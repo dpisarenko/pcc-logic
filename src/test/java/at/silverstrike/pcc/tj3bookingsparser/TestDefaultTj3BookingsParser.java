@@ -33,7 +33,7 @@ import ru.altruix.commons.api.di.PccException;
 
 import at.silverstrike.pcc.api.tj3bookingsparser.BookingTuple;
 import at.silverstrike.pcc.api.tj3bookingsparser.Tj3BookingsParser;
-import at.silverstrike.pcc.test.testutils.MockInjectorFactory;
+import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 
 import com.google.inject.Injector;
 

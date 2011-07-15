@@ -19,8 +19,8 @@ import at.silverstrike.pcc.api.tj3bookingsparser.Tj3BookingsParser;
 import at.silverstrike.pcc.impl.embeddedfilereading.DefaultEmbeddedFileReaderFactory;
 import at.silverstrike.pcc.impl.tj3bookingsparser.DefaultBookingsFile2BookingsFactory;
 import at.silverstrike.pcc.impl.tj3bookingsparser.DefaultTj3BookingsParserFactory;
-import at.silverstrike.pcc.test.mockpersistence.MockBooking;
-import at.silverstrike.pcc.test.mockpersistence.MockPersistenceAdapter;
+import at.silverstrike.pcc.impl.mockpersistence.MockBooking;
+import at.silverstrike.pcc.impl.mockpersistence.MockPersistenceAdapter;
 
 import com.google.inject.AbstractModule;
 

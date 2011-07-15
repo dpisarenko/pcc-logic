@@ -21,6 +21,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ru.altruix.commons.api.conventions.TestConventions;
 import ru.altruix.commons.api.di.InjectorFactory;
 
 import at.silverstrike.pcc.api.model.Booking;
@@ -32,8 +33,7 @@ import at.silverstrike.pcc.api.tj3bookingsparser.BookingsFile;
 import at.silverstrike.pcc.api.tj3bookingsparser.BookingsFile2Bookings;
 import at.silverstrike.pcc.api.tj3bookingsparser.BookingsFile2BookingsFactory;
 import at.silverstrike.pcc.impl.jruby.RubyDateTimeUtils;
-import at.silverstrike.pcc.test.conventions.TestConventions;
-import at.silverstrike.pcc.test.testutils.MockInjectorFactory;
+import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 
 import com.google.inject.Injector;
 
