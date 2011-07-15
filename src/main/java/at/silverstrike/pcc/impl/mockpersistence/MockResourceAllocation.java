@@ -15,22 +15,20 @@ import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.ResourceAllocation;
 
 final class MockResourceAllocation implements ResourceAllocation {
-    private Resource resource;
-    private Long id;
 
-    public Resource getResource() {
-        return resource;
+    private Long id;
+    private Resource resource;
+
+    public Long getId() {
+        return this.id;
     }
 
     public void setResource(final Resource aResource) {
         this.resource = aResource;
     }
 
-    public Long getId() {
-        return id;
+    public Resource getResource() {
+        return this.resource;
     }
 
-    public void setId(final Long aId) {
-        this.id = aId;
-    }
 }

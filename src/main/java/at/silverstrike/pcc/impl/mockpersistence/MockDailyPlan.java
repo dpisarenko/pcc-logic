@@ -12,19 +12,19 @@
 package at.silverstrike.pcc.impl.mockpersistence;
 
 import java.util.Date;
-import at.silverstrike.pcc.api.model.Booking;
-import at.silverstrike.pcc.api.model.Task;
+import at.silverstrike.pcc.api.model.DailyPlan;
+import at.silverstrike.pcc.api.model.DailySchedule;
+import at.silverstrike.pcc.api.model.DailyToDoList;
 import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.UserData;
 
-class MockBooking implements Booking {
+class MockDailyPlan implements DailyPlan {
 
     private Long id;
-    private Task process;
     private Resource resource;
-    private Date startDateTime;
-    private double durationInHours;
-    private Date endDateTime;
+    private Date date;
+    private DailyToDoList toDoList;
+    private DailySchedule schedule;
     private UserData user;
 
     public UserData getUserData() {
@@ -38,14 +38,6 @@ class MockBooking implements Booking {
         return this.id;
     }
 
-    public void setProcess(final Task aProcess) {
-        this.process = aProcess;
-    }
-
-    public Task getProcess() {
-        return this.process;
-    }
-
     public void setResource(final Resource aResource) {
         this.resource = aResource;
     }
@@ -54,24 +46,28 @@ class MockBooking implements Booking {
         return this.resource;
     }
 
-    public void setStartDateTime(final Date aDate) {
-        this.startDateTime = aDate;
+    public void setDate(final Date aDate) {
+        this.date = aDate;
     }
 
-    public Date getStartDateTime() {
-        return this.startDateTime;
+    public Date getDate() {
+        return this.date;
     }
 
-    public void setDuration(final double aDurationInHours) {
-        this.durationInHours = aDurationInHours;
+    public void setToDoList(final DailyToDoList aToDoList) {
+        this.toDoList = aToDoList;
     }
 
-    public double getDuration() {
-        return this.durationInHours;
+    public DailyToDoList getToDoList() {
+        return this.toDoList;
     }
 
-    public Date getEndDateTime() {
-        return this.endDateTime;
+    public void setSchedule(final DailySchedule aSchedule) {
+        this.schedule = aSchedule;
+    }
+
+    public DailySchedule getSchedule() {
+        return this.schedule;
     }
 
 }

@@ -11,17 +11,16 @@
 
 package at.silverstrike.pcc.impl.mockpersistence;
 
-import at.silverstrike.pcc.api.model.Resource;
+import at.silverstrike.pcc.api.model.Worker;
 
-class MockResource implements Resource {
+class MockWorker implements Worker {
 
-    private Long id;
     private String abbreviation;
     private double dailyLimit;
-
-    public Long getId() {
-        return this.id;
-    }
+    private Long id;
+    private String firstName;
+    private String middleName;
+    private String surname;
 
     public void setAbbreviation(final String aAbbreviation) {
         this.abbreviation = aAbbreviation;
@@ -39,8 +38,32 @@ class MockResource implements Resource {
         return this.dailyLimit;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setFirstName(final String aFirstName) {
+        this.firstName = aFirstName;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public void setMiddleName(final String aMiddleName) {
+        this.middleName = aMiddleName;
+    }
+
+    public String getMiddleName() {
+        return this.middleName;
+    }
+
+    public void setSurname(final String aSurname) {
+        this.surname = aSurname;
+    }
+
+    public String getSurname() {
+        return this.surname;
     }
 
 }
