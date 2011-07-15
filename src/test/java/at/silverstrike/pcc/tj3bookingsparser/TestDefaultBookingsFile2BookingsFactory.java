@@ -21,7 +21,7 @@ import ru.altruix.commons.api.di.InjectorFactory;
 import com.google.inject.Injector;
 
 import at.silverstrike.pcc.api.tj3bookingsparser.BookingsFile2BookingsFactory;
-import at.silverstrike.pcc.test.testutils.MockInjectorFactory;
+import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 
 public final class TestDefaultBookingsFile2BookingsFactory {
 
