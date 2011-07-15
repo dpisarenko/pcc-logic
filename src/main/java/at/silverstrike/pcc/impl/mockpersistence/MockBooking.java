@@ -17,7 +17,7 @@ import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.UserData;
 
-class MockBooking implements Booking {
+public class MockBooking implements Booking {
 
     private Long id;
     private Task process;

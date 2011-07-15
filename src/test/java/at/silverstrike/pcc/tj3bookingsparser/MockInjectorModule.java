@@ -12,12 +12,14 @@
 package at.silverstrike.pcc.tj3bookingsparser;
 
 import at.silverstrike.pcc.api.embeddedfilereading.EmbeddedFileReader;
+import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.api.tj3bookingsparser.BookingsFile2BookingsFactory;
 import at.silverstrike.pcc.api.tj3bookingsparser.Tj3BookingsParser;
 import at.silverstrike.pcc.impl.embeddedfilereading.DefaultEmbeddedFileReaderFactory;
 import at.silverstrike.pcc.impl.tj3bookingsparser.DefaultBookingsFile2BookingsFactory;
 import at.silverstrike.pcc.impl.tj3bookingsparser.DefaultTj3BookingsParserFactory;
+import at.silverstrike.pcc.impl.mockpersistence.MockBooking;
 import at.silverstrike.pcc.impl.mockpersistence.MockPersistenceAdapter;
 
 import com.google.inject.AbstractModule;
@@ -36,6 +38,10 @@ class MockInjectorModule extends AbstractModule {
         bind(EmbeddedFileReader.class).toInstance(
                 new DefaultEmbeddedFileReaderFactory().create());
         bind(Persistence.class).toInstance(new MockPersistenceAdapter() {
+            @Override
+            public Booking createBooking() {
+                return new MockBooking();
+            }
 
         });
     }
