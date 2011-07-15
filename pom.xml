@@ -87,5 +87,11 @@
 			<artifactId>derby</artifactId>
 			<version>10.6.2.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.0.Final</version>
+		</dependency>
+		
 	</dependencies>
 </project>
