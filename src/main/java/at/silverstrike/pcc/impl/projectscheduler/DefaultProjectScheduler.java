@@ -190,7 +190,8 @@ class DefaultProjectScheduler implements ProjectScheduler {
                     COMMAND_TEMPLATE.replace(PLACEHOLDER_TJ,
                             this.taskJugglerPath)
                             .replace(PLACEHOLDER_FILE, TJ3_INPUT_FILE);
-
+            
+            LOGGER.info("aParentDir: {}", aParentDir);
             LOGGER.info("command: " + command);
 
             final File parent = new File(aParentDir);
