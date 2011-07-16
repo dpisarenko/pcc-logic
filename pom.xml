@@ -126,6 +126,10 @@
 			<artifactId>jruby-embed</artifactId>
 			<version>0.1.2</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.8.0.GA</version>
+		</dependency>
 	</dependencies>
 </project>
