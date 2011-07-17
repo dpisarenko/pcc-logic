@@ -36,7 +36,7 @@ public abstract class MockPersistenceAdapter implements Persistence {
 
     @Override
     public Booking createBooking() {
-        return null;
+        return new MockBooking();
     }
 
     @Override
