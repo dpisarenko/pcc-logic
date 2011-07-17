@@ -18,6 +18,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,22 @@ public class TestDefaultPersistence {
     private static final Logger LOGGER =
             LoggerFactory
                     .getLogger(TestDefaultPersistence.class);
+    @Before
+    public final void setUp()
+    {
+        final Persistence persistence = new DefaultPersistence();
 
+        try {
+            persistence.openSession();
+            persistence.clearDatabase();
+            persistence.closeSession();
+        } catch (final RuntimeException exception) {
+            Assert.fail(exception.getMessage());
+        } catch (final Exception exception) {
+            Assert.fail(exception.getMessage());
+        }
+    }
+    
     @Test
     public final void test01() {
         final Persistence persistence = new DefaultPersistence();

@@ -12,6 +12,8 @@
 package at.silverstrike.pcc.impl.mockpersistence;
 
 import java.util.Date;
+
+import ru.altruix.commons.impl.util.Utils;
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.Resource;
@@ -24,7 +26,6 @@ public class MockBooking implements Booking {
     private Resource resource;
     private Date startDateTime;
     private double durationInHours;
-    private Date endDateTime;
     private UserData user;
 
     public UserData getUserData() {
@@ -71,7 +72,7 @@ public class MockBooking implements Booking {
     }
 
     public Date getEndDateTime() {
-        return this.endDateTime;
+        return Utils.addHours(this.startDateTime, this.durationInHours);
     }
 
 }
