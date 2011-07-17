@@ -12,6 +12,7 @@
 package at.silverstrike.pcc.impl.mockpersistence;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import at.silverstrike.pcc.api.model.SchedulingObjectValidationError;
@@ -22,9 +23,9 @@ import at.silverstrike.pcc.api.model.UserData;
 class MockControlProcess extends MockSchedulingObject implements Task {
 
     private Double bestCaseEffort;
-    private Double averageCaseEffort;
     private Double worstCaseEffort;
-    private List<ResourceAllocation> resourceAllocations;
+    private List<ResourceAllocation> resourceAllocations =
+            new LinkedList<ResourceAllocation>();
     private Date averageEstimatedEndDateTime;
     private Date bestEstimatedEndDateTime;
     private Date worstEstimatedEndDateTime;
@@ -32,12 +33,13 @@ class MockControlProcess extends MockSchedulingObject implements Task {
     private UserData user;
 
     public UserData getUserData() {
-            return user;
+        return user;
     }
 
     public void setUserData(UserData user) {
-            this.user = user;
+        this.user = user;
     }
+
     public Double getBestCaseEffort() {
         return this.bestCaseEffort;
     }
@@ -46,8 +48,19 @@ class MockControlProcess extends MockSchedulingObject implements Task {
         this.bestCaseEffort = aEffortInHours;
     }
 
+    @Override
     public double getAverageCaseEffort() {
-        return this.averageCaseEffort;
+        if ((this.bestCaseEffort != null) && (this.worstCaseEffort == null)) {
+            return this.bestCaseEffort;
+        } else if ((this.bestCaseEffort == null)
+                && (this.worstCaseEffort != null)) {
+            return this.worstCaseEffort;
+        } else if ((this.bestCaseEffort == null)
+                && (this.worstCaseEffort == null)) {
+            return 0.;
+        } else {
+            return (this.bestCaseEffort + this.worstCaseEffort) / 2;
+        }
     }
 
     public Double getWorstCaseEffort() {
@@ -96,7 +109,8 @@ class MockControlProcess extends MockSchedulingObject implements Task {
         return validationError;
     }
 
-    public void setValidationError(SchedulingObjectValidationError validationError) {
+    public void setValidationError(
+            SchedulingObjectValidationError validationError) {
         this.validationError = validationError;
     }
 
