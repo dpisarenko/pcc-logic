@@ -250,8 +250,6 @@ public class TestDefaultPersistence {
     public void testNullPointerExceptionInDefaultTask() {
         // Get object under test (persistence)
         final Persistence persistence = new DefaultPersistence();
-
-        persistence.clearDatabase();
         
         // Создаём событие
         final Task task =

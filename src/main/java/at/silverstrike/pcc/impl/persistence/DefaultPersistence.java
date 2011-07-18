@@ -20,6 +20,7 @@ import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -913,27 +914,34 @@ public class DefaultPersistence implements Persistence {
         try {
             final String[] entitiesToDelete =
                     { "DefaultDailyLimitResourceAllocation",
-                            "DefaultResourceAllocation", 
+                            "DefaultResourceAllocation",
                             "DefaultBooking",
-                            "DefaultDailyPlan", 
+                            "DefaultDailyPlan",
                             "DefaultDailySchedule",
-                            "DefaultResource", 
-                            
+                            "DefaultResource",
+
                             "DefaultEvent",
                             "DefaultMilestone",
                             "DefaultUserData",
                             "DefaultWorker",
                             "TBL_DAILY_TO_DO_LIST_TASKSTOCOMPLETETODAY",
                             "DefaultDailyToDoList",
-                            
-                            "DefaultTask", 
+
+                            "DefaultTask",
                             "DefaultSchedulingObject", };
 
             for (final String entityToDelete : entitiesToDelete) {
                 LOGGER.debug("clearDatbase, delete from {}", entityToDelete);
-                final Query query =
-                        session.createQuery("delete from " + entityToDelete);
-                query.executeUpdate();
+                if (entityToDelete.startsWith("TBL_")) {
+                    final SQLQuery query =
+                            session.createSQLQuery("delete from "
+                                    + entityToDelete);
+                    query.executeUpdate();
+                } else {
+                    final Query query =
+                            session.createQuery("delete from " + entityToDelete);
+                    query.executeUpdate();
+                }
             }
             tx.commit();
         } catch (final Exception exception) {
