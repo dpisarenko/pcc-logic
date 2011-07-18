@@ -229,4 +229,10 @@ public abstract class MockPersistenceAdapter implements Persistence {
     public void exportSchema(final File aFile) {
     }
 
+    @Override
+    public UserData getUser(Long aUserId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

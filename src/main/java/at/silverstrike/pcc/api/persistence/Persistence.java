@@ -169,4 +169,6 @@ public interface Persistence extends ModuleWithInjectableDependencies {
     Task createTaskStub();
 
     void exportSchema(final File aFile);
+
+    UserData getUser(final Long aUserId);
 }

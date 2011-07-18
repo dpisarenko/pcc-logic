@@ -240,7 +240,7 @@ public class DefaultPersistence implements Persistence {
             session.createQuery("delete from DefaultDailySchedule")
                     .executeUpdate();
             session.createSQLQuery(
-                    "delete from TBL_DAILY_TO_DO_LIST_TASKSTOCOMPLETETODAY")
+                    "delete from APP.TBL_DAILY_TO_DO_LIST_TASKSTOCOMPLETETODAY")
                     .executeUpdate();
             session.createQuery("delete from DefaultDailyToDoList")
                     .executeUpdate();
@@ -1443,5 +1443,22 @@ public class DefaultPersistence implements Persistence {
         schemaExport.setOutputFile(aFile.getAbsolutePath());
         
         schemaExport.execute(true, true, false, true);        
+    }
+
+    @Override
+    public UserData getUser(final Long aUserId) {
+        UserData returnValue = null;
+        final Transaction tx = session.beginTransaction();
+
+        try {            
+            returnValue = (UserData)session.get(DefaultUserData.class, aUserId);
+            
+            tx.commit();
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            tx.rollback();
+        }
+
+        return returnValue;
     }
 }
