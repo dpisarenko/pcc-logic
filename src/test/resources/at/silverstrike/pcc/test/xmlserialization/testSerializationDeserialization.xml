@@ -1,0 +1,92 @@
+<at.silverstrike.pcc.test.model.MockUserData>
+  <identifier>1st user data identifier</identifier>
+  <processes>
+    <at.silverstrike.pcc.test.model.MockControlProcess>
+      <name>process1</name>
+      <state>ATTAINED</state>
+      <priority>5</priority>
+      <parentProcess class="at.silverstrike.pcc.test.model.MockControlProcess">
+        <name>parent</name>
+        <state>ATTAINED</state>
+        <priority>1</priority>
+        <parentProcess class="at.silverstrike.pcc.test.model.MockControlProcess">
+          <predecessors/>
+        </parentProcess>
+        <predecessors/>
+        <bestCaseEffort>3.3</bestCaseEffort>
+        <worstCaseEffort>6.7</worstCaseEffort>
+        <resourceAllocations/>
+        <averageEstimatedEndDateTime>2011-07-15 10:15:21.114 CEST</averageEstimatedEndDateTime>
+        <bestEstimatedEndDateTime>2011-07-15 10:15:21.114 CEST</bestEstimatedEndDateTime>
+        <worstEstimatedEndDateTime>2011-07-15 10:15:21.115 CEST</worstEstimatedEndDateTime>
+      </parentProcess>
+      <predecessors>
+        <at.silverstrike.pcc.test.model.MockControlProcess>
+          <name>firstPredecessors</name>
+          <state>REPORTED</state>
+          <priority>1</priority>
+          <parentProcess class="at.silverstrike.pcc.test.model.MockControlProcess">
+            <predecessors/>
+          </parentProcess>
+          <predecessors/>
+          <bestCaseEffort>2.2</bestCaseEffort>
+          <worstCaseEffort>5.5</worstCaseEffort>
+          <resourceAllocations>
+            <at.silverstrike.pcc.test.model.MockResourceAllocation>
+              <resource class="at.silverstrike.pcc.test.model.MockResource">
+                <abbreviation>Abbreviation</abbreviation>
+                <dailyLimit>4.4</dailyLimit>
+              </resource>
+            </at.silverstrike.pcc.test.model.MockResourceAllocation>
+          </resourceAllocations>
+          <averageEstimatedEndDateTime>2011-07-15 10:15:21.115 CEST</averageEstimatedEndDateTime>
+          <bestEstimatedEndDateTime>2011-07-15 10:15:21.115 CEST</bestEstimatedEndDateTime>
+          <worstEstimatedEndDateTime>2011-07-15 10:15:21.116 CEST</worstEstimatedEndDateTime>
+        </at.silverstrike.pcc.test.model.MockControlProcess>
+      </predecessors>
+      <bestCaseEffort>1.1</bestCaseEffort>
+      <worstCaseEffort>7.7</worstCaseEffort>
+      <resourceAllocations/>
+      <averageEstimatedEndDateTime>2011-07-15 10:15:21.114 CEST</averageEstimatedEndDateTime>
+      <bestEstimatedEndDateTime>2011-07-15 10:15:21.114 CEST</bestEstimatedEndDateTime>
+      <worstEstimatedEndDateTime>2011-07-15 10:15:21.116 CEST</worstEstimatedEndDateTime>
+    </at.silverstrike.pcc.test.model.MockControlProcess>
+  </processes>
+  <dailyPlans>
+    <at.silverstrike.pcc.test.model.MockDailyPlan>
+      <resource class="at.silverstrike.pcc.test.model.MockResource">
+        <dailyLimit>0.0</dailyLimit>
+      </resource>
+      <date>2011-07-15 10:15:21.117 CEST</date>
+      <toDoList class="at.silverstrike.pcc.test.model.MockDailyToDoList">
+        <tasksToCompleteToday/>
+      </toDoList>
+      <schedule class="at.silverstrike.pcc.test.model.MockDailySchedule">
+        <bookings>
+          <at.silverstrike.pcc.test.model.MockBooking>
+            <process class="at.silverstrike.pcc.test.model.MockControlProcess">
+              <predecessors/>
+            </process>
+            <resource class="at.silverstrike.pcc.test.model.MockResource">
+              <dailyLimit>0.0</dailyLimit>
+            </resource>
+            <startDateTime>2011-07-15 10:15:21.118 CEST</startDateTime>
+            <durationInHours>3.4</durationInHours>
+          </at.silverstrike.pcc.test.model.MockBooking>
+        </bookings>
+      </schedule>
+    </at.silverstrike.pcc.test.model.MockDailyPlan>
+  </dailyPlans>
+  <bookings>
+    <at.silverstrike.pcc.test.model.MockBooking>
+      <process class="at.silverstrike.pcc.test.model.MockControlProcess">
+        <predecessors/>
+      </process>
+      <resource class="at.silverstrike.pcc.test.model.MockResource">
+        <dailyLimit>0.0</dailyLimit>
+      </resource>
+      <startDateTime>2011-07-15 10:15:21.119 CEST</startDateTime>
+      <durationInHours>1.6</durationInHours>
+    </at.silverstrike.pcc.test.model.MockBooking>
+  </bookings>
+</at.silverstrike.pcc.test.model.MockUserData>
