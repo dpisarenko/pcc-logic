@@ -913,15 +913,24 @@ public class DefaultPersistence implements Persistence {
         try {
             final String[] entitiesToDelete =
                     { "DefaultDailyLimitResourceAllocation",
-                            "DefaultResourceAllocation", "DefaultBooking",
-                            "DefaultDailyPlan", "DefaultDailySchedule",
-                            "DefaultResource", "DefaultTask", "DefaultEvent",
+                            "DefaultResourceAllocation", 
+                            "DefaultBooking",
+                            "DefaultDailyPlan", 
+                            "DefaultDailySchedule",
+                            "DefaultResource", 
+                            
+                            "DefaultEvent",
                             "DefaultMilestone",
-                            "DefaultDailyToDoList", 
-                            "DefaultSchedulingObject",
-                            "DefaultWorker" };
+                            "DefaultUserData",
+                            "DefaultWorker",
+                            "TBL_DAILY_TO_DO_LIST_TASKSTOCOMPLETETODAY",
+                            "DefaultDailyToDoList",
+                            
+                            "DefaultTask", 
+                            "DefaultSchedulingObject", };
 
             for (final String entityToDelete : entitiesToDelete) {
+                LOGGER.debug("clearDatbase, delete from {}", entityToDelete);
                 final Query query =
                         session.createQuery("delete from " + entityToDelete);
                 query.executeUpdate();
