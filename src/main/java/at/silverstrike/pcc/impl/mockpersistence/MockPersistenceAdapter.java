@@ -11,6 +11,7 @@
 
 package at.silverstrike.pcc.impl.mockpersistence;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -223,6 +224,9 @@ public abstract class MockPersistenceAdapter implements Persistence {
     @Override
     public Task createTaskStub() {
         return null;
+    }
+
+    public void exportSchema(final File aFile) {
     }
 
 }

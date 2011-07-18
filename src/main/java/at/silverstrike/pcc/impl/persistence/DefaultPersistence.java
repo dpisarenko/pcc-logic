@@ -11,6 +11,7 @@
 
 package at.silverstrike.pcc.impl.persistence;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -27,6 +28,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.dialect.DerbyDialect;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.DailyLimitResourceAllocation;
@@ -63,9 +65,10 @@ public class DefaultPersistence implements Persistence {
     private static final int LAST_MILLISECOND = 999;
     public static final String DB_NAME = "pcc";
     private static final int DAYS_TO_PLAN_AHEAD = 7;
-    private static final String JDBC_CONN_STRING_EXISTING_DB = "jdbc:derby:"
+    // jdbc:derby://localhost:1527/pcc;create=true
+    private static final String JDBC_CONN_STRING_EXISTING_DB = "jdbc:derby://localhost:1527/"
             + DB_NAME;
-    private static final String JDBC_CONN_STRING_NEW_DB = "jdbc:derby:"
+    private static final String JDBC_CONN_STRING_NEW_DB = "jdbc:derby://localhost:1527/"
             + DB_NAME + ";create=true";
     private static final String PROCESS_ID = "${processId}";
     private static final String USER_ID = "${userId}";
@@ -100,6 +103,7 @@ public class DefaultPersistence implements Persistence {
 
     private Session session;
     private SessionFactory sessionFactory;
+    private Configuration config;
 
     public DefaultPersistence() {
     }
@@ -737,29 +741,12 @@ public class DefaultPersistence implements Persistence {
 
         LOGGER.debug("tryToOpenSession, 2");
 
-        final Configuration cnf = new Configuration();
-        cnf.setProperty(Environment.DRIVER,
-                "org.apache.derby.jdbc.EmbeddedDriver");
-        cnf.setProperty(Environment.URL, aConnectionString);
-        cnf.setProperty(Environment.DIALECT, DerbyDialect.class.getName());
-        cnf.setProperty(Environment.SHOW_SQL, "false");
-        cnf.setProperty(Environment.HBM2DDL_AUTO, "update");
-        cnf.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
-        cnf.addResource("persistence/DefaultResource.hbm.xml");
-        cnf.addResource("persistence/DefaultResourceAllocation.hbm.xml");
-        cnf.addResource("persistence/DefaultSchedulingObject.hbm.xml");
-        cnf.addResource("persistence/DefaultBooking.hbm.xml");
-        cnf.addResource("persistence/DefaultDailyPlan.hbm.xml");
-        cnf.addResource("persistence/DefaultDailySchedule.hbm.xml");
-        cnf.addResource("persistence/DefaultDailyToDoList.hbm.xml");
-        cnf.addResource("persistence/DefaultInvitationRequest.hbm.xml");
-        cnf.addResource("persistence/DefaultUserData.hbm.xml");
+        config = getConfiguration(aConnectionString);
 
         LOGGER.debug("tryToOpenSession, 3");
 
-        sessionFactory = cnf.buildSessionFactory();
-
+        sessionFactory = config.buildSessionFactory();
+        
         LOGGER.debug("tryToOpenSession, 4");
 
         session = getSession();
@@ -769,6 +756,32 @@ public class DefaultPersistence implements Persistence {
         getAllNotDeletedTasks(null);
 
         LOGGER.debug("tryToOpenSession, 6");
+    }
+
+    private Configuration getConfiguration(final String aConnectionString) {
+        final Configuration cnf = new Configuration();
+        cnf.setProperty(Environment.DRIVER,
+                "org.apache.derby.jdbc.ClientDriver");
+        cnf.setProperty(Environment.URL, aConnectionString);
+        cnf.setProperty(Environment.DIALECT, DerbyDialect.class.getName());
+        cnf.setProperty(Environment.SHOW_SQL, "false");
+        cnf.setProperty(Environment.HBM2DDL_AUTO, "update");
+        cnf.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+        cnf.setProperty(Environment.USER, "user");
+        cnf.setProperty(Environment.PASS, "app");
+        cnf.setProperty(Environment.DEFAULT_SCHEMA, "APP");
+        
+        
+        cnf.addResource("persistence/DefaultResource.hbm.xml");
+        cnf.addResource("persistence/DefaultResourceAllocation.hbm.xml");
+        cnf.addResource("persistence/DefaultSchedulingObject.hbm.xml");
+        cnf.addResource("persistence/DefaultBooking.hbm.xml");
+        cnf.addResource("persistence/DefaultDailyPlan.hbm.xml");
+        cnf.addResource("persistence/DefaultDailySchedule.hbm.xml");
+        cnf.addResource("persistence/DefaultDailyToDoList.hbm.xml");
+        cnf.addResource("persistence/DefaultInvitationRequest.hbm.xml");
+        cnf.addResource("persistence/DefaultUserData.hbm.xml");
+        return cnf;
     }
 
     @SuppressWarnings("unchecked")
@@ -934,7 +947,7 @@ public class DefaultPersistence implements Persistence {
                 LOGGER.debug("clearDatbase, delete from {}", entityToDelete);
                 if (entityToDelete.startsWith("TBL_")) {
                     final SQLQuery query =
-                            session.createSQLQuery("delete from "
+                            session.createSQLQuery("delete from APP."
                                     + entityToDelete);
                     query.executeUpdate();
                 } else {
@@ -1420,5 +1433,15 @@ public class DefaultPersistence implements Persistence {
     @Override
     public Task createTaskStub() {
         return new DefaultTask();
+    }
+    
+    @Override
+    public void exportSchema(final File aFile)
+    {
+        final SchemaExport schemaExport = new SchemaExport(this.config);
+        
+        schemaExport.setOutputFile(aFile.getAbsolutePath());
+        
+        schemaExport.execute(true, true, false, true);        
     }
 }

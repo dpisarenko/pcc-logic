@@ -138,5 +138,10 @@
 			<artifactId>javassist</artifactId>
 			<version>3.8.0.GA</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.derby</groupId>
+		    <artifactId>derbyclient</artifactId>
+		    <version>10.8.1.2</version>
+		</dependency>		
 	</dependencies>
 </project>

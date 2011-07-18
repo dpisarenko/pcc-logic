@@ -11,6 +11,7 @@
 
 package at.silverstrike.pcc.api.persistence;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -166,4 +167,6 @@ public interface Persistence extends ModuleWithInjectableDependencies {
     void removeUserSchedulingObjects(final UserData aUser);
     
     Task createTaskStub();
+
+    void exportSchema(final File aFile);
 }
