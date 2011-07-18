@@ -17,6 +17,7 @@ import java.security.PrivateKey;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,6 +101,7 @@ public class TestServerSidedOAuth {
     }
     
     @Test
+    @Ignore
     public void testCalendar() {
         try {
             final PrivateKey privKey = getPrivateKey();
