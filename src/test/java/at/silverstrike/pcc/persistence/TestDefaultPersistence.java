@@ -35,21 +35,6 @@ public class TestDefaultPersistence {
     private static final Logger LOGGER =
             LoggerFactory
                     .getLogger(TestDefaultPersistence.class);
-    @Before
-    public final void setUp()
-    {
-        final Persistence persistence = new DefaultPersistence();
-
-        try {
-            persistence.openSession();
-            persistence.clearDatabase();
-            persistence.closeSession();
-        } catch (final RuntimeException exception) {
-            Assert.fail(exception.getMessage());
-        } catch (final Exception exception) {
-            Assert.fail(exception.getMessage());
-        }
-    }
     
     @Test
     public final void test01() {
@@ -57,6 +42,7 @@ public class TestDefaultPersistence {
 
         try {
             persistence.openSession();
+            persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
         } catch (final Exception exception) {
@@ -80,6 +66,7 @@ public class TestDefaultPersistence {
 
         try {
             persistence.openSession();
+            persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
         } catch (final Exception exception) {
@@ -131,6 +118,7 @@ public class TestDefaultPersistence {
 
         try {
             persistence.openSession();
+            persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
         } catch (final Exception exception) {
@@ -263,6 +251,8 @@ public class TestDefaultPersistence {
         // Get object under test (persistence)
         final Persistence persistence = new DefaultPersistence();
 
+        persistence.clearDatabase();
+        
         // Создаём событие
         final Task task =
                 persistence.createTaskStub();
