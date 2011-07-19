@@ -49,4 +49,8 @@ public interface UserData extends UniquelyIdentifiableObject {
 
     void setCalendarOAuthParameters(final GoogleOAuthParameters aOauthParameters);
     GoogleOAuthParameters getCalendarOAuthParameters();
+
+    boolean isGoogleCalendarAccessGranted();
+    
+    boolean isGoogleTasksAccessGranted();
 }

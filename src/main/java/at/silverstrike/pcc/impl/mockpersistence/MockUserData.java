@@ -128,4 +128,16 @@ class MockUserData implements UserData {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public boolean isGoogleCalendarAccessGranted() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isGoogleTasksAccessGranted() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

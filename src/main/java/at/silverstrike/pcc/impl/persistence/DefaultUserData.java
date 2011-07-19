@@ -123,4 +123,16 @@ class DefaultUserData implements UserData {
     public GoogleOAuthParameters getCalendarOAuthParameters() {
         return oauthParameters;
     }
+
+    @Override
+    public boolean isGoogleCalendarAccessGranted() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isGoogleTasksAccessGranted() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
