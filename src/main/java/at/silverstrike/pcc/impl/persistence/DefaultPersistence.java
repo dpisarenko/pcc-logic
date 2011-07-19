@@ -1461,4 +1461,18 @@ public class DefaultPersistence implements Persistence {
 
         return returnValue;
     }
+
+    @Override
+    public void updateUser(final UserData aUser) {
+        final Transaction tx = session.beginTransaction();
+
+        try {            
+            session.save(aUser);
+            
+            tx.commit();
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            tx.rollback();
+        }
+    }
 }

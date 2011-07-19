@@ -13,7 +13,7 @@ package at.silverstrike.pcc.impl.persistence;
 
 import java.util.List;
 
-import com.google.gdata.client.authn.oauth.GoogleOAuthParameters;
+import org.apache.commons.lang.StringUtils;
 
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.SchedulingObject;
@@ -28,9 +28,10 @@ class DefaultUserData implements UserData {
     private String username;
     private String password;
     private Long id;
-    private String googleUsername;
-    private String googlePassword;
-    private GoogleOAuthParameters oauthParameters;
+    private String googleTasksRefreshToken;
+    private String googleCalendarOAuthVerifier;
+    private String googleCalendarOAuthToken;
+    private String googleCalendarOAuthTokenSecret;
 
     public String getIdentifier() {
         return identifier;
@@ -98,41 +99,49 @@ class DefaultUserData implements UserData {
         return builder.toString();
     }
 
-    public String getGoogleUsername() {
-        return googleUsername;
-    }
-
-    public void setGoogleUsername(final String aGoogleUsername) {
-        this.googleUsername = aGoogleUsername;
-    }
-
-    public String getGooglePassword() {
-        return googlePassword;
-    }
-
-    public void setGooglePassword(final String aGooglePassword) {
-        this.googlePassword = aGooglePassword;
-    }
-
-    public void setCalendarOAuthParameters(
-            final GoogleOAuthParameters aOauthParameters) {
-        oauthParameters = aOauthParameters;
-    }
-
-    @Override
-    public GoogleOAuthParameters getCalendarOAuthParameters() {
-        return oauthParameters;
-    }
-
     @Override
     public boolean isGoogleCalendarAccessGranted() {
-        // TODO Auto-generated method stub
-        return false;
+        return (!StringUtils.isBlank(this.googleCalendarOAuthToken)) &&
+                (!StringUtils.isBlank(this.googleCalendarOAuthTokenSecret)) &&
+                (!StringUtils.isBlank(this.googleCalendarOAuthVerifier));
     }
 
     @Override
     public boolean isGoogleTasksAccessGranted() {
-        // TODO Auto-generated method stub
-        return false;
+        return !StringUtils.isBlank(this.googleTasksRefreshToken);
+    }
+
+    public String getGoogleTasksRefreshToken() {
+        return googleTasksRefreshToken;
+    }
+
+    public void setGoogleTasksRefreshToken(final String aRefreshToken) {
+        this.googleTasksRefreshToken = aRefreshToken;
+    }
+
+    public String getGoogleCalendarOAuthVerifier() {
+        return googleCalendarOAuthVerifier;
+    }
+
+    public void setGoogleCalendarOAuthVerifier(
+            String googleCalendarOAuthVerifier) {
+        this.googleCalendarOAuthVerifier = googleCalendarOAuthVerifier;
+    }
+
+    public String getGoogleCalendarOAuthToken() {
+        return googleCalendarOAuthToken;
+    }
+
+    public void setGoogleCalendarOAuthToken(String googleCalendarOAuthToken) {
+        this.googleCalendarOAuthToken = googleCalendarOAuthToken;
+    }
+
+    public String getGoogleCalendarOAuthTokenSecret() {
+        return googleCalendarOAuthTokenSecret;
+    }
+
+    public void setGoogleCalendarOAuthTokenSecret(
+            String googleCalendarOAuthTokenSecret) {
+        this.googleCalendarOAuthTokenSecret = googleCalendarOAuthTokenSecret;
     }
 }

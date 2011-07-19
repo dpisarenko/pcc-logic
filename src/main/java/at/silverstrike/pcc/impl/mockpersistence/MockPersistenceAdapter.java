@@ -235,4 +235,10 @@ public abstract class MockPersistenceAdapter implements Persistence {
         return null;
     }
 
+    @Override
+    public void updateUser(UserData aUser) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

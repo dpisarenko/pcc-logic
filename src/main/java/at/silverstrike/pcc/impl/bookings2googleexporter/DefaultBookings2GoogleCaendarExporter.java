@@ -59,8 +59,8 @@ class DefaultBookings2GoogleCaendarExporter implements
         final GoogleCalendarServiceCreator serviceCreator = factory.create();
         CalendarService service = null;
 
-        serviceCreator.setUsername(this.userData.getGoogleUsername());
-        serviceCreator.setPassword(this.userData.getGooglePassword());
+//        serviceCreator.setUsername(this.userData.getGoogleUsername());
+//        serviceCreator.setPassword(this.userData.getGooglePassword());
         try {
             serviceCreator.run();
             service = serviceCreator.getService();

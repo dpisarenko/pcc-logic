@@ -171,4 +171,6 @@ public interface Persistence extends ModuleWithInjectableDependencies {
     void exportSchema(final File aFile);
 
     UserData getUser(final Long aUserId);
+    
+    void updateUser(final UserData aUser);
 }

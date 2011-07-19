@@ -13,8 +13,6 @@ package at.silverstrike.pcc.impl.mockpersistence;
 
 import java.util.List;
 
-import com.google.gdata.client.authn.oauth.GoogleOAuthParameters;
-
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.DailyPlan;
@@ -116,18 +114,6 @@ class MockUserData implements UserData {
         this.googlePassword = googlePassword;
     }
 
-    @Override
-    public void setCalendarOAuthParameters(
-            GoogleOAuthParameters aOauthParameters) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public GoogleOAuthParameters getCalendarOAuthParameters() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     public boolean isGoogleCalendarAccessGranted() {
@@ -139,5 +125,53 @@ class MockUserData implements UserData {
     public boolean isGoogleTasksAccessGranted() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public void setGoogleTasksRefreshToken(String aRefreshToken) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getGoogleTasksRefreshToken() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setGoogleCalendarOAuthVerifier(String aVerifier) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getGoogleCalendarOAuthVerifier() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setGoogleCalendarOAuthToken(String aToken) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getGoogleCalendarOAuthToken() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setGoogleCalendarOAuthTokenSecret(String aTokenSecret) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public String getGoogleCalendarOAuthTokenSecret() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

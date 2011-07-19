@@ -25,9 +25,11 @@
 		<property name="username" />
 		<property name="password" />
 		
-		<property name="googleUsername" />
-		<property name="googlePassword" />
-		
+		<property name="googleTasksRefreshToken" />
+		<property name="googleCalendarOAuthVerifier" />
+		<property name="googleCalendarOAuthToken" />
+		<property name="googleCalendarOAuthTokenSecret" />
+				
 		<bag name="schedulingData" lazy="false">
 			<key column="USER_DATA_ID" />
 			<one-to-many class="at.silverstrike.pcc.impl.persistence.DefaultSchedulingObject" />
