@@ -124,8 +124,8 @@ class DefaultUserData implements UserData {
     }
 
     public void setGoogleCalendarOAuthVerifier(
-            String googleCalendarOAuthVerifier) {
-        this.googleCalendarOAuthVerifier = googleCalendarOAuthVerifier;
+            String aGoogleCalendarOAuthVerifier) {
+        this.googleCalendarOAuthVerifier = aGoogleCalendarOAuthVerifier;
     }
 
     public String getGoogleCalendarOAuthToken() {

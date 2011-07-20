@@ -56,7 +56,7 @@ public class TestServerSidedOAuth {
             "294496059397.apps.googleusercontent.com";
     private static final String CLIENT_SECRET = "J1JRmoTA-EmOjTwKkW-eLHLY";
     private static final String REFRESH_TOKEN_TASKS =
-            "1/SNHvbndl5mYgJ_tW8GjwRQjY0FvNaMxR8VRPzuYhqmg";
+            "4/CyVClsAy4qceFzR62vIjQRfZkRxD";
     private static final String CONSUMER_KEY = "pcchq.com";
 
     @Test
@@ -97,6 +97,7 @@ public class TestServerSidedOAuth {
 
         } catch (final IOException exception) {
             LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
         }
     }
     
