@@ -1,5 +1,5 @@
 
-task T${id} "${name}"
+task T${soId} "${taskName}"
 {
 	${startDateTime}
 	priority ${priority}

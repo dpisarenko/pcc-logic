@@ -43,7 +43,7 @@ import com.google.inject.Injector;
  * 
  */
 class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
-    private static final String RESOURCE_ID = "${id}";
+    private static final String RESOURCE_ID = "${resourceId}";
 
     private static final String ABBREVIATION = "${abbreviation}";
 
@@ -77,7 +77,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     private static final String EXPORT2TJ3_TEMPLATE_TASK =
             TEMPLATE_DIRECTORY + "export2tj3.template.task";
 
-    private static final String ID = "${id}";
+    private static final String ID = "${soId}";
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(DefaultTaskJuggler3Exporter.class);
@@ -86,7 +86,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
     private static final int MAX_TASK_NAME_LENGTH = 30;
 
-    private static final String NAME = "${name}";
+    private static final String NAME = "${taskName}";
 
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat(
             "#0.00");
