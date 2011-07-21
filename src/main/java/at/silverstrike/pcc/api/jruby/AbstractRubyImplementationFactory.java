@@ -51,8 +51,12 @@ public abstract class AbstractRubyImplementationFactory<X> implements
 		try {
 			final EmbeddedFileReader reader = this.injector
 					.getInstance(EmbeddedFileReader.class);
-			jruby.eval(reader.readEmbeddedFile(RUBY_DIRECTORY + aInterfacename
-					+ "/" + IMPLEMENTATION_PREFIX + aModule + RUBY_EXTENSION));
+
+			reader.setFilename(RUBY_DIRECTORY + aInterfacename
+                                + "/" + IMPLEMENTATION_PREFIX + aModule + RUBY_EXTENSION);
+			reader.run();
+			
+			jruby.eval(reader.getFileContents());
 
 			retVal = (X) jruby.eval(IMPLEMENTATION_PREFIX + aModule
 					+ RUBY_CONSTRUCTOR);

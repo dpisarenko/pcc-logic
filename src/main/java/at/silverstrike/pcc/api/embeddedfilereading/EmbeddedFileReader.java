@@ -11,12 +11,15 @@
 
 package at.silverstrike.pcc.api.embeddedfilereading;
 
-import ru.altruix.commons.api.di.PccException;
+import ru.altruix.commons.api.conventions.SingleActivityModule;
 
 /**
  * @author Dmitri Pisarenko
  * 
  */
-public interface EmbeddedFileReader {
-	String readEmbeddedFile(final String aFileName) throws PccException;
+public interface EmbeddedFileReader extends SingleActivityModule {
+    void setFilename(final String aFileName);
+    void setClassLoader(final ClassLoader aClassLoader);
+    
+    String getFileContents();
 }

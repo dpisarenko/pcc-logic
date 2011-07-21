@@ -144,8 +144,11 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
         LOGGER.debug("this.embeddedFileReader: " + embeddedFileReader);
 
+        embeddedFileReader.setFilename(PROJECT_HEADER_TEMPLATE);
+        embeddedFileReader.run();
+
         final String projectTemplate =
-                embeddedFileReader.readEmbeddedFile(PROJECT_HEADER_TEMPLATE);
+                embeddedFileReader.getFileContents();
         final String projectHeader =
                 substituteProjectHeaderPlaceholders(projectTemplate);
 
@@ -159,21 +162,29 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         final List<SchedulingObject> processes =
                 this.projectExportInfo.getSchedulingObjectsToExport();
         if (processes != null) {
-            taskTemplate =
-                    embeddedFileReader
-                            .readEmbeddedFile(EXPORT2TJ3_TEMPLATE_TASK);
-            effortTemplate =
-                    embeddedFileReader
-                            .readEmbeddedFile(EXPORT2TJ3_TEMPLATE_EFFORT);
+            embeddedFileReader.setFilename(EXPORT2TJ3_TEMPLATE_TASK);
+            embeddedFileReader.run();
+            taskTemplate = embeddedFileReader.getFileContents();
+
+            embeddedFileReader.setFilename(EXPORT2TJ3_TEMPLATE_EFFORT);
+            embeddedFileReader.run();
+            effortTemplate = embeddedFileReader.getFileContents();
+
+            embeddedFileReader
+                    .setFilename(EXPORT2TJ3_TEMPLATE_RESOURCEALLOCATION_LIMITS);
+            embeddedFileReader.run();
             resourceAllocationLimitsTemplate =
-                    embeddedFileReader
-                            .readEmbeddedFile(EXPORT2TJ3_TEMPLATE_RESOURCEALLOCATION_LIMITS);
+                    embeddedFileReader.getFileContents();
+
+            embeddedFileReader
+                    .setFilename(EXPORT2TJ3_TEMPLATE_RESOURCEALLOCATION_NOLIMITS);
+            embeddedFileReader.run();
             resourceAllocationNoLimitsTemplate =
-                    embeddedFileReader
-                            .readEmbeddedFile(EXPORT2TJ3_TEMPLATE_RESOURCEALLOCATION_NOLIMITS);
-            startDateTimeTemplate =
-                    embeddedFileReader
-                            .readEmbeddedFile(EXPORT2TJ3_TEMPLATE_START);
+                    embeddedFileReader.getFileContents();
+
+            embeddedFileReader.setFilename(EXPORT2TJ3_TEMPLATE_START);
+            embeddedFileReader.run();
+            startDateTimeTemplate = embeddedFileReader.getFileContents();
 
             for (final SchedulingObject process : processes) {
                 builder.append(getTaskInformation(process, null));
@@ -181,7 +192,9 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         }
 
         // Add footer (report definitions)
-        builder.append(embeddedFileReader.readEmbeddedFile(REPORT_TEMPLATE));
+        embeddedFileReader.setFilename(REPORT_TEMPLATE);
+        embeddedFileReader.run();
+        builder.append(embeddedFileReader.getFileContents());
 
         result = builder.toString();
     }
@@ -201,8 +214,11 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                 this.projectExportInfo.getResourcesToExport();
 
         if (resources != null) {
+            embeddedFileReader.setFilename(RESOURCE_TEMPLATE);
+            embeddedFileReader.run();
+            
             final String resourceDefinitionTemplate =
-                    embeddedFileReader.readEmbeddedFile(RESOURCE_TEMPLATE);
+                    embeddedFileReader.getFileContents();
 
             for (final Resource resource : resources) {
                 final String resourceDefinition =

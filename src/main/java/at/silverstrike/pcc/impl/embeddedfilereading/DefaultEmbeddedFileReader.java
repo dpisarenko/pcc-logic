@@ -31,15 +31,20 @@ import at.silverstrike.pcc.api.embeddedfilereading.EmbeddedFileReader;
 class DefaultEmbeddedFileReader implements EmbeddedFileReader {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(DefaultEmbeddedFileReader.class);
+    private String filename;
+    private String fileContents;
+    private ClassLoader classLoader;
 
     @Override
-    public String readEmbeddedFile(final String aFileName) throws PccException {
-        final ClassLoader contextClassLoader =
-                Thread.currentThread().getContextClassLoader();
+    public void run() throws PccException {
+        if (this.classLoader == null) {
+            this.classLoader = Thread.currentThread().getContextClassLoader();
+        }
+
         InputStream inputStream = null;
         String projectTemplate = null;
         try {
-            inputStream = contextClassLoader.getResourceAsStream(aFileName);
+            inputStream = this.classLoader.getResourceAsStream(this.filename);
 
             if (inputStream == null) {
                 /**
@@ -49,11 +54,12 @@ class DefaultEmbeddedFileReader implements EmbeddedFileReader {
                 inputStream =
                         openInputStream(new File(System.getProperty("user.dir")
                                 +
-                                "/src/main/webapp/WEB-INF/classes/" + aFileName));
+                                "/src/main/webapp/WEB-INF/classes/"
+                                + this.filename));
             }
 
             LOGGER.debug("inputStream: " + inputStream);
-            LOGGER.debug("aFileName: " + aFileName);
+            LOGGER.debug("aFileName: " + this.filename);
             LOGGER.debug("pwd: " + System.getProperty("user.dir"));
             projectTemplate = IOUtils.toString(inputStream);
         } catch (final Exception exception) {
@@ -62,8 +68,23 @@ class DefaultEmbeddedFileReader implements EmbeddedFileReader {
         } finally {
             IOUtils.closeQuietly(inputStream);
         }
-        return projectTemplate;
+        fileContents = projectTemplate;
+    }
 
+    @Override
+    public void setFilename(final String aFileName) {
+        this.filename = aFileName;
+    }
+
+    @Override
+    public String getFileContents() {
+        // TODO Auto-generated method stub
+        return fileContents;
+    }
+
+    @Override
+    public void setClassLoader(final ClassLoader aClassLoader) {
+        this.classLoader = aClassLoader;
     }
 
 }
