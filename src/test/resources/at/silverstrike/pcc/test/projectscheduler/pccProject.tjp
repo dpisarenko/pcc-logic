@@ -25,12 +25,12 @@ project "Sample project" 2010-10-25 +1m
 
 copyright "DP"
 
-resource Rco.altruix:pcc-logic:jar:1.0-SNAPSHOT "DP"
+resource R1210 "DP"
 {
 	limits { dailymax 8.00h }
 }
 
-task Tco.altruix:pcc-logic:jar:1.0-SNAPSHOT "pcc-logic"
+task T2010 "Some interesting task"
 {
 	
 start ${now}
