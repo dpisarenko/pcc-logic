@@ -145,6 +145,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         LOGGER.debug("this.embeddedFileReader: " + embeddedFileReader);
 
         embeddedFileReader.setFilename(PROJECT_HEADER_TEMPLATE);
+        embeddedFileReader.setClassLoader(getClass().getClassLoader());
         embeddedFileReader.run();
 
         final String projectTemplate =
