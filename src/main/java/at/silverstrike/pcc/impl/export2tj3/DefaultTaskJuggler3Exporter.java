@@ -58,20 +58,24 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
     private static final String EFFORT_INFO = "${effortInfo}";
 
+    private static final String TEMPLATE_DIRECTORY = "export2tj3/";
+
     private static final String EXPORT2TJ3_TEMPLATE_EFFORT =
-            "export2tj3.template.effort";
+            TEMPLATE_DIRECTORY + "export2tj3.template.effort";
 
     private static final String EXPORT2TJ3_TEMPLATE_RESOURCEALLOCATION_LIMITS =
-            "export2tj3.template.resourceallocation.limits";
+            TEMPLATE_DIRECTORY
+                    + "export2tj3.template.resourceallocation.limits";
 
     private static final String EXPORT2TJ3_TEMPLATE_RESOURCEALLOCATION_NOLIMITS =
-            "export2tj3.template.resourceallocation.nolimits";
+            TEMPLATE_DIRECTORY
+                    + "export2tj3.template.resourceallocation.nolimits";
 
     private static final String EXPORT2TJ3_TEMPLATE_START =
-            "export2tj3.template.start";
+            TEMPLATE_DIRECTORY + "export2tj3.template.start";
 
     private static final String EXPORT2TJ3_TEMPLATE_TASK =
-            "export2tj3.template.task";
+            TEMPLATE_DIRECTORY + "export2tj3.template.task";
 
     private static final String ID = "${id}";
 
@@ -101,16 +105,17 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     private static final String PRIORITY = "${priority}";
 
     private static final String PROJECT_HEADER_TEMPLATE =
-            "export2tj3.template.project";
+            TEMPLATE_DIRECTORY + "export2tj3.template.project";
 
-    private static final String REPORT_TEMPLATE = "export2tj3.template.reports";
+    private static final String REPORT_TEMPLATE = TEMPLATE_DIRECTORY
+            + "export2tj3.template.reports";
 
     private static final String RESOURCE = "${resource}";
 
     private static final String RESOURCE_ALLOCATIONS = "${resourceAllocations}";
 
     private static final String RESOURCE_TEMPLATE =
-            "export2tj3.template.resource";
+            TEMPLATE_DIRECTORY + "export2tj3.template.resource";
     private static final String START_DATE_TIME = "${startDateTime}";
 
     private static final Double TIMING_RESOLUTION_IN_HOURS = 0.16667;
@@ -217,7 +222,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         if (resources != null) {
             embeddedFileReader.setFilename(RESOURCE_TEMPLATE);
             embeddedFileReader.run();
-            
+
             final String resourceDefinitionTemplate =
                     embeddedFileReader.getFileContents();
 
