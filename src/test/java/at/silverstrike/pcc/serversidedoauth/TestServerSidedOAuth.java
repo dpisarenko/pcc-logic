@@ -60,6 +60,7 @@ public class TestServerSidedOAuth {
     private static final String CONSUMER_KEY = "pcchq.com";
 
     @Test
+    @Ignore
     public void testTasks() {
         final HttpTransport httpTransport = new NetHttpTransport();
         final JacksonFactory jsonFactory = new JacksonFactory();
