@@ -25,6 +25,8 @@ class MockUserData implements UserData {
     private List<Booking> bookings;
     private String googleUsername;
     private String googlePassword;
+    private boolean automaticScheduling;
+    private int automaticSchedulingInterval; 
 
     
     public String getIdentifier() {
@@ -173,5 +175,21 @@ class MockUserData implements UserData {
     public String getGoogleCalendarOAuthTokenSecret() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    public boolean isAutomaticScheduling() {
+        return automaticScheduling;
+    }
+
+    public void setAutomaticScheduling(boolean aAutomaticScheduling) {
+        this.automaticScheduling = aAutomaticScheduling;
+    }
+
+    public int getAutomaticSchedulingInterval() {
+        return automaticSchedulingInterval;
+    }
+
+    public void setAutomaticSchedulingInterval(final int aAutomaticSchedulingInterval) {
+        this.automaticSchedulingInterval = aAutomaticSchedulingInterval;
     }
 }
