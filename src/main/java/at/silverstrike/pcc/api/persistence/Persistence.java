@@ -173,4 +173,6 @@ public interface Persistence extends ModuleWithInjectableDependencies {
     UserData getUser(final Long aUserId);
     
     void updateUser(final UserData aUser);
+    
+    List<UserData> getAllusersWithAutomaticScheduling();
 }

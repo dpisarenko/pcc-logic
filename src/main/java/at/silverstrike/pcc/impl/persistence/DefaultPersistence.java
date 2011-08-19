@@ -1475,4 +1475,29 @@ public class DefaultPersistence implements Persistence {
             tx.rollback();
         }
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<UserData> getAllusersWithAutomaticScheduling() {
+        List<UserData> result = null;
+        final Transaction tx = session.beginTransaction();
+
+        try {
+            final String hql =
+                    "from DefaultUserData where automaticScheduling = true";                            
+
+            final Query query =
+                    session.createQuery(hql);
+
+            result = (List<UserData>) query.list();
+
+            tx.commit();
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            tx.rollback();
+        }
+
+        return result;          
+    }
+    
 }

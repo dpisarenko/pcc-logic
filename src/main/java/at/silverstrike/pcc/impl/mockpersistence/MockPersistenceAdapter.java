@@ -241,4 +241,10 @@ public abstract class MockPersistenceAdapter implements Persistence {
         
     }
 
+    @Override
+    public List<UserData> getAllusersWithAutomaticScheduling() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

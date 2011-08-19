@@ -32,7 +32,11 @@ class DefaultUserData implements UserData {
     private String googleCalendarOAuthVerifier;
     private String googleCalendarOAuthToken;
     private String googleCalendarOAuthTokenSecret;
+    private boolean automaticScheduling;
+    private int automaticSchedulingInterval; 
 
+    
+    
     public String getIdentifier() {
         return identifier;
     }
@@ -143,5 +147,21 @@ class DefaultUserData implements UserData {
     public void setGoogleCalendarOAuthTokenSecret(
             String googleCalendarOAuthTokenSecret) {
         this.googleCalendarOAuthTokenSecret = googleCalendarOAuthTokenSecret;
+    }
+
+    public boolean isAutomaticScheduling() {
+        return automaticScheduling;
+    }
+
+    public void setAutomaticScheduling(boolean automaticScheduling) {
+        this.automaticScheduling = automaticScheduling;
+    }
+
+    public int getAutomaticSchedulingInterval() {
+        return automaticSchedulingInterval;
+    }
+
+    public void setAutomaticSchedulingInterval(int automaticSchedulingInterval) {
+        this.automaticSchedulingInterval = automaticSchedulingInterval;
     }
 }
