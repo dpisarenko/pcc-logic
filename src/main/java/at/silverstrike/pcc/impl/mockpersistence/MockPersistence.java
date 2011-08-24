@@ -102,7 +102,8 @@ class MockPersistence extends MockPersistenceAdapter implements Persistence {
     }
 
     @Override
-    public void openSession() {
+    public void openSession(final String aHost, final String aUser,
+            final String aPassword, final String aDatabase) {
         throw new NotImplementedException();
 
     }
@@ -112,7 +113,6 @@ class MockPersistence extends MockPersistenceAdapter implements Persistence {
         throw new NotImplementedException();
 
     }
-
 
     @Override
     public void updateTask(final Task process) {
@@ -141,7 +141,6 @@ class MockPersistence extends MockPersistenceAdapter implements Persistence {
     public UserData getUserData() {
         throw new NotImplementedException();
     }
-
 
     @Override
     public boolean deleteEvent(final Event aEvent) {

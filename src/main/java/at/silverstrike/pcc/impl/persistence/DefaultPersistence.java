@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,10 +67,10 @@ public class DefaultPersistence implements Persistence {
     public static final String DB_NAME = "pcc";
     private static final int DAYS_TO_PLAN_AHEAD = 7;
     // jdbc:derby://localhost:1527/pcc;create=true
-    private static final String JDBC_CONN_STRING_EXISTING_DB = "jdbc:derby://78.47.242.60:1527/"
-            + DB_NAME;
-    private static final String JDBC_CONN_STRING_NEW_DB = "jdbc:derby://78.47.242.60:1527/"
-            + DB_NAME + ";create=true";
+    
+    private static final String JDBC_CONN_STRING_EXISTING_DB_TEMPLATE = "jdbc:derby://${host}:1527/${db}";
+    private static final String JDBC_CONN_STRING_NEW_DB_TEMPLATE = "jdbc:derby://${host}:1527/${db};create=true";
+    
     private static final String PROCESS_ID = "${processId}";
     private static final String USER_ID = "${userId}";
     private static final String STATE_BEING_ATTAINED = ":stateBeingAttained";
@@ -590,18 +591,32 @@ public class DefaultPersistence implements Persistence {
      * @see at.silverstrike.pcc.api.persistence.Persistence#openSession()
      */
     @Override
-    public final void openSession() {
+    public final void openSession(final String aHost, final String aUser, final String aPassword, final String aDatabase) {
         LOGGER.debug(ErrorCodes.M_001_OPEN_SESSION);
         try {
-            tryToOpenSession(JDBC_CONN_STRING_EXISTING_DB);
+            tryToOpenSession(getConnectionStringExistingDb(aHost, aDatabase));
             LOGGER.debug(ErrorCodes.M_002_OPEN_SESSION);
         } catch (final RuntimeException exception) {
             LOGGER.debug(ErrorCodes.M_003_OPEN_SESSION, exception);
-            tryToCreateDb(exception);
+            tryToCreateDb(exception, aHost, aDatabase);
         } catch (final Throwable exception) {
             LOGGER.debug(ErrorCodes.M_004_OPEN_SESSION, exception);
-            tryToCreateDb(exception);
+            tryToCreateDb(exception, aHost, aDatabase);
         }
+    }
+
+    private String getConnectionStringExistingDb(final String aHost, final String aDb)
+    {
+        final String[] searchList = new String[] {"${host}", "${db}"};
+        final String[] replacementList = new String[] {aHost, aDb};
+        return StringUtils.replaceEach(JDBC_CONN_STRING_EXISTING_DB_TEMPLATE, searchList, replacementList);
+    }
+
+    private String getConnectionStringNewDb(final String aHost, final String aDb)
+    {
+        final String[] searchList = new String[] {"${host}", "${db}"};
+        final String[] replacementList = new String[] {aHost, aDb};
+        return StringUtils.replaceEach(JDBC_CONN_STRING_NEW_DB_TEMPLATE, searchList, replacementList);
     }
 
     @Override
@@ -720,12 +735,12 @@ public class DefaultPersistence implements Persistence {
         }
     }
 
-    private void tryToCreateDb(final Throwable aException) {
+    private void tryToCreateDb(final Throwable aException, final String aHost, final String aDatabase) {
         LOGGER.error("tryToCreateDb, 1, ", aException);
 
         try {
             LOGGER.error("tryToCreateDb, 2");
-            tryToOpenSession(JDBC_CONN_STRING_NEW_DB);
+            tryToOpenSession(getConnectionStringNewDb(aHost, aDatabase));
             LOGGER.error("tryToCreateDb, 3");
         } catch (final Throwable exception2) {
             LOGGER.error("tryToCreateDb, 4", exception2);

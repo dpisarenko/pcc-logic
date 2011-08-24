@@ -129,7 +129,7 @@ public final class TestDefaultProjectScheduler {
          * Init persistence
          */
         try {
-            persistence.openSession();
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, "pcc");
         } catch (final RuntimeException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());

@@ -40,7 +40,7 @@ public class TestDefaultPersistence {
         final Persistence persistence = new DefaultPersistence();
 
         try {
-            persistence.openSession();
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, "pcc");
             persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
@@ -64,7 +64,7 @@ public class TestDefaultPersistence {
         final Persistence persistence = new DefaultPersistence();
 
         try {
-            persistence.openSession();
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, "pcc");
             persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
@@ -116,7 +116,7 @@ public class TestDefaultPersistence {
         final Persistence persistence = new DefaultPersistence();
 
         try {
-            persistence.openSession();
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, "pcc");
             persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
@@ -210,7 +210,7 @@ public class TestDefaultPersistence {
         final Persistence persistence = new DefaultPersistence();
 
         try {
-            persistence.openSession();
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, "pcc");
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
         } catch (final Exception exception) {

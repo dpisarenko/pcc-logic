@@ -106,7 +106,8 @@ public abstract class MockPersistenceAdapter implements Persistence {
     }
 
     @Override
-    public void openSession() {
+    public void openSession(final String aHost, final String aUser,
+            final String aPassword, final String aDatabase) {
     }
 
     @Override
@@ -238,7 +239,7 @@ public abstract class MockPersistenceAdapter implements Persistence {
     @Override
     public void updateUser(UserData aUser) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
