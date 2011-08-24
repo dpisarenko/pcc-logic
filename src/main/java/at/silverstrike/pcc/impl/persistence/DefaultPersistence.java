@@ -950,13 +950,14 @@ public class DefaultPersistence implements Persistence {
 
                             "DefaultEvent",
                             "DefaultMilestone",
-                            "DefaultUserData",
+                            
                             "DefaultWorker",
                             "TBL_DAILY_TO_DO_LIST_TASKSTOCOMPLETETODAY",
                             "DefaultDailyToDoList",
 
                             "DefaultTask",
-                            "DefaultSchedulingObject", };
+                            "DefaultSchedulingObject", 
+                            "DefaultUserData",};
 
             for (final String entityToDelete : entitiesToDelete) {
                 LOGGER.debug("clearDatbase, delete from {}", entityToDelete);
