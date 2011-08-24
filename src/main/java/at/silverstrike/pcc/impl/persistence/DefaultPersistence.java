@@ -66,9 +66,9 @@ public class DefaultPersistence implements Persistence {
     public static final String DB_NAME = "pcc";
     private static final int DAYS_TO_PLAN_AHEAD = 7;
     // jdbc:derby://localhost:1527/pcc;create=true
-    private static final String JDBC_CONN_STRING_EXISTING_DB = "jdbc:derby://localhost:1527/"
+    private static final String JDBC_CONN_STRING_EXISTING_DB = "jdbc:derby://78.47.242.60:1527/"
             + DB_NAME;
-    private static final String JDBC_CONN_STRING_NEW_DB = "jdbc:derby://localhost:1527/"
+    private static final String JDBC_CONN_STRING_NEW_DB = "jdbc:derby://78.47.242.60:1527/"
             + DB_NAME + ";create=true";
     private static final String PROCESS_ID = "${processId}";
     private static final String USER_ID = "${userId}";
