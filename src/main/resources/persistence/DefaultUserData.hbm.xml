@@ -29,6 +29,10 @@
 		<property name="googleCalendarOAuthVerifier" />
 		<property name="googleCalendarOAuthToken" />
 		<property name="googleCalendarOAuthTokenSecret" />
+		
+		<property name="automaticScheduling" />
+		<property name="automaticSchedulingInterval" />
+		
 				
 		<bag name="schedulingData" lazy="false">
 			<key column="USER_DATA_ID" />
