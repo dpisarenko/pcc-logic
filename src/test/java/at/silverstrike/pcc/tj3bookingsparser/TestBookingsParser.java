@@ -102,5 +102,34 @@ public final class TestBookingsParser {
                         .getStartTime());
         Assert.assertEquals("2.75h", indBooking.getDuration());
     }
+    
+    @Test
+    /**
+     * 201108/5
+     * evernote:///view/3784753/s35/ca00cf14-68bc-4889-82f4-c3de6d59cca3/ca00cf14-68bc-4889-82f4-c3de6d59cca3/
+     */
+    public void testDefect_201108_5()
+    {
+        BookingsFile bookingsFile = null;
+        InputStream inputStream = null;
+        try {
+            inputStream = FileUtils.openInputStream(new File(DIR + "testDefect_201108_5"));
+            final BookingsLexer lexer =
+                    new BookingsLexer(new ANTLRInputStream(inputStream));
+            final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            final BookingsParser parser = new BookingsParser(tokenStream);
 
+            parser.bookingsFile();
+
+            bookingsFile = parser.getBookingsFile();
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+
+        assertNotNull(bookingsFile);
+        
+    }
 }

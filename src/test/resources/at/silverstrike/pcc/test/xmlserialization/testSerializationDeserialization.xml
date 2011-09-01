@@ -17,9 +17,9 @@
         <bestCaseEffort>3.3</bestCaseEffort>
         <worstCaseEffort>6.7</worstCaseEffort>
         <resourceAllocations/>
-        <averageEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</averageEstimatedEndDateTime>
-        <bestEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</bestEstimatedEndDateTime>
-        <worstEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</worstEstimatedEndDateTime>
+        <averageEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</averageEstimatedEndDateTime>
+        <bestEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</bestEstimatedEndDateTime>
+        <worstEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</worstEstimatedEndDateTime>
       </parentProcess>
       <predecessors>
         <at.silverstrike.pcc.impl.mockpersistence.MockControlProcess>
@@ -41,17 +41,17 @@
               </resource>
             </at.silverstrike.pcc.impl.mockpersistence.MockResourceAllocation>
           </resourceAllocations>
-          <averageEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</averageEstimatedEndDateTime>
-          <bestEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</bestEstimatedEndDateTime>
-          <worstEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</worstEstimatedEndDateTime>
+          <averageEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</averageEstimatedEndDateTime>
+          <bestEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</bestEstimatedEndDateTime>
+          <worstEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</worstEstimatedEndDateTime>
         </at.silverstrike.pcc.impl.mockpersistence.MockControlProcess>
       </predecessors>
       <bestCaseEffort>1.1</bestCaseEffort>
       <worstCaseEffort>7.7</worstCaseEffort>
       <resourceAllocations/>
-      <averageEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</averageEstimatedEndDateTime>
-      <bestEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</bestEstimatedEndDateTime>
-      <worstEstimatedEndDateTime>2011-08-25 00:11:47.196 CEST</worstEstimatedEndDateTime>
+      <averageEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</averageEstimatedEndDateTime>
+      <bestEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</bestEstimatedEndDateTime>
+      <worstEstimatedEndDateTime>2011-09-01 23:24:29.430 CEST</worstEstimatedEndDateTime>
     </at.silverstrike.pcc.impl.mockpersistence.MockControlProcess>
   </processes>
   <dailyPlans>
@@ -59,7 +59,7 @@
       <resource class="at.silverstrike.pcc.impl.mockpersistence.MockResource">
         <dailyLimit>0.0</dailyLimit>
       </resource>
-      <date>2011-08-25 00:11:47.197 CEST</date>
+      <date>2011-09-01 23:24:29.431 CEST</date>
       <toDoList class="at.silverstrike.pcc.impl.mockpersistence.MockDailyToDoList">
         <tasksToCompleteToday/>
       </toDoList>
@@ -73,7 +73,7 @@
             <resource class="at.silverstrike.pcc.impl.mockpersistence.MockResource">
               <dailyLimit>0.0</dailyLimit>
             </resource>
-            <startDateTime>2011-08-25 00:11:47.198 CEST</startDateTime>
+            <startDateTime>2011-09-01 23:24:29.431 CEST</startDateTime>
             <durationInHours>3.4</durationInHours>
           </at.silverstrike.pcc.impl.mockpersistence.MockBooking>
         </bookings>
@@ -89,7 +89,7 @@
       <resource class="at.silverstrike.pcc.impl.mockpersistence.MockResource">
         <dailyLimit>0.0</dailyLimit>
       </resource>
-      <startDateTime>2011-08-25 00:11:47.198 CEST</startDateTime>
+      <startDateTime>2011-09-01 23:24:29.432 CEST</startDateTime>
       <durationInHours>1.6</durationInHours>
     </at.silverstrike.pcc.impl.mockpersistence.MockBooking>
   </bookings>
