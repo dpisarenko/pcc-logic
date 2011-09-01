@@ -47,7 +47,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
             .getLogger(DefaultGoogleCalendarTasks2PccImporter2.class);
 
     private List<com.google.api.services.tasks.v1.model.Task> googleTasks;
-    private List<at.silverstrike.pcc.api.model.Task> createdPccTasks;
+    private List<SchedulingObject> createdPccTasks;
     private Injector injector;
     private UserData user;
 
@@ -77,7 +77,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
         LOGGER.debug("Relevant tasks: " + relevantTasksByIds.size());
 
         this.createdPccTasks =
-                new LinkedList<at.silverstrike.pcc.api.model.Task>();
+                new LinkedList<SchedulingObject>();
 
         // Create tasks in PCC database
         final Map<String, at.silverstrike.pcc.api.model.Task> pccTasksByGoogleIds =
@@ -257,7 +257,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
         this.user = user;
     }
 
-    public List<at.silverstrike.pcc.api.model.Task> getCreatedPccTasks() {
+    public List<SchedulingObject> getCreatedPccTasks() {
         return createdPccTasks;
     }
 

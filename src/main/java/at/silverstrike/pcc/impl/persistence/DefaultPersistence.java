@@ -1515,5 +1515,36 @@ public class DefaultPersistence implements Persistence {
 
         return result;          
     }
+
+    @Override
+    public Task createTransientTask(final String aProcessName, final Long aParentProcessId,
+            final UserData aUser) {
+        Task returnValue = null;
+
+        try {
+            final Task newProcess = new DefaultTask();
+
+            newProcess.setUserData(aUser);
+            newProcess.setParent(getParentTask(aParentProcessId));
+            newProcess.setName(aProcessName);
+
+            newProcess.setPriority(getNextSchedulingObjectPriority(
+                    getParentTask(aParentProcessId)));
+
+            final DailyLimitResourceAllocation alloc =
+                    new DefaultDailyLimitResourceAllocation();
+            final Worker worker = this.getCurrentWorker(aUser);
+            alloc.setResource(worker);
+            alloc.setDailyLimit(worker.getDailyLimitInHours());
+            newProcess
+                    .setResourceAllocations(new LinkedList<ResourceAllocation>());
+            newProcess.getResourceAllocations().add(alloc);
+
+            returnValue = newProcess;
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+        }
+        return returnValue;
+    }
     
 }

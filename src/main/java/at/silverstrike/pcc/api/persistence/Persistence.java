@@ -178,4 +178,7 @@ public interface Persistence extends ModuleWithInjectableDependencies {
     void updateUser(final UserData aUser);
     
     List<UserData> getAllusersWithAutomaticScheduling();
+
+    Task createTransientTask(final String aProcessName, final Long aParentProcessId,
+            final UserData aUser);
 }

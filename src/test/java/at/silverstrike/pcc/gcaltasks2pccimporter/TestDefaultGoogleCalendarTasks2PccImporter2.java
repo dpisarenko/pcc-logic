@@ -124,7 +124,7 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
             Assert.fail(exception.getMessage());
         }
 
-        final List<at.silverstrike.pcc.api.model.Task> createdPccTasks =
+        final List<SchedulingObject> createdPccTasks =
                 objectUnderTest.getCreatedPccTasks();
 
         Assert.assertNotNull(createdPccTasks);
@@ -173,12 +173,14 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
 
     private Map<String, at.silverstrike.pcc.api.model.Task>
             getPccTasksByLabels(
-                    final List<at.silverstrike.pcc.api.model.Task> aPccTasks) {
+                    final List<SchedulingObject> aPccTasks) {
         final Map<String, at.silverstrike.pcc.api.model.Task> returnValue =
                 new HashMap<String, at.silverstrike.pcc.api.model.Task>();
 
-        for (final at.silverstrike.pcc.api.model.Task curTask : aPccTasks) {
-            returnValue.put(curTask.getLabel(), curTask);
+        for (final SchedulingObject curTask : aPccTasks) {
+            returnValue.put(
+                    ((at.silverstrike.pcc.api.model.Task) curTask).getLabel(),
+                    (at.silverstrike.pcc.api.model.Task) curTask);
         }
 
         return returnValue;

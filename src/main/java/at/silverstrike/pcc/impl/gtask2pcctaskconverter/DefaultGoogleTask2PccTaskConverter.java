@@ -45,8 +45,9 @@ class DefaultGoogleTask2PccTaskConverter implements GoogleTask2PccTaskConverter 
     @Override
     public void run() throws PccException {
         this.task =
-                persistence.createSubTask(googleTask.title, null,
-                        this.user);
+            persistence.createTransientTask(googleTask.title, null, this.user);
+        
+        
         try {
             this.notesParser.setNotes(googleTask.notes);
             this.notesParser.run();
@@ -67,7 +68,6 @@ class DefaultGoogleTask2PccTaskConverter implements GoogleTask2PccTaskConverter 
         } catch (final PccException exception) {
             LOGGER.error("", exception);
         }
-
     }
 
     @Override

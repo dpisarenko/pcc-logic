@@ -11,6 +11,9 @@
 
 package at.silverstrike.pcc.api.gcaltasks2pcc;
 
+import java.util.List;
+
+import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.UserData;
 
 import com.google.api.services.tasks.v1.Tasks;
@@ -25,4 +28,5 @@ public interface GoogleCalendarTasks2PccImporter extends SingleActivityModule,
         ModuleWithInjectableDependencies {
     void setService(final Tasks aService);
     void setUser(final UserData aUser);
+    List<SchedulingObject> getCreatedPccTasks();
 }

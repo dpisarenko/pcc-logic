@@ -16,6 +16,7 @@ import java.util.List;
 import ru.altruix.commons.api.conventions.SingleActivityModule;
 import ru.altruix.commons.api.di.ModuleWithInjectableDependencies;
 
+import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.UserData;
 
 /**
@@ -27,5 +28,5 @@ public interface GoogleCalendarTasks2PccImporter2 extends SingleActivityModule,
     void setGoogleTasks(final java.util.List<com.google.api.services.tasks.v1.model.Task> aTasks);
     void setUser(final UserData aUser);
     
-    List<at.silverstrike.pcc.api.model.Task> getCreatedPccTasks();
+    List<SchedulingObject> getCreatedPccTasks();
 }

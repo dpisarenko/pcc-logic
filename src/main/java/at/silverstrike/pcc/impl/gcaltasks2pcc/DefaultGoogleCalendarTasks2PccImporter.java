@@ -12,6 +12,7 @@
 package at.silverstrike.pcc.impl.gcaltasks2pcc;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ import com.google.inject.Injector;
 import at.silverstrike.pcc.api.gcaltasks2pcc.GoogleCalendarTasks2PccImporter;
 import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2;
 import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2Factory;
+import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.UserData;
 import at.silverstrike.pcc.api.persistence.Persistence;
 
@@ -40,7 +42,8 @@ class DefaultGoogleCalendarTasks2PccImporter implements
     private Injector injector;
     private UserData user;
     private Tasks service;
-
+    private List<SchedulingObject> createdPccTasks;
+    
     @Override
     public void run() throws PccException {
         final Persistence persistence =
@@ -78,6 +81,7 @@ class DefaultGoogleCalendarTasks2PccImporter implements
             importer2.setInjector(this.injector);
             importer2.setUser(this.user);
             importer2.run();
+            this.createdPccTasks = importer2.getCreatedPccTasks();
         } catch (final IOException exception) {
             LOGGER.error("", exception);
         }
@@ -96,5 +100,10 @@ class DefaultGoogleCalendarTasks2PccImporter implements
     @Override
     public void setService(final Tasks aService) {
         this.service = aService;
+    }
+
+    @Override
+    public List<SchedulingObject> getCreatedPccTasks() {
+        return createdPccTasks;
     }
 }
