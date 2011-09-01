@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 14:05:07 src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g 2011-09-02 01:37:16
+// $ANTLR 3.2 Sep 23, 2009 14:05:07 src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g 2011-09-02 01:45:41
 
 package at.silverstrike.pcc.impl.tj3bookingsparser.grammar;
 
@@ -9,45 +9,47 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class BookingsLexer extends Lexer {
-    public static final int D=38;
-    public static final int End=19;
-    public static final int Scheduled=22;
-    public static final int FloatingPointNumberDuration=34;
-    public static final int Start=18;
-    public static final int A=13;
-    public static final int Prj=5;
-    public static final int CloseParen=10;
-    public static final int IntegerNumber=25;
-    public static final int Supplement=23;
-    public static final int H=40;
-    public static final int DayOfWeek=27;
+    public static final int End=21;
+    public static final int FloatingPointNumberDuration=36;
+    public static final int CloseParen=14;
+    public static final int IntegerNumber=27;
+    public static final int Supplement=25;
+    public static final int DayOfWeek=29;
     public static final int DateTimeWithTimeZone=7;
-    public static final int Utc=12;
-    public static final int Time=30;
-    public static final int Colon=31;
-    public static final int P=39;
     public static final int EOF=-1;
+    public static final int FloatingPointNumber=37;
     public static final int Project=4;
-    public static final int FloatingPointNumber=35;
-    public static final int TimeZone=11;
-    public static final int Identifier=16;
-    public static final int Space=41;
-    public static final int Resource=15;
+    public static final int Identifier=18;
+    public static final int Space=43;
     public static final int Hyphen=8;
-    public static final int Plus=33;
-    public static final int Off=28;
-    public static final int Overtime=36;
+    public static final int Overtime=38;
     public static final int OpenParen=9;
-    public static final int Booking=32;
-    public static final int Priority=24;
-    public static final int Projectids=14;
-    public static final int Scheduling=20;
+    public static final int Booking=34;
+    public static final int Projectids=16;
+    public static final int Scheduling=22;
     public static final int String=6;
-    public static final int Task=17;
-    public static final int Asap=21;
-    public static final int Comma=29;
-    public static final int Workinghours=26;
-    public static final int Complete=37;
+    public static final int Task=19;
+    public static final int Complete=39;
+    public static final int D=40;
+    public static final int Scheduled=24;
+    public static final int Start=20;
+    public static final int A=15;
+    public static final int Prj=5;
+    public static final int H=42;
+    public static final int Utc=11;
+    public static final int Time=32;
+    public static final int Colon=33;
+    public static final int P=41;
+    public static final int TimeZone=10;
+    public static final int Resource=17;
+    public static final int Plus=35;
+    public static final int Off=30;
+    public static final int Priority=26;
+    public static final int Asap=23;
+    public static final int Comma=31;
+    public static final int ScenarioPart1=12;
+    public static final int Workinghours=28;
+    public static final int ScenarioPart2=13;
 
     // delegates
     // delegators
@@ -62,13 +64,55 @@ public class BookingsLexer extends Lexer {
     }
     public String getGrammarFileName() { return "src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g"; }
 
+    // $ANTLR start "ScenarioPart1"
+    public final void mScenarioPart1() throws RecognitionException {
+        try {
+            int _type = ScenarioPart1;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:59:2: ( 'scenario plan \"Plan\"' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:60:2: 'scenario plan \"Plan\"'
+            {
+            match("scenario plan \"Plan\""); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "ScenarioPart1"
+
+    // $ANTLR start "ScenarioPart2"
+    public final void mScenarioPart2() throws RecognitionException {
+        try {
+            int _type = ScenarioPart2;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:64:2: ( 'active yes' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:65:2: 'active yes'
+            {
+            match("active yes"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "ScenarioPart2"
+
     // $ANTLR start "TimeZone"
     public final void mTimeZone() throws RecognitionException {
         try {
             int _type = TimeZone;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:64:2: ( 'timezone' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:65:2: 'timezone'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:69:2: ( 'timezone' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:70:2: 'timezone'
             {
             match("timezone"); 
 
@@ -88,11 +132,11 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Utc;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:69:2: ( '\"' ( A )+ '\"' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:70:2: '\"' ( A )+ '\"'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:74:2: ( '\"' ( A )+ '\"' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:75:2: '\"' ( A )+ '\"'
             {
             match('\"'); 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:70:5: ( A )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:75:5: ( A )+
             int cnt1=0;
             loop1:
             do {
@@ -106,7 +150,7 @@ public class BookingsLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:70:5: A
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:75:5: A
             	    {
             	    mA(); 
 
@@ -139,8 +183,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Workinghours;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:121:2: ( 'workinghours' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:121:4: 'workinghours'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:126:2: ( 'workinghours' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:126:4: 'workinghours'
             {
             match("workinghours"); 
 
@@ -160,8 +204,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Time;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:134:2: ( IntegerNumber Colon IntegerNumber )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:134:4: IntegerNumber Colon IntegerNumber
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:139:2: ( IntegerNumber Colon IntegerNumber )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:139:4: IntegerNumber Colon IntegerNumber
             {
             mIntegerNumber(); 
             mColon(); 
@@ -182,8 +226,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:138:2: ( ':' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:139:2: ':'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:143:2: ( ':' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:144:2: ':'
             {
             match(':'); 
 
@@ -202,8 +246,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:143:2: ( ',' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:144:2: ','
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:148:2: ( ',' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:149:2: ','
             {
             match(','); 
 
@@ -222,12 +266,12 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = DayOfWeek;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:148:2: ( 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:153:2: ( 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun' )
             int alt2=7;
             alt2 = dfa2.predict(input);
             switch (alt2) {
                 case 1 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:148:4: 'mon'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:153:4: 'mon'
                     {
                     match("mon"); 
 
@@ -235,7 +279,7 @@ public class BookingsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:149:4: 'tue'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:154:4: 'tue'
                     {
                     match("tue"); 
 
@@ -243,7 +287,7 @@ public class BookingsLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:150:4: 'wed'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:155:4: 'wed'
                     {
                     match("wed"); 
 
@@ -251,7 +295,7 @@ public class BookingsLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:151:4: 'thu'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:156:4: 'thu'
                     {
                     match("thu"); 
 
@@ -259,7 +303,7 @@ public class BookingsLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:152:4: 'fri'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:157:4: 'fri'
                     {
                     match("fri"); 
 
@@ -267,7 +311,7 @@ public class BookingsLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:153:4: 'sat'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:158:4: 'sat'
                     {
                     match("sat"); 
 
@@ -275,7 +319,7 @@ public class BookingsLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:154:4: 'sun'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:159:4: 'sun'
                     {
                     match("sun"); 
 
@@ -297,8 +341,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Off;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:158:2: ( 'off' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:159:2: 'off'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:163:2: ( 'off' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:164:2: 'off'
             {
             match("off"); 
 
@@ -318,8 +362,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Booking;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:188:2: ( 'booking' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:189:2: 'booking'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:193:2: ( 'booking' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:194:2: 'booking'
             {
             match("booking"); 
 
@@ -339,8 +383,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Plus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:193:2: ( '+' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:194:2: '+'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:198:2: ( '+' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:199:2: '+'
             {
             match('+'); 
 
@@ -359,8 +403,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Overtime;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:208:2: ( 'overtime' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:209:2: 'overtime'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:213:2: ( 'overtime' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:214:2: 'overtime'
             {
             match("overtime"); 
 
@@ -380,8 +424,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Supplement;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:213:2: ( 'supplement' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:214:2: 'supplement'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:218:2: ( 'supplement' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:219:2: 'supplement'
             {
             match("supplement"); 
 
@@ -401,8 +445,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Priority;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:218:2: ( 'priority' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:219:2: 'priority'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:223:2: ( 'priority' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:224:2: 'priority'
             {
             match("priority"); 
 
@@ -422,8 +466,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Complete;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:223:2: ( 'complete' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:224:2: 'complete'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:228:2: ( 'complete' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:229:2: 'complete'
             {
             match("complete"); 
 
@@ -443,8 +487,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Start;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:228:2: ( 'start' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:229:2: 'start'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:233:2: ( 'start' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:234:2: 'start'
             {
             match("start"); 
 
@@ -464,8 +508,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = End;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:233:2: ( 'end' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:234:2: 'end'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:238:2: ( 'end' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:239:2: 'end'
             {
             match("end"); 
 
@@ -485,8 +529,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Scheduling;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:238:2: ( 'scheduling' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:239:2: 'scheduling'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:243:2: ( 'scheduling' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:244:2: 'scheduling'
             {
             match("scheduling"); 
 
@@ -506,8 +550,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Asap;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:243:2: ( 'asap' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:244:2: 'asap'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:248:2: ( 'asap' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:249:2: 'asap'
             {
             match("asap"); 
 
@@ -527,8 +571,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Scheduled;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:248:2: ( 'scheduled' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:249:2: 'scheduled'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:253:2: ( 'scheduled' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:254:2: 'scheduled'
             {
             match("scheduled"); 
 
@@ -548,8 +592,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Task;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:253:2: ( 'task' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:254:2: 'task'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:258:2: ( 'task' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:259:2: 'task'
             {
             match("task"); 
 
@@ -569,8 +613,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Resource;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:258:2: ( 'resource' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:259:2: 'resource'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:263:2: ( 'resource' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:264:2: 'resource'
             {
             match("resource"); 
 
@@ -590,8 +634,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Projectids;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:263:2: ( 'projectids' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:264:2: 'projectids'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:268:2: ( 'projectids' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:269:2: 'projectids'
             {
             match("projectids"); 
 
@@ -611,8 +655,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Project;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:268:3: ( 'project' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:268:6: 'project'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:273:3: ( 'project' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:273:6: 'project'
             {
             match("project"); 
 
@@ -632,8 +676,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Prj;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:272:3: ( 'prj' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:272:6: 'prj'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:277:3: ( 'prj' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:277:6: 'prj'
             {
             match("prj"); 
 
@@ -653,8 +697,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = OpenParen;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:276:3: ( '{' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:276:6: '{'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:281:3: ( '{' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:281:6: '{'
             {
             match('{'); 
 
@@ -673,8 +717,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = CloseParen;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:280:3: ( '}' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:280:6: '}'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:285:3: ( '}' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:285:6: '}'
             {
             match('}'); 
 
@@ -693,8 +737,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Hyphen;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:284:3: ( '-' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:284:6: '-'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:289:3: ( '-' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:289:6: '-'
             {
             match('-'); 
 
@@ -713,10 +757,10 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = FloatingPointNumber;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:288:3: ( ( D )+ '.' ( D )+ )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:288:5: ( D )+ '.' ( D )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:293:3: ( ( D )+ '.' ( D )+ )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:293:5: ( D )+ '.' ( D )+
             {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:288:5: ( D )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:293:5: ( D )+
             int cnt3=0;
             loop3:
             do {
@@ -730,7 +774,7 @@ public class BookingsLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:288:5: D
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:293:5: D
             	    {
             	    mD(); 
 
@@ -747,7 +791,7 @@ public class BookingsLexer extends Lexer {
             } while (true);
 
             match('.'); 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:288:10: ( D )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:293:10: ( D )+
             int cnt4=0;
             loop4:
             do {
@@ -761,7 +805,7 @@ public class BookingsLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:288:10: D
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:293:10: D
             	    {
             	    mD(); 
 
@@ -793,10 +837,10 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = FloatingPointNumberDuration;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:291:3: ( ( D )+ P ( D )+ H )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:291:5: ( D )+ P ( D )+ H
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:296:3: ( ( D )+ P ( D )+ H )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:296:5: ( D )+ P ( D )+ H
             {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:291:5: ( D )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:296:5: ( D )+
             int cnt5=0;
             loop5:
             do {
@@ -810,7 +854,7 @@ public class BookingsLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:291:5: D
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:296:5: D
             	    {
             	    mD(); 
 
@@ -827,7 +871,7 @@ public class BookingsLexer extends Lexer {
             } while (true);
 
             mP(); 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:291:10: ( D )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:296:10: ( D )+
             int cnt6=0;
             loop6:
             do {
@@ -841,7 +885,7 @@ public class BookingsLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:291:10: D
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:296:10: D
             	    {
             	    mD(); 
 
@@ -874,10 +918,10 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = IntegerNumber;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:295:3: ( ( D )+ )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:295:5: ( D )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:300:3: ( ( D )+ )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:300:5: ( D )+
             {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:295:5: ( D )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:300:5: ( D )+
             int cnt7=0;
             loop7:
             do {
@@ -891,7 +935,7 @@ public class BookingsLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:295:5: D
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:300:5: D
             	    {
             	    mD(); 
 
@@ -923,10 +967,10 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Identifier;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:299:3: ( ( D | A | P )+ )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:299:5: ( D | A | P )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:304:3: ( ( D | A | P )+ )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:304:5: ( D | A | P )+
             {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:299:5: ( D | A | P )+
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:304:5: ( D | A | P )+
             int cnt8=0;
             loop8:
             do {
@@ -980,11 +1024,11 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = String;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:302:3: ( '\"' (~ '\"' )* '\"' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:302:6: '\"' (~ '\"' )* '\"'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:307:3: ( '\"' (~ '\"' )* '\"' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:307:6: '\"' (~ '\"' )* '\"'
             {
             match('\"'); 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:302:10: (~ '\"' )*
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:307:10: (~ '\"' )*
             loop9:
             do {
                 int alt9=2;
@@ -997,7 +1041,7 @@ public class BookingsLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:302:10: ~ '\"'
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:307:10: ~ '\"'
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1034,8 +1078,8 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = DateTimeWithTimeZone;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:306:3: ( D D D D '-' D D '-' D D '-' D D ':' D D '-+' D D D D )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:306:6: D D D D '-' D D '-' D D '-' D D ':' D D '-+' D D D D
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:311:3: ( D D D D '-' D D '-' D D '-' D D ':' D D '-+' D D D D )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:311:6: D D D D '-' D D '-' D D '-' D D ':' D D '-+' D D D D
             {
             mD(); 
             mD(); 
@@ -1073,8 +1117,8 @@ public class BookingsLexer extends Lexer {
     // $ANTLR start "D"
     public final void mD() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:311:3: ( '0' .. '9' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:311:6: '0' .. '9'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:316:3: ( '0' .. '9' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:316:6: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -1089,7 +1133,7 @@ public class BookingsLexer extends Lexer {
     // $ANTLR start "A"
     public final void mA() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:316:3: ( 'A' .. 'Z' | 'a' .. 'z' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:321:3: ( 'A' .. 'Z' | 'a' .. 'z' )
             // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
@@ -1113,8 +1157,8 @@ public class BookingsLexer extends Lexer {
     // $ANTLR start "P"
     public final void mP() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:322:3: ( '.' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:322:5: '.'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:327:3: ( '.' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:327:5: '.'
             {
             match('.'); 
 
@@ -1129,8 +1173,8 @@ public class BookingsLexer extends Lexer {
     // $ANTLR start "H"
     public final void mH() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:327:3: ( 'h' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:327:5: 'h'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:3: ( 'h' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:5: 'h'
             {
             match('h'); 
 
@@ -1147,10 +1191,10 @@ public class BookingsLexer extends Lexer {
         try {
             int _type = Space;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:3: ( ( ' ' | '\\t' | ( '\\r' )? '\\n' ) )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:6: ( ' ' | '\\t' | ( '\\r' )? '\\n' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:337:3: ( ( ' ' | '\\t' | ( '\\r' )? '\\n' ) )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:337:6: ( ' ' | '\\t' | ( '\\r' )? '\\n' )
             {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:6: ( ' ' | '\\t' | ( '\\r' )? '\\n' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:337:6: ( ' ' | '\\t' | ( '\\r' )? '\\n' )
             int alt11=3;
             switch ( input.LA(1) ) {
             case ' ':
@@ -1178,23 +1222,23 @@ public class BookingsLexer extends Lexer {
 
             switch (alt11) {
                 case 1 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:7: ' '
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:337:7: ' '
                     {
                     match(' '); 
 
                     }
                     break;
                 case 2 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:13: '\\t'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:337:13: '\\t'
                     {
                     match('\t'); 
 
                     }
                     break;
                 case 3 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:20: ( '\\r' )? '\\n'
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:337:20: ( '\\r' )? '\\n'
                     {
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:20: ( '\\r' )?
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:337:20: ( '\\r' )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1203,7 +1247,7 @@ public class BookingsLexer extends Lexer {
                     }
                     switch (alt10) {
                         case 1 :
-                            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:332:20: '\\r'
+                            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:337:20: '\\r'
                             {
                             match('\r'); 
 
@@ -1232,243 +1276,257 @@ public class BookingsLexer extends Lexer {
     // $ANTLR end "Space"
 
     public void mTokens() throws RecognitionException {
-        // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:8: ( TimeZone | Utc | Workinghours | Time | Colon | Comma | DayOfWeek | Off | Booking | Plus | Overtime | Supplement | Priority | Complete | Start | End | Scheduling | Asap | Scheduled | Task | Resource | Projectids | Project | Prj | OpenParen | CloseParen | Hyphen | FloatingPointNumber | FloatingPointNumberDuration | IntegerNumber | Identifier | String | DateTimeWithTimeZone | Space )
-        int alt12=34;
+        // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:8: ( ScenarioPart1 | ScenarioPart2 | TimeZone | Utc | Workinghours | Time | Colon | Comma | DayOfWeek | Off | Booking | Plus | Overtime | Supplement | Priority | Complete | Start | End | Scheduling | Asap | Scheduled | Task | Resource | Projectids | Project | Prj | OpenParen | CloseParen | Hyphen | FloatingPointNumber | FloatingPointNumberDuration | IntegerNumber | Identifier | String | DateTimeWithTimeZone | Space )
+        int alt12=36;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:10: TimeZone
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:10: ScenarioPart1
+                {
+                mScenarioPart1(); 
+
+                }
+                break;
+            case 2 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:24: ScenarioPart2
+                {
+                mScenarioPart2(); 
+
+                }
+                break;
+            case 3 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:38: TimeZone
                 {
                 mTimeZone(); 
 
                 }
                 break;
-            case 2 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:19: Utc
+            case 4 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:47: Utc
                 {
                 mUtc(); 
 
                 }
                 break;
-            case 3 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:23: Workinghours
+            case 5 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:51: Workinghours
                 {
                 mWorkinghours(); 
 
                 }
                 break;
-            case 4 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:36: Time
+            case 6 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:64: Time
                 {
                 mTime(); 
 
                 }
                 break;
-            case 5 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:41: Colon
+            case 7 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:69: Colon
                 {
                 mColon(); 
 
                 }
                 break;
-            case 6 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:47: Comma
+            case 8 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:75: Comma
                 {
                 mComma(); 
 
                 }
                 break;
-            case 7 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:53: DayOfWeek
+            case 9 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:81: DayOfWeek
                 {
                 mDayOfWeek(); 
 
                 }
                 break;
-            case 8 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:63: Off
+            case 10 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:91: Off
                 {
                 mOff(); 
 
                 }
                 break;
-            case 9 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:67: Booking
+            case 11 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:95: Booking
                 {
                 mBooking(); 
 
                 }
                 break;
-            case 10 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:75: Plus
+            case 12 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:103: Plus
                 {
                 mPlus(); 
 
                 }
                 break;
-            case 11 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:80: Overtime
+            case 13 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:108: Overtime
                 {
                 mOvertime(); 
 
                 }
                 break;
-            case 12 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:89: Supplement
+            case 14 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:117: Supplement
                 {
                 mSupplement(); 
 
                 }
                 break;
-            case 13 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:100: Priority
+            case 15 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:128: Priority
                 {
                 mPriority(); 
 
                 }
                 break;
-            case 14 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:109: Complete
+            case 16 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:137: Complete
                 {
                 mComplete(); 
 
                 }
                 break;
-            case 15 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:118: Start
+            case 17 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:146: Start
                 {
                 mStart(); 
 
                 }
                 break;
-            case 16 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:124: End
+            case 18 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:152: End
                 {
                 mEnd(); 
 
                 }
                 break;
-            case 17 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:128: Scheduling
+            case 19 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:156: Scheduling
                 {
                 mScheduling(); 
 
                 }
                 break;
-            case 18 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:139: Asap
+            case 20 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:167: Asap
                 {
                 mAsap(); 
 
                 }
                 break;
-            case 19 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:144: Scheduled
+            case 21 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:172: Scheduled
                 {
                 mScheduled(); 
 
                 }
                 break;
-            case 20 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:154: Task
+            case 22 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:182: Task
                 {
                 mTask(); 
 
                 }
                 break;
-            case 21 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:159: Resource
+            case 23 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:187: Resource
                 {
                 mResource(); 
 
                 }
                 break;
-            case 22 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:168: Projectids
+            case 24 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:196: Projectids
                 {
                 mProjectids(); 
 
                 }
                 break;
-            case 23 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:179: Project
+            case 25 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:207: Project
                 {
                 mProject(); 
 
                 }
                 break;
-            case 24 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:187: Prj
+            case 26 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:215: Prj
                 {
                 mPrj(); 
 
                 }
                 break;
-            case 25 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:191: OpenParen
+            case 27 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:219: OpenParen
                 {
                 mOpenParen(); 
 
                 }
                 break;
-            case 26 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:201: CloseParen
+            case 28 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:229: CloseParen
                 {
                 mCloseParen(); 
 
                 }
                 break;
-            case 27 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:212: Hyphen
+            case 29 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:240: Hyphen
                 {
                 mHyphen(); 
 
                 }
                 break;
-            case 28 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:219: FloatingPointNumber
+            case 30 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:247: FloatingPointNumber
                 {
                 mFloatingPointNumber(); 
 
                 }
                 break;
-            case 29 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:239: FloatingPointNumberDuration
+            case 31 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:267: FloatingPointNumberDuration
                 {
                 mFloatingPointNumberDuration(); 
 
                 }
                 break;
-            case 30 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:267: IntegerNumber
+            case 32 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:295: IntegerNumber
                 {
                 mIntegerNumber(); 
 
                 }
                 break;
-            case 31 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:281: Identifier
+            case 33 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:309: Identifier
                 {
                 mIdentifier(); 
 
                 }
                 break;
-            case 32 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:292: String
+            case 34 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:320: String
                 {
                 mString(); 
 
                 }
                 break;
-            case 33 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:299: DateTimeWithTimeZone
+            case 35 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:327: DateTimeWithTimeZone
                 {
                 mDateTimeWithTimeZone(); 
 
                 }
                 break;
-            case 34 :
-                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:320: Space
+            case 36 :
+                // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:1:348: Space
                 {
                 mSpace(); 
 
@@ -1537,179 +1595,182 @@ public class BookingsLexer extends Lexer {
             this.transition = DFA2_transition;
         }
         public String getDescription() {
-            return "147:1: DayOfWeek : ( 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun' );";
+            return "152:1: DayOfWeek : ( 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun' );";
         }
     }
     static final String DFA12_eotS =
-        "\1\uffff\1\25\1\uffff\1\25\1\37\2\uffff\5\25\1\uffff\5\25\5\uffff"+
-        "\4\25\2\uffff\2\25\1\uffff\1\25\1\37\1\uffff\17\25\2\114\1\25\1"+
-        "\uffff\1\25\1\114\1\120\1\37\4\114\3\25\1\126\4\25\1\133\1\25\1"+
-        "\135\3\25\1\uffff\1\141\1\uffff\1\25\1\uffff\1\143\1\37\3\25\1\uffff"+
-        "\4\25\1\uffff\1\25\1\uffff\1\156\2\25\1\uffff\1\25\1\uffff\1\37"+
-        "\1\uffff\1\25\1\163\6\25\1\uffff\4\25\1\uffff\14\25\1\u008b\1\25"+
-        "\1\u008e\2\25\1\u0091\4\25\1\u0096\1\uffff\1\u0097\1\25\1\uffff"+
-        "\1\u0099\1\u009a\1\uffff\3\25\1\u009e\2\uffff\1\25\2\uffff\1\25"+
-        "\1\u00a1\1\u00a2\1\uffff\1\u00a3\1\25\3\uffff\1\u00a5\1\uffff";
+        "\1\uffff\3\25\1\uffff\1\25\1\45\2\uffff\4\25\1\uffff\4\25\5\uffff"+
+        "\12\25\2\uffff\2\25\1\uffff\1\25\1\45\1\uffff\13\25\2\120\5\25\2"+
+        "\120\1\25\1\uffff\1\25\1\120\1\131\1\45\2\120\1\134\4\25\1\141\1"+
+        "\25\1\143\3\25\1\uffff\3\25\1\152\1\25\1\154\1\uffff\1\25\1\uffff"+
+        "\1\156\1\45\1\uffff\4\25\1\uffff\1\25\1\uffff\4\25\1\172\1\25\1"+
+        "\uffff\1\25\1\uffff\1\25\1\uffff\1\45\1\uffff\11\25\1\uffff\14\25"+
+        "\1\uffff\3\25\1\u0097\1\25\1\u009a\6\25\1\u00a1\1\25\1\u00a3\1\uffff"+
+        "\1\u00a4\1\25\1\uffff\1\u00a6\1\u00a7\1\uffff\1\25\1\u00a9\1\25"+
+        "\1\uffff\1\25\2\uffff\1\25\2\uffff\1\u00ad\1\uffff\1\u00ae\1\25"+
+        "\1\u00b0\2\uffff\1\25\1\uffff\1\u00b2\1\uffff";
     static final String DFA12_eofS =
-        "\u00a6\uffff";
+        "\u00b3\uffff";
     static final String DFA12_minS =
-        "\1\11\1\141\1\0\1\145\1\56\2\uffff\1\157\1\162\1\141\1\146\1\157"+
-        "\1\uffff\1\162\1\157\1\156\1\163\1\145\5\uffff\1\155\1\145\1\165"+
-        "\1\163\1\0\1\uffff\1\162\1\144\1\uffff\1\60\1\56\1\uffff\1\156\1"+
-        "\151\1\164\1\156\1\141\1\150\1\146\1\145\1\157\1\151\1\155\1\144"+
-        "\1\141\1\163\1\145\2\56\1\153\1\uffff\1\153\7\56\1\160\1\162\1\145"+
-        "\1\56\1\162\1\153\1\157\1\152\1\56\1\160\1\56\1\160\1\157\1\172"+
-        "\1\uffff\1\56\1\uffff\1\151\1\uffff\1\56\1\55\1\154\1\164\1\144"+
-        "\1\uffff\1\164\1\151\1\162\1\145\1\uffff\1\154\1\uffff\1\56\1\165"+
-        "\1\157\1\uffff\1\156\1\uffff\1\56\1\uffff\1\145\1\56\1\165\1\151"+
-        "\1\156\1\151\1\143\1\145\1\uffff\1\162\1\156\1\147\1\155\1\uffff"+
-        "\1\154\1\155\1\147\3\164\1\143\1\145\1\150\3\145\1\56\1\171\1\56"+
-        "\2\145\1\56\1\157\2\156\1\144\1\56\1\uffff\1\56\1\144\1\uffff\2"+
-        "\56\1\uffff\1\165\1\164\1\147\1\56\2\uffff\1\163\2\uffff\1\162\2"+
-        "\56\1\uffff\1\56\1\163\3\uffff\1\56\1\uffff";
+        "\1\11\1\141\1\143\1\141\1\0\1\145\1\56\2\uffff\1\157\1\162\1\146"+
+        "\1\157\1\uffff\1\162\1\157\1\156\1\145\5\uffff\1\145\1\164\1\156"+
+        "\1\141\1\164\1\141\1\155\1\145\1\165\1\163\1\0\1\uffff\1\162\1\144"+
+        "\1\uffff\1\60\1\56\1\uffff\1\156\1\151\1\146\1\145\1\157\1\151\1"+
+        "\155\1\144\1\163\1\156\1\145\2\56\1\160\1\162\1\151\1\160\1\145"+
+        "\2\56\1\153\1\uffff\1\153\6\56\1\162\1\153\1\157\1\152\1\56\1\160"+
+        "\1\56\1\157\1\141\1\144\1\uffff\1\154\1\164\1\166\1\56\1\172\1\56"+
+        "\1\uffff\1\151\1\uffff\1\56\1\55\1\uffff\1\164\1\151\1\162\1\145"+
+        "\1\uffff\1\154\1\uffff\1\165\1\162\1\165\1\145\1\56\1\145\1\uffff"+
+        "\1\157\1\uffff\1\156\1\uffff\1\56\1\uffff\1\151\1\156\1\151\1\143"+
+        "\1\145\1\162\1\151\1\154\1\155\1\uffff\1\40\1\156\1\147\1\155\1"+
+        "\147\3\164\1\143\1\157\2\145\1\uffff\1\145\1\150\1\145\1\56\1\171"+
+        "\1\56\2\145\1\40\1\156\1\144\1\156\1\56\1\157\1\56\1\uffff\1\56"+
+        "\1\144\1\uffff\2\56\1\uffff\1\147\1\56\1\164\1\uffff\1\165\2\uffff"+
+        "\1\163\2\uffff\1\56\1\uffff\1\56\1\162\1\56\2\uffff\1\163\1\uffff"+
+        "\1\56\1\uffff";
     static final String DFA12_maxS =
-        "\1\175\1\165\1\uffff\1\157\1\172\2\uffff\1\157\1\162\1\165\1\166"+
-        "\1\157\1\uffff\1\162\1\157\1\156\1\163\1\145\5\uffff\1\155\1\145"+
-        "\1\165\1\163\1\uffff\1\uffff\1\162\1\144\1\uffff\1\71\1\172\1\uffff"+
-        "\1\156\1\151\1\164\1\160\1\141\1\150\1\146\1\145\2\157\1\155\1\144"+
-        "\1\141\1\163\1\145\2\172\1\153\1\uffff\1\153\7\172\1\160\1\162\1"+
-        "\145\1\172\1\162\1\153\1\157\1\152\1\172\1\160\1\172\1\160\1\157"+
-        "\1\172\1\uffff\1\172\1\uffff\1\151\1\uffff\2\172\1\154\1\164\1\144"+
-        "\1\uffff\1\164\1\151\1\162\1\145\1\uffff\1\154\1\uffff\1\172\1\165"+
-        "\1\157\1\uffff\1\156\1\uffff\1\172\1\uffff\1\145\1\172\1\165\1\151"+
-        "\1\156\1\151\1\143\1\145\1\uffff\1\162\1\156\1\147\1\155\1\uffff"+
-        "\1\154\1\155\1\147\3\164\1\143\1\145\1\150\1\145\1\151\1\145\1\172"+
-        "\1\171\1\172\2\145\1\172\1\157\2\156\1\144\1\172\1\uffff\1\172\1"+
-        "\144\1\uffff\2\172\1\uffff\1\165\1\164\1\147\1\172\2\uffff\1\163"+
-        "\2\uffff\1\162\2\172\1\uffff\1\172\1\163\3\uffff\1\172\1\uffff";
+        "\1\175\1\165\1\163\1\165\1\uffff\1\157\1\172\2\uffff\1\157\1\162"+
+        "\1\166\1\157\1\uffff\1\162\1\157\1\156\1\145\5\uffff\1\150\1\164"+
+        "\1\160\1\141\1\164\1\141\1\155\1\145\1\165\1\163\1\uffff\1\uffff"+
+        "\1\162\1\144\1\uffff\1\71\1\172\1\uffff\1\156\1\151\1\146\1\145"+
+        "\2\157\1\155\1\144\1\163\1\156\1\145\2\172\1\160\1\162\1\151\1\160"+
+        "\1\145\2\172\1\153\1\uffff\1\153\6\172\1\162\1\153\1\157\1\152\1"+
+        "\172\1\160\1\172\1\157\1\141\1\144\1\uffff\1\154\1\164\1\166\3\172"+
+        "\1\uffff\1\151\1\uffff\2\172\1\uffff\1\164\1\151\1\162\1\145\1\uffff"+
+        "\1\154\1\uffff\1\165\1\162\1\165\1\145\1\172\1\145\1\uffff\1\157"+
+        "\1\uffff\1\156\1\uffff\1\172\1\uffff\1\151\1\156\1\151\1\143\1\145"+
+        "\1\162\1\151\1\154\1\155\1\uffff\1\40\1\156\1\147\1\155\1\147\3"+
+        "\164\1\143\1\157\1\151\1\145\1\uffff\1\145\1\150\1\145\1\172\1\171"+
+        "\1\172\2\145\1\40\1\156\1\144\1\156\1\172\1\157\1\172\1\uffff\1"+
+        "\172\1\144\1\uffff\2\172\1\uffff\1\147\1\172\1\164\1\uffff\1\165"+
+        "\2\uffff\1\163\2\uffff\1\172\1\uffff\1\172\1\162\1\172\2\uffff\1"+
+        "\163\1\uffff\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\5\uffff\1\5\1\6\5\uffff\1\12\5\uffff\1\31\1\32\1\33\1\37\1\42"+
-        "\5\uffff\1\40\2\uffff\1\36\2\uffff\1\4\22\uffff\1\2\26\uffff\1\7"+
-        "\1\uffff\1\2\1\uffff\1\34\5\uffff\1\10\4\uffff\1\30\1\uffff\1\20"+
-        "\3\uffff\1\24\1\uffff\1\35\1\uffff\1\41\10\uffff\1\22\4\uffff\1"+
-        "\17\27\uffff\1\11\2\uffff\1\27\2\uffff\1\1\4\uffff\1\13\1\15\1\uffff"+
-        "\1\16\1\25\3\uffff\1\23\2\uffff\1\14\1\21\1\26\1\uffff\1\3";
+        "\7\uffff\1\7\1\10\4\uffff\1\14\4\uffff\1\33\1\34\1\35\1\41\1\44"+
+        "\13\uffff\1\42\2\uffff\1\40\2\uffff\1\6\25\uffff\1\4\21\uffff\1"+
+        "\11\6\uffff\1\4\1\uffff\1\36\2\uffff\1\12\4\uffff\1\32\1\uffff\1"+
+        "\22\6\uffff\1\24\1\uffff\1\26\1\uffff\1\37\1\uffff\1\43\11\uffff"+
+        "\1\21\14\uffff\1\2\17\uffff\1\13\2\uffff\1\31\2\uffff\1\1\3\uffff"+
+        "\1\3\1\uffff\1\15\1\17\1\uffff\1\20\1\27\1\uffff\1\25\3\uffff\1"+
+        "\23\1\16\1\uffff\1\30\1\uffff\1\5";
     static final String DFA12_specialS =
-        "\2\uffff\1\1\30\uffff\1\0\u008a\uffff}>";
+        "\4\uffff\1\1\34\uffff\1\0\u0091\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\2\26\2\uffff\1\26\22\uffff\1\26\1\uffff\1\2\10\uffff\1\14"+
-            "\1\6\1\24\1\25\1\uffff\12\4\1\5\6\uffff\32\25\6\uffff\1\20\1"+
-            "\13\1\16\1\25\1\17\1\10\6\25\1\7\1\25\1\12\1\15\1\25\1\21\1"+
-            "\11\1\1\2\25\1\3\3\25\1\22\1\uffff\1\23",
-            "\1\32\6\uffff\1\31\1\27\13\uffff\1\30",
-            "\101\34\32\33\6\34\32\33\uff85\34",
-            "\1\36\11\uffff\1\35",
-            "\1\40\1\uffff\12\41\1\42\6\uffff\32\25\6\uffff\32\25",
+            "\2\26\2\uffff\1\26\22\uffff\1\26\1\uffff\1\4\10\uffff\1\15"+
+            "\1\10\1\24\1\25\1\uffff\12\6\1\7\6\uffff\32\25\6\uffff\1\2\1"+
+            "\14\1\17\1\25\1\20\1\12\6\25\1\11\1\25\1\13\1\16\1\25\1\21\1"+
+            "\1\1\3\2\25\1\5\3\25\1\22\1\uffff\1\23",
+            "\1\30\1\uffff\1\27\20\uffff\1\32\1\31",
+            "\1\33\17\uffff\1\34",
+            "\1\40\6\uffff\1\37\1\35\13\uffff\1\36",
+            "\101\42\32\41\6\42\32\41\uff85\42",
+            "\1\44\11\uffff\1\43",
+            "\1\46\1\uffff\12\47\1\50\6\uffff\32\25\6\uffff\32\25",
             "",
             "",
-            "\1\43",
-            "\1\44",
-            "\1\45\1\uffff\1\50\20\uffff\1\47\1\46",
-            "\1\51\17\uffff\1\52",
-            "\1\53",
-            "",
-            "\1\54",
+            "\1\51",
+            "\1\52",
+            "\1\53\17\uffff\1\54",
             "\1\55",
+            "",
             "\1\56",
             "\1\57",
             "\1\60",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\61",
-            "\1\62",
-            "\1\63",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\62\2\uffff\1\63",
             "\1\64",
-            "\42\34\1\65\36\34\32\33\6\34\32\33\uff85\34",
-            "",
-            "\1\66",
+            "\1\65\1\uffff\1\66",
             "\1\67",
-            "",
-            "\12\70",
-            "\1\40\1\uffff\12\71\1\42\6\uffff\32\25\6\uffff\32\25",
-            "",
+            "\1\70",
+            "\1\71",
             "\1\72",
             "\1\73",
             "\1\74",
-            "\1\75\1\uffff\1\76",
+            "\1\75",
+            "\42\42\1\76\36\42\32\41\6\42\32\41\uff85\42",
+            "",
             "\1\77",
             "\1\100",
-            "\1\101",
-            "\1\102",
-            "\1\103",
-            "\1\104\1\106\4\uffff\1\105",
-            "\1\107",
-            "\1\110",
-            "\1\111",
-            "\1\112",
-            "\1\113",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\115",
             "",
+            "\12\101",
+            "\1\46\1\uffff\12\102\1\50\6\uffff\32\25\6\uffff\32\25",
+            "",
+            "\1\103",
+            "\1\104",
+            "\1\105",
+            "\1\106",
+            "\1\107",
+            "\1\110\1\112\4\uffff\1\111",
+            "\1\113",
+            "\1\114",
+            "\1\115",
+            "\1\116",
             "\1\117",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\25\1\uffff\12\70\7\uffff\32\25\6\uffff\7\25\1\121\22\25",
-            "\1\40\1\uffff\12\122\1\42\6\uffff\32\25\6\uffff\32\25",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\121",
+            "\1\122",
             "\1\123",
             "\1\124",
             "\1\125",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\127",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\126",
+            "",
             "\1\130",
-            "\1\131",
-            "\1\132",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\134",
+            "\1\25\1\uffff\12\101\7\uffff\32\25\6\uffff\7\25\1\132\22\25",
+            "\1\46\1\uffff\12\133\1\50\6\uffff\32\25\6\uffff\32\25",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\135",
             "\1\136",
             "\1\137",
             "\1\140",
-            "",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "",
             "\1\142",
-            "",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\145\1\40\1\uffff\12\144\1\42\6\uffff\32\25\6\uffff\32\25",
+            "\1\144",
+            "\1\145",
             "\1\146",
+            "",
             "\1\147",
             "\1\150",
-            "",
             "\1\151",
-            "\1\152",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
             "\1\153",
-            "\1\154",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
             "",
             "\1\155",
             "",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\157",
-            "\1\160",
+            "\1\160\1\46\1\uffff\12\157\1\50\6\uffff\32\25\6\uffff\32\25",
             "",
             "\1\161",
-            "",
-            "\1\40\1\uffff\12\144\1\42\6\uffff\32\25\6\uffff\32\25",
-            "",
             "\1\162",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\163",
             "\1\164",
+            "",
             "\1\165",
+            "",
             "\1\166",
             "\1\167",
             "\1\170",
             "\1\171",
-            "",
-            "\1\172",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
             "\1\173",
+            "",
             "\1\174",
+            "",
             "\1\175",
+            "",
+            "\1\46\1\uffff\12\157\1\50\6\uffff\32\25\6\uffff\32\25",
             "",
             "\1\176",
             "\1\177",
@@ -1720,45 +1781,61 @@ public class BookingsLexer extends Lexer {
             "\1\u0084",
             "\1\u0085",
             "\1\u0086",
+            "",
             "\1\u0087",
-            "\1\u0089\3\uffff\1\u0088",
+            "\1\u0088",
+            "\1\u0089",
             "\1\u008a",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\u008b",
             "\1\u008c",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\10\25\1\u008d\21"+
-            "\25",
+            "\1\u008d",
+            "\1\u008e",
             "\1\u008f",
             "\1\u0090",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\u0092",
+            "\1\u0092\3\uffff\1\u0091",
             "\1\u0093",
+            "",
             "\1\u0094",
             "\1\u0095",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "",
+            "\1\u0096",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
             "\1\u0098",
-            "",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\10\25\1\u0099\21"+
+            "\25",
             "\1\u009b",
             "\1\u009c",
             "\1\u009d",
-            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "",
-            "",
+            "\1\u009e",
             "\1\u009f",
-            "",
-            "",
             "\1\u00a0",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\u00a2",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
             "",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\u00a4",
+            "\1\u00a5",
+            "",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "",
+            "\1\u00a8",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\u00aa",
+            "",
+            "\1\u00ab",
             "",
             "",
+            "\1\u00ac",
+            "",
+            "",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\u00af",
+            "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
+            "",
+            "",
+            "\1\u00b1",
             "",
             "\1\25\1\uffff\12\25\7\uffff\32\25\6\uffff\32\25",
             ""
@@ -1794,31 +1871,31 @@ public class BookingsLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( TimeZone | Utc | Workinghours | Time | Colon | Comma | DayOfWeek | Off | Booking | Plus | Overtime | Supplement | Priority | Complete | Start | End | Scheduling | Asap | Scheduled | Task | Resource | Projectids | Project | Prj | OpenParen | CloseParen | Hyphen | FloatingPointNumber | FloatingPointNumberDuration | IntegerNumber | Identifier | String | DateTimeWithTimeZone | Space );";
+            return "1:1: Tokens : ( ScenarioPart1 | ScenarioPart2 | TimeZone | Utc | Workinghours | Time | Colon | Comma | DayOfWeek | Off | Booking | Plus | Overtime | Supplement | Priority | Complete | Start | End | Scheduling | Asap | Scheduled | Task | Resource | Projectids | Project | Prj | OpenParen | CloseParen | Hyphen | FloatingPointNumber | FloatingPointNumberDuration | IntegerNumber | Identifier | String | DateTimeWithTimeZone | Space );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_27 = input.LA(1);
+                        int LA12_33 = input.LA(1);
 
                         s = -1;
-                        if ( (LA12_27=='\"') ) {s = 53;}
+                        if ( (LA12_33=='\"') ) {s = 62;}
 
-                        else if ( ((LA12_27>='A' && LA12_27<='Z')||(LA12_27>='a' && LA12_27<='z')) ) {s = 27;}
+                        else if ( ((LA12_33>='A' && LA12_33<='Z')||(LA12_33>='a' && LA12_33<='z')) ) {s = 33;}
 
-                        else if ( ((LA12_27>='\u0000' && LA12_27<='!')||(LA12_27>='#' && LA12_27<='@')||(LA12_27>='[' && LA12_27<='`')||(LA12_27>='{' && LA12_27<='\uFFFF')) ) {s = 28;}
+                        else if ( ((LA12_33>='\u0000' && LA12_33<='!')||(LA12_33>='#' && LA12_33<='@')||(LA12_33>='[' && LA12_33<='`')||(LA12_33>='{' && LA12_33<='\uFFFF')) ) {s = 34;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA12_2 = input.LA(1);
+                        int LA12_4 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA12_2>='A' && LA12_2<='Z')||(LA12_2>='a' && LA12_2<='z')) ) {s = 27;}
+                        if ( ((LA12_4>='A' && LA12_4<='Z')||(LA12_4>='a' && LA12_4<='z')) ) {s = 33;}
 
-                        else if ( ((LA12_2>='\u0000' && LA12_2<='@')||(LA12_2>='[' && LA12_2<='`')||(LA12_2>='{' && LA12_2<='\uFFFF')) ) {s = 28;}
+                        else if ( ((LA12_4>='\u0000' && LA12_4<='@')||(LA12_4>='[' && LA12_4<='`')||(LA12_4>='{' && LA12_4<='\uFFFF')) ) {s = 34;}
 
                         if ( s>=0 ) return s;
                         break;
