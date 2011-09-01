@@ -12,8 +12,10 @@
 package at.silverstrike.pcc.impl.persistence;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
+import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.ResourceAllocation;
 
@@ -29,9 +31,11 @@ class DefaultTask extends DefaultSchedulingObject implements
     private Date averageEstimatedEndDateTime;
     private Date bestEstimatedEndDateTime;
     private Date worstEstimatedEndDateTime;
+    private List<SchedulingObject> children;
 
     public DefaultTask() {
         super();
+        this.children = new LinkedList<SchedulingObject>();
     }
 
     public Double getBestCaseEffort() {
@@ -104,5 +108,13 @@ class DefaultTask extends DefaultSchedulingObject implements
     public void setWorstEstimatedEndDateTime(
             final Date aWorstEstimatedEndDateTime) {
         this.worstEstimatedEndDateTime = aWorstEstimatedEndDateTime;
+    }
+
+    public List<SchedulingObject> getChildren() {
+        return children;
+    }
+
+    public void setChildren(final List<SchedulingObject> aChildren) {
+        this.children = aChildren;
     }
 }

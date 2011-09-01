@@ -71,4 +71,7 @@ public interface Task extends SchedulingObject {
      * This method is not implemented now (prototype 1).
      */
     void setWorstEstimatedEndDateTime(final Date aDate);
+    
+    void setChildren(final List<SchedulingObject> aChildren);
+    List<SchedulingObject> getChildren();
 }

@@ -450,7 +450,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
                 LOGGER.debug("task: " + task.getName());
 
-                if (!persistence.hasChildren(task)) {
+                if (task.getChildren() == null) {
                     checkTimingResolution(task, task.getBestCaseEffort());
                     checkTimingResolution(task, task.getAverageCaseEffort());
                     checkTimingResolution(task, task.getWorstCaseEffort());
