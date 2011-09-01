@@ -24,9 +24,21 @@ final class MockPersistence extends MockPersistenceAdapter {
     private static final MockObjectFactory MOCK_OBJECT_FACTORY =
             new MockObjectFactory();
 
+//    @Override
+//    public Task createSubTask(final String aProcessName,
+//            final Long aParentProcessId,
+//            final UserData aUser) {
+//        final Task task = MOCK_OBJECT_FACTORY.createTask();
+//        
+//        task.setName(aProcessName);
+//        task.setParent(null);
+//        task.setUserData(aUser);
+//
+//        return task;
+//    }
+
     @Override
-    public Task createSubTask(final String aProcessName,
-            final Long aParentProcessId,
+    public Task createTransientTask(final String aProcessName, final Long aParentProcessId,
             final UserData aUser) {
         final Task task = MOCK_OBJECT_FACTORY.createTask();
         
@@ -35,6 +47,7 @@ final class MockPersistence extends MockPersistenceAdapter {
         task.setUserData(aUser);
 
         return task;
+
     }
 
 }
