@@ -55,7 +55,7 @@ header
 	Project Prj String String DateTimeWithTimeZone Hyphen DateTimeWithTimeZone OpenParen timeZone CloseParen
 	;
 
-timeZone:
+timeZone
 	:
 	TimeZone Utc
 	;
