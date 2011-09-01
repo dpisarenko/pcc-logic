@@ -255,4 +255,12 @@ public abstract class MockPersistenceAdapter implements Persistence {
         return null;
     }
 
+    @Override
+    public List<Booking> updateBookingsTransientMode(
+            List<BookingTuple> bookingTuples, UserData userData,
+            List<SchedulingObject> schedulingObjectsToExport) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

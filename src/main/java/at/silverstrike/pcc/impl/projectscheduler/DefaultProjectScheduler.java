@@ -33,6 +33,7 @@ import ru.altruix.commons.api.di.PccException;
 import com.google.inject.Injector;
 
 import at.silverstrike.pcc.api.export2tj3.TaskJuggler3Exporter;
+import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.api.projectscheduler.ProjectExportInfo;
 import at.silverstrike.pcc.api.projectscheduler.ProjectScheduler;
@@ -64,9 +65,12 @@ class DefaultProjectScheduler implements ProjectScheduler {
     private ProjectExportInfo projectExportInfo;
     private Date now;
     private String taskJugglerPath;
-
+    private boolean transientMode;
+    private List<Booking> bookings;
+    
     public DefaultProjectScheduler() {
         this.projectExportInfo = new DefaultProjectExportInfo();
+        this.transientMode = false;
     }
 
     @Override
@@ -94,10 +98,17 @@ class DefaultProjectScheduler implements ProjectScheduler {
 
         // Parse pccBookings.tji
         parseBookingsFile(this.directory);
-        persistence.updateBookings(this.bookingTuples, this.projectExportInfo.getUserData());
+        if (this.transientMode) {
+            persistence.updateBookingsTransientMode(this.bookingTuples,
+                    this.projectExportInfo.getUserData(),
+                    this.projectExportInfo.getSchedulingObjectsToExport());
+        } else {
+            persistence.updateBookings(this.bookingTuples,
+                    this.projectExportInfo.getUserData());
 
-        // Update daily plans
-        persistence.generateDailyPlans(this.now);
+            // Update daily plans
+            persistence.generateDailyPlans(this.now);
+        }
     }
 
     private void parseDeadlinesFile(final String aParentDir)
@@ -190,7 +201,7 @@ class DefaultProjectScheduler implements ProjectScheduler {
                     COMMAND_TEMPLATE.replace(PLACEHOLDER_TJ,
                             this.taskJugglerPath)
                             .replace(PLACEHOLDER_FILE, TJ3_INPUT_FILE);
-            
+
             LOGGER.info("aParentDir: {}", aParentDir);
             LOGGER.info("command: " + command);
 
@@ -252,6 +263,15 @@ class DefaultProjectScheduler implements ProjectScheduler {
     @Override
     public void setTaskJugglerPath(final String aPath) {
         this.taskJugglerPath = aPath;
+    }
+
+    @Override
+    public void setTransientMode(final boolean aTransientMode) {
+        this.transientMode = aTransientMode;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
     }
 
 }

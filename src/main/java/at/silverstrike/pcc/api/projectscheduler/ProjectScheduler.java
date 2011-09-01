@@ -12,6 +12,9 @@
 package at.silverstrike.pcc.api.projectscheduler;
 
 import java.util.Date;
+import java.util.List;
+
+import at.silverstrike.pcc.api.model.Booking;
 
 import ru.altruix.commons.api.conventions.SingleActivityModule;
 import ru.altruix.commons.api.di.ModuleWithInjectableDependencies;
@@ -35,4 +38,8 @@ public interface ProjectScheduler extends ModuleWithInjectableDependencies,
     void setNow(final Date aDate);
     
     void setTaskJugglerPath(final String aPath);
+    
+    void setTransientMode(final boolean aTransientMode);
+    
+    List<Booking> getBookings();
 }

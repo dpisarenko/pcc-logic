@@ -181,4 +181,9 @@ public interface Persistence extends ModuleWithInjectableDependencies {
 
     Task createTransientTask(final String aProcessName, final Long aParentProcessId,
             final UserData aUser);
+
+    List<Booking>
+            updateBookingsTransientMode(final List<BookingTuple> bookingTuples,
+                    final UserData userData,
+                    final List<SchedulingObject> schedulingObjectsToExport);
 }

@@ -14,8 +14,10 @@ package at.silverstrike.pcc.impl.persistence;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
@@ -67,10 +69,12 @@ public class DefaultPersistence implements Persistence {
     public static final String DB_NAME = "pcc";
     private static final int DAYS_TO_PLAN_AHEAD = 7;
     // jdbc:derby://localhost:1527/pcc;create=true
-    
-    private static final String JDBC_CONN_STRING_EXISTING_DB_TEMPLATE = "jdbc:derby://${host}:1527/${db}";
-    private static final String JDBC_CONN_STRING_NEW_DB_TEMPLATE = "jdbc:derby://${host}:1527/${db};create=true";
-    
+
+    private static final String JDBC_CONN_STRING_EXISTING_DB_TEMPLATE =
+            "jdbc:derby://${host}:1527/${db}";
+    private static final String JDBC_CONN_STRING_NEW_DB_TEMPLATE =
+            "jdbc:derby://${host}:1527/${db};create=true";
+
     private static final String PROCESS_ID = "${processId}";
     private static final String USER_ID = "${userId}";
     private static final String STATE_BEING_ATTAINED = ":stateBeingAttained";
@@ -591,7 +595,8 @@ public class DefaultPersistence implements Persistence {
      * @see at.silverstrike.pcc.api.persistence.Persistence#openSession()
      */
     @Override
-    public final void openSession(final String aHost, final String aUser, final String aPassword, final String aDatabase) {
+    public final void openSession(final String aHost, final String aUser,
+            final String aPassword, final String aDatabase) {
         LOGGER.debug(ErrorCodes.M_001_OPEN_SESSION);
         try {
             tryToOpenSession(getConnectionStringExistingDb(aHost, aDatabase));
@@ -605,18 +610,20 @@ public class DefaultPersistence implements Persistence {
         }
     }
 
-    private String getConnectionStringExistingDb(final String aHost, final String aDb)
-    {
-        final String[] searchList = new String[] {"${host}", "${db}"};
-        final String[] replacementList = new String[] {aHost, aDb};
-        return StringUtils.replaceEach(JDBC_CONN_STRING_EXISTING_DB_TEMPLATE, searchList, replacementList);
+    private String getConnectionStringExistingDb(final String aHost,
+            final String aDb) {
+        final String[] searchList = new String[] { "${host}", "${db}" };
+        final String[] replacementList = new String[] { aHost, aDb };
+        return StringUtils.replaceEach(JDBC_CONN_STRING_EXISTING_DB_TEMPLATE,
+                searchList, replacementList);
     }
 
-    private String getConnectionStringNewDb(final String aHost, final String aDb)
-    {
-        final String[] searchList = new String[] {"${host}", "${db}"};
-        final String[] replacementList = new String[] {aHost, aDb};
-        return StringUtils.replaceEach(JDBC_CONN_STRING_NEW_DB_TEMPLATE, searchList, replacementList);
+    private String
+            getConnectionStringNewDb(final String aHost, final String aDb) {
+        final String[] searchList = new String[] { "${host}", "${db}" };
+        final String[] replacementList = new String[] { aHost, aDb };
+        return StringUtils.replaceEach(JDBC_CONN_STRING_NEW_DB_TEMPLATE,
+                searchList, replacementList);
     }
 
     @Override
@@ -735,7 +742,8 @@ public class DefaultPersistence implements Persistence {
         }
     }
 
-    private void tryToCreateDb(final Throwable aException, final String aHost, final String aDatabase) {
+    private void tryToCreateDb(final Throwable aException, final String aHost,
+            final String aDatabase) {
         LOGGER.error("tryToCreateDb, 1, ", aException);
 
         try {
@@ -761,7 +769,7 @@ public class DefaultPersistence implements Persistence {
         LOGGER.debug("tryToOpenSession, 3");
 
         sessionFactory = config.buildSessionFactory();
-        
+
         LOGGER.debug("tryToOpenSession, 4");
 
         session = getSession();
@@ -785,8 +793,7 @@ public class DefaultPersistence implements Persistence {
         cnf.setProperty(Environment.USER, "user");
         cnf.setProperty(Environment.PASS, "app");
         cnf.setProperty(Environment.DEFAULT_SCHEMA, "APP");
-        
-        
+
         cnf.addResource("persistence/DefaultResource.hbm.xml");
         cnf.addResource("persistence/DefaultResourceAllocation.hbm.xml");
         cnf.addResource("persistence/DefaultSchedulingObject.hbm.xml");
@@ -950,14 +957,14 @@ public class DefaultPersistence implements Persistence {
 
                             "DefaultEvent",
                             "DefaultMilestone",
-                            
+
                             "DefaultWorker",
                             "TBL_DAILY_TO_DO_LIST_TASKSTOCOMPLETETODAY",
                             "DefaultDailyToDoList",
 
                             "DefaultTask",
-                            "DefaultSchedulingObject", 
-                            "DefaultUserData",};
+                            "DefaultSchedulingObject",
+                            "DefaultUserData", };
 
             for (final String entityToDelete : entitiesToDelete) {
                 LOGGER.debug("clearDatbase, delete from {}", entityToDelete);
@@ -1450,15 +1457,14 @@ public class DefaultPersistence implements Persistence {
     public Task createTaskStub() {
         return new DefaultTask();
     }
-    
+
     @Override
-    public void exportSchema(final File aFile)
-    {
+    public void exportSchema(final File aFile) {
         final SchemaExport schemaExport = new SchemaExport(this.config);
-        
+
         schemaExport.setOutputFile(aFile.getAbsolutePath());
-        
-        schemaExport.execute(true, true, false, true);        
+
+        schemaExport.execute(true, true, false, true);
     }
 
     @Override
@@ -1466,9 +1472,10 @@ public class DefaultPersistence implements Persistence {
         UserData returnValue = null;
         final Transaction tx = session.beginTransaction();
 
-        try {            
-            returnValue = (UserData)session.get(DefaultUserData.class, aUserId);
-            
+        try {
+            returnValue =
+                    (UserData) session.get(DefaultUserData.class, aUserId);
+
             tx.commit();
         } catch (final Exception exception) {
             LOGGER.error("", exception);
@@ -1482,9 +1489,9 @@ public class DefaultPersistence implements Persistence {
     public void updateUser(final UserData aUser) {
         final Transaction tx = session.beginTransaction();
 
-        try {            
+        try {
             session.save(aUser);
-            
+
             tx.commit();
         } catch (final Exception exception) {
             LOGGER.error("", exception);
@@ -1500,7 +1507,7 @@ public class DefaultPersistence implements Persistence {
 
         try {
             final String hql =
-                    "from DefaultUserData where automaticScheduling = true";                            
+                    "from DefaultUserData where automaticScheduling = true";
 
             final Query query =
                     session.createQuery(hql);
@@ -1513,11 +1520,12 @@ public class DefaultPersistence implements Persistence {
             tx.rollback();
         }
 
-        return result;          
+        return result;
     }
 
     @Override
-    public Task createTransientTask(final String aProcessName, final Long aParentProcessId,
+    public Task createTransientTask(final String aProcessName,
+            final Long aParentProcessId,
             final UserData aUser) {
         Task returnValue = null;
 
@@ -1546,5 +1554,44 @@ public class DefaultPersistence implements Persistence {
         }
         return returnValue;
     }
-    
+
+    @Override
+    public List<Booking>
+            updateBookingsTransientMode(
+                    final List<BookingTuple> aBookingTuples,
+                    final UserData aUserData,
+                    final List<SchedulingObject> aSchedulingObjectsToExport) {
+        final List<Booking> bookings = new LinkedList<Booking>();
+
+        final Map<Long, SchedulingObject> tasksByIds =
+                new HashMap<Long, SchedulingObject>();
+
+        for (final SchedulingObject aTask : aSchedulingObjectsToExport) {
+            tasksByIds.put(aTask.getId(), aTask);
+        }
+
+        try {
+            for (final BookingTuple tuple : aBookingTuples) {
+                final Booking booking = tuple.getBooking();
+
+                LOGGER.debug("booking ID: {}", tuple.getBooking().getId());
+
+                final Task process =
+                        (Task)tasksByIds.get(tuple.getProcessId());
+                final Resource resource =
+                        (Resource) session.load(DefaultResource.class,
+                                tuple.getResourceId());
+
+                booking.setProcess(process);
+                booking.setResource(resource);
+                booking.setUserData(aUserData);
+
+                bookings.add(booking);
+            }
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+        }
+        return bookings;
+    }
+
 }
