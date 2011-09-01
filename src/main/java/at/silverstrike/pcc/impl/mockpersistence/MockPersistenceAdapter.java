@@ -249,8 +249,9 @@ public abstract class MockPersistenceAdapter implements Persistence {
     }
 
     @Override
-    public Task createTransientTask(final String aProcessName, final Long aParentProcessId,
-            final UserData aUser) {
+    public Task createTransientTask(final String aProcessName,
+            final Long aParentProcessId,
+            final UserData aUser, final long aTaskId) {
         // TODO Auto-generated method stub
         return null;
     }

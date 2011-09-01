@@ -209,7 +209,6 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
 
                 final at.silverstrike.pcc.api.model.Task pccTask =
                         converter.getPccTask();
-
                 pccTasksByGoogleIds.put(curTask.id, pccTask);
             } catch (final PccException exception) {
                 LOGGER.error("", exception);

@@ -26,7 +26,7 @@ final class MockPersistence extends MockPersistenceAdapter {
 
     @Override
     public Task createTransientTask(final String aProcessName, final Long aParentProcessId,
-            final UserData aUser) {
+            final UserData aUser, final long aTaskId) {
         final Task task = MOCK_OBJECT_FACTORY.createTask();
         
         task.setName(aProcessName);

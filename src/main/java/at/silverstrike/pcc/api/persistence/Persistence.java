@@ -180,7 +180,7 @@ public interface Persistence extends ModuleWithInjectableDependencies {
     List<UserData> getAllusersWithAutomaticScheduling();
 
     Task createTransientTask(final String aProcessName, final Long aParentProcessId,
-            final UserData aUser);
+            final UserData aUser, final long aTaskId);
 
     List<Booking>
             updateBookingsTransientMode(final List<BookingTuple> bookingTuples,

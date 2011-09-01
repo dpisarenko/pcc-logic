@@ -1526,12 +1526,13 @@ public class DefaultPersistence implements Persistence {
     @Override
     public Task createTransientTask(final String aProcessName,
             final Long aParentProcessId,
-            final UserData aUser) {
+            final UserData aUser, final long aTaskId) {
         Task returnValue = null;
 
         try {
-            final Task newProcess = new DefaultTask();
+            final DefaultTask newProcess = new DefaultTask();
 
+            newProcess.setId(aTaskId);
             newProcess.setUserData(aUser);
             newProcess.setParent(getParentTask(aParentProcessId));
             newProcess.setName(aProcessName);
