@@ -177,19 +177,19 @@ class MockUserData implements UserData {
         return null;
     }
 
-    public boolean isAutomaticScheduling() {
+    public Boolean isAutomaticScheduling() {
         return automaticScheduling;
     }
 
-    public void setAutomaticScheduling(boolean aAutomaticScheduling) {
+    public void setAutomaticScheduling(final Boolean aAutomaticScheduling) {
         this.automaticScheduling = aAutomaticScheduling;
     }
 
-    public int getAutomaticSchedulingInterval() {
+    public Integer getAutomaticSchedulingInterval() {
         return automaticSchedulingInterval;
     }
 
-    public void setAutomaticSchedulingInterval(final int aAutomaticSchedulingInterval) {
+    public void setAutomaticSchedulingInterval(final Integer aAutomaticSchedulingInterval) {
         this.automaticSchedulingInterval = aAutomaticSchedulingInterval;
     }
 }

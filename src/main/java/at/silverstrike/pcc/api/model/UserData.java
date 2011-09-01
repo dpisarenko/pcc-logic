@@ -55,9 +55,9 @@ public interface UserData extends UniquelyIdentifiableObject {
     void setGoogleCalendarOAuthTokenSecret(final String aTokenSecret);
     String getGoogleCalendarOAuthTokenSecret();
 
-    boolean isAutomaticScheduling();       
-    void setAutomaticScheduling(final boolean aValue);
+    Boolean isAutomaticScheduling();       
+    void setAutomaticScheduling(final Boolean aValue);
     
-    int getAutomaticSchedulingInterval();
-    void setAutomaticSchedulingInterval(final int aValue);
+    Integer getAutomaticSchedulingInterval();
+    void setAutomaticSchedulingInterval(final Integer aValue);
 }
