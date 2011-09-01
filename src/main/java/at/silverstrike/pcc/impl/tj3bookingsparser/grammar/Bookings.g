@@ -52,7 +52,22 @@ bookingsFile
 
 header
 	:
-	Project Prj String String DateTimeWithTimeZone Hyphen DateTimeWithTimeZone OpenParen CloseParen
+	Project Prj String String DateTimeWithTimeZone Hyphen DateTimeWithTimeZone OpenParen timeZone CloseParen
+	;
+
+timeZone:
+	:
+	TimeZone Utc
+	;
+
+TimeZone
+	:
+	'timezone'
+	;
+
+Utc
+	:
+	'"'A+'"'
 	;
 
 projectIds:
