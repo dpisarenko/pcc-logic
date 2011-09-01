@@ -130,6 +130,8 @@ public final class TestBookingsParser {
         }
 
         assertNotNull(bookingsFile);
+        assertNotNull(bookingsFile.getSupplementStatements());
+        assertEquals(6, bookingsFile.getSupplementStatements().size());
         
     }
 }
