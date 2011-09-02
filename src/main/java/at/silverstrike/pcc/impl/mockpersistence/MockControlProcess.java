@@ -34,6 +34,10 @@ class MockControlProcess extends MockSchedulingObject implements Task {
     private UserData user;
     private List<SchedulingObject> children;
 
+    public MockControlProcess() {
+        this.children = new LinkedList<SchedulingObject>();
+    }
+
     public UserData getUserData() {
         return user;
     }
