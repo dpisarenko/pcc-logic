@@ -245,6 +245,8 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
                         aPccTasksByGoogleIds.get(parentId);
 
                 parentPccTask.getChildren().add(childPccTask);
+                
+                childPccTask.setParent(parentPccTask);
             }
         }
     }

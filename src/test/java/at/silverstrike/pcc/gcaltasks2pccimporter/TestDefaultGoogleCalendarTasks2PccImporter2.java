@@ -286,6 +286,12 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
         Assert.assertEquals(997, (int)pccTaskTrain.getPriority());
         Assert.assertEquals(996, (int)pccTaskDoll.getPriority());
         
+        
+        Assert.assertNotNull(pccTaskSmallBall.getParent());
+        Assert.assertNotNull(pccTaskBigBall.getParent());
+        
+        Assert.assertEquals(pccTaskBall.getId(), pccTaskSmallBall.getParent().getId());
+        Assert.assertEquals(pccTaskBall.getId(), pccTaskBigBall.getParent().getId());
     }
 
     private List<SchedulingObject> importTasks(final List<Task> aGoogleTasks) {
