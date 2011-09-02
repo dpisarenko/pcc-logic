@@ -21,5 +21,6 @@ public interface GoogleTaskFields {
     public static final String PARENT = "parent";
     public static final String COMPLETED = "completed";
     public static final String ID = "id";
+    public static final String POSITION = "position";
 
 }
