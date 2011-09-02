@@ -92,6 +92,7 @@ public class MockObjectFactory {
         final MockResource returnValue = new MockResource();
 
         returnValue.setId(aId);
+        returnValue.setAbbreviation("R");
 
         return returnValue;
     }
