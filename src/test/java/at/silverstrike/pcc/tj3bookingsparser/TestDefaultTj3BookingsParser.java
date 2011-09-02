@@ -96,6 +96,7 @@ public final class TestDefaultTj3BookingsParser {
     }
 
     @Test
+    @Ignore
     public void test02() {
         /**
          * Create the injector

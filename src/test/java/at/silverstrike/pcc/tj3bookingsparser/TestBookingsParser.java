@@ -173,7 +173,7 @@ public final class TestBookingsParser {
         assertEquals(1, bookingStmt1.getIndBookings().size());
         
         final IndBooking indBooking = bookingStmt1.getIndBookings().get(0);
-        assertEquals(2, indBooking.getDuration());
+        assertEquals("2.0h", indBooking.getDuration());
         
     }
 
