@@ -118,7 +118,11 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
             final PriorityTuple tuple = new PriorityTuple();
 
             tuple.setGoogleTaskId(curGoogleTaskId);
-            tuple.setPosition(Long.parseLong(curGoogleTask.position));
+            if (curGoogleTask.position != null) {
+                tuple.setPosition(Long.parseLong(curGoogleTask.position));
+            } else {
+                tuple.setPosition(0L);
+            }
 
             final String parentTaskId = curGoogleTask.parent;
 
