@@ -220,38 +220,37 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
         ball.set(GoogleTaskFields.ID, "1");
         ball.set(GoogleTaskFields.TITLE, "B: Ball");
         ball.set(GoogleTaskFields.NOTES, "");
-        ball.set(GoogleTaskFields.POSITION, "0033554431");
+        ball.set(GoogleTaskFields.POSITION, "1");
         ball.set(GoogleTaskFields.PARENT, null);
 
         final Task smallBall = new Task();
         smallBall.set(GoogleTaskFields.ID, "2");
         smallBall.set(GoogleTaskFields.TITLE, "SB: Small ball");
         smallBall.set(GoogleTaskFields.NOTES, "1h");
-        smallBall.set(GoogleTaskFields.POSITION, "2147483647");
+        smallBall.set(GoogleTaskFields.POSITION, "2");
         smallBall.set(GoogleTaskFields.PARENT, ball.id);
 
         final Task bigBall = new Task();
         bigBall.set(GoogleTaskFields.ID, "3");
         bigBall.set(GoogleTaskFields.TITLE, "BB: Big ball");
         bigBall.set(GoogleTaskFields.NOTES, "2h");
-        bigBall.set(GoogleTaskFields.POSITION, "3221225471");
+        bigBall.set(GoogleTaskFields.POSITION, "3");
         bigBall.set(GoogleTaskFields.PARENT, ball.id);
 
         final Task train = new Task();
         train.set(GoogleTaskFields.ID, "4");
         train.set(GoogleTaskFields.TITLE, "T: Train");
         train.set(GoogleTaskFields.NOTES, "3h");
-        train.set(GoogleTaskFields.POSITION, "0268435455");
+        train.set(GoogleTaskFields.POSITION, "4");
         train.set(GoogleTaskFields.PARENT, null);
 
         final Task doll = new Task();
         doll.set(GoogleTaskFields.ID, "5");
         doll.set(GoogleTaskFields.TITLE, "D: Doll");
         doll.set(GoogleTaskFields.NOTES, "2h");
-        doll.set(GoogleTaskFields.POSITION, "0536870911");
+        doll.set(GoogleTaskFields.POSITION, "5");
         doll.set(GoogleTaskFields.PARENT, null);
 
-        
         googleTasks.add(ball);
         googleTasks.add(smallBall);
         googleTasks.add(bigBall);
@@ -274,6 +273,12 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
         Assert.assertNotNull(pccTaskBigBall);
         Assert.assertNotNull(pccTaskTrain);
         Assert.assertNotNull(pccTaskDoll);
+        
+        LOGGER.debug("pccTaskBall: {}", pccTaskBall.getPriority());
+        LOGGER.debug("pccTaskSmallBall: {}", pccTaskSmallBall.getPriority());
+        LOGGER.debug("pccTaskBigBall: {}", pccTaskBigBall.getPriority());
+        LOGGER.debug("pccTaskTrain: {}", pccTaskTrain.getPriority());
+        LOGGER.debug("pccTaskDoll: {}", pccTaskDoll.getPriority());
         
         Assert.assertEquals(1000, (int)pccTaskBall.getPriority());
         Assert.assertEquals(999, (int)pccTaskSmallBall.getPriority());

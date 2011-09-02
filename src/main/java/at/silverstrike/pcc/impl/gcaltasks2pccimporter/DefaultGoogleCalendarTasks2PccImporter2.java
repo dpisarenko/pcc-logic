@@ -134,6 +134,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
             } else {
                 tuple.setParentPosition(0L);
             }
+            priorityTuples.add(tuple);
         }
 
         // Sort them by MAX(position, parentPosition) in descending order

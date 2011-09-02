@@ -55,7 +55,7 @@ final class PriorityTuple implements Comparable<PriorityTuple> {
 
     @Override
     public int compareTo(final PriorityTuple aOtherTuple) {
-        return (int)(aOtherTuple.getMaxPositionParentPosition()
-                - this.getMaxPositionParentPosition());
+        return (int) (this.getMaxPositionParentPosition() - aOtherTuple
+                .getMaxPositionParentPosition());
     }
 }
