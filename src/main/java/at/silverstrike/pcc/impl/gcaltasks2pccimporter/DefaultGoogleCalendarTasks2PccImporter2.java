@@ -11,6 +11,7 @@
 
 package at.silverstrike.pcc.impl.gcaltasks2pccimporter;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -24,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import ru.altruix.commons.api.di.PccException;
 
+import com.google.api.services.tasks.v1.model.Task;
 import com.google.inject.Injector;
 
 import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2;
@@ -90,9 +92,66 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
         setDependencies(persistence, relevantTasksByIds,
                     pccTasksByGoogleIds);
 
+        // Set priorities
+        setPriorities(relevantTasksByIds,
+                    pccTasksByGoogleIds);
+
         for (final at.silverstrike.pcc.api.model.Task curTask : pccTasksByGoogleIds
                 .values()) {
             this.createdPccTasks.add(curTask);
+        }
+    }
+
+    private
+            void
+            setPriorities(
+                    final Map<String, Task> aRelevantTasksByIds,
+                    final Map<String, at.silverstrike.pcc.api.model.Task> aPccTasksByGoogleIds) {
+        final List<PriorityTuple> priorityTuples =
+                new LinkedList<PriorityTuple>();
+
+        // Create tuples
+        for (final String curGoogleTaskId : aRelevantTasksByIds.keySet()) {
+            final com.google.api.services.tasks.v1.model.Task curGoogleTask =
+                    aRelevantTasksByIds.get(curGoogleTaskId);
+
+            final PriorityTuple tuple = new PriorityTuple();
+
+            tuple.setGoogleTaskId(curGoogleTaskId);
+            tuple.setPosition(Long.parseLong(curGoogleTask.position));
+
+            final String parentTaskId = curGoogleTask.parent;
+
+            if (!StringUtils.isBlank(parentTaskId)) {
+                final com.google.api.services.tasks.v1.model.Task parentTask =
+                        aRelevantTasksByIds.get(parentTaskId);
+
+                if (parentTask != null) {
+                    tuple.setParentPosition(Long.parseLong(parentTask.position));
+                } else {
+                    tuple.setParentPosition(0L);
+                }
+            } else {
+                tuple.setParentPosition(0L);
+            }
+        }
+
+        // Sort them by MAX(position, parentPosition) in descending order
+        Collections.sort(priorityTuples);
+
+        // Assign Taskjuggler-friendly priorities
+        int curPriority = 1000;
+
+        for (final PriorityTuple curPriorityTuple : priorityTuples) {
+            curPriorityTuple.setPriority(curPriority--);
+        }
+
+        // Save priorities in PCC tasks
+        for (final PriorityTuple curPriorityTuple : priorityTuples) {
+            at.silverstrike.pcc.api.model.Task pccTask =
+                    aPccTasksByGoogleIds
+                            .get(curPriorityTuple.getGoogleTaskId());
+            pccTask.setPriority(curPriorityTuple.getPriority());
         }
     }
 
@@ -125,7 +184,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
                 }
 
                 tuple.setPccTask(aPccTasksByGoogleIds.get(curGoogleTaskId));
-                
+
                 tuples.add(tuple);
             } catch (final PccException exception) {
                 LOGGER.error("", exception);
@@ -179,7 +238,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
                 // Fetch parent PCC task
                 final at.silverstrike.pcc.api.model.Task parentPccTask =
                         aPccTasksByGoogleIds.get(parentId);
-                
+
                 parentPccTask.getChildren().add(childPccTask);
             }
         }
