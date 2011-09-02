@@ -67,7 +67,7 @@ class DefaultProjectScheduler implements ProjectScheduler {
     private String taskJugglerPath;
     private boolean transientMode;
     private List<Booking> bookings;
-    
+
     public DefaultProjectScheduler() {
         this.projectExportInfo = new DefaultProjectExportInfo();
         this.transientMode = false;
@@ -94,14 +94,18 @@ class DefaultProjectScheduler implements ProjectScheduler {
         parseDeadlinesFile(this.directory);
         final Persistence persistence = this.injector
                 .getInstance(Persistence.class);
-        persistence.updateTaskEndTimes(this.endTimeTuples);
+        if (!this.transientMode) {
+            persistence.updateTaskEndTimes(this.endTimeTuples);
+        }
 
         // Parse pccBookings.tji
         parseBookingsFile(this.directory);
         if (this.transientMode) {
-            persistence.updateBookingsTransientMode(this.bookingTuples,
-                    this.projectExportInfo.getUserData(),
-                    this.projectExportInfo.getSchedulingObjectsToExport());
+            this.bookings =
+                    persistence.updateBookingsTransientMode(this.bookingTuples,
+                            this.projectExportInfo.getUserData(),
+                            this.projectExportInfo
+                                    .getSchedulingObjectsToExport());
         } else {
             persistence.updateBookings(this.bookingTuples,
                     this.projectExportInfo.getUserData());
