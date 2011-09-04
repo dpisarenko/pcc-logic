@@ -226,6 +226,9 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         for (final SchedulingObject curSchedulingObject : aSchedulingObjectsToExport) {
             final SchedulingObject parent = curSchedulingObject.getParent();
             if (parent != null) {
+                addToGraphIfNecessary(graph, parent);
+                addToGraphIfNecessary(graph, curSchedulingObject);
+                
                 graph.addEdge(parent, curSchedulingObject);
             }
         }
@@ -240,6 +243,14 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         }
 
         return topLevelSchedulingObjects;
+    }
+
+    private void addToGraphIfNecessary(
+            final DirectedGraph<SchedulingObject, DefaultEdge> aGraph,
+            final SchedulingObject aVertex) {
+        if (!aGraph.containsVertex(aVertex)){
+            aGraph.addVertex(aVertex);
+        }
     }
 
     @Override
