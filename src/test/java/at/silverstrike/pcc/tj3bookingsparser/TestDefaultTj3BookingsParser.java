@@ -248,15 +248,60 @@ public final class TestDefaultTj3BookingsParser {
         /**
          * Parse file
          */
-        objectUnderTest.setInjector(injector);
+        parseBookingsFile(injector, objectUnderTest, "test03");
+
+        /**
+         * Check actual and expected results.
+         */
+        final List<BookingTuple> bookingTuples = objectUnderTest.getBookings();
+
+        Assert.assertNotNull(bookingTuples);
+        Assert.assertTrue(bookingTuples.size() > 0);
+    }
+    
+    @Test
+    public void test05()
+    {
+        /**
+         * Create the injector
+         */
+        final InjectorFactory injectorFactory =
+                new MockInjectorFactory(new MockInjectorModule());
+        final Injector injector = injectorFactory.createInjector();
+
+        /**
+         * Get object under test
+         */
+        final Tj3BookingsParser objectUnderTest =
+                injector.getInstance(Tj3BookingsParser.class);
+        Assert.assertNotNull(objectUnderTest);
+
+        /**
+         * Parse file
+         */
+        parseBookingsFile(injector, objectUnderTest, "test05");
+
+        /**
+         * Check actual and expected results.
+         */
+        final List<BookingTuple> bookingTuples = objectUnderTest.getBookings();
+
+        Assert.assertNotNull(bookingTuples);
+        Assert.assertEquals(4, bookingTuples.size());
+        
+    }
+
+    private void parseBookingsFile(final Injector aInjector,
+            final Tj3BookingsParser aParser, final String aFile) {
+        aParser.setInjector(aInjector);
 
         InputStream inputStream = null;
         try {
-            inputStream = FileUtils.openInputStream(new File(DIR + "test03"));
+            inputStream = FileUtils.openInputStream(new File(DIR + aFile));
 
-            objectUnderTest.setInputStream(inputStream);
+            aParser.setInputStream(inputStream);
 
-            objectUnderTest.run();
+            aParser.run();
         } catch (final IOException exception) {
             LOGGER.error("", exception);
             fail(exception.getMessage());
@@ -266,14 +311,6 @@ public final class TestDefaultTj3BookingsParser {
         } finally {
             closeQuietly(inputStream);
         }
-
-        /**
-         * Check actual and expected results.
-         */
-        final List<BookingTuple> bookingTuples = objectUnderTest.getBookings();
-
-        Assert.assertNotNull(bookingTuples);
-        Assert.assertTrue(bookingTuples.size() > 0);
     }
 
 }
