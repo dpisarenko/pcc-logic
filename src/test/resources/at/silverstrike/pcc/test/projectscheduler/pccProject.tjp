@@ -6,14 +6,14 @@
 # Copyright 2010, 2011 Dmitri Anatol'evich Pisarenko
 # All rights reserved
 
-project "pcc-logic" 2011-09-04 +1m 
+project "Sample project" 2010-10-25 +1m 
 {
   timeformat "%d.%m.%Y %H:%M"
 
   numberformat "-" "" "." "," 2
   currencyformat "(" ")" "." "," 0
 
-  now 2011-09-04
+  now 2010-10-25
 
   currency "EUR"
 
@@ -25,80 +25,22 @@ project "pcc-logic" 2011-09-04 +1m
 
 copyright "DP"
 
-resource R55 "DP"
+resource R1210 "DP"
 {
 	limits { dailymax 8.00h }
 }
 
-task T3 "B: Ball"
+task T2010 "Some interesting task"
 {
 	
 start ${now}
 
-	priority 0
+	priority 200
 	
-allocate R55 {limits {dailymax 8.00h}}
+allocate R1210
 
 	
-	
-	
-task T1 "BB: Big ball"
-{
-	
-	priority 998
-	
-allocate R55 {limits {dailymax 8.00h}}
-
-	
-effort 2.00h
-
-	
-	
-}
-
-task T2 "SB: Small ball"
-{
-	
-	priority 999
-	
-allocate R55 {limits {dailymax 8.00h}}
-
-	
-effort 1.00h
-
-	
-	
-}
-
-}
-
-task T4 "D: Doll"
-{
-	
-start ${now}
-
-	priority 996
-	
-allocate R55 {limits {dailymax 8.00h}}
-
-	
-effort 2.00h
-
-	
-	
-}
-
-task T5 "T: Train"
-{
-	
-start ${now}
-
-	priority 997
-	
-allocate R55 {limits {dailymax 8.00h}}
-
-	
-effort 3.00h
+effort 2.50h
 
 	
 	
