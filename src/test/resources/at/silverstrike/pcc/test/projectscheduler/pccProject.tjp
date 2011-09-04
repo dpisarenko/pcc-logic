@@ -25,7 +25,7 @@ project "pcc-logic" 2011-09-04 +1m
 
 copyright "DP"
 
-resource R50 "DP"
+resource R55 "DP"
 {
 	limits { dailymax 8.00h }
 }
@@ -37,7 +37,7 @@ start ${now}
 
 	priority 0
 	
-allocate R50 {limits {dailymax 8.00h}}
+allocate R55 {limits {dailymax 8.00h}}
 
 	
 	
@@ -47,7 +47,7 @@ task T1 "BB: Big ball"
 	
 	priority 998
 	
-allocate R50 {limits {dailymax 8.00h}}
+allocate R55 {limits {dailymax 8.00h}}
 
 	
 effort 2.00h
@@ -61,7 +61,7 @@ task T2 "SB: Small ball"
 	
 	priority 999
 	
-allocate R50 {limits {dailymax 8.00h}}
+allocate R55 {limits {dailymax 8.00h}}
 
 	
 effort 1.00h
@@ -79,7 +79,7 @@ start ${now}
 
 	priority 996
 	
-allocate R50 {limits {dailymax 8.00h}}
+allocate R55 {limits {dailymax 8.00h}}
 
 	
 effort 2.00h
@@ -95,7 +95,7 @@ start ${now}
 
 	priority 997
 	
-allocate R50 {limits {dailymax 8.00h}}
+allocate R55 {limits {dailymax 8.00h}}
 
 	
 effort 3.00h

@@ -25,7 +25,6 @@ import java.util.Map;
 
 import junit.framework.Assert;
 
-import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -53,11 +52,13 @@ import at.silverstrike.pcc.impl.jruby.RubyDateTimeUtils;
 import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
 import at.silverstrike.pcc.impl.persistence.DefaultPersistence;
 import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
-
-import com.google.common.collect.Multimap;
 import com.google.inject.Injector;
 
 public final class TestDefaultProjectScheduler {
+    private static final String T_TRAIN = "T: Train";
+    private static final String D_DOLL = "D: Doll";
+    private static final String BB_BIG_BALL = "BB: Big ball";
+    private static final String SB_SMALL_BALL = "SB: Small ball";
     private static final String TJ3_PATH = "C:\\Ruby191\\bin\\tj3.bat";
     private static final String DIR = "src/test/resources/at/silverstrike/"
                             + "pcc/test/projectscheduler/";
@@ -337,13 +338,28 @@ public final class TestDefaultProjectScheduler {
         final Map<String,Booking> bookingsByTaskLabel = new HashMap<String,Booking>();
         
         for (final Booking curBooking : bookings) {
-            bookingsByTaskLabel.put(curBooking.getProcess().getLabel(), curBooking);
+            bookingsByTaskLabel.put(curBooking.getProcess().getName(), curBooking);
         }
         
-        final Booking smallBallBooking = bookingsByTaskLabel.get("SB");
+        final Booking smallBallBooking = bookingsByTaskLabel.get(SB_SMALL_BALL);
         Assert.assertNotNull(smallBallBooking);
         Assert.assertEquals(smallBallBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 9, 0));
         Assert.assertEquals(smallBallBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 10, 0));
+
+        final Booking bigBallBooking = bookingsByTaskLabel.get(BB_BIG_BALL);
+        Assert.assertNotNull(bigBallBooking);
+        Assert.assertEquals(bigBallBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 10, 0));
+        Assert.assertEquals(bigBallBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 12, 0));
+
+        final Booking trainBooking = bookingsByTaskLabel.get(T_TRAIN);
+        Assert.assertNotNull(trainBooking);
+        Assert.assertEquals(trainBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 12, 0));
+        Assert.assertEquals(trainBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 15, 0));
+
+        final Booking dollBooking = bookingsByTaskLabel.get(D_DOLL);
+        Assert.assertNotNull(dollBooking);
+        Assert.assertEquals(dollBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 15, 0));
+        Assert.assertEquals(dollBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 17, 0));
 
     }
 
@@ -435,7 +451,7 @@ public final class TestDefaultProjectScheduler {
         final com.google.api.services.tasks.v1.model.Task smallBall =
                 new com.google.api.services.tasks.v1.model.Task();
         smallBall.set(GoogleTaskFields.ID, "2");
-        smallBall.set(GoogleTaskFields.TITLE, "SB: Small ball");
+        smallBall.set(GoogleTaskFields.TITLE, SB_SMALL_BALL);
         smallBall.set(GoogleTaskFields.NOTES, "1h");
         smallBall.set(GoogleTaskFields.POSITION, "2");
         smallBall.set(GoogleTaskFields.PARENT, ball.id);
@@ -443,7 +459,7 @@ public final class TestDefaultProjectScheduler {
         final com.google.api.services.tasks.v1.model.Task bigBall =
                 new com.google.api.services.tasks.v1.model.Task();
         bigBall.set(GoogleTaskFields.ID, "3");
-        bigBall.set(GoogleTaskFields.TITLE, "BB: Big ball");
+        bigBall.set(GoogleTaskFields.TITLE, BB_BIG_BALL);
         bigBall.set(GoogleTaskFields.NOTES, "2h");
         bigBall.set(GoogleTaskFields.POSITION, "3");
         bigBall.set(GoogleTaskFields.PARENT, ball.id);
@@ -451,7 +467,7 @@ public final class TestDefaultProjectScheduler {
         final com.google.api.services.tasks.v1.model.Task train =
                 new com.google.api.services.tasks.v1.model.Task();
         train.set(GoogleTaskFields.ID, "4");
-        train.set(GoogleTaskFields.TITLE, "T: Train");
+        train.set(GoogleTaskFields.TITLE, T_TRAIN);
         train.set(GoogleTaskFields.NOTES, "3h");
         train.set(GoogleTaskFields.POSITION, "4");
         train.set(GoogleTaskFields.PARENT, null);
@@ -459,7 +475,7 @@ public final class TestDefaultProjectScheduler {
         final com.google.api.services.tasks.v1.model.Task doll =
                 new com.google.api.services.tasks.v1.model.Task();
         doll.set(GoogleTaskFields.ID, "5");
-        doll.set(GoogleTaskFields.TITLE, "D: Doll");
+        doll.set(GoogleTaskFields.TITLE, D_DOLL);
         doll.set(GoogleTaskFields.NOTES, "2h");
         doll.set(GoogleTaskFields.POSITION, "5");
         doll.set(GoogleTaskFields.PARENT, null);

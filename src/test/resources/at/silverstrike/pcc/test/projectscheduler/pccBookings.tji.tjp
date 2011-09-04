@@ -7,7 +7,7 @@ project prj "pcc-logic" "1.0" 2011-09-04-00:00-+0000 - 2011-10-04-10:00-+0000 {
 
 projectids prj
 
-resource R50 "DP"
+resource R55 "DP"
 
 task T3 "B: Ball" {
   task T1 "BB: Big ball" {
@@ -40,26 +40,26 @@ supplement task T3 {
   projectid prj
 }
 supplement task T3.T1 {
-  booking R50 2011-09-05-10:00-+0000 + 2.0h { overtime 2 }
+  booking R55 2011-09-05-10:00-+0000 + 2.0h { overtime 2 }
   priority 998
   projectid prj
 }
 supplement task T3.T2 {
-  booking R50 2011-09-05-09:00-+0000 + 1.0h { overtime 2 }
+  booking R55 2011-09-05-09:00-+0000 + 1.0h { overtime 2 }
   priority 999
   projectid prj
 }
 supplement task T4 {
-  booking R50 2011-09-05-15:00-+0000 + 2.0h { overtime 2 }
+  booking R55 2011-09-05-15:00-+0000 + 2.0h { overtime 2 }
   priority 996
   projectid prj
 }
 supplement task T5 {
-  booking R50 2011-09-05-12:00-+0000 + 3.0h { overtime 2 }
+  booking R55 2011-09-05-12:00-+0000 + 3.0h { overtime 2 }
   priority 997
   projectid prj
 }
-supplement resource R50 {
+supplement resource R55 {
   workinghours sun off
                workinghours mon 9:00 - 17:00
                workinghours tue 9:00 - 17:00
