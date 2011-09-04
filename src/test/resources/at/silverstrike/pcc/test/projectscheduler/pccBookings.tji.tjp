@@ -1,4 +1,4 @@
-project prj "Sample project" "1.0" 2011-09-04-00:00-+0000 - 2011-10-04-10:00-+0000 {
+project prj "pcc-logic" "1.0" 2011-09-04-00:00-+0000 - 2011-10-04-10:00-+0000 {
   timezone "UTC"
   scenario plan "Plan" {
     active yes
@@ -7,82 +7,59 @@ project prj "Sample project" "1.0" 2011-09-04-00:00-+0000 - 2011-10-04-10:00-+00
 
 projectids prj
 
-resource R47 "DP"
+resource R50 "DP"
 
-task T1 "BB: Big ball" {
-  start 2011-09-05-11:00-+0000
-  end 2011-09-05-13:00-+0000
-  scheduling asap
-  scheduled
-}
-task T2 "SB: Small ball" {
-  start 2011-09-05-09:00-+0000
-  end 2011-09-05-10:00-+0000
-  scheduling asap
-  scheduled
-}
 task T3 "B: Ball" {
   task T1 "BB: Big ball" {
-    start 2011-09-05-13:00-+0000
-    end 2011-09-05-15:00-+0000
+    start 2011-09-05-10:00-+0000
+    end 2011-09-05-12:00-+0000
     scheduling asap
     scheduled
   }
   task T2 "SB: Small ball" {
-    start 2011-09-05-10:00-+0000
-    end 2011-09-05-11:00-+0000
+    start 2011-09-05-09:00-+0000
+    end 2011-09-05-10:00-+0000
     scheduling asap
     scheduled
   }
 }
 task T4 "D: Doll" {
-  start 2011-09-06-10:00-+0000
-  end 2011-09-06-12:00-+0000
+  start 2011-09-05-15:00-+0000
+  end 2011-09-05-17:00-+0000
   scheduling asap
   scheduled
 }
 task T5 "T: Train" {
-  start 2011-09-05-15:00-+0000
-  end 2011-09-06-10:00-+0000
+  start 2011-09-05-12:00-+0000
+  end 2011-09-05-15:00-+0000
   scheduling asap
   scheduled
-}
-supplement task T1 {
-  booking R47 2011-09-05-11:00-+0000 + 2.0h { overtime 2 }
-  priority 998
-  projectid prj
-}
-supplement task T2 {
-  booking R47 2011-09-05-09:00-+0000 + 1.0h { overtime 2 }
-  priority 999
-  projectid prj
 }
 supplement task T3 {
   priority 0
   projectid prj
 }
 supplement task T3.T1 {
-  booking R47 2011-09-05-13:00-+0000 + 2.0h { overtime 2 }
+  booking R50 2011-09-05-10:00-+0000 + 2.0h { overtime 2 }
   priority 998
   projectid prj
 }
 supplement task T3.T2 {
-  booking R47 2011-09-05-10:00-+0000 + 1.0h { overtime 2 }
+  booking R50 2011-09-05-09:00-+0000 + 1.0h { overtime 2 }
   priority 999
   projectid prj
 }
 supplement task T4 {
-  booking R47 2011-09-06-10:00-+0000 + 2.0h { overtime 2 }
+  booking R50 2011-09-05-15:00-+0000 + 2.0h { overtime 2 }
   priority 996
   projectid prj
 }
 supplement task T5 {
-  booking R47 2011-09-05-15:00-+0000 + 2.0h,
-          2011-09-06-09:00-+0000 + 1.0h { overtime 2 }
+  booking R50 2011-09-05-12:00-+0000 + 3.0h { overtime 2 }
   priority 997
   projectid prj
 }
-supplement resource R47 {
+supplement resource R50 {
   workinghours sun off
                workinghours mon 9:00 - 17:00
                workinghours tue 9:00 - 17:00

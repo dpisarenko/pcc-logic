@@ -6,7 +6,7 @@
 # Copyright 2010, 2011 Dmitri Anatol'evich Pisarenko
 # All rights reserved
 
-project "Sample project" 2011-09-04 +1m 
+project "pcc-logic" 2011-09-04 +1m 
 {
   timeformat "%d.%m.%Y %H:%M"
 
@@ -25,41 +25,9 @@ project "Sample project" 2011-09-04 +1m
 
 copyright "DP"
 
-resource R47 "DP"
+resource R50 "DP"
 {
 	limits { dailymax 8.00h }
-}
-
-task T1 "BB: Big ball"
-{
-	
-start ${now}
-
-	priority 998
-	
-allocate R47 {limits {dailymax 8.00h}}
-
-	
-effort 2.00h
-
-	
-	
-}
-
-task T2 "SB: Small ball"
-{
-	
-start ${now}
-
-	priority 999
-	
-allocate R47 {limits {dailymax 8.00h}}
-
-	
-effort 1.00h
-
-	
-	
 }
 
 task T3 "B: Ball"
@@ -69,7 +37,7 @@ start ${now}
 
 	priority 0
 	
-allocate R47 {limits {dailymax 8.00h}}
+allocate R50 {limits {dailymax 8.00h}}
 
 	
 	
@@ -79,7 +47,7 @@ task T1 "BB: Big ball"
 	
 	priority 998
 	
-allocate R47 {limits {dailymax 8.00h}}
+allocate R50 {limits {dailymax 8.00h}}
 
 	
 effort 2.00h
@@ -93,7 +61,7 @@ task T2 "SB: Small ball"
 	
 	priority 999
 	
-allocate R47 {limits {dailymax 8.00h}}
+allocate R50 {limits {dailymax 8.00h}}
 
 	
 effort 1.00h
@@ -111,7 +79,7 @@ start ${now}
 
 	priority 996
 	
-allocate R47 {limits {dailymax 8.00h}}
+allocate R50 {limits {dailymax 8.00h}}
 
 	
 effort 2.00h
@@ -127,7 +95,7 @@ start ${now}
 
 	priority 997
 	
-allocate R47 {limits {dailymax 8.00h}}
+allocate R50 {limits {dailymax 8.00h}}
 
 	
 effort 3.00h

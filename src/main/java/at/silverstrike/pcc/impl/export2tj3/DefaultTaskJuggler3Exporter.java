@@ -225,10 +225,9 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
         for (final SchedulingObject curSchedulingObject : aSchedulingObjectsToExport) {
             final SchedulingObject parent = curSchedulingObject.getParent();
+            addToGraphIfNecessary(graph, curSchedulingObject);
             if (parent != null) {
                 addToGraphIfNecessary(graph, parent);
-                addToGraphIfNecessary(graph, curSchedulingObject);
-                
                 graph.addEdge(parent, curSchedulingObject);
             }
         }
