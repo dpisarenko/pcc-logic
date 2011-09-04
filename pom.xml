@@ -142,6 +142,11 @@
 		    <groupId>org.apache.derby</groupId>
 		    <artifactId>derbyclient</artifactId>
 		    <version>10.8.1.2</version>
+		</dependency>
+		<dependency>
+		   <groupId>jgrapht</groupId>
+		   <artifactId>jgrapht</artifactId>
+		   <version>0.7.3</version>
 		</dependency>		
 	</dependencies>
 	<reporting>

@@ -18,6 +18,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.jgrapht.DirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.ListenableDirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -166,9 +169,16 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         addResourceInformation(builder);
 
         // Add task information
+        final List<SchedulingObject> processes;
+        if (this.transientMode) {
+            processes =
+                    filterOutTopLevelTasks(this.projectExportInfo
+                            .getSchedulingObjectsToExport());
+        } else {
+            processes =
+                    this.projectExportInfo.getSchedulingObjectsToExport();
+        }
 
-        final List<SchedulingObject> processes =
-                this.projectExportInfo.getSchedulingObjectsToExport();
         if (processes != null) {
             embeddedFileReader.setFilename(EXPORT2TJ3_TEMPLATE_TASK);
             embeddedFileReader.run();
@@ -205,6 +215,31 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         builder.append(embeddedFileReader.getFileContents());
 
         result = builder.toString();
+    }
+
+    private List<SchedulingObject> filterOutTopLevelTasks(
+            final List<SchedulingObject> aSchedulingObjectsToExport) {
+        final DirectedGraph<SchedulingObject, DefaultEdge> graph =
+                new ListenableDirectedGraph<SchedulingObject, DefaultEdge>(
+                        DefaultEdge.class);
+
+        for (final SchedulingObject curSchedulingObject : aSchedulingObjectsToExport) {
+            final SchedulingObject parent = curSchedulingObject.getParent();
+            if (parent != null) {
+                graph.addEdge(parent, curSchedulingObject);
+            }
+        }
+
+        final List<SchedulingObject> topLevelSchedulingObjects =
+                new LinkedList<SchedulingObject>();
+
+        for (final SchedulingObject vertex : graph.vertexSet()) {
+            if (graph.inDegreeOf(vertex) == 0) {
+                topLevelSchedulingObjects.add(vertex);
+            }
+        }
+
+        return topLevelSchedulingObjects;
     }
 
     @Override

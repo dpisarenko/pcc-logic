@@ -23,6 +23,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -51,6 +52,7 @@ import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
 import at.silverstrike.pcc.impl.persistence.DefaultPersistence;
 import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 
+import com.google.common.collect.Multimap;
 import com.google.inject.Injector;
 
 public final class TestDefaultProjectScheduler {
@@ -328,8 +330,13 @@ public final class TestDefaultProjectScheduler {
                 calculatePlan(injector, persistence, pccTasks);
 
         Assert.assertNotNull(bookings);
-        Assert.assertEquals(5, bookings.size());
+        Assert.assertEquals(7, bookings.size());
         
+        final MultiHashMap bookingsByTaskLabel = new MultiHashMap();
+        
+        for (final Booking curBooking : bookings) {
+            bookingsByTaskLabel.put(curBooking.getProcess().getLabel(), curBooking);
+        }
         
     }
 
