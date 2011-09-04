@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 14:05:07 src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g 2011-09-05 00:19:40
+// $ANTLR 3.2 Sep 23, 2009 14:05:07 src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g 2011-09-05 00:23:08
  
 
 package at.silverstrike.pcc.impl.tj3bookingsparser.grammar; 
@@ -24,47 +24,48 @@ import java.util.ArrayList;
  **/
 public class BookingsParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Project", "Prj", "String", "DateTimeWithTimeZone", "Hyphen", "OpenParen", "TimeZone", "ScenarioPart1", "ScenarioPart2", "CloseParen", "Projectids", "Resource", "Identifier", "Task", "Start", "End", "Scheduling", "Asap", "Scheduled", "Supplement", "Priority", "IntegerNumber", "Workinghours", "DayOfWeek", "Off", "Comma", "Time", "Colon", "Booking", "Plus", "FloatingPointNumberDuration", "FloatingPointNumber", "Overtime", "Complete", "D", "P", "H", "A", "Space"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Project", "Prj", "String", "DateTimeWithTimeZone", "Hyphen", "OpenParen", "TimeZone", "ScenarioPart1", "ScenarioPart2", "CloseParen", "Projectids", "Resource", "Identifier", "Task", "Start", "End", "Scheduling", "Asap", "Scheduled", "Supplement", "Priority", "IntegerNumber", "ProjectIdPrj", "Workinghours", "DayOfWeek", "Off", "Comma", "Time", "Colon", "Booking", "Plus", "FloatingPointNumberDuration", "FloatingPointNumber", "Overtime", "Complete", "D", "P", "H", "A", "Space"
     };
-    public static final int D=38;
-    public static final int Scheduled=22;
     public static final int End=19;
-    public static final int FloatingPointNumberDuration=34;
-    public static final int Start=18;
-    public static final int A=41;
-    public static final int Prj=5;
+    public static final int FloatingPointNumberDuration=35;
+    public static final int ProjectIdPrj=26;
     public static final int CloseParen=13;
-    public static final int IntegerNumber=25;
     public static final int Supplement=23;
-    public static final int H=40;
-    public static final int DayOfWeek=27;
+    public static final int IntegerNumber=25;
+    public static final int DayOfWeek=28;
     public static final int DateTimeWithTimeZone=7;
-    public static final int Time=30;
-    public static final int Colon=31;
-    public static final int P=39;
     public static final int EOF=-1;
-    public static final int FloatingPointNumber=35;
     public static final int Project=4;
-    public static final int TimeZone=10;
+    public static final int FloatingPointNumber=36;
     public static final int Identifier=16;
-    public static final int Space=42;
-    public static final int Plus=33;
+    public static final int Space=43;
     public static final int Hyphen=8;
-    public static final int Resource=15;
-    public static final int Off=28;
-    public static final int Overtime=36;
+    public static final int Overtime=37;
     public static final int OpenParen=9;
-    public static final int Booking=32;
-    public static final int Priority=24;
+    public static final int Booking=33;
     public static final int Projectids=14;
     public static final int Scheduling=20;
     public static final int String=6;
     public static final int Task=17;
+    public static final int Complete=38;
+    public static final int D=39;
+    public static final int Scheduled=22;
+    public static final int Start=18;
+    public static final int A=42;
+    public static final int Prj=5;
+    public static final int H=41;
+    public static final int Time=31;
+    public static final int Colon=32;
+    public static final int P=40;
+    public static final int TimeZone=10;
+    public static final int Resource=15;
+    public static final int Plus=34;
+    public static final int Off=29;
+    public static final int Priority=24;
     public static final int Asap=21;
-    public static final int Comma=29;
-    public static final int Complete=37;
-    public static final int Workinghours=26;
+    public static final int Comma=30;
     public static final int ScenarioPart1=11;
+    public static final int Workinghours=27;
     public static final int ScenarioPart2=12;
 
     // delegates
@@ -411,7 +412,7 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "supplementTask"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:96:1: supplementTask returns [DefaultSupplementStatement suppStmt] : Supplement Task taskId= Identifier OpenParen (bStmt= booking )* Priority IntegerNumber CloseParen ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:96:1: supplementTask returns [DefaultSupplementStatement suppStmt] : Supplement Task taskId= Identifier OpenParen (bStmt= booking )* Priority IntegerNumber ProjectIdPrj CloseParen ;
     public final DefaultSupplementStatement supplementTask() throws RecognitionException {
         DefaultSupplementStatement suppStmt = null;
 
@@ -420,8 +421,8 @@ public class BookingsParser extends Parser {
 
 
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:97:2: ( Supplement Task taskId= Identifier OpenParen (bStmt= booking )* Priority IntegerNumber CloseParen )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:98:3: Supplement Task taskId= Identifier OpenParen (bStmt= booking )* Priority IntegerNumber CloseParen
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:97:2: ( Supplement Task taskId= Identifier OpenParen (bStmt= booking )* Priority IntegerNumber ProjectIdPrj CloseParen )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:98:3: Supplement Task taskId= Identifier OpenParen (bStmt= booking )* Priority IntegerNumber ProjectIdPrj CloseParen
             {
 
             			suppStmt = new DefaultSupplementStatement();
@@ -463,7 +464,8 @@ public class BookingsParser extends Parser {
 
             match(input,Priority,FOLLOW_Priority_in_supplementTask295); 
             match(input,IntegerNumber,FOLLOW_IntegerNumber_in_supplementTask297); 
-            match(input,CloseParen,FOLLOW_CloseParen_in_supplementTask300); 
+            match(input,ProjectIdPrj,FOLLOW_ProjectIdPrj_in_supplementTask300); 
+            match(input,CloseParen,FOLLOW_CloseParen_in_supplementTask303); 
 
             }
 
@@ -480,17 +482,17 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "supplementResource"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:110:1: supplementResource : Supplement Resource Identifier OpenParen ( workinghours )+ CloseParen ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:111:1: supplementResource : Supplement Resource Identifier OpenParen ( workinghours )+ CloseParen ;
     public final void supplementResource() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:111:2: ( Supplement Resource Identifier OpenParen ( workinghours )+ CloseParen )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:112:2: Supplement Resource Identifier OpenParen ( workinghours )+ CloseParen
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:112:2: ( Supplement Resource Identifier OpenParen ( workinghours )+ CloseParen )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:113:2: Supplement Resource Identifier OpenParen ( workinghours )+ CloseParen
             {
-            match(input,Supplement,FOLLOW_Supplement_in_supplementResource312); 
-            match(input,Resource,FOLLOW_Resource_in_supplementResource314); 
-            match(input,Identifier,FOLLOW_Identifier_in_supplementResource316); 
-            match(input,OpenParen,FOLLOW_OpenParen_in_supplementResource318); 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:113:2: ( workinghours )+
+            match(input,Supplement,FOLLOW_Supplement_in_supplementResource315); 
+            match(input,Resource,FOLLOW_Resource_in_supplementResource317); 
+            match(input,Identifier,FOLLOW_Identifier_in_supplementResource319); 
+            match(input,OpenParen,FOLLOW_OpenParen_in_supplementResource321); 
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:114:2: ( workinghours )+
             int cnt7=0;
             loop7:
             do {
@@ -504,9 +506,9 @@ public class BookingsParser extends Parser {
 
                 switch (alt7) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:113:2: workinghours
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:114:2: workinghours
             	    {
-            	    pushFollow(FOLLOW_workinghours_in_supplementResource321);
+            	    pushFollow(FOLLOW_workinghours_in_supplementResource324);
             	    workinghours();
 
             	    state._fsp--;
@@ -524,7 +526,7 @@ public class BookingsParser extends Parser {
                 cnt7++;
             } while (true);
 
-            match(input,CloseParen,FOLLOW_CloseParen_in_supplementResource325); 
+            match(input,CloseParen,FOLLOW_CloseParen_in_supplementResource328); 
 
             }
 
@@ -541,15 +543,15 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "workinghours"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:117:1: workinghours : Workinghours DayOfWeek ( Off | workingIntervals ) ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:118:1: workinghours : Workinghours DayOfWeek ( Off | workingIntervals ) ;
     public final void workinghours() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:118:2: ( Workinghours DayOfWeek ( Off | workingIntervals ) )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:119:2: Workinghours DayOfWeek ( Off | workingIntervals )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:119:2: ( Workinghours DayOfWeek ( Off | workingIntervals ) )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:120:2: Workinghours DayOfWeek ( Off | workingIntervals )
             {
-            match(input,Workinghours,FOLLOW_Workinghours_in_workinghours337); 
-            match(input,DayOfWeek,FOLLOW_DayOfWeek_in_workinghours339); 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:119:25: ( Off | workingIntervals )
+            match(input,Workinghours,FOLLOW_Workinghours_in_workinghours340); 
+            match(input,DayOfWeek,FOLLOW_DayOfWeek_in_workinghours342); 
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:120:25: ( Off | workingIntervals )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -567,16 +569,16 @@ public class BookingsParser extends Parser {
             }
             switch (alt8) {
                 case 1 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:119:26: Off
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:120:26: Off
                     {
-                    match(input,Off,FOLLOW_Off_in_workinghours342); 
+                    match(input,Off,FOLLOW_Off_in_workinghours345); 
 
                     }
                     break;
                 case 2 :
-                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:119:30: workingIntervals
+                    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:120:30: workingIntervals
                     {
-                    pushFollow(FOLLOW_workingIntervals_in_workinghours344);
+                    pushFollow(FOLLOW_workingIntervals_in_workinghours347);
                     workingIntervals();
 
                     state._fsp--;
@@ -603,18 +605,18 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "workingIntervals"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:126:1: workingIntervals : workingInterval ( Comma workingInterval )* ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:127:1: workingIntervals : workingInterval ( Comma workingInterval )* ;
     public final void workingIntervals() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:127:2: ( workingInterval ( Comma workingInterval )* )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:128:2: workingInterval ( Comma workingInterval )*
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:128:2: ( workingInterval ( Comma workingInterval )* )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:129:2: workingInterval ( Comma workingInterval )*
             {
-            pushFollow(FOLLOW_workingInterval_in_workingIntervals368);
+            pushFollow(FOLLOW_workingInterval_in_workingIntervals371);
             workingInterval();
 
             state._fsp--;
 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:128:18: ( Comma workingInterval )*
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:129:18: ( Comma workingInterval )*
             loop9:
             do {
                 int alt9=2;
@@ -627,10 +629,10 @@ public class BookingsParser extends Parser {
 
                 switch (alt9) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:128:19: Comma workingInterval
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:129:19: Comma workingInterval
             	    {
-            	    match(input,Comma,FOLLOW_Comma_in_workingIntervals371); 
-            	    pushFollow(FOLLOW_workingInterval_in_workingIntervals373);
+            	    match(input,Comma,FOLLOW_Comma_in_workingIntervals374); 
+            	    pushFollow(FOLLOW_workingInterval_in_workingIntervals376);
             	    workingInterval();
 
             	    state._fsp--;
@@ -660,15 +662,15 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "workingInterval"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:131:1: workingInterval : Time Hyphen Time ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:132:1: workingInterval : Time Hyphen Time ;
     public final void workingInterval() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:132:2: ( Time Hyphen Time )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:132:4: Time Hyphen Time
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:133:2: ( Time Hyphen Time )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:133:4: Time Hyphen Time
             {
-            match(input,Time,FOLLOW_Time_in_workingInterval387); 
-            match(input,Hyphen,FOLLOW_Hyphen_in_workingInterval389); 
-            match(input,Time,FOLLOW_Time_in_workingInterval391); 
+            match(input,Time,FOLLOW_Time_in_workingInterval390); 
+            match(input,Hyphen,FOLLOW_Hyphen_in_workingInterval392); 
+            match(input,Time,FOLLOW_Time_in_workingInterval394); 
 
             }
 
@@ -685,7 +687,7 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "booking"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:164:1: booking returns [DefaultBookingStatement stmt] : Booking resource= Identifier bt1= bookingTime ( Comma bt2= bookingTime )* ( OpenParen overtime CloseParen ) ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:165:1: booking returns [DefaultBookingStatement stmt] : Booking resource= Identifier bt1= bookingTime ( Comma bt2= bookingTime )* ( OpenParen overtime CloseParen ) ;
     public final DefaultBookingStatement booking() throws RecognitionException {
         DefaultBookingStatement stmt = null;
 
@@ -696,22 +698,22 @@ public class BookingsParser extends Parser {
 
 
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:165:2: ( Booking resource= Identifier bt1= bookingTime ( Comma bt2= bookingTime )* ( OpenParen overtime CloseParen ) )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:166:2: Booking resource= Identifier bt1= bookingTime ( Comma bt2= bookingTime )* ( OpenParen overtime CloseParen )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:166:2: ( Booking resource= Identifier bt1= bookingTime ( Comma bt2= bookingTime )* ( OpenParen overtime CloseParen ) )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:167:2: Booking resource= Identifier bt1= bookingTime ( Comma bt2= bookingTime )* ( OpenParen overtime CloseParen )
             {
 
             		stmt = new DefaultBookingStatement();
             	
-            match(input,Booking,FOLLOW_Booking_in_booking505); 
-            resource=(Token)match(input,Identifier,FOLLOW_Identifier_in_booking509); 
+            match(input,Booking,FOLLOW_Booking_in_booking508); 
+            resource=(Token)match(input,Identifier,FOLLOW_Identifier_in_booking512); 
              stmt.setResource((resource!=null?resource.getText():null)); 
-            pushFollow(FOLLOW_bookingTime_in_booking518);
+            pushFollow(FOLLOW_bookingTime_in_booking521);
             bt1=bookingTime();
 
             state._fsp--;
 
              stmt.addIndBooking(bt1); 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:171:2: ( Comma bt2= bookingTime )*
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:172:2: ( Comma bt2= bookingTime )*
             loop10:
             do {
                 int alt10=2;
@@ -724,10 +726,10 @@ public class BookingsParser extends Parser {
 
                 switch (alt10) {
             	case 1 :
-            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:171:3: Comma bt2= bookingTime
+            	    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:172:3: Comma bt2= bookingTime
             	    {
-            	    match(input,Comma,FOLLOW_Comma_in_booking525); 
-            	    pushFollow(FOLLOW_bookingTime_in_booking531);
+            	    match(input,Comma,FOLLOW_Comma_in_booking528); 
+            	    pushFollow(FOLLOW_bookingTime_in_booking534);
             	    bt2=bookingTime();
 
             	    state._fsp--;
@@ -742,16 +744,16 @@ public class BookingsParser extends Parser {
                 }
             } while (true);
 
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:174:2: ( OpenParen overtime CloseParen )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:174:3: OpenParen overtime CloseParen
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:175:2: ( OpenParen overtime CloseParen )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:175:3: OpenParen overtime CloseParen
             {
-            match(input,OpenParen,FOLLOW_OpenParen_in_booking543); 
-            pushFollow(FOLLOW_overtime_in_booking547);
+            match(input,OpenParen,FOLLOW_OpenParen_in_booking546); 
+            pushFollow(FOLLOW_overtime_in_booking550);
             overtime();
 
             state._fsp--;
 
-            match(input,CloseParen,FOLLOW_CloseParen_in_booking551); 
+            match(input,CloseParen,FOLLOW_CloseParen_in_booking554); 
 
             }
 
@@ -771,7 +773,7 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "bookingTime"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:179:1: bookingTime returns [DefaultIndBooking indBooking] : startTime= DateTimeWithTimeZone Plus bookingDuration= FloatingPointNumberDuration ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:180:1: bookingTime returns [DefaultIndBooking indBooking] : startTime= DateTimeWithTimeZone Plus bookingDuration= FloatingPointNumberDuration ;
     public final DefaultIndBooking bookingTime() throws RecognitionException {
         DefaultIndBooking indBooking = null;
 
@@ -779,12 +781,12 @@ public class BookingsParser extends Parser {
         Token bookingDuration=null;
 
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:180:2: (startTime= DateTimeWithTimeZone Plus bookingDuration= FloatingPointNumberDuration )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:181:2: startTime= DateTimeWithTimeZone Plus bookingDuration= FloatingPointNumberDuration
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:181:2: (startTime= DateTimeWithTimeZone Plus bookingDuration= FloatingPointNumberDuration )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:182:2: startTime= DateTimeWithTimeZone Plus bookingDuration= FloatingPointNumberDuration
             {
-            startTime=(Token)match(input,DateTimeWithTimeZone,FOLLOW_DateTimeWithTimeZone_in_bookingTime570); 
-            match(input,Plus,FOLLOW_Plus_in_bookingTime574); 
-            bookingDuration=(Token)match(input,FloatingPointNumberDuration,FOLLOW_FloatingPointNumberDuration_in_bookingTime580); 
+            startTime=(Token)match(input,DateTimeWithTimeZone,FOLLOW_DateTimeWithTimeZone_in_bookingTime573); 
+            match(input,Plus,FOLLOW_Plus_in_bookingTime577); 
+            bookingDuration=(Token)match(input,FloatingPointNumberDuration,FOLLOW_FloatingPointNumberDuration_in_bookingTime583); 
 
             		indBooking = new DefaultIndBooking((startTime!=null?startTime.getText():null), (bookingDuration!=null?bookingDuration.getText():null));
             	
@@ -804,14 +806,14 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "duration"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:199:1: duration : FloatingPointNumber 'h' ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:205:1: duration : FloatingPointNumber 'h' ;
     public final void duration() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:200:2: ( FloatingPointNumber 'h' )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:201:2: FloatingPointNumber 'h'
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:206:2: ( FloatingPointNumber 'h' )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:207:2: FloatingPointNumber 'h'
             {
-            match(input,FloatingPointNumber,FOLLOW_FloatingPointNumber_in_duration620); 
-            match(input,H,FOLLOW_H_in_duration622); 
+            match(input,FloatingPointNumber,FOLLOW_FloatingPointNumber_in_duration635); 
+            match(input,H,FOLLOW_H_in_duration637); 
 
             }
 
@@ -828,14 +830,14 @@ public class BookingsParser extends Parser {
 
 
     // $ANTLR start "overtime"
-    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:204:1: overtime : Overtime IntegerNumber ;
+    // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:210:1: overtime : Overtime IntegerNumber ;
     public final void overtime() throws RecognitionException {
         try {
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:205:2: ( Overtime IntegerNumber )
-            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:206:2: Overtime IntegerNumber
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:211:2: ( Overtime IntegerNumber )
+            // src\\main\\java\\at\\silverstrike\\pcc\\impl\\tj3bookingsparser\\grammar\\Bookings.g:212:2: Overtime IntegerNumber
             {
-            match(input,Overtime,FOLLOW_Overtime_in_overtime634); 
-            match(input,IntegerNumber,FOLLOW_IntegerNumber_in_overtime636); 
+            match(input,Overtime,FOLLOW_Overtime_in_overtime649); 
+            match(input,IntegerNumber,FOLLOW_IntegerNumber_in_overtime651); 
 
             }
 
@@ -898,41 +900,42 @@ public class BookingsParser extends Parser {
     public static final BitSet FOLLOW_Supplement_in_supplementTask265 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_Task_in_supplementTask267 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_Identifier_in_supplementTask271 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_OpenParen_in_supplementTask277 = new BitSet(new long[]{0x0000000101000000L});
-    public static final BitSet FOLLOW_booking_in_supplementTask285 = new BitSet(new long[]{0x0000000101000000L});
+    public static final BitSet FOLLOW_OpenParen_in_supplementTask277 = new BitSet(new long[]{0x0000000201000000L});
+    public static final BitSet FOLLOW_booking_in_supplementTask285 = new BitSet(new long[]{0x0000000201000000L});
     public static final BitSet FOLLOW_Priority_in_supplementTask295 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_IntegerNumber_in_supplementTask297 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_CloseParen_in_supplementTask300 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_Supplement_in_supplementResource312 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_Resource_in_supplementResource314 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_Identifier_in_supplementResource316 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_OpenParen_in_supplementResource318 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_workinghours_in_supplementResource321 = new BitSet(new long[]{0x0000000004002000L});
-    public static final BitSet FOLLOW_CloseParen_in_supplementResource325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_Workinghours_in_workinghours337 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_DayOfWeek_in_workinghours339 = new BitSet(new long[]{0x0000000050000000L});
-    public static final BitSet FOLLOW_Off_in_workinghours342 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_workingIntervals_in_workinghours344 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_workingInterval_in_workingIntervals368 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_Comma_in_workingIntervals371 = new BitSet(new long[]{0x0000000050000000L});
-    public static final BitSet FOLLOW_workingInterval_in_workingIntervals373 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_Time_in_workingInterval387 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_Hyphen_in_workingInterval389 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_Time_in_workingInterval391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_Booking_in_booking505 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_Identifier_in_booking509 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_bookingTime_in_booking518 = new BitSet(new long[]{0x0000000020000200L});
-    public static final BitSet FOLLOW_Comma_in_booking525 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_bookingTime_in_booking531 = new BitSet(new long[]{0x0000000020000200L});
-    public static final BitSet FOLLOW_OpenParen_in_booking543 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_overtime_in_booking547 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_CloseParen_in_booking551 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DateTimeWithTimeZone_in_bookingTime570 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_Plus_in_bookingTime574 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_FloatingPointNumberDuration_in_bookingTime580 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FloatingPointNumber_in_duration620 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_H_in_duration622 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_Overtime_in_overtime634 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_IntegerNumber_in_overtime636 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IntegerNumber_in_supplementTask297 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_ProjectIdPrj_in_supplementTask300 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_CloseParen_in_supplementTask303 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Supplement_in_supplementResource315 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_Resource_in_supplementResource317 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_Identifier_in_supplementResource319 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_OpenParen_in_supplementResource321 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_workinghours_in_supplementResource324 = new BitSet(new long[]{0x0000000008002000L});
+    public static final BitSet FOLLOW_CloseParen_in_supplementResource328 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Workinghours_in_workinghours340 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_DayOfWeek_in_workinghours342 = new BitSet(new long[]{0x00000000A0000000L});
+    public static final BitSet FOLLOW_Off_in_workinghours345 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_workingIntervals_in_workinghours347 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_workingInterval_in_workingIntervals371 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_Comma_in_workingIntervals374 = new BitSet(new long[]{0x00000000A0000000L});
+    public static final BitSet FOLLOW_workingInterval_in_workingIntervals376 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_Time_in_workingInterval390 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_Hyphen_in_workingInterval392 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_Time_in_workingInterval394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Booking_in_booking508 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_Identifier_in_booking512 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_bookingTime_in_booking521 = new BitSet(new long[]{0x0000000040000200L});
+    public static final BitSet FOLLOW_Comma_in_booking528 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_bookingTime_in_booking534 = new BitSet(new long[]{0x0000000040000200L});
+    public static final BitSet FOLLOW_OpenParen_in_booking546 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_overtime_in_booking550 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_CloseParen_in_booking554 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DateTimeWithTimeZone_in_bookingTime573 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_Plus_in_bookingTime577 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_FloatingPointNumberDuration_in_bookingTime583 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FloatingPointNumber_in_duration635 = new BitSet(new long[]{0x0000020000000000L});
+    public static final BitSet FOLLOW_H_in_duration637 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_Overtime_in_overtime649 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_IntegerNumber_in_overtime651 = new BitSet(new long[]{0x0000000000000002L});
 
 }
