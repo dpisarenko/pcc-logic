@@ -18,8 +18,10 @@ import static junit.framework.Assert.fail;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.Assert;
 
@@ -330,14 +332,19 @@ public final class TestDefaultProjectScheduler {
                 calculatePlan(injector, persistence, pccTasks);
 
         Assert.assertNotNull(bookings);
-        Assert.assertEquals(7, bookings.size());
+        Assert.assertEquals(4, bookings.size());
         
-        final MultiHashMap bookingsByTaskLabel = new MultiHashMap();
+        final Map<String,Booking> bookingsByTaskLabel = new HashMap<String,Booking>();
         
         for (final Booking curBooking : bookings) {
             bookingsByTaskLabel.put(curBooking.getProcess().getLabel(), curBooking);
         }
         
+        final Booking smallBallBooking = bookingsByTaskLabel.get("SB");
+        Assert.assertNotNull(smallBallBooking);
+        Assert.assertEquals(smallBallBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 9, 0));
+        Assert.assertEquals(smallBallBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 10, 0));
+
     }
 
     private List<Booking> calculatePlan(final Injector aInjector,
