@@ -33,8 +33,10 @@ import ru.altruix.commons.api.di.InjectorFactory;
 import ru.altruix.commons.api.di.PccException;
 
 import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2;
+import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2Factory;
 import at.silverstrike.pcc.api.gtasks.GoogleTaskFields;
 import at.silverstrike.pcc.api.model.Booking;
+import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.DailyPlan;
@@ -45,6 +47,7 @@ import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.api.projectscheduler.ProjectExportInfo;
 import at.silverstrike.pcc.api.projectscheduler.ProjectScheduler;
 import at.silverstrike.pcc.impl.jruby.RubyDateTimeUtils;
+import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
 import at.silverstrike.pcc.impl.persistence.DefaultPersistence;
 import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 
@@ -311,42 +314,134 @@ public final class TestDefaultProjectScheduler {
         }
 
         final InjectorFactory injectorFactory =
-                new MockInjectorFactory(new MockInjectorModule(persistence));
+                new MockInjectorFactory(new MockInjectorModuleDefect201109_1(
+                        persistence));
         final Injector injector = injectorFactory.createInjector();
 
+        final List<com.google.api.services.tasks.v1.model.Task> googleTasks =
+                getGoogleTasks();
+
+        final List<SchedulingObject> pccTasks =
+                importTasks(googleTasks, injector);
+
+        final List<Booking> bookings =
+                calculatePlan(injector, persistence, pccTasks);
+
+        Assert.assertNotNull(bookings);
+        Assert.assertEquals(5, bookings.size());
+    }
+
+    private List<Booking> calculatePlan(final Injector aInjector,
+            final Persistence aPersistence,
+            final List<SchedulingObject> aPccTasks) {
+        final ProjectScheduler objectUnderTest =
+                aInjector.getInstance(ProjectScheduler.class);
+
+        assertNotNull(objectUnderTest);
+
+        final ProjectExportInfo projectInfo =
+                getProjectInfo(aPersistence, aPccTasks, objectUnderTest);
+
+        objectUnderTest.setInjector(aInjector);
+        objectUnderTest.setTaskJugglerPath(TJ3_PATH);
+        objectUnderTest.setTransientMode(true);
+        objectUnderTest
+                .setDirectory(DIR);
+        objectUnderTest.setNow(projectInfo.getNow());
+
+        try {
+            objectUnderTest.run();
+        } catch (final PccException exception) {
+            LOGGER.error("", exception);
+            fail(exception.getMessage());
+        }
+
+        final List<Booking> bookings = objectUnderTest.getBookings();
+
+        return bookings;
+    }
+
+    private ProjectExportInfo getProjectInfo(final Persistence persistence,
+            final List<SchedulingObject> pccTasks,
+            final ProjectScheduler objectUnderTest) {
+        final ProjectExportInfo projectInfo = objectUnderTest
+                .getProjectExportInfo();
+
+        assertNotNull(projectInfo);
+
+        persistence.createSuperUser();
+        final UserData user = persistence.getUser(Persistence.SUPER_USER_NAME,
+                Persistence.SUPER_USER_PASSWORD);
+
+        assertNotNull(user);
+
+        final List<Resource> resources = getResources(persistence);
+
+        projectInfo.setSchedulingObjectsToExport(pccTasks);
+        projectInfo.setResourcesToExport(resources);
+        projectInfo.setCopyright("DP");
+        projectInfo.setCurrency("EUR");
+        projectInfo.setNow(RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER,
+                4, 17,
+                37));
+        projectInfo.setProjectName("Sample project");
+        projectInfo.setSchedulingHorizonMonths(1);
+        projectInfo.setUserData(user);
+        return projectInfo;
+    }
+
+    private List<Resource> getResources(final Persistence persistence) {
+        final List<Resource> resources = new LinkedList<Resource>();
+
+        final Long id =
+                persistence.createHumanResource("DP", "Dmitri", "Anatl'evich",
+                        "Pisarenko", 8.0);
+        final Resource worker = persistence.getResource(id);
+        worker.setDailyLimitInHours(8);
+        resources.add(worker);
+        return resources;
+    }
+
+    private List<com.google.api.services.tasks.v1.model.Task> getGoogleTasks() {
         // Prepare test data (START)
-        final List<com.google.api.services.tasks.v1.model.Task> googleTasks = new LinkedList<com.google.api.services.tasks.v1.model.Task>();
+        final List<com.google.api.services.tasks.v1.model.Task> googleTasks =
+                new LinkedList<com.google.api.services.tasks.v1.model.Task>();
 
         // Task T1, depends on nothing
-        final com.google.api.services.tasks.v1.model.Task ball = new com.google.api.services.tasks.v1.model.Task();
+        final com.google.api.services.tasks.v1.model.Task ball =
+                new com.google.api.services.tasks.v1.model.Task();
         ball.set(GoogleTaskFields.ID, "1");
         ball.set(GoogleTaskFields.TITLE, "B: Ball");
         ball.set(GoogleTaskFields.NOTES, "");
         ball.set(GoogleTaskFields.POSITION, "1");
         ball.set(GoogleTaskFields.PARENT, null);
 
-        final com.google.api.services.tasks.v1.model.Task smallBall = new com.google.api.services.tasks.v1.model.Task();
+        final com.google.api.services.tasks.v1.model.Task smallBall =
+                new com.google.api.services.tasks.v1.model.Task();
         smallBall.set(GoogleTaskFields.ID, "2");
         smallBall.set(GoogleTaskFields.TITLE, "SB: Small ball");
         smallBall.set(GoogleTaskFields.NOTES, "1h");
         smallBall.set(GoogleTaskFields.POSITION, "2");
         smallBall.set(GoogleTaskFields.PARENT, ball.id);
 
-        final com.google.api.services.tasks.v1.model.Task bigBall = new com.google.api.services.tasks.v1.model.Task();
+        final com.google.api.services.tasks.v1.model.Task bigBall =
+                new com.google.api.services.tasks.v1.model.Task();
         bigBall.set(GoogleTaskFields.ID, "3");
         bigBall.set(GoogleTaskFields.TITLE, "BB: Big ball");
         bigBall.set(GoogleTaskFields.NOTES, "2h");
         bigBall.set(GoogleTaskFields.POSITION, "3");
         bigBall.set(GoogleTaskFields.PARENT, ball.id);
 
-        final com.google.api.services.tasks.v1.model.Task train = new com.google.api.services.tasks.v1.model.Task();
+        final com.google.api.services.tasks.v1.model.Task train =
+                new com.google.api.services.tasks.v1.model.Task();
         train.set(GoogleTaskFields.ID, "4");
         train.set(GoogleTaskFields.TITLE, "T: Train");
         train.set(GoogleTaskFields.NOTES, "3h");
         train.set(GoogleTaskFields.POSITION, "4");
         train.set(GoogleTaskFields.PARENT, null);
 
-        final com.google.api.services.tasks.v1.model.Task doll = new com.google.api.services.tasks.v1.model.Task();
+        final com.google.api.services.tasks.v1.model.Task doll =
+                new com.google.api.services.tasks.v1.model.Task();
         doll.set(GoogleTaskFields.ID, "5");
         doll.set(GoogleTaskFields.TITLE, "D: Doll");
         doll.set(GoogleTaskFields.NOTES, "2h");
@@ -358,19 +453,26 @@ public final class TestDefaultProjectScheduler {
         googleTasks.add(bigBall);
         googleTasks.add(train);
         googleTasks.add(doll);
-
-        final List<SchedulingObject> pccTasks = importTasks(googleTasks);
-
+        return googleTasks;
     }
 
-    private List<SchedulingObject> importTasks(final List<com.google.api.services.tasks.v1.model.Task> aGoogleTasks, final Injector aInjector) {
+    private
+            List<SchedulingObject>
+            importTasks(
+                    final List<com.google.api.services.tasks.v1.model.Task> aGoogleTasks,
+                    final Injector aInjector) {
+        final GoogleCalendarTasks2PccImporter2Factory factory =
+                aInjector
+                        .getInstance(GoogleCalendarTasks2PccImporter2Factory.class);
         final GoogleCalendarTasks2PccImporter2 objectUnderTest =
-                getObjectUnderTest(injector);
-        final UserData user = MOCK_OBJECT_FACTORY.createUserData();
+                factory.create();
+        objectUnderTest.setInjector(aInjector);
+
+        final UserData user = new MockObjectFactory().createUserData();
 
         // Prepare test data (END)
         objectUnderTest.setGoogleTasks(aGoogleTasks);
-        objectUnderTest.setInjector(injector);
+        objectUnderTest.setInjector(aInjector);
         objectUnderTest.setUser(user);
         try {
             objectUnderTest.run();
