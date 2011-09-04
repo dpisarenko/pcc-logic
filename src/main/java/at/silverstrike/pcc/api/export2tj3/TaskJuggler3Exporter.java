@@ -37,4 +37,6 @@ public interface TaskJuggler3Exporter extends ModuleWithInjectableDependencies,
      * the information contained in the control process objects.
      */
     String getTaskJugglerIIIProjectFileContents();
+    
+    void setTransientMode(final boolean aTransientMode);
 }

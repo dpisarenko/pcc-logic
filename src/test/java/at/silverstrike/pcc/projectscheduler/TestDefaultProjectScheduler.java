@@ -329,6 +329,8 @@ public final class TestDefaultProjectScheduler {
 
         Assert.assertNotNull(bookings);
         Assert.assertEquals(5, bookings.size());
+        
+        
     }
 
     private List<Booking> calculatePlan(final Injector aInjector,

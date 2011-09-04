@@ -14,6 +14,7 @@ package at.silverstrike.pcc.impl.export2tj3;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -129,6 +130,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     private String startDateTimeTemplate;
     private String taskTemplate;
     private ProjectExportInfo projectExportInfo;
+    private boolean transientMode;
 
     public DefaultTaskJuggler3Exporter() {
     }
@@ -262,7 +264,17 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
     private List<SchedulingObject>
             getChildProcesses(final SchedulingObject aProcess) {
-        return persistence.getChildTasks(aProcess);
+        if ((this.transientMode) && (aProcess instanceof Task)) {
+            final Task task = (Task) aProcess;
+
+            return task.getChildren();
+        } else if ((this.transientMode) && !(aProcess instanceof Task)) {
+            return new LinkedList<SchedulingObject>();
+        } else if (!this.transientMode) {
+            return persistence.getChildTasks(aProcess);
+        } else {
+            return null;
+        }
     }
 
     private CharSequence getEffortAllocations(final Task aProcess) {
@@ -345,14 +357,9 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
         final String childProcessDefinitions = stringBuilder.toString();
 
-        final Integer boxedPriority = aProcess.getPriority();
-        final int priority;
-
-        if (boxedPriority != null) {
-            priority = boxedPriority;
-        } else {
-            priority = 0;
-        }
+        final Integer boxedPriority =
+                getBoxedPriority(aProcess, childProcesses);
+        final int priority = getPriority(boxedPriority);
 
         final String taskDefinition =
                 taskTemplate
@@ -367,6 +374,29 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                         .replace(CHILD_TASKS, childProcessDefinitions);
 
         return taskDefinition;
+    }
+
+    private int getPriority(Integer boxedPriority) {
+        final int priority;
+        if (boxedPriority != null) {
+            priority = boxedPriority;
+        } else {
+            priority = 0;
+        }
+        return priority;
+    }
+
+    private Integer getBoxedPriority(final SchedulingObject aProcess,
+            final List<SchedulingObject> aChildProcesses) {
+        Integer boxedPriority = null;
+
+        if (aChildProcesses.size() > 0) {
+            boxedPriority = 0;
+        } else {
+            boxedPriority = aProcess.getPriority();
+        }
+
+        return boxedPriority;
     }
 
     private CharSequence shortenName(final String aName) {
@@ -475,6 +505,10 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     public void
             setProjectExportInfo(final ProjectExportInfo aProjectExportInfo) {
         this.projectExportInfo = aProjectExportInfo;
+    }
+
+    public void setTransientMode(final boolean aTransientMode) {
+        this.transientMode = aTransientMode;
     }
 
 }

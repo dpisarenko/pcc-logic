@@ -169,7 +169,7 @@ class DefaultProjectScheduler implements ProjectScheduler {
 
         exporter.setProjectExportInfo(this.projectExportInfo);
         exporter.setInjector(this.injector);
-
+        exporter.setTransientMode(this.transientMode);
         exporter.run();
 
         final String projectFileContents = exporter
