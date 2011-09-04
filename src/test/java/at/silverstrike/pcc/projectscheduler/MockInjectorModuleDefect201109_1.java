@@ -16,6 +16,7 @@ import com.google.inject.AbstractModule;
 import at.silverstrike.pcc.api.embeddedfilereading.EmbeddedFileReader;
 import at.silverstrike.pcc.api.export2tj3.TaskJuggler3Exporter;
 import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2Factory;
+import at.silverstrike.pcc.api.gtaskrelevance.IsGoogleTaskRelevantCalculatorFactory;
 import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.api.projectscheduler.ProjectScheduler;
 import at.silverstrike.pcc.api.tj3bookingsparser.BookingsFile2BookingsFactory;
@@ -24,6 +25,7 @@ import at.silverstrike.pcc.api.tj3deadlinesparser.Tj3DeadlinesFileParserFactory;
 import at.silverstrike.pcc.impl.embeddedfilereading.DefaultEmbeddedFileReaderFactory;
 import at.silverstrike.pcc.impl.export2tj3.DefaultTaskJuggler3ExporterFactory;
 import at.silverstrike.pcc.impl.gcaltasks2pccimporter.DefaultGoogleCalendarTasks2PccImporter2Factory;
+import at.silverstrike.pcc.impl.gtaskrelevance.DefaultIsGoogleTaskRelevantCalculatorFactory;
 import at.silverstrike.pcc.impl.projectscheduler.DefaultProjectSchedulerFactory;
 import at.silverstrike.pcc.impl.tj3bookingsparser.DefaultBookingsFile2BookingsFactory;
 import at.silverstrike.pcc.impl.tj3bookingsparser.DefaultTj3BookingsParserFactory;
@@ -57,6 +59,8 @@ public class MockInjectorModuleDefect201109_1 extends AbstractModule {
                 toInstance(new DefaultBookingsFile2BookingsFactory());
         bind(GoogleCalendarTasks2PccImporter2Factory.class).toInstance(
                 new DefaultGoogleCalendarTasks2PccImporter2Factory());
+        bind(IsGoogleTaskRelevantCalculatorFactory.class).toInstance(
+                new DefaultIsGoogleTaskRelevantCalculatorFactory());
     }
 
 }
