@@ -18,6 +18,7 @@ import static junit.framework.Assert.fail;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -31,6 +32,8 @@ import ru.altruix.commons.api.conventions.TestConventions;
 import ru.altruix.commons.api.di.InjectorFactory;
 import ru.altruix.commons.api.di.PccException;
 
+import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2;
+import at.silverstrike.pcc.api.gtasks.GoogleTaskFields;
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
@@ -168,11 +171,11 @@ public final class TestDefaultProjectScheduler {
                 Persistence.SUPER_USER_PASSWORD);
 
         assertNotNull(user);
-        
+
         this.helper.fillProjectInfo02(projectInfo, persistence, user);
-        
+
         assertNotNull(projectInfo.getUserData());
-        
+
         objectUnderTest.setInjector(injector);
         objectUnderTest.setTaskJugglerPath(TJ3_PATH);
         /**
@@ -285,5 +288,100 @@ public final class TestDefaultProjectScheduler {
 
         Assert.assertEquals(expectedTask.getId(), task.getId());
         Assert.assertEquals(((Task) expectedTask).getName(), task.getName());
+    }
+
+    @Test
+    public void testDefect201109_1() {
+        /**
+         * Create persistence
+         */
+        final Persistence persistence = new DefaultPersistence();
+
+        /**
+         * Init persistence
+         */
+        try {
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, "pcc");
+        } catch (final RuntimeException exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        }
+
+        final InjectorFactory injectorFactory =
+                new MockInjectorFactory(new MockInjectorModule(persistence));
+        final Injector injector = injectorFactory.createInjector();
+
+        // Prepare test data (START)
+        final List<com.google.api.services.tasks.v1.model.Task> googleTasks = new LinkedList<com.google.api.services.tasks.v1.model.Task>();
+
+        // Task T1, depends on nothing
+        final com.google.api.services.tasks.v1.model.Task ball = new com.google.api.services.tasks.v1.model.Task();
+        ball.set(GoogleTaskFields.ID, "1");
+        ball.set(GoogleTaskFields.TITLE, "B: Ball");
+        ball.set(GoogleTaskFields.NOTES, "");
+        ball.set(GoogleTaskFields.POSITION, "1");
+        ball.set(GoogleTaskFields.PARENT, null);
+
+        final com.google.api.services.tasks.v1.model.Task smallBall = new com.google.api.services.tasks.v1.model.Task();
+        smallBall.set(GoogleTaskFields.ID, "2");
+        smallBall.set(GoogleTaskFields.TITLE, "SB: Small ball");
+        smallBall.set(GoogleTaskFields.NOTES, "1h");
+        smallBall.set(GoogleTaskFields.POSITION, "2");
+        smallBall.set(GoogleTaskFields.PARENT, ball.id);
+
+        final com.google.api.services.tasks.v1.model.Task bigBall = new com.google.api.services.tasks.v1.model.Task();
+        bigBall.set(GoogleTaskFields.ID, "3");
+        bigBall.set(GoogleTaskFields.TITLE, "BB: Big ball");
+        bigBall.set(GoogleTaskFields.NOTES, "2h");
+        bigBall.set(GoogleTaskFields.POSITION, "3");
+        bigBall.set(GoogleTaskFields.PARENT, ball.id);
+
+        final com.google.api.services.tasks.v1.model.Task train = new com.google.api.services.tasks.v1.model.Task();
+        train.set(GoogleTaskFields.ID, "4");
+        train.set(GoogleTaskFields.TITLE, "T: Train");
+        train.set(GoogleTaskFields.NOTES, "3h");
+        train.set(GoogleTaskFields.POSITION, "4");
+        train.set(GoogleTaskFields.PARENT, null);
+
+        final com.google.api.services.tasks.v1.model.Task doll = new com.google.api.services.tasks.v1.model.Task();
+        doll.set(GoogleTaskFields.ID, "5");
+        doll.set(GoogleTaskFields.TITLE, "D: Doll");
+        doll.set(GoogleTaskFields.NOTES, "2h");
+        doll.set(GoogleTaskFields.POSITION, "5");
+        doll.set(GoogleTaskFields.PARENT, null);
+
+        googleTasks.add(ball);
+        googleTasks.add(smallBall);
+        googleTasks.add(bigBall);
+        googleTasks.add(train);
+        googleTasks.add(doll);
+
+        final List<SchedulingObject> pccTasks = importTasks(googleTasks);
+
+    }
+
+    private List<SchedulingObject> importTasks(final List<com.google.api.services.tasks.v1.model.Task> aGoogleTasks, final Injector aInjector) {
+        final GoogleCalendarTasks2PccImporter2 objectUnderTest =
+                getObjectUnderTest(injector);
+        final UserData user = MOCK_OBJECT_FACTORY.createUserData();
+
+        // Prepare test data (END)
+        objectUnderTest.setGoogleTasks(aGoogleTasks);
+        objectUnderTest.setInjector(injector);
+        objectUnderTest.setUser(user);
+        try {
+            objectUnderTest.run();
+        } catch (final PccException exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        }
+
+        final List<SchedulingObject> createdPccTasks =
+                objectUnderTest.getCreatedPccTasks();
+
+        return createdPccTasks;
     }
 }
