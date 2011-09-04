@@ -72,11 +72,6 @@ TimeZone
 	'timezone'
 	;
 
-Utc
-	:
-	'"'A+'"'
-	;
-
 projectIds:
 	Projectids Prj
 	;
