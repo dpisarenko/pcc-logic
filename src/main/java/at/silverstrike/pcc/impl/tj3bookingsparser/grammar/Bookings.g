@@ -104,6 +104,7 @@ supplementTask returns [DefaultSupplementStatement suppStmt]
 	bStmt=booking {suppStmt.addBookingStatement( $bStmt.stmt ); }
 	)*	
 	Priority IntegerNumber
+	ProjectIdPrj
 	CloseParen
 	;
 
@@ -184,6 +185,11 @@ bookingTime returns [DefaultIndBooking indBooking]
 	{
 		$indBooking = new DefaultIndBooking($startTime.text, $bookingDuration.text);
 	}
+	;
+
+ProjectIdPrj
+	:
+	'projectid prj'
 	;
 	
 Booking
