@@ -433,7 +433,7 @@ public final class TestDefaultProjectScheduler {
 
         final Task ball = getTaskByName(pccTasks, B_BALL);
         
-        Assert.assertEquals(0, ball.getChildren());
+        Assert.assertEquals(0, ball.getChildren().size());
 
         final List<Booking> bookings =
                 calculatePlan(injector, persistence, pccTasks);

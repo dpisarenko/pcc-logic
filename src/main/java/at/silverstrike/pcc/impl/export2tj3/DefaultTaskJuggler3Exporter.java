@@ -436,9 +436,9 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         Integer boxedPriority = null;
 
         if (aChildProcesses.size() > 0) {
-            boxedPriority = 0;
-        } else {
             boxedPriority = aProcess.getPriority();
+        } else {
+            boxedPriority = 0;
         }
 
         return boxedPriority;
