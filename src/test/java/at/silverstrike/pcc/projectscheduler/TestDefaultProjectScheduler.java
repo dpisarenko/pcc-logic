@@ -104,6 +104,11 @@ public final class TestDefaultProjectScheduler {
                 .setDirectory(DIR);
 
         /**
+         * Delete project, bookings and deadline files
+         */
+        cleanupTargetDirectory();
+
+        /**
          * Run the method under test
          */
         try {
@@ -203,6 +208,11 @@ public final class TestDefaultProjectScheduler {
          */
 
         /**
+         * Delete project, bookings and deadline files
+         */
+        cleanupTargetDirectory();
+        
+        /**
          * Run the method under test
          */
         try {
@@ -296,6 +306,12 @@ public final class TestDefaultProjectScheduler {
 
         Assert.assertEquals(expectedTask.getId(), task.getId());
         Assert.assertEquals(((Task) expectedTask).getName(), task.getName());
+    }
+
+    private void cleanupTargetDirectory() {
+        new File(DIR + "/pccBookings.tji.tjp").delete();
+        new File(DIR + "/pccDeadlines.csv").delete();
+        new File(DIR + "/pccProject.tjp").delete();
     }
 
     @Test
@@ -486,6 +502,12 @@ public final class TestDefaultProjectScheduler {
                 .setDirectory(DIR);
         objectUnderTest.setNow(projectInfo.getNow());
 
+        /**
+         * Delete project, bookings and deadline files
+         */
+        cleanupTargetDirectory();
+
+        
         try {
             objectUnderTest.run();
         } catch (final PccException exception) {
