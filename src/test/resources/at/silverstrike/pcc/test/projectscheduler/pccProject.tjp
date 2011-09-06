@@ -6,14 +6,14 @@
 # Copyright 2010, 2011 Dmitri Anatol'evich Pisarenko
 # All rights reserved
 
-project "Sample project" 2010-10-25 +1m 
+project "Sample project" 2011-09-04 +1m 
 {
   timeformat "%d.%m.%Y %H:%M"
 
   numberformat "-" "" "." "," 2
   currencyformat "(" ")" "." "," 0
 
-  now 2010-10-25
+  now 2011-09-04
 
   currency "EUR"
 
@@ -25,22 +25,38 @@ project "Sample project" 2010-10-25 +1m
 
 copyright "DP"
 
-resource R12 "DP"
+resource R35 "DP"
 {
 	limits { dailymax 8.00h }
 }
 
-task T4 "Some interesting task"
+task T2 "D: Doll"
 {
 	
 start ${now}
 
-	priority 0
+	priority 998
 	
-allocate R12
+allocate R35 {limits {dailymax 8.00h}}
 
 	
-effort 2.50h
+effort 2.00h
+
+	
+	
+}
+
+task T3 "T: Train"
+{
+	
+start ${now}
+
+	priority 999
+	
+allocate R35 {limits {dailymax 8.00h}}
+
+	
+effort 3.00h
 
 	
 	

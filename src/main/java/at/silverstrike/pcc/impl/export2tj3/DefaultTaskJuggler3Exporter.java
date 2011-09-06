@@ -247,7 +247,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     private void addToGraphIfNecessary(
             final DirectedGraph<SchedulingObject, DefaultEdge> aGraph,
             final SchedulingObject aVertex) {
-        if (!aGraph.containsVertex(aVertex)){
+        if (!aGraph.containsVertex(aVertex)) {
             aGraph.addVertex(aVertex);
         }
     }
@@ -393,6 +393,12 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         final StringBuilder stringBuilder = new StringBuilder();
         final List<SchedulingObject> childProcesses =
                 getChildProcesses(aProcess);
+
+        if ((((Task) aProcess).getAverageCaseEffort() == 0.)
+                && (childProcesses.size() < 1)) {
+            return "";
+        }
+
         if (childProcesses != null) {
             for (final SchedulingObject childProcess : childProcesses) {
                 stringBuilder
@@ -436,9 +442,9 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         Integer boxedPriority = null;
 
         if (aChildProcesses.size() > 0) {
-            boxedPriority = aProcess.getPriority();
-        } else {
             boxedPriority = 0;
+        } else {
+            boxedPriority = aProcess.getPriority();
         }
 
         return boxedPriority;
