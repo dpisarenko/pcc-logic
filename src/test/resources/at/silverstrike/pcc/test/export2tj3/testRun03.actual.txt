@@ -35,7 +35,7 @@ task T2010 "Some interesting task"
 	
 start ${now}
 
-	priority 0
+	priority 200
 	
 allocate R1210
 
