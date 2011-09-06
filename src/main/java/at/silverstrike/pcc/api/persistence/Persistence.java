@@ -36,6 +36,9 @@ public interface Persistence extends ModuleWithInjectableDependencies {
     public static final String HOST_LOCAL = "localhost";
     public static final String HOST_DEV = "78.47.242.60";
     
+    public static final String DB_DEV = "pcc-dev";
+    public static final String DB_PRODUCTION = "pcc";
+    
     void openSession(final String aHost, final String aUser, final String aPassword, final String aDatabase);
 
     void closeSession();

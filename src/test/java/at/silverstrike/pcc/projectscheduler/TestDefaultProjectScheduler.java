@@ -140,7 +140,7 @@ public final class TestDefaultProjectScheduler {
          * Init persistence
          */
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, "pcc");
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
         } catch (final RuntimeException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
@@ -299,6 +299,9 @@ public final class TestDefaultProjectScheduler {
     }
 
     @Test
+    /**
+     * evernote:///view/3784753/s35/d7d20fd2-70de-41fd-8ed3-5e08500c0cea/d7d20fd2-70de-41fd-8ed3-5e08500c0cea/
+     */
     public void testDefect201109_1() {
         /**
          * Create persistence
@@ -309,7 +312,7 @@ public final class TestDefaultProjectScheduler {
          * Init persistence
          */
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, "pcc");
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
         } catch (final RuntimeException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
@@ -324,7 +327,7 @@ public final class TestDefaultProjectScheduler {
         final Injector injector = injectorFactory.createInjector();
 
         final List<com.google.api.services.tasks.v1.model.Task> googleTasks =
-                getGoogleTasks();
+                getGoogleTasksDefect201109_1();
 
         final List<SchedulingObject> pccTasks =
                 importTasks(googleTasks, injector);
@@ -360,6 +363,108 @@ public final class TestDefaultProjectScheduler {
         Assert.assertNotNull(dollBooking);
         Assert.assertEquals(dollBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 15, 0));
         Assert.assertEquals(dollBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 17, 0));
+
+    }
+
+    @Test
+    /**
+     * Test case for reproducing defect 201109/2
+     * evernote:///view/3784753/s35/4d8dc28e-4de8-4d46-b9f5-a103de0681b3/4d8dc28e-4de8-4d46-b9f5-a103de0681b3/
+     */
+    public void testDefect201109_2() {
+        /**
+         * Create persistence
+         */
+        final Persistence persistence = new DefaultPersistence();
+
+        /**
+         * Init persistence
+         */
+        try {
+            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
+        } catch (final RuntimeException exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        }
+
+        final InjectorFactory injectorFactory =
+                new MockInjectorFactory(new MockInjectorModuleDefect201109_1(
+                        persistence));
+        final Injector injector = injectorFactory.createInjector();
+
+        final List<com.google.api.services.tasks.v1.model.Task> googleTasks =
+                getGoogleTasksDefect201109_2();
+
+        final List<SchedulingObject> pccTasks =
+                importTasks(googleTasks, injector);
+
+        final List<Booking> bookings =
+                calculatePlan(injector, persistence, pccTasks);
+
+        Assert.assertNotNull(bookings);
+        Assert.assertEquals(2, bookings.size());        
+    }
+
+    
+    
+    private List<com.google.api.services.tasks.v1.model.Task>
+            getGoogleTasksDefect201109_2() {
+        // Prepare test data (START)
+        final List<com.google.api.services.tasks.v1.model.Task> googleTasks =
+                new LinkedList<com.google.api.services.tasks.v1.model.Task>();
+
+        // Task T1, depends on nothing
+        final com.google.api.services.tasks.v1.model.Task ball =
+                new com.google.api.services.tasks.v1.model.Task();
+        ball.set(GoogleTaskFields.ID, "1");
+        ball.set(GoogleTaskFields.TITLE, "B: Ball");
+        ball.set(GoogleTaskFields.NOTES, "");
+        ball.set(GoogleTaskFields.POSITION, "1");
+        ball.set(GoogleTaskFields.PARENT, null);
+
+        final com.google.api.services.tasks.v1.model.Task smallBall =
+                new com.google.api.services.tasks.v1.model.Task();
+        smallBall.set(GoogleTaskFields.ID, "2");
+        smallBall.set(GoogleTaskFields.TITLE, SB_SMALL_BALL);
+        smallBall.set(GoogleTaskFields.NOTES, "1h");
+        smallBall.set(GoogleTaskFields.POSITION, "2");
+        smallBall.set(GoogleTaskFields.PARENT, ball.id);
+        smallBall.set(GoogleTaskFields.COMPLETED, "2011-06-10T11:44:22.300Z");
+        
+        final com.google.api.services.tasks.v1.model.Task bigBall =
+                new com.google.api.services.tasks.v1.model.Task();
+        bigBall.set(GoogleTaskFields.ID, "3");
+        bigBall.set(GoogleTaskFields.TITLE, BB_BIG_BALL);
+        bigBall.set(GoogleTaskFields.NOTES, "2h");
+        bigBall.set(GoogleTaskFields.POSITION, "3");
+        bigBall.set(GoogleTaskFields.PARENT, ball.id);
+        bigBall.set(GoogleTaskFields.COMPLETED, "2011-06-10T11:44:22.300Z");
+        
+        final com.google.api.services.tasks.v1.model.Task train =
+                new com.google.api.services.tasks.v1.model.Task();
+        train.set(GoogleTaskFields.ID, "4");
+        train.set(GoogleTaskFields.TITLE, T_TRAIN);
+        train.set(GoogleTaskFields.NOTES, "3h");
+        train.set(GoogleTaskFields.POSITION, "4");
+        train.set(GoogleTaskFields.PARENT, null);
+
+        final com.google.api.services.tasks.v1.model.Task doll =
+                new com.google.api.services.tasks.v1.model.Task();
+        doll.set(GoogleTaskFields.ID, "5");
+        doll.set(GoogleTaskFields.TITLE, D_DOLL);
+        doll.set(GoogleTaskFields.NOTES, "2h");
+        doll.set(GoogleTaskFields.POSITION, "5");
+        doll.set(GoogleTaskFields.PARENT, null);
+
+        googleTasks.add(ball);
+        googleTasks.add(smallBall);
+        googleTasks.add(bigBall);
+        googleTasks.add(train);
+        googleTasks.add(doll);
+        return googleTasks;
 
     }
 
@@ -434,7 +539,7 @@ public final class TestDefaultProjectScheduler {
         return resources;
     }
 
-    private List<com.google.api.services.tasks.v1.model.Task> getGoogleTasks() {
+    private List<com.google.api.services.tasks.v1.model.Task> getGoogleTasksDefect201109_1() {
         // Prepare test data (START)
         final List<com.google.api.services.tasks.v1.model.Task> googleTasks =
                 new LinkedList<com.google.api.services.tasks.v1.model.Task>();
