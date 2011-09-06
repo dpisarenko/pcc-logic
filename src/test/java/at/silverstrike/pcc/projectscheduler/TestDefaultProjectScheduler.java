@@ -55,6 +55,7 @@ import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 import com.google.inject.Injector;
 
 public final class TestDefaultProjectScheduler {
+    private static final String B_BALL = "B: Ball";
     private static final String T_TRAIN = "T: Train";
     private static final String D_DOLL = "D: Doll";
     private static final String BB_BIG_BALL = "BB: Big ball";
@@ -145,7 +146,8 @@ public final class TestDefaultProjectScheduler {
          * Init persistence
          */
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                    Persistence.DB_DEV);
         } catch (final RuntimeException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
@@ -211,7 +213,7 @@ public final class TestDefaultProjectScheduler {
          * Delete project, bookings and deadline files
          */
         cleanupTargetDirectory();
-        
+
         /**
          * Run the method under test
          */
@@ -328,7 +330,8 @@ public final class TestDefaultProjectScheduler {
          * Init persistence
          */
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                    Persistence.DB_DEV);
         } catch (final RuntimeException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
@@ -353,32 +356,42 @@ public final class TestDefaultProjectScheduler {
 
         Assert.assertNotNull(bookings);
         Assert.assertEquals(4, bookings.size());
-        
-        final Map<String,Booking> bookingsByTaskLabel = new HashMap<String,Booking>();
-        
+
+        final Map<String, Booking> bookingsByTaskLabel =
+                new HashMap<String, Booking>();
+
         for (final Booking curBooking : bookings) {
-            bookingsByTaskLabel.put(curBooking.getProcess().getName(), curBooking);
+            bookingsByTaskLabel.put(curBooking.getProcess().getName(),
+                    curBooking);
         }
-        
+
         final Booking smallBallBooking = bookingsByTaskLabel.get(SB_SMALL_BALL);
         Assert.assertNotNull(smallBallBooking);
-        Assert.assertEquals(smallBallBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 9, 0));
-        Assert.assertEquals(smallBallBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 10, 0));
+        Assert.assertEquals(smallBallBooking.getStartDateTime(),
+                RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 9, 0));
+        Assert.assertEquals(smallBallBooking.getEndDateTime(),
+                RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 10, 0));
 
         final Booking bigBallBooking = bookingsByTaskLabel.get(BB_BIG_BALL);
         Assert.assertNotNull(bigBallBooking);
-        Assert.assertEquals(bigBallBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 10, 0));
-        Assert.assertEquals(bigBallBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 12, 0));
+        Assert.assertEquals(bigBallBooking.getStartDateTime(),
+                RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 10, 0));
+        Assert.assertEquals(bigBallBooking.getEndDateTime(),
+                RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 12, 0));
 
         final Booking trainBooking = bookingsByTaskLabel.get(T_TRAIN);
         Assert.assertNotNull(trainBooking);
-        Assert.assertEquals(trainBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 12, 0));
-        Assert.assertEquals(trainBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 15, 0));
+        Assert.assertEquals(trainBooking.getStartDateTime(),
+                RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 12, 0));
+        Assert.assertEquals(trainBooking.getEndDateTime(),
+                RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 15, 0));
 
         final Booking dollBooking = bookingsByTaskLabel.get(D_DOLL);
         Assert.assertNotNull(dollBooking);
-        Assert.assertEquals(dollBooking.getStartDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 15, 0));
-        Assert.assertEquals(dollBooking.getEndDateTime(), RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 17, 0));
+        Assert.assertEquals(dollBooking.getStartDateTime(),
+                RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 15, 0));
+        Assert.assertEquals(dollBooking.getEndDateTime(),
+                RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER, 05, 17, 0));
 
     }
 
@@ -397,7 +410,8 @@ public final class TestDefaultProjectScheduler {
          * Init persistence
          */
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                    Persistence.DB_DEV);
         } catch (final RuntimeException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
@@ -417,15 +431,27 @@ public final class TestDefaultProjectScheduler {
         final List<SchedulingObject> pccTasks =
                 importTasks(googleTasks, injector);
 
+        final Task ball = getTaskByName(pccTasks, B_BALL);
+        
+        Assert.assertEquals(0, ball.getChildren());
+
         final List<Booking> bookings =
                 calculatePlan(injector, persistence, pccTasks);
 
         Assert.assertNotNull(bookings);
-        Assert.assertEquals(2, bookings.size());        
+        Assert.assertEquals(2, bookings.size());
     }
 
-    
-    
+    private Task getTaskByName(final List<SchedulingObject> pccTasks,
+            final String aName) {
+        for (final SchedulingObject curObject : pccTasks) {
+            if (aName.equals(curObject.getName())) {
+                return (Task) curObject;
+            }
+        }
+        return null;
+    }
+
     private List<com.google.api.services.tasks.v1.model.Task>
             getGoogleTasksDefect201109_2() {
         // Prepare test data (START)
@@ -436,7 +462,7 @@ public final class TestDefaultProjectScheduler {
         final com.google.api.services.tasks.v1.model.Task ball =
                 new com.google.api.services.tasks.v1.model.Task();
         ball.set(GoogleTaskFields.ID, "1");
-        ball.set(GoogleTaskFields.TITLE, "B: Ball");
+        ball.set(GoogleTaskFields.TITLE, B_BALL);
         ball.set(GoogleTaskFields.NOTES, "");
         ball.set(GoogleTaskFields.POSITION, "1");
         ball.set(GoogleTaskFields.PARENT, null);
@@ -449,7 +475,7 @@ public final class TestDefaultProjectScheduler {
         smallBall.set(GoogleTaskFields.POSITION, "2");
         smallBall.set(GoogleTaskFields.PARENT, ball.id);
         smallBall.set(GoogleTaskFields.COMPLETED, "2011-06-10T11:44:22.300Z");
-        
+
         final com.google.api.services.tasks.v1.model.Task bigBall =
                 new com.google.api.services.tasks.v1.model.Task();
         bigBall.set(GoogleTaskFields.ID, "3");
@@ -458,7 +484,7 @@ public final class TestDefaultProjectScheduler {
         bigBall.set(GoogleTaskFields.POSITION, "3");
         bigBall.set(GoogleTaskFields.PARENT, ball.id);
         bigBall.set(GoogleTaskFields.COMPLETED, "2011-06-10T11:44:22.300Z");
-        
+
         final com.google.api.services.tasks.v1.model.Task train =
                 new com.google.api.services.tasks.v1.model.Task();
         train.set(GoogleTaskFields.ID, "4");
@@ -507,7 +533,6 @@ public final class TestDefaultProjectScheduler {
          */
         cleanupTargetDirectory();
 
-        
         try {
             objectUnderTest.run();
         } catch (final PccException exception) {
@@ -561,7 +586,8 @@ public final class TestDefaultProjectScheduler {
         return resources;
     }
 
-    private List<com.google.api.services.tasks.v1.model.Task> getGoogleTasksDefect201109_1() {
+    private List<com.google.api.services.tasks.v1.model.Task>
+            getGoogleTasksDefect201109_1() {
         // Prepare test data (START)
         final List<com.google.api.services.tasks.v1.model.Task> googleTasks =
                 new LinkedList<com.google.api.services.tasks.v1.model.Task>();
@@ -570,7 +596,7 @@ public final class TestDefaultProjectScheduler {
         final com.google.api.services.tasks.v1.model.Task ball =
                 new com.google.api.services.tasks.v1.model.Task();
         ball.set(GoogleTaskFields.ID, "1");
-        ball.set(GoogleTaskFields.TITLE, "B: Ball");
+        ball.set(GoogleTaskFields.TITLE, B_BALL);
         ball.set(GoogleTaskFields.NOTES, "");
         ball.set(GoogleTaskFields.POSITION, "1");
         ball.set(GoogleTaskFields.PARENT, null);
