@@ -6,7 +6,7 @@
 # Copyright 2010, 2011 Dmitri Anatol'evich Pisarenko
 # All rights reserved
 
-project "Sample project" 2011-09-04 +1m 
+project "pcc-logic" 2011-09-04 +1m 
 {
   timeformat "%d.%m.%Y %H:%M"
 
@@ -25,7 +25,7 @@ project "Sample project" 2011-09-04 +1m
 
 copyright "DP"
 
-resource R57 "DP"
+resource R61 "DP"
 {
 	limits { dailymax 8.00h }
 }
@@ -37,7 +37,7 @@ start ${now}
 
 	priority 998
 	
-allocate R57 {limits {dailymax 8.00h}}
+allocate R61 {limits {dailymax 8.00h}}
 
 	
 effort 2.00h
@@ -53,7 +53,7 @@ start ${now}
 
 	priority 999
 	
-allocate R57 {limits {dailymax 8.00h}}
+allocate R61 {limits {dailymax 8.00h}}
 
 	
 effort 3.00h
