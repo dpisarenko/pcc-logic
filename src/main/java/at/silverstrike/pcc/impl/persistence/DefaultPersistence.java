@@ -1496,6 +1496,7 @@ public class DefaultPersistence implements Persistence {
         } catch (final Exception exception) {
             LOGGER.error("", exception);
             tx.rollback();
+            throw new RuntimeException(exception);
         }
     }
 
