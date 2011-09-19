@@ -34,13 +34,14 @@ public class TestDefaultPersistence {
     private static final Logger LOGGER =
             LoggerFactory
                     .getLogger(TestDefaultPersistence.class);
-    
+
     @Test
     public final void test01() {
         final Persistence persistence = new DefaultPersistence();
 
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                    Persistence.DB_DEV);
             persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
@@ -64,7 +65,8 @@ public class TestDefaultPersistence {
         final Persistence persistence = new DefaultPersistence();
 
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                    Persistence.DB_DEV);
             persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
@@ -116,7 +118,8 @@ public class TestDefaultPersistence {
         final Persistence persistence = new DefaultPersistence();
 
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                    Persistence.DB_DEV);
             persistence.clearDatabase();
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
@@ -210,7 +213,8 @@ public class TestDefaultPersistence {
         final Persistence persistence = new DefaultPersistence();
 
         try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null, Persistence.DB_DEV);
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                    Persistence.DB_DEV);
         } catch (final RuntimeException exception) {
             Assert.fail(exception.getMessage());
         } catch (final Exception exception) {
@@ -249,7 +253,7 @@ public class TestDefaultPersistence {
     public void testNullPointerExceptionInDefaultTask() {
         // Get object under test (persistence)
         final Persistence persistence = new DefaultPersistence();
-        
+
         // Создаём событие
         final Task task =
                 persistence.createTaskStub();
@@ -263,5 +267,33 @@ public class TestDefaultPersistence {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
         }
+    }
+
+    @Test
+    public void testSavingBooleanAttributeValues() {
+        final Persistence persistence = new DefaultPersistence();
+        try {
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                                Persistence.DB_DEV);
+
+        } catch (final RuntimeException exception) {
+            Assert.fail(exception.getMessage());
+        } catch (final Exception exception) {
+            Assert.fail(exception.getMessage());
+        }
+        try {
+            final UserData user =
+                    persistence.getUser(Persistence.SUPER_USER_NAME,
+                            Persistence.SUPER_USER_PASSWORD);
+            user.setAutomaticScheduling(true);
+            persistence.updateUser(user);
+            user.setAutomaticScheduling(false);
+            persistence.updateUser(user);
+
+        } catch (final Throwable throwable) {
+            LOGGER.error("", throwable);
+            Assert.fail(throwable.getMessage());
+        }
+
     }
 }
