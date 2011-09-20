@@ -30,14 +30,14 @@ import at.silverstrike.pcc.api.tj3bookingsparser.BookingTuple;
 import at.silverstrike.pcc.api.tj3deadlinesparser.ProcessEndTimeTuple;
 
 public interface Persistence extends ModuleWithInjectableDependencies {
-    static final String SUPER_USER_PASSWORD = "DCvEu4LKyC";
-    static final String SUPER_USER_NAME = "dp@sw-dev.at";
+    final String SUPER_USER_PASSWORD = "DCvEu4LKyC";
+    final String SUPER_USER_NAME = "dp@sw-dev.at";
 
-    static final String HOST_LOCAL = "localhost";
-    static final String HOST_DEV = "78.47.242.60";
+    final String HOST_LOCAL = "localhost";
+    final String HOST_DEV = "78.47.242.60";
     
-    static final String DB_DEV = "pcc-dev";
-    static final String DB_PRODUCTION = "pcc";
+    final String DB_DEV = "pcc-dev";
+    final String DB_PRODUCTION = "pcc";
     
     void openSession(final String aHost, final String aUser, final String aPassword, final String aDatabase);
 
