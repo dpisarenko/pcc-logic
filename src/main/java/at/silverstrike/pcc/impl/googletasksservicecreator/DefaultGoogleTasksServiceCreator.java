@@ -75,7 +75,7 @@ class DefaultGoogleTasksServiceCreator implements GoogleTasksServiceCreator {
                     new Tasks(httpTransport, accessProtectedResource,
                             jsonFactory);
             this.service.setApplicationName(this.applicationName);
-        } catch (IOException exception) {
+        } catch (final IOException exception) {
             LOGGER.error("", exception);
         }
     }
