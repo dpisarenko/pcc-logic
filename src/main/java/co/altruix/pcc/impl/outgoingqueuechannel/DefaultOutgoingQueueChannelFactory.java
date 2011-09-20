@@ -16,9 +16,9 @@ import co.altruix.pcc.api.outgoingqueuechannel.OutgoingQueueChannelFactory;
 
 /**
  * @author DP118M
- *
+ * 
  */
-public class DefaultOutgoingQueueChannelFactory implements
+public final class DefaultOutgoingQueueChannelFactory implements
         OutgoingQueueChannelFactory {
 
     @Override
