@@ -52,10 +52,10 @@ class DefaultIncorrectSchedulingObjectsMarker implements
             if (curSchedulingObject instanceof Task) {
                 final Task curTask = (Task) curSchedulingObject;
                 boolean errorFound = false;
-                boolean hasErrorFlagSet =
+                final boolean hasErrorFlagSet =
                         (curTask.getValidationError() != null);
 
-                boolean hasChildren = persistence.hasChildren(curTask);
+                final boolean hasChildren = persistence.hasChildren(curTask);
 
                 if ((!hasChildren) && ((curTask.getBestCaseEffort() == null)
                         || (curTask.getWorstCaseEffort() == null))) {
