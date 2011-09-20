@@ -54,7 +54,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
     private UserData user;
 
     public void setGoogleTasks(
-            List<com.google.api.services.tasks.v1.model.Task> aGoogleTasks) {
+            final List<com.google.api.services.tasks.v1.model.Task> aGoogleTasks) {
         this.googleTasks = aGoogleTasks;
     }
 
@@ -153,7 +153,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
 
         // Save priorities in PCC tasks
         for (final PriorityTuple curPriorityTuple : priorityTuples) {
-            at.silverstrike.pcc.api.model.Task pccTask =
+            final at.silverstrike.pcc.api.model.Task pccTask =
                     aPccTasksByGoogleIds
                             .get(curPriorityTuple.getGoogleTaskId());
             pccTask.setPriority(curPriorityTuple.getPriority());
