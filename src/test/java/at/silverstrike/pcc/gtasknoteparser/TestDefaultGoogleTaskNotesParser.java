@@ -29,7 +29,7 @@ import at.silverstrike.pcc.impl.gtasknoteparser.DefaultGoogleTaskNotesParserFact
  * @author DP118M
  * 
  */
-public class TestDefaultGoogleTaskNotesParser {
+public final class TestDefaultGoogleTaskNotesParser {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(TestDefaultGoogleTaskNotesParser.class);
 

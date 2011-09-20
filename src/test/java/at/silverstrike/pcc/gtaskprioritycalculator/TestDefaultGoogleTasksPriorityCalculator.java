@@ -32,7 +32,7 @@ import at.silverstrike.pcc.impl.gtaskprioritycalculator.DefaultGoogleTasksPriori
  * @author DP118M
  * 
  */
-public class TestDefaultGoogleTasksPriorityCalculator {
+public final class TestDefaultGoogleTasksPriorityCalculator {
     private static final String ID_2 = "MTE5OTY3NjA1Mjc5NDc1OTc1NjI6MDoxMg";
     private static final String ID_1 = "MTE5OTY3NjA1Mjc5NDc1OTc1NjI6MDo5";
     private static final Logger LOGGER = LoggerFactory
