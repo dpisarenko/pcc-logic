@@ -81,7 +81,7 @@ public final class TestServerSidedOAuth {
                             CLIENT_ID, CLIENT_SECRET,
                             REFRESH_TOKEN_TASKS);
 
-            Tasks service =
+            final Tasks service =
                     new Tasks(httpTransport, accessProtectedResource,
                             jsonFactory);
             service.setApplicationName("pcchq.com");
@@ -112,7 +112,7 @@ public final class TestServerSidedOAuth {
             final OAuthRsaSha1Signer signer = new OAuthRsaSha1Signer(privKey);
 
             
-            GoogleOAuthParameters oauthParameters = new GoogleOAuthParameters();
+            final GoogleOAuthParameters oauthParameters = new GoogleOAuthParameters();
             oauthParameters.setOAuthConsumerKey(CONSUMER_KEY);
 
             oauthParameters.setScope("https://www.google.com/calendar/feeds");
@@ -140,9 +140,7 @@ public final class TestServerSidedOAuth {
 
             LOGGER.debug("Your calendars:");
 
-            CalendarEntry pccCalendar = null;
-            for (int i = 0; (i < resultFeed.getEntries().size())
-                    && (pccCalendar == null); i++) {
+            for (int i = 0; i < resultFeed.getEntries().size(); i++) {
                 final CalendarEntry entry = resultFeed.getEntries().get(i);
                 
                 LOGGER.debug(entry.getTitle().getPlainText());
