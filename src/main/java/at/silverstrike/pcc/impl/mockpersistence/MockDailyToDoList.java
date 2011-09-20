@@ -25,8 +25,8 @@ class MockDailyToDoList implements DailyToDoList {
         return user;
     }
 
-    public void setUserData(UserData user) {
-        this.user = user;
+    public void setUserData(final UserData aUser) {
+        this.user = aUser;
     }
 
     public Long getId() {
