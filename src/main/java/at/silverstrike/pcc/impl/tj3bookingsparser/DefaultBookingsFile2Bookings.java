@@ -105,7 +105,7 @@ class DefaultBookingsFile2Bookings implements BookingsFile2Bookings {
         LOGGER.debug("taskOrResourceIdStringToLong, aIdAsString: {}", aIdAsString);
         
         final String[] ids = aIdAsString.split("\\.");
-        final String taskId = ids[ids.length-1];
+        final String taskId = ids[ids.length - 1];
         return Long.parseLong(taskId.substring(1));
     }
 
