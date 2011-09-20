@@ -62,7 +62,7 @@ class MockUserData implements UserData {
     }
 
     @Override
-    public void setUsername(String aUsername) {
+    public void setUsername(final String aUsername) {
         // TODO Auto-generated method stub
         
     }
@@ -74,7 +74,7 @@ class MockUserData implements UserData {
     }
 
     @Override
-    public void setPassword(String aPassword) {
+    public void setPassword(final String aPassword) {
         // TODO Auto-generated method stub
         
     }
@@ -104,16 +104,16 @@ class MockUserData implements UserData {
         return googleUsername;
     }
 
-    public void setGoogleUsername(String googleUsername) {
-        this.googleUsername = googleUsername;
+    public void setGoogleUsername(final String aGoogleUsername) {
+        this.googleUsername = aGoogleUsername;
     }
 
     public String getGooglePassword() {
         return googlePassword;
     }
 
-    public void setGooglePassword(String googlePassword) {
-        this.googlePassword = googlePassword;
+    public void setGooglePassword(final String aGooglePassword) {
+        this.googlePassword = aGooglePassword;
     }
 
 
@@ -130,7 +130,7 @@ class MockUserData implements UserData {
     }
 
     @Override
-    public void setGoogleTasksRefreshToken(String aRefreshToken) {
+    public void setGoogleTasksRefreshToken(final String aRefreshToken) {
         // TODO Auto-generated method stub
         
     }
@@ -142,7 +142,7 @@ class MockUserData implements UserData {
     }
 
     @Override
-    public void setGoogleCalendarOAuthVerifier(String aVerifier) {
+    public void setGoogleCalendarOAuthVerifier(final String aVerifier) {
         // TODO Auto-generated method stub
         
     }
@@ -154,7 +154,7 @@ class MockUserData implements UserData {
     }
 
     @Override
-    public void setGoogleCalendarOAuthToken(String aToken) {
+    public void setGoogleCalendarOAuthToken(final String aToken) {
         // TODO Auto-generated method stub
         
     }
@@ -166,7 +166,7 @@ class MockUserData implements UserData {
     }
 
     @Override
-    public void setGoogleCalendarOAuthTokenSecret(String aTokenSecret) {
+    public void setGoogleCalendarOAuthTokenSecret(final String aTokenSecret) {
         // TODO Auto-generated method stub
         
     }
