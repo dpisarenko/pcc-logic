@@ -18,7 +18,7 @@ import at.silverstrike.pcc.api.gtasknoteparser.GoogleTaskNotesParserFactory;
  * @author DP118M
  *
  */
-public class DefaultGoogleTaskNotesParserFactory implements
+public final class DefaultGoogleTaskNotesParserFactory implements
         GoogleTaskNotesParserFactory {
 
     @Override

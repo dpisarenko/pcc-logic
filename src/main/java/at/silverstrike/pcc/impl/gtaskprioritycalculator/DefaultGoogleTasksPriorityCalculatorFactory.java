@@ -18,7 +18,7 @@ import at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalcul
  * @author DP118M
  *
  */
-public class DefaultGoogleTasksPriorityCalculatorFactory implements
+public final class DefaultGoogleTasksPriorityCalculatorFactory implements
         GoogleTasksPriorityCalculatorFactory {
 
     @Override

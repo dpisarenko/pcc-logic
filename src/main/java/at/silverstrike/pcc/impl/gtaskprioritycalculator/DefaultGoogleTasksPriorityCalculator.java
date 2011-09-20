@@ -29,6 +29,7 @@ import at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalcul
  */
 class DefaultGoogleTasksPriorityCalculator implements
         GoogleTasksPriorityCalculator {
+    private static final int HIGHEST_PRIORITY = 1000;
     private Map<String, Task> tasksByTaskIds;
     private Map<String, Integer> prioritiesByTaskIds;
 
@@ -41,7 +42,7 @@ class DefaultGoogleTasksPriorityCalculator implements
 
     private void
             setPriorities(final List<GoogleTaskIdAndPriorityTuple> aTuples) {
-        int curPriority = 1000;
+        int curPriority = HIGHEST_PRIORITY;
         
         this.prioritiesByTaskIds = new HashMap<String, Integer>();
         
