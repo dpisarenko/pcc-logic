@@ -51,15 +51,15 @@ class DefaultPrivateKeyReader implements PrivateKeyReader {
 
             LOGGER.debug("privKeyBytes: {}", privKeyBytes);
 
-            String BEGIN = "-----BEGIN PRIVATE KEY-----";
-            String END = "-----END PRIVATE KEY-----";
+            final String begin = "-----BEGIN PRIVATE KEY-----";
+            final String end = "-----END PRIVATE KEY-----";
             String str = new String(privKeyBytes);
-            if (str.contains(BEGIN) && str.contains(END)) {
-                str = str.substring(BEGIN.length(), str.lastIndexOf(END));
+            if (str.contains(begin) && str.contains(end)) {
+                str = str.substring(begin.length(), str.lastIndexOf(end));
             }
 
-            KeyFactory fac = KeyFactory.getInstance("RSA");
-            EncodedKeySpec privKeySpec =
+            final KeyFactory fac = KeyFactory.getInstance("RSA");
+            final EncodedKeySpec privKeySpec =
                     new PKCS8EncodedKeySpec(Base64.decode(str.getBytes()));
 
             this.privateKey = fac.generatePrivate(privKeySpec);
