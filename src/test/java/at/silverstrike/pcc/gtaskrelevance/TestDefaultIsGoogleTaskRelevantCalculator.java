@@ -33,7 +33,7 @@ import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
  * @author DP118M
  * 
  */
-public class TestDefaultIsGoogleTaskRelevantCalculator {
+public final class TestDefaultIsGoogleTaskRelevantCalculator {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(TestDefaultIsGoogleTaskRelevantCalculator.class);
 
@@ -169,13 +169,13 @@ public class TestDefaultIsGoogleTaskRelevantCalculator {
     }
     
     private boolean getActualRelevance(
-            final IsGoogleTaskRelevantCalculator objectUnderTest,
-            final com.google.api.services.tasks.v1.model.Task task) {
+            final IsGoogleTaskRelevantCalculator aObjectUnderTest,
+            final com.google.api.services.tasks.v1.model.Task aTask) {
         boolean actualRelevance = false;
         try {
-            objectUnderTest.setGoogleTask(task);
-            objectUnderTest.run();
-            actualRelevance = objectUnderTest.isRelevant();
+            aObjectUnderTest.setGoogleTask(aTask);
+            aObjectUnderTest.run();
+            actualRelevance = aObjectUnderTest.isRelevant();
         } catch (final PccException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
