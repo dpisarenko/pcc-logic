@@ -25,7 +25,7 @@ import at.silverstrike.pcc.api.model.UserData;
 import at.silverstrike.pcc.api.model.Worker;
 import at.silverstrike.pcc.api.persistence.Persistence;
 
-public class MockObjectFactory {
+public final class MockObjectFactory {
 
     public final UserData createUserData() {
         return new MockUserData();

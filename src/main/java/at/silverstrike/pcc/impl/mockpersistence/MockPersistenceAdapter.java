@@ -231,13 +231,13 @@ public abstract class MockPersistenceAdapter implements Persistence {
     }
 
     @Override
-    public UserData getUser(Long aUserId) {
+    public UserData getUser(final Long aUserId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void updateUser(UserData aUser) {
+    public void updateUser(final UserData aUser) {
         // TODO Auto-generated method stub
 
     }
@@ -258,8 +258,8 @@ public abstract class MockPersistenceAdapter implements Persistence {
 
     @Override
     public List<Booking> updateBookingsTransientMode(
-            List<BookingTuple> bookingTuples, UserData userData,
-            List<SchedulingObject> schedulingObjectsToExport) {
+            final List<BookingTuple> aBookingTuples, final UserData aUserData,
+            final List<SchedulingObject> aSchedulingObjectsToExport) {
         // TODO Auto-generated method stub
         return null;
     }

@@ -115,7 +115,7 @@ class MockPersistence extends MockPersistenceAdapter implements Persistence {
     }
 
     @Override
-    public void updateTask(final Task process) {
+    public void updateTask(final Task aProcess) {
         throw new NotImplementedException();
 
     }
