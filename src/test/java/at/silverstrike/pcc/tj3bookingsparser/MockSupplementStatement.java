@@ -27,8 +27,8 @@ public final class MockSupplementStatement implements SupplementStatement {
         return taskId;
     }
 
-    public void setTaskId(final String taskId) {
-        this.taskId = taskId;
+    public void setTaskId(final String aTaskId) {
+        this.taskId = aTaskId;
     }
 
     public List<BookingStatement> getBookingStatements() {
@@ -36,8 +36,8 @@ public final class MockSupplementStatement implements SupplementStatement {
     }
 
     public void setBookingStatements(
-            final List<BookingStatement> bookingStatements) {
-        this.bookingStatements = bookingStatements;
+            final List<BookingStatement> aBookingStatements) {
+        this.bookingStatements = aBookingStatements;
     }
 
 }
