@@ -23,16 +23,16 @@ public final class MockIndBooking implements IndBooking {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStartTime(final String aStartTime) {
+        this.startTime = aStartTime;
     }
 
     public String getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setDuration(final String aDuration) {
+        this.duration = aDuration;
     }
 
 }

@@ -18,14 +18,15 @@ import at.silverstrike.pcc.api.tj3bookingsparser.BookingsFile;
 import at.silverstrike.pcc.api.tj3bookingsparser.SupplementStatement;
 
 public final class MockBookingsFile implements BookingsFile {
-    private List<SupplementStatement> supplementStatements = new LinkedList<SupplementStatement>();
+    private List<SupplementStatement> supplementStatements =
+            new LinkedList<SupplementStatement>();
 
     public List<SupplementStatement> getSupplementStatements() {
         return supplementStatements;
     }
 
     public void setSupplementStatements(
-            List<SupplementStatement> supplementStatements) {
-        this.supplementStatements = supplementStatements;
+            final List<SupplementStatement> aSupplementStatements) {
+        this.supplementStatements = aSupplementStatements;
     }
 }
