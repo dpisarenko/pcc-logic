@@ -42,8 +42,8 @@ class MockControlProcess extends MockSchedulingObject implements Task {
         return user;
     }
 
-    public void setUserData(UserData user) {
-        this.user = user;
+    public void setUserData(final UserData aUser) {
+        this.user = aUser;
     }
 
     public Double getBestCaseEffort() {
@@ -116,8 +116,8 @@ class MockControlProcess extends MockSchedulingObject implements Task {
     }
 
     public void setValidationError(
-            SchedulingObjectValidationError validationError) {
-        this.validationError = validationError;
+            final SchedulingObjectValidationError aValidationError) {
+        this.validationError = aValidationError;
     }
 
     public List<SchedulingObject> getChildren() {
