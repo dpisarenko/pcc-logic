@@ -28,12 +28,13 @@ class MockDailyPlan implements DailyPlan {
     private UserData user;
 
     public UserData getUserData() {
-            return user;
+        return user;
     }
 
-    public void setUserData(UserData user) {
-            this.user = user;
+    public void setUserData(final UserData aUser) {
+        this.user = aUser;
     }
+
     public Long getId() {
         return this.id;
     }
