@@ -59,8 +59,8 @@ class DefaultBookings2GoogleCaendarExporter implements
         final GoogleCalendarServiceCreator serviceCreator = factory.create();
         CalendarService service = null;
 
-//        serviceCreator.setUsername(this.userData.getGoogleUsername());
-//        serviceCreator.setPassword(this.userData.getGooglePassword());
+        // serviceCreator.setUsername(this.userData.getGoogleUsername());
+        // serviceCreator.setPassword(this.userData.getGooglePassword());
         try {
             serviceCreator.run();
             service = serviceCreator.getService();
@@ -80,18 +80,15 @@ class DefaultBookings2GoogleCaendarExporter implements
     private void removeEvents(final CalendarService aService) {
         // TODO Auto-generated method stub
         final GoogleCalendarReaderFactory gcalFactory =
-            injector.getInstance(GoogleCalendarReaderFactory.class);
+                injector.getInstance(GoogleCalendarReaderFactory.class);
         final GoogleCalendarReader gcalReader = gcalFactory.create();
 
-        try
-        {
+        try {
             gcalReader.setCalendarService(aService);
             gcalReader.run();
             gcalReader.getCalendarEntries();
-            
-        }
-        catch (final PccException exception)
-        {
+
+        } catch (final PccException exception) {
             LOGGER.error("", exception);
         }
     }

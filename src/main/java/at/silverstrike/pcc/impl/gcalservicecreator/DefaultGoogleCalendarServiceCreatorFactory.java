@@ -18,7 +18,7 @@ import at.silverstrike.pcc.api.gcalservicecreator.GoogleCalendarServiceCreatorFa
  * @author DP118M
  *
  */
-public class DefaultGoogleCalendarServiceCreatorFactory implements
+public final class DefaultGoogleCalendarServiceCreatorFactory implements
         GoogleCalendarServiceCreatorFactory {
 
     @Override

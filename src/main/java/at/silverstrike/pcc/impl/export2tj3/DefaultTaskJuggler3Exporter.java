@@ -427,10 +427,10 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         return taskDefinition;
     }
 
-    private int getPriority(Integer boxedPriority) {
+    private int getPriority(final Integer aBoxedPriority) {
         final int priority;
-        if (boxedPriority != null) {
-            priority = boxedPriority;
+        if (aBoxedPriority != null) {
+            priority = aBoxedPriority;
         } else {
             priority = 0;
         }
