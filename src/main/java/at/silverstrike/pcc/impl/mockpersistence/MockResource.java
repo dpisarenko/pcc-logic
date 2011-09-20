@@ -39,8 +39,8 @@ class MockResource implements Resource {
         return this.dailyLimit;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(final Long aId) {
+        this.id = aId;
     }
 
 }
