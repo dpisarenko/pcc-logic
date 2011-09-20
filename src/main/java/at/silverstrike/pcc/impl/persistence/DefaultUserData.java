@@ -33,10 +33,8 @@ class DefaultUserData implements UserData {
     private String googleCalendarOAuthToken;
     private String googleCalendarOAuthTokenSecret;
     private Boolean automaticScheduling;
-    private Integer automaticSchedulingInterval; 
+    private Integer automaticSchedulingInterval;
 
-    
-    
     public String getIdentifier() {
         return identifier;
     }
@@ -73,16 +71,16 @@ class DefaultUserData implements UserData {
         return username;
     }
 
-    public void setUsername(final String username) {
-        this.username = username;
+    public void setUsername(final String aUsername) {
+        this.username = aUsername;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(final String password) {
-        this.password = password;
+    public void setPassword(final String aPassword) {
+        this.password = aPassword;
     }
 
     public Long getId() {
@@ -105,9 +103,9 @@ class DefaultUserData implements UserData {
 
     @Override
     public boolean isGoogleCalendarAccessGranted() {
-        return (!StringUtils.isBlank(this.googleCalendarOAuthToken)) &&
-                (!StringUtils.isBlank(this.googleCalendarOAuthTokenSecret)) &&
-                (!StringUtils.isBlank(this.googleCalendarOAuthVerifier));
+        return (!StringUtils.isBlank(this.googleCalendarOAuthToken))
+                && (!StringUtils.isBlank(this.googleCalendarOAuthTokenSecret))
+                && (!StringUtils.isBlank(this.googleCalendarOAuthVerifier));
     }
 
     @Override
@@ -128,7 +126,7 @@ class DefaultUserData implements UserData {
     }
 
     public void setGoogleCalendarOAuthVerifier(
-            String aGoogleCalendarOAuthVerifier) {
+            final String aGoogleCalendarOAuthVerifier) {
         this.googleCalendarOAuthVerifier = aGoogleCalendarOAuthVerifier;
     }
 
@@ -136,8 +134,8 @@ class DefaultUserData implements UserData {
         return googleCalendarOAuthToken;
     }
 
-    public void setGoogleCalendarOAuthToken(String googleCalendarOAuthToken) {
-        this.googleCalendarOAuthToken = googleCalendarOAuthToken;
+    public void setGoogleCalendarOAuthToken(final String aGoogleCalendarOAuthToken) {
+        this.googleCalendarOAuthToken = aGoogleCalendarOAuthToken;
     }
 
     public String getGoogleCalendarOAuthTokenSecret() {
@@ -145,8 +143,8 @@ class DefaultUserData implements UserData {
     }
 
     public void setGoogleCalendarOAuthTokenSecret(
-            String googleCalendarOAuthTokenSecret) {
-        this.googleCalendarOAuthTokenSecret = googleCalendarOAuthTokenSecret;
+            final String aGoogleCalendarOAuthTokenSecret) {
+        this.googleCalendarOAuthTokenSecret = aGoogleCalendarOAuthTokenSecret;
     }
 
     public Boolean isAutomaticScheduling() {
@@ -161,7 +159,8 @@ class DefaultUserData implements UserData {
         return automaticSchedulingInterval;
     }
 
-    public void setAutomaticSchedulingInterval(final Integer aAutomaticSchedulingInterval) {
+    public void setAutomaticSchedulingInterval(
+            final Integer aAutomaticSchedulingInterval) {
         this.automaticSchedulingInterval = aAutomaticSchedulingInterval;
     }
 }
