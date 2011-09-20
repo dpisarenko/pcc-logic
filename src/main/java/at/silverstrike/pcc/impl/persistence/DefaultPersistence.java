@@ -58,7 +58,7 @@ import com.google.inject.Injector;
  * @author Dmitri Pisarenko
  * 
  */
-public class DefaultPersistence implements Persistence {
+public final class DefaultPersistence implements Persistence {
     private static final double DAILY_LIMIT_IN_HOURS = 8.;
     private static final int MAX_PRIORITY = 500;
     private static final int PRIORITY_INCREASE_STEP = 10;
@@ -460,7 +460,7 @@ public class DefaultPersistence implements Persistence {
     /**
      * @see at.silverstrike.pcc.api.persistence.Persistence#getSession()
      */
-    private final Session getSession() {
+    private Session getSession() {
         if (sessionFactory == null) {
             return null;
         }
