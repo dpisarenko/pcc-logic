@@ -40,8 +40,8 @@ class MockSchedulingObject {
         return user;
     }
 
-    public void setUserData(UserData user) {
-        this.user = user;
+    public void setUserData(final UserData aUser) {
+        this.user = aUser;
     }
 
     public Long getId() {
@@ -111,8 +111,8 @@ class MockSchedulingObject {
     }
 
     public void setValidationError(
-            SchedulingObjectValidationError validationError) {
-        this.validationError = validationError;
+            final SchedulingObjectValidationError aValidationError) {
+        this.validationError = aValidationError;
     }
 
 }
