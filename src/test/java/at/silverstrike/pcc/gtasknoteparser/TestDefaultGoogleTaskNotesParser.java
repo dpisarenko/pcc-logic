@@ -100,7 +100,7 @@ public final class TestDefaultGoogleTaskNotesParser {
         Assert.assertEquals("T2", predecessors.get(1));
         Assert.assertEquals("T3", predecessors.get(2));
     }
-    
+
     @Test
     public void testDependenciesRepetition() {
         final GoogleTaskNotesParser objectUnderTest = getObjectUnderTest();
@@ -145,21 +145,20 @@ public final class TestDefaultGoogleTaskNotesParser {
         Assert.assertEquals("T3", predecessors.get(2));
     }
 
-    
-    
-    
-    private void checkReturnValues(final GoogleTaskNotesParser objectUnderTest,
-            final boolean expectedEffortSpecified, Double expectedEffort) {
+    private void
+            checkReturnValues(final GoogleTaskNotesParser aObjectUnderTest,
+                    final boolean aExpectedEffortSpecified,
+                    final Double aExpectedEffort) {
         try {
-            objectUnderTest.run();
+            aObjectUnderTest.run();
 
-            if (expectedEffortSpecified) {
-                Assert.assertTrue(objectUnderTest.isEffortSpecified());
-                Assert.assertEquals(expectedEffort,
-                        objectUnderTest.getEffortInHours(),
+            if (aExpectedEffortSpecified) {
+                Assert.assertTrue(aObjectUnderTest.isEffortSpecified());
+                Assert.assertEquals(aExpectedEffort,
+                        aObjectUnderTest.getEffortInHours(),
                         1. / 1000000.);
             } else {
-                Assert.assertFalse(objectUnderTest.isEffortSpecified());
+                Assert.assertFalse(aObjectUnderTest.isEffortSpecified());
             }
         } catch (final PccException exception) {
             LOGGER.error("", exception);

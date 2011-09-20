@@ -20,7 +20,7 @@ import com.google.inject.AbstractModule;
  * @author DP118M
  * 
  */
-public class MockInjectorModule extends AbstractModule {
+public final class MockInjectorModule extends AbstractModule {
 
     @Override
     protected void configure() {
