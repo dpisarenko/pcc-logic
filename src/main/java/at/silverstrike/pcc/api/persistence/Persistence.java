@@ -30,14 +30,14 @@ import at.silverstrike.pcc.api.tj3bookingsparser.BookingTuple;
 import at.silverstrike.pcc.api.tj3deadlinesparser.ProcessEndTimeTuple;
 
 public interface Persistence extends ModuleWithInjectableDependencies {
-    public static final String SUPER_USER_PASSWORD = "DCvEu4LKyC";
-    public static final String SUPER_USER_NAME = "dp@sw-dev.at";
+    static final String SUPER_USER_PASSWORD = "DCvEu4LKyC";
+    static final String SUPER_USER_NAME = "dp@sw-dev.at";
 
-    public static final String HOST_LOCAL = "localhost";
-    public static final String HOST_DEV = "78.47.242.60";
+    static final String HOST_LOCAL = "localhost";
+    static final String HOST_DEV = "78.47.242.60";
     
-    public static final String DB_DEV = "pcc-dev";
-    public static final String DB_PRODUCTION = "pcc";
+    static final String DB_DEV = "pcc-dev";
+    static final String DB_PRODUCTION = "pcc";
     
     void openSession(final String aHost, final String aUser, final String aPassword, final String aDatabase);
 
@@ -166,7 +166,7 @@ public interface Persistence extends ModuleWithInjectableDependencies {
 
     Long getUserCount();
 
-    UserData getUser(String userName, String password);
+    UserData getUser(final String aUserName, final String aPassword);
 
     List<Booking> getBookings(final UserData aUser);
 
@@ -186,7 +186,7 @@ public interface Persistence extends ModuleWithInjectableDependencies {
             final UserData aUser, final long aTaskId);
 
     List<Booking>
-            updateBookingsTransientMode(final List<BookingTuple> bookingTuples,
-                    final UserData userData,
-                    final List<SchedulingObject> schedulingObjectsToExport);
+            updateBookingsTransientMode(final List<BookingTuple> aBookingTuples,
+                    final UserData aUserData,
+                    final List<SchedulingObject> aSchedulingObjectsToExport);
 }
