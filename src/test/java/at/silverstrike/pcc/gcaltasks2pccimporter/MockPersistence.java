@@ -18,19 +18,21 @@ import at.silverstrike.pcc.impl.mockpersistence.MockPersistenceAdapter;
 
 /**
  * @author DP118M
- *
+ * 
  */
 final class MockPersistence extends MockPersistenceAdapter {
-    private static MockObjectFactory MOCK_OBJECT_FACTORY = new MockObjectFactory();
-    
+    private static MockObjectFactory MOCK_OBJECT_FACTORY =
+            new MockObjectFactory();
+
     @Override
-    public Task createTransientTask(String aProcessName, Long aParentProcessId,
-            UserData aUser, final long aTaskId) {
+    public Task createTransientTask(final String aProcessName,
+            final Long aParentProcessId,
+            final UserData aUser, final long aTaskId) {
         final Task task = MOCK_OBJECT_FACTORY.createTask();
-        
+
         task.setName(aProcessName);
         task.setUserData(aUser);
-        
+
         return task;
     }
 
