@@ -18,7 +18,7 @@ import at.silverstrike.pcc.api.googletasksservicecreator.GoogleTasksServiceCreat
  * @author DP118M
  *
  */
-public class DefaultGoogleTasksServiceCreatorFactory implements
+public final class DefaultGoogleTasksServiceCreatorFactory implements
         GoogleTasksServiceCreatorFactory {
 
     @Override
