@@ -35,7 +35,7 @@ class Helper {
     private static final MockObjectFactory MOCK_OBJECT_FACTORY =
             new MockObjectFactory();
 
-    public void fillProjectInfo01(final ProjectExportInfo anInfo) {
+    public void fillProjectInfo01(final ProjectExportInfo aInfo) {
         final MockObjectFactory mockObjectFactory = new MockObjectFactory();
 
         final List<SchedulingObject> processes =
@@ -62,14 +62,14 @@ class Helper {
 
         resources.add(getWorker1210());
 
-        anInfo.setSchedulingObjectsToExport(processes);
-        anInfo.setResourcesToExport(resources);
-        anInfo.setCopyright("DP");
-        anInfo.setCurrency("EUR");
-        anInfo.setNow(RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 11,
+        aInfo.setSchedulingObjectsToExport(processes);
+        aInfo.setResourcesToExport(resources);
+        aInfo.setCopyright("DP");
+        aInfo.setCurrency("EUR");
+        aInfo.setNow(RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 11,
                 30));
-        anInfo.setProjectName("Sample project");
-        anInfo.setSchedulingHorizonMonths(1);
+        aInfo.setProjectName("Sample project");
+        aInfo.setSchedulingHorizonMonths(1);
     }
 
     private Resource getWorker1210() {
@@ -89,7 +89,7 @@ class Helper {
         return worker;
     }
 
-    public void fillProjectInfo02(final ProjectExportInfo anInfo,
+    public void fillProjectInfo02(final ProjectExportInfo aInfo,
             final Persistence aPersistence, final UserData aUserData) {
         final List<SchedulingObject> processes =
                 new LinkedList<SchedulingObject>();
@@ -113,15 +113,15 @@ class Helper {
 
         resources.add(resource);
 
-        anInfo.setSchedulingObjectsToExport(processes);
-        anInfo.setResourcesToExport(resources);
-        anInfo.setCopyright("DP");
-        anInfo.setCurrency("EUR");
-        anInfo.setNow(RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 11,
+        aInfo.setSchedulingObjectsToExport(processes);
+        aInfo.setResourcesToExport(resources);
+        aInfo.setCopyright("DP");
+        aInfo.setCurrency("EUR");
+        aInfo.setNow(RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 11,
                 30));
-        anInfo.setProjectName("Sample project");
-        anInfo.setSchedulingHorizonMonths(1);
-        anInfo.setUserData(aUserData);
+        aInfo.setProjectName("Sample project");
+        aInfo.setSchedulingHorizonMonths(1);
+        aInfo.setUserData(aUserData);
 
     }
 }

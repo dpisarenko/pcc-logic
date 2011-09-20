@@ -46,7 +46,7 @@ class MockPersistence01 extends MockPersistenceAdapter {
 
         final ProcessEndTimeTuple tuple = aEndTimeTuples.get(0);
 
-        Date date =
+        final Date date =
                 RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 11, 30);
 
         Assert.assertEquals("Task ID is wrong.", new Long(2010), tuple

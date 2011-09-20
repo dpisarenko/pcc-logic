@@ -63,7 +63,7 @@ public final class TestDefaultProjectScheduler {
     private static final String TJ3_PATH = "C:\\Ruby191\\bin\\tj3.bat";
     private static final String DIR = "src/test/resources/at/silverstrike/"
                             + "pcc/test/projectscheduler/";
-    private final static Logger LOGGER =
+    private static final Logger LOGGER =
             LoggerFactory.getLogger(TestDefaultProjectScheduler.class);
     private Helper helper = new Helper();
 
@@ -442,9 +442,9 @@ public final class TestDefaultProjectScheduler {
         Assert.assertEquals(2, bookings.size());
     }
 
-    private Task getTaskByName(final List<SchedulingObject> pccTasks,
+    private Task getTaskByName(final List<SchedulingObject> aPccTasks,
             final String aName) {
-        for (final SchedulingObject curObject : pccTasks) {
+        for (final SchedulingObject curObject : aPccTasks) {
             if (aName.equals(curObject.getName())) {
                 return (Task) curObject;
             }
@@ -545,23 +545,23 @@ public final class TestDefaultProjectScheduler {
         return bookings;
     }
 
-    private ProjectExportInfo getProjectInfo(final Persistence persistence,
-            final List<SchedulingObject> pccTasks,
-            final ProjectScheduler objectUnderTest) {
-        final ProjectExportInfo projectInfo = objectUnderTest
+    private ProjectExportInfo getProjectInfo(final Persistence aPersistence,
+            final List<SchedulingObject> aPccTasks,
+            final ProjectScheduler aObjectUnderTest) {
+        final ProjectExportInfo projectInfo = aObjectUnderTest
                 .getProjectExportInfo();
 
         assertNotNull(projectInfo);
 
-        persistence.createSuperUser();
-        final UserData user = persistence.getUser(Persistence.SUPER_USER_NAME,
+        aPersistence.createSuperUser();
+        final UserData user = aPersistence.getUser(Persistence.SUPER_USER_NAME,
                 Persistence.SUPER_USER_PASSWORD);
 
         assertNotNull(user);
 
-        final List<Resource> resources = getResources(persistence);
+        final List<Resource> resources = getResources(aPersistence);
 
-        projectInfo.setSchedulingObjectsToExport(pccTasks);
+        projectInfo.setSchedulingObjectsToExport(aPccTasks);
         projectInfo.setResourcesToExport(resources);
         projectInfo.setCopyright("DP");
         projectInfo.setCurrency("EUR");
@@ -574,13 +574,13 @@ public final class TestDefaultProjectScheduler {
         return projectInfo;
     }
 
-    private List<Resource> getResources(final Persistence persistence) {
+    private List<Resource> getResources(final Persistence aPersistence) {
         final List<Resource> resources = new LinkedList<Resource>();
 
         final Long id =
-                persistence.createHumanResource("DP", "Dmitri", "Anatl'evich",
+                aPersistence.createHumanResource("DP", "Dmitri", "Anatl'evich",
                         "Pisarenko", 8.0);
-        final Resource worker = persistence.getResource(id);
+        final Resource worker = aPersistence.getResource(id);
         worker.setDailyLimitInHours(8);
         resources.add(worker);
         return resources;

@@ -48,7 +48,7 @@ import com.google.gdata.util.ServiceException;
  * @author DP118M
  * 
  */
-public class TestServerSidedOAuth {
+public final class TestServerSidedOAuth {
     private static final Logger LOGGER =
             LoggerFactory
                     .getLogger(TestServerSidedOAuth.class);

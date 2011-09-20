@@ -24,7 +24,7 @@ import com.google.gdata.client.authn.oauth.OAuthUtil;
  * @author DP118M
  * 
  */
-public class TestOAuthHelper {
+public final class TestOAuthHelper {
     private static final String TOKEN = "4/sESfTRqBIuH_2OZEFTzLjd9P5hS6";
     private static final String QUERY_STRING =
             "oauth_verifier=bG_JiMC1QyJkBbkqaDdeFNhe&oauth_token=4/sESfTRqBIuH_2OZEFTzLjd9P5hS6";

@@ -41,7 +41,7 @@ import at.silverstrike.pcc.impl.tj3deadlinesparser.DefaultTj3DeadlinesFileParser
  * @author DP118M
  * 
  */
-public class MockInjectorModuleDefect201109_1 extends AbstractModule {
+public final class MockInjectorModuleDefect201109_1 extends AbstractModule {
     private Persistence persistence;
 
     public MockInjectorModuleDefect201109_1(final Persistence aPersistence) {

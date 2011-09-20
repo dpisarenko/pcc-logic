@@ -30,7 +30,7 @@ import at.silverstrike.pcc.api.model.UserData;
 import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.impl.persistence.DefaultPersistence;
 
-public class TestDefaultPersistence {
+public final class TestDefaultPersistence {
     private static final Logger LOGGER =
             LoggerFactory
                     .getLogger(TestDefaultPersistence.class);
