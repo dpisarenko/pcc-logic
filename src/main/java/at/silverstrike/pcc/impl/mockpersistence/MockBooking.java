@@ -19,7 +19,7 @@ import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.UserData;
 
-public class MockBooking implements Booking {
+public final class MockBooking implements Booking {
 
     private Long id;
     private Task process;
@@ -29,12 +29,13 @@ public class MockBooking implements Booking {
     private UserData user;
 
     public UserData getUserData() {
-            return user;
+        return user;
     }
 
-    public void setUserData(UserData user) {
-            this.user = user;
+    public void setUserData(final UserData aUser) {
+        this.user = aUser;
     }
+
     public Long getId() {
         return this.id;
     }
