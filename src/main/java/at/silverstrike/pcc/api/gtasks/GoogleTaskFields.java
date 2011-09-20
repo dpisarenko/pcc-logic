@@ -16,11 +16,11 @@ package at.silverstrike.pcc.api.gtasks;
  * 
  */
 public interface GoogleTaskFields {
-    static final String TITLE = "title";
-    static final String NOTES = "notes";
-    static final String PARENT = "parent";
-    static final String COMPLETED = "completed";
-    static final String ID = "id";
-    static final String POSITION = "position";
+    final String TITLE = "title";
+    final String NOTES = "notes";
+    final String PARENT = "parent";
+    final String COMPLETED = "completed";
+    final String ID = "id";
+    final String POSITION = "position";
 
 }
