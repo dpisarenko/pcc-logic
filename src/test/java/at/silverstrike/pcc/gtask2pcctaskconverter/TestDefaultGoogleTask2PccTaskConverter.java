@@ -34,7 +34,7 @@ import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
  * @author DP118M
  * 
  */
-public class TestDefaultGoogleTask2PccTaskConverter {
+public final class TestDefaultGoogleTask2PccTaskConverter {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(TestDefaultGoogleTask2PccTaskConverter.class);
 
