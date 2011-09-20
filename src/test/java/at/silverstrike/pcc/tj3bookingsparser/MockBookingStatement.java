@@ -29,23 +29,23 @@ public final class MockBookingStatement implements BookingStatement {
         return resource;
     }
 
-    public void setResource(String resource) {
-        this.resource = resource;
+    public void setResource(final String aResource) {
+        this.resource = aResource;
     }
 
     public String getScenario() {
         return scenario;
     }
 
-    public void setScenario(String scenario) {
-        this.scenario = scenario;
+    public void setScenario(final String aScenario) {
+        this.scenario = aScenario;
     }
 
     public List<IndBooking> getIndBookings() {
         return indBookings;
     }
 
-    public void setIndBookings(List<IndBooking> indBookings) {
-        this.indBookings = indBookings;
+    public void setIndBookings(final List<IndBooking> aIndBookings) {
+        this.indBookings = aIndBookings;
     }
 }
