@@ -102,18 +102,19 @@ public final class TestBookingsParser {
                         .getStartTime());
         Assert.assertEquals("2.75h", indBooking.getDuration());
     }
-    
+
     @Test
     /**
      * 201108/5
      * evernote:///view/3784753/s35/ca00cf14-68bc-4889-82f4-c3de6d59cca3/ca00cf14-68bc-4889-82f4-c3de6d59cca3/
      */
-    public void testDefect_201108_5()
-    {
+    public void testDefect_201108_5() {
         BookingsFile bookingsFile = null;
         InputStream inputStream = null;
         try {
-            inputStream = FileUtils.openInputStream(new File(DIR + "testDefect_201108_5"));
+            inputStream =
+                    FileUtils.openInputStream(new File(DIR
+                            + "testDefect_201108_5"));
             final BookingsLexer lexer =
                     new BookingsLexer(new ANTLRInputStream(inputStream));
             final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -132,19 +133,21 @@ public final class TestBookingsParser {
         assertNotNull(bookingsFile);
         assertNotNull(bookingsFile.getSupplementStatements());
         assertEquals(5, bookingsFile.getSupplementStatements().size());
-        
+
     }
+
     @Test
     /**
      * 201108/5
      * evernote:///view/3784753/s35/ca00cf14-68bc-4889-82f4-c3de6d59cca3/ca00cf14-68bc-4889-82f4-c3de6d59cca3/
      */
-    public void testDefect_201108_5_2()
-    {
+    public void testDefect_201108_5_2() {
         BookingsFile bookingsFile = null;
         InputStream inputStream = null;
         try {
-            inputStream = FileUtils.openInputStream(new File(DIR + "testDefect_201108_5_2"));
+            inputStream =
+                    FileUtils.openInputStream(new File(DIR
+                            + "testDefect_201108_5_2"));
             final BookingsLexer lexer =
                     new BookingsLexer(new ANTLRInputStream(inputStream));
             final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -163,18 +166,20 @@ public final class TestBookingsParser {
         assertNotNull(bookingsFile);
         assertNotNull(bookingsFile.getSupplementStatements());
         assertEquals(5, bookingsFile.getSupplementStatements().size());
-        
-        final SupplementStatement stmt1 = bookingsFile.getSupplementStatements().get(0);
+
+        final SupplementStatement stmt1 =
+                bookingsFile.getSupplementStatements().get(0);
         assertEquals(1, stmt1.getBookingStatements().size());
 
-        final BookingStatement bookingStmt1 = stmt1.getBookingStatements().get(0);
-        
+        final BookingStatement bookingStmt1 =
+                stmt1.getBookingStatements().get(0);
+
         assertEquals("R22", bookingStmt1.getResource());
         assertEquals(1, bookingStmt1.getIndBookings().size());
-        
+
         final IndBooking indBooking = bookingStmt1.getIndBookings().get(0);
         assertEquals("2.0h", indBooking.getDuration());
-        
+
     }
 
 }
