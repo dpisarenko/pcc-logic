@@ -30,27 +30,27 @@ class MockEvent extends MockSchedulingObject implements Event {
             return user;
     }
 
-    public void setUserData(UserData user) {
-            this.user = user;
+    public void setUserData(final UserData aUser) {
+            this.user = aUser;
     }
     
     public String getPlace() {
         return place;
     }
-    public void setPlace(final String place) {
-        this.place = place;
+    public void setPlace(final String aPlace) {
+        this.place = aPlace;
     }
     public Date getStartDateTime() {
         return startDateTime;
     }
-    public void setStartDateTime(final Date startDateTime) {
-        this.startDateTime = startDateTime;
+    public void setStartDateTime(final Date aStartDateTime) {
+        this.startDateTime = aStartDateTime;
     }
     public Date getEndDateTime() {
         return endDateTime;
     }
-    public void setEndDateTime(final Date endDateTime) {
-        this.endDateTime = endDateTime;
+    public void setEndDateTime(final Date aEndDateTime) {
+        this.endDateTime = aEndDateTime;
     }
 
 }
