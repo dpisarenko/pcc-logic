@@ -175,7 +175,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
 
         for (final String curGoogleTaskId : aRelevantTasksByIds.keySet()) {
             try {
-                RelevantTaskInformation tuple = new RelevantTaskInformation();
+                final RelevantTaskInformation tuple = new RelevantTaskInformation();
 
                 final com.google.api.services.tasks.v1.model.Task curGoogleTask =
                         aRelevantTasksByIds.get(curGoogleTaskId);
@@ -315,8 +315,8 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
         }
     }
 
-    public void setUser(UserData user) {
-        this.user = user;
+    public void setUser(final UserData aUser) {
+        this.user = aUser;
     }
 
     public List<SchedulingObject> getCreatedPccTasks() {
