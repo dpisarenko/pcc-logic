@@ -25,7 +25,7 @@ project "Sample project" 2011-09-04 +1m
 
 copyright "DP"
 
-resource R97 "DP"
+resource R101 "DP"
 {
 	limits { dailymax 8.00h }
 }
@@ -37,7 +37,7 @@ start ${now}
 
 	priority 998
 	
-allocate R97 {limits {dailymax 8.00h}}
+allocate R101 {limits {dailymax 8.00h}}
 
 	
 effort 2.00h
@@ -53,7 +53,7 @@ start ${now}
 
 	priority 999
 	
-allocate R97 {limits {dailymax 8.00h}}
+allocate R101 {limits {dailymax 8.00h}}
 
 	
 effort 3.00h

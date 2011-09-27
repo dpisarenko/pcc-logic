@@ -66,8 +66,6 @@ public final class TestServerSidedOAuth {
         final JacksonFactory jsonFactory = new JacksonFactory();
 
         try {
-//            new GoogleAccessTokenRequest.GoogleRefreshTokenGrant()
-            
             final AccessTokenResponse response =
                     new GoogleAccessTokenRequest.GoogleRefreshTokenGrant(
                             httpTransport,
