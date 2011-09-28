@@ -50,6 +50,7 @@ public class TestDefaultRelevantTaskSetCalculator {
                 getGoogleTasks();
 
         objectUnderTest.setGoogleTasks(googleTasks);
+        objectUnderTest.setInjector(injector);
         try {
             objectUnderTest.run();
         } catch (final PccException exception) {
