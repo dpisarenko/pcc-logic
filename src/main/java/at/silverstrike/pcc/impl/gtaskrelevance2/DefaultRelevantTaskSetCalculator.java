@@ -104,7 +104,9 @@ final class DefaultRelevantTaskSetCalculator implements
     }
 
     private boolean isTaskParentOfRelevantTasks(final Task aTask) {
-        if (this.parentChildGraph.inDegreeOf(aTask) < 1) {
+        if (!this.parentChildGraph.containsVertex(aTask)) {
+            return false;
+        } else if (this.parentChildGraph.inDegreeOf(aTask) < 1) {
             return this.relevantTasks.contains(aTask);
         } else {
             final List<Task> childTasks = new LinkedList<Task>();
