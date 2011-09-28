@@ -68,15 +68,12 @@ final class DefaultRelevantTaskSetCalculator implements
         final IsGoogleTaskRelevantCalculator calculator =
                 getIsGoogleTaskRelevantCalculator();
 
-        final List<com.google.api.services.tasks.v1.model.Task> tasksRelevantByThemselves =
-                new LinkedList<com.google.api.services.tasks.v1.model.Task>();
-
         for (final com.google.api.services.tasks.v1.model.Task curTask : this.googleTasks) {
             calculator.setGoogleTask(curTask);
             calculator.run();
 
             if (calculator.isRelevant()) {
-                tasksRelevantByThemselves.add(curTask);
+                relevantTasks.add(curTask);
             }
         }
 
@@ -84,7 +81,7 @@ final class DefaultRelevantTaskSetCalculator implements
 
         for (final com.google.api.services.tasks.v1.model.Task curTask : this.googleTasks) {
             final boolean taskRelevantByItself =
-                    tasksRelevantByThemselves.contains(curTask);
+                relevantTasks.contains(curTask);
             final boolean taskParentOfRelevantTasks =
                     isTaskParentOfRelevantTasks(curTask);
 
