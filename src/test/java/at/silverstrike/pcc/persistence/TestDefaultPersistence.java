@@ -28,6 +28,7 @@ import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.ProcessState;
 import at.silverstrike.pcc.api.model.UserData;
 import at.silverstrike.pcc.api.persistence.Persistence;
+import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
 import at.silverstrike.pcc.impl.persistence.DefaultPersistence;
 
 public final class TestDefaultPersistence {
@@ -314,6 +315,31 @@ public final class TestDefaultPersistence {
             LOGGER.error("", throwable);
             Assert.fail(throwable.getMessage());
         }
+    }
+    @Test
+    public void testRemoveUserSchedulingObjectsWithUserWithNullId() {
+        final Persistence persistence = new DefaultPersistence();
+        try {
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                                Persistence.DB_DEV);
+
+        } catch (final RuntimeException exception) {
+            Assert.fail(exception.getMessage());
+        } catch (final Exception exception) {
+            Assert.fail(exception.getMessage());
+        }
+        final MockObjectFactory mockObjectFactory = new MockObjectFactory();
+        final UserData user = mockObjectFactory.createUserData();
+        
+        Assert.assertNull(user.getId());
+
+        try {           
+            persistence.removeUserSchedulingObjects(user);
+        } catch (final Throwable throwable) {
+            LOGGER.error("", throwable);
+            Assert.fail(throwable.getMessage());
+        }
 
     }
+
 }
