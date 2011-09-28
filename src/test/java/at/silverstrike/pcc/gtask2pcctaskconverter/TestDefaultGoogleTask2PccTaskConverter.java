@@ -179,4 +179,32 @@ public final class TestDefaultGoogleTask2PccTaskConverter {
         final MockObjectFactory mockObjectFactory = new MockObjectFactory();
         return mockObjectFactory.createUserData();
     }
+    
+    @Test
+    public void testOn2DigitHours() {
+        final GoogleTask2PccTaskConverter objectUnderTest =
+                getObjectUnderTest();
+
+        /**
+         * Run the first time, with non-null notes
+         */
+        final com.google.api.services.tasks.v1.model.Task task1 =
+                new com.google.api.services.tasks.v1.model.Task();
+        task1.set("notes", "12h");
+        objectUnderTest.setGoogleTask(task1);
+        objectUnderTest.setUser(getUserData());
+        try {
+            objectUnderTest.run();
+        } catch (final PccException exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        }
+
+        final at.silverstrike.pcc.api.model.Task pccTask =
+                objectUnderTest.getPccTask();
+
+        Assert.assertEquals(12.0, pccTask.getBestCaseEffort());
+        Assert.assertEquals(12.0, pccTask.getWorstCaseEffort());
+    }
+
 }
