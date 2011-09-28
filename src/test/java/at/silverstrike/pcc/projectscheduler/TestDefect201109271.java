@@ -33,20 +33,20 @@ import com.google.inject.Injector;
 
 /**
  * @author DP118M
- *
+ * 
  */
 public class TestDefect201109271 {
     private static final Logger LOGGER =
-        LoggerFactory.getLogger(TestDefect201109271.class);
+            LoggerFactory.getLogger(TestDefect201109271.class);
     private Helper helper = new Helper();
-    
+
     /**
      * Test case for reproducing defect 20110927/1
-     * evernote:///view/3784753/s35/edc7f152-2e80-4945-8ff1-331697d7b2a9/edc7f152-2e80-4945-8ff1-331697d7b2a9/
+     * evernote:///view/3784753/s35/edc7f152
+     * -2e80-4945-8ff1-331697d7b2a9/edc7f152-2e80-4945-8ff1-331697d7b2a9/
      */
     @Test
-    public void testDefect201109271()
-    {
+    public void testDefect201109271() {
         /**
          * Create persistence
          */
@@ -81,10 +81,15 @@ public class TestDefect201109271 {
                 this.helper.calculatePlan(injector, persistence, pccTasks);
 
         Assert.assertNotNull(bookings);
-        Assert.assertEquals(1, bookings.size());
+        Assert.assertEquals(3, bookings.size());
+
+        Assert.assertEquals(17L, (long) bookings.get(0).getProcess().getId());
+        Assert.assertEquals(12L, (long) bookings.get(1).getProcess().getId());
+        Assert.assertEquals(14L, (long) bookings.get(2).getProcess().getId());
     }
 
     private List<Task> getGoogleTasks() {
-        return Csv2GoogleTasks.csvToGoogleTasks(new File(Helper.DIR + "TestDefect201109271-2011-09-28___02-32-44-396.csv"));
+        return Csv2GoogleTasks.csvToGoogleTasks(new File(Helper.DIR
+                + "TestDefect201109271-2011-09-28___02-32-44-396.csv"));
     }
 }
