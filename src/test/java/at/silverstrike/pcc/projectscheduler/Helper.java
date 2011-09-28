@@ -16,6 +16,7 @@ import static junit.framework.Assert.fail;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -132,7 +133,7 @@ final class Helper {
         final List<Resource> resources = new LinkedList<Resource>();
 
         resources.add(resource);
-        
+
         aInfo.setSchedulingObjectsToExport(processes);
         aInfo.setResourcesToExport(resources);
         aInfo.setCopyright("DP");
@@ -163,7 +164,7 @@ final class Helper {
         objectUnderTest.setGoogleTasks(aGoogleTasks);
         objectUnderTest.setInjector(aInjector);
         objectUnderTest.setUser(user);
-        
+
         try {
             objectUnderTest.run();
         } catch (final PccException exception) {
@@ -194,6 +195,40 @@ final class Helper {
         objectUnderTest
                 .setDirectory(DIR);
         objectUnderTest.setNow(projectInfo.getNow());
+
+        /**
+         * Delete project, bookings and deadline files
+         */
+        cleanupTargetDirectory();
+
+        try {
+            objectUnderTest.run();
+        } catch (final PccException exception) {
+            LOGGER.error("", exception);
+            fail(exception.getMessage());
+        }
+
+        final List<Booking> bookings = objectUnderTest.getBookings();
+
+        return bookings;
+    }
+
+    public List<Booking> calculatePlan(final Injector aInjector,
+            final Persistence aPersistence,
+            final List<SchedulingObject> aPccTasks, final Date aNow) {
+        final ProjectScheduler objectUnderTest =
+                aInjector.getInstance(ProjectScheduler.class);
+
+        assertNotNull(objectUnderTest);
+
+        getProjectInfo(aPersistence, aPccTasks, objectUnderTest);
+
+        objectUnderTest.setInjector(aInjector);
+        objectUnderTest.setTaskJugglerPath(TJ3_PATH);
+        objectUnderTest.setTransientMode(true);
+        objectUnderTest
+                .setDirectory(DIR);
+        objectUnderTest.setNow(aNow);
 
         /**
          * Delete project, bookings and deadline files
@@ -258,6 +293,5 @@ final class Helper {
         new File(DIR + "/pccDeadlines.csv").delete();
         new File(DIR + "/pccProject.tjp").delete();
     }
-
 
 }

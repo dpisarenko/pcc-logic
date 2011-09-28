@@ -13,11 +13,13 @@ package at.silverstrike.pcc.impl.export2tj3;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.ListenableDirectedGraph;
@@ -56,7 +58,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     private static final String DAILY_LIMIT_IN_HOURS = "${dailyLimitInHours}";
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
-            "yyyy-MM-dd");
+            "yyyy-MM-dd-hh:mm");
 
     private static final String EFFORT = "${effort}";
 
@@ -288,7 +290,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
      * 28.04.2010.
      */
     private CharSequence formatDate(final Date aDate) {
-        return DATE_FORMAT.format(aDate);
+        return DATE_FORMAT.format(DateUtils.round(aDate, Calendar.HOUR_OF_DAY));
     }
 
     private String formatDouble(final double aNumber) {
