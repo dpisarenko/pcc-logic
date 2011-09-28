@@ -142,7 +142,7 @@ class Helper {
         final List<Resource> resources = new LinkedList<Resource>();
 
         resources.add(resource);
-
+        
         aInfo.setSchedulingObjectsToExport(processes);
         aInfo.setResourcesToExport(resources);
         aInfo.setCopyright("DP");
@@ -173,6 +173,7 @@ class Helper {
         objectUnderTest.setGoogleTasks(aGoogleTasks);
         objectUnderTest.setInjector(aInjector);
         objectUnderTest.setUser(user);
+        
         try {
             objectUnderTest.run();
         } catch (final PccException exception) {

@@ -235,7 +235,7 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
             // Fetch parent ID
             final String parentId = childTask.parent;
 
-            if (parentId != null) {
+            if (!StringUtils.isBlank(parentId)) {
                 // Fetch child PCC task
                 final at.silverstrike.pcc.api.model.Task childPccTask =
                         aPccTasksByGoogleIds.get(curGoogleTaskId);
