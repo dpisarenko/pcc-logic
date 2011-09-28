@@ -49,7 +49,7 @@ import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
  * 
  */
 class Helper {
-    private static final char CSV_FIELD_SEPARATOR = ';';
+    private static final String CSV_FIELD_SEPARATOR = ";";
     private static final int POSITION_INDEX = 5;
     private static final int COMPLETED_INDEX = 4;
     private static final int NOTES_INDEX = 3;
@@ -283,7 +283,7 @@ class Helper {
 
         for (final String curLine : lines) {
             final String[] fields =
-                    StringUtils.split(curLine, CSV_FIELD_SEPARATOR);
+                    StringUtils.splitByWholeSeparatorPreserveAllTokens(curLine, CSV_FIELD_SEPARATOR);
             final com.google.api.services.tasks.v1.model.Task task =
                     new com.google.api.services.tasks.v1.model.Task();
 
