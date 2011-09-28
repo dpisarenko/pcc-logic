@@ -201,7 +201,7 @@ public final class TestDefaultIsGoogleTaskRelevantCalculator {
         task.set("status", null);
         task.set("updated", null);
         
-        Assert.assertFalse(getActualRelevance(objectUnderTest, task));
+        Assert.assertTrue(getActualRelevance(objectUnderTest, task));
         
     }
 }

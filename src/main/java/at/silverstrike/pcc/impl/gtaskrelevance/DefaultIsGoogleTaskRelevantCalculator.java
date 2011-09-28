@@ -37,7 +37,7 @@ class DefaultIsGoogleTaskRelevantCalculator implements
 
     @Override
     public void run() throws PccException {
-        final boolean completed = (task.completed != null);
+        final boolean completed = !StringUtils.isBlank(task.completed);
         final boolean topLevelTask = StringUtils.isBlank(task.parent);
         final boolean effortSpecified = isEffortSpecified(task.notes);
         final boolean titleBlank = StringUtils.isBlank(task.title);
