@@ -294,6 +294,26 @@ public final class TestDefaultPersistence {
             LOGGER.error("", throwable);
             Assert.fail(throwable.getMessage());
         }
+    }
+
+    @Test
+    public void testRemoveUserSchedulingObjectsWithNullUser() {
+        final Persistence persistence = new DefaultPersistence();
+        try {
+            persistence.openSession(Persistence.HOST_LOCAL, null, null,
+                                Persistence.DB_DEV);
+
+        } catch (final RuntimeException exception) {
+            Assert.fail(exception.getMessage());
+        } catch (final Exception exception) {
+            Assert.fail(exception.getMessage());
+        }
+        try {
+            persistence.removeUserSchedulingObjects(null);
+        } catch (final Throwable throwable) {
+            LOGGER.error("", throwable);
+            Assert.fail(throwable.getMessage());
+        }
 
     }
 }
