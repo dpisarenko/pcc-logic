@@ -11,8 +11,10 @@
 
 package at.silverstrike.pcc.gtaskrelevance2;
 
+import at.silverstrike.pcc.api.gtasknoteparser.GoogleTaskNotesParserFactory;
 import at.silverstrike.pcc.api.gtaskrelevance.IsGoogleTaskRelevantCalculatorFactory;
 import at.silverstrike.pcc.api.gtaskrelevance2.RelevantTaskSetCalculatorFactory;
+import at.silverstrike.pcc.impl.gtasknoteparser.DefaultGoogleTaskNotesParserFactory;
 import at.silverstrike.pcc.impl.gtaskrelevance.DefaultIsGoogleTaskRelevantCalculatorFactory;
 import at.silverstrike.pcc.impl.gtaskrelevance2.DefaultRelevantTaskSetCalculatorFactory;
 
@@ -30,6 +32,8 @@ final class MockInjectorModule extends AbstractModule {
                 new DefaultRelevantTaskSetCalculatorFactory());
         bind(IsGoogleTaskRelevantCalculatorFactory.class).toInstance(
                 new DefaultIsGoogleTaskRelevantCalculatorFactory());
+        bind(GoogleTaskNotesParserFactory.class).toInstance(
+                new DefaultGoogleTaskNotesParserFactory());
     }
 
 }
