@@ -25,6 +25,7 @@ import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.impl.persistence.DefaultPersistence;
+import at.silverstrike.pcc.impl.testutils.Csv2GoogleTasks;
 import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 
 import com.google.api.services.tasks.v1.model.Task;
@@ -84,6 +85,6 @@ public class TestDefect201109271 {
     }
 
     private List<Task> getGoogleTasks() {
-        return this.helper.csvToGoogleTasks(new File(Helper.DIR + "TestDefect201109271-2011-09-28___02-32-44-396.csv"));
+        return Csv2GoogleTasks.csvToGoogleTasks(new File(Helper.DIR + "TestDefect201109271-2011-09-28___02-32-44-396.csv"));
     }
 }

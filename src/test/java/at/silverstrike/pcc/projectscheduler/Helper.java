@@ -15,13 +15,10 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.fail;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,14 +45,7 @@ import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
  * @author dp118m
  * 
  */
-class Helper {
-    private static final String CSV_FIELD_SEPARATOR = ";";
-    private static final int POSITION_INDEX = 5;
-    private static final int COMPLETED_INDEX = 4;
-    private static final int NOTES_INDEX = 3;
-    private static final int PARENT_INDEX = 2;
-    private static final int TITLE_INDEX = 1;
-    private static final int ID_INDEX = 0;
+final class Helper {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(Helper.class);
     public static final String DIR = "src/test/resources/at/silverstrike/"
@@ -269,36 +259,5 @@ class Helper {
         new File(DIR + "/pccProject.tjp").delete();
     }
 
-    @SuppressWarnings("unchecked")
-    public List<com.google.api.services.tasks.v1.model.Task> csvToGoogleTasks(
-            final File aFile) {
-        List<String> lines = null;
-        try {
-            lines = FileUtils.readLines(aFile, "UTF-8");
-        } catch (final IOException exception) {
-            LOGGER.error("", exception);
-            Assert.fail(exception.getMessage());
-        }
-        final List<com.google.api.services.tasks.v1.model.Task> returnValue =
-                new LinkedList<com.google.api.services.tasks.v1.model.Task>();
-
-        for (final String curLine : lines) {
-            final String[] fields =
-                    StringUtils.splitByWholeSeparatorPreserveAllTokens(curLine, CSV_FIELD_SEPARATOR);
-            final com.google.api.services.tasks.v1.model.Task task =
-                    new com.google.api.services.tasks.v1.model.Task();
-
-            task.id = fields[ID_INDEX];
-            task.title = fields[TITLE_INDEX];
-            task.parent = fields[PARENT_INDEX];
-            task.notes = fields[NOTES_INDEX];
-            task.completed = fields[COMPLETED_INDEX];
-            task.position = fields[POSITION_INDEX];
-
-            returnValue.add(task);
-        }
-
-        return returnValue;
-    }
 
 }
