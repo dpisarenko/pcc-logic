@@ -87,8 +87,8 @@ final class Helper {
         aInfo.setResourcesToExport(resources);
         aInfo.setCopyright("DP");
         aInfo.setCurrency("EUR");
-        aInfo.setNow(RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 11,
-                30));
+        aInfo.setNow(RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 9,
+                0/*30*/));
         aInfo.setProjectName("Sample project");
         aInfo.setSchedulingHorizonMonths(1);
     }
