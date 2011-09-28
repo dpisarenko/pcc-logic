@@ -1421,8 +1421,7 @@ public final class DefaultPersistence implements Persistence {
     public void removeUserSchedulingObjects(final UserData aUser) {
         final Transaction tx = session.beginTransaction();
 
-        try {
-            final String[] queries =
+        final String[] queries =
             {
                     "delete from DefaultDailyLimitResourceAllocation",
                     "delete from DefaultResourceAllocation",
@@ -1435,22 +1434,18 @@ public final class DefaultPersistence implements Persistence {
                     "delete from DefaultSchedulingObject where userData.id = ${userId}",
                     "delete from DefaultDailyToDoList where userData.id = ${userId}" };
 
-            for (final String curHqlStatement : queries) {
-                final String hql =
+        for (final String curHqlStatement : queries) {
+            final String hql =
                         curHqlStatement.replace("${userId}",
                                 Long.toString(aUser.getId()));
 
-                final Query query =
+            final Query query =
                         session.createQuery(hql);
 
-                query.executeUpdate();
-            }
-
-            tx.commit();
-        } catch (final Exception exception) {
-            LOGGER.error("", exception);
-            tx.rollback();
+            query.executeUpdate();
         }
+
+        tx.commit();
     }
 
     @Override
@@ -1579,7 +1574,7 @@ public final class DefaultPersistence implements Persistence {
                 LOGGER.debug("booking ID: {}", tuple.getBooking().getId());
 
                 final Task process =
-                        (Task)tasksByIds.get(tuple.getProcessId());
+                        (Task) tasksByIds.get(tuple.getProcessId());
                 final Resource resource =
                         (Resource) session.load(DefaultResource.class,
                                 tuple.getResourceId());
