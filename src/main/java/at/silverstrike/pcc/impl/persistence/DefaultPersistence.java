@@ -1419,6 +1419,12 @@ public final class DefaultPersistence implements Persistence {
 
     @Override
     public void removeUserSchedulingObjects(final UserData aUser) {
+        if (aUser == null)
+        {
+            LOGGER.debug("Attempt to invoke removeUserSchedulingObjects with null user.");
+            return;
+        }
+        
         final Transaction tx = session.beginTransaction();
 
         final String[] queries =
