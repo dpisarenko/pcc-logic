@@ -34,11 +34,8 @@ import ru.altruix.commons.api.conventions.TestConventions;
 import ru.altruix.commons.api.di.InjectorFactory;
 import ru.altruix.commons.api.di.PccException;
 
-import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2;
-import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2Factory;
 import at.silverstrike.pcc.api.gtasks.GoogleTaskFields;
 import at.silverstrike.pcc.api.model.Booking;
-import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.DailyPlan;
@@ -49,7 +46,6 @@ import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.api.projectscheduler.ProjectExportInfo;
 import at.silverstrike.pcc.api.projectscheduler.ProjectScheduler;
 import at.silverstrike.pcc.impl.jruby.RubyDateTimeUtils;
-import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
 import at.silverstrike.pcc.impl.persistence.DefaultPersistence;
 import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 import com.google.inject.Injector;
@@ -60,9 +56,6 @@ public final class TestDefaultProjectScheduler {
     private static final String D_DOLL = "D: Doll";
     private static final String BB_BIG_BALL = "BB: Big ball";
     private static final String SB_SMALL_BALL = "SB: Small ball";
-    private static final String TJ3_PATH = "C:\\Ruby191\\bin\\tj3.bat";
-    private static final String DIR = "src/test/resources/at/silverstrike/"
-                            + "pcc/test/projectscheduler/";
     private static final Logger LOGGER =
             LoggerFactory.getLogger(TestDefaultProjectScheduler.class);
     private Helper helper = new Helper();
@@ -96,18 +89,17 @@ public final class TestDefaultProjectScheduler {
 
         this.helper.fillProjectInfo01(projectInfo);
         objectUnderTest.setInjector(injector);
-        objectUnderTest.setTaskJugglerPath(TJ3_PATH);
+        objectUnderTest.setTaskJugglerPath(Helper.TJ3_PATH);
 
         /**
          * Set input data
          */
-        objectUnderTest
-                .setDirectory(DIR);
+        objectUnderTest.setDirectory(Helper.DIR);
 
         /**
          * Delete project, bookings and deadline files
          */
-        cleanupTargetDirectory();
+        this.helper.cleanupTargetDirectory();
 
         /**
          * Run the method under test
@@ -123,9 +115,9 @@ public final class TestDefaultProjectScheduler {
          * Verify that TJ3 was successfully invoked and created an output file
          */
         final File bookingsFile =
-                new File(DIR + ProjectScheduler.BOOKINGS_FILE);
+                new File(Helper.DIR + ProjectScheduler.BOOKINGS_FILE);
         final File deadlinesFile =
-                new File(DIR + ProjectScheduler.DEADLINE_CSV_FILE);
+                new File(Helper.DIR + ProjectScheduler.DEADLINE_CSV_FILE);
 
         assertTrue("Bookings file doesn't exist.", bookingsFile.exists());
         assertTrue("Deadlines file doesn't exist.", deadlinesFile.exists());
@@ -192,7 +184,7 @@ public final class TestDefaultProjectScheduler {
         assertNotNull(projectInfo.getUserData());
 
         objectUnderTest.setInjector(injector);
-        objectUnderTest.setTaskJugglerPath(TJ3_PATH);
+        objectUnderTest.setTaskJugglerPath(Helper.TJ3_PATH);
         /**
          * Save all task and resource data in the database
          */
@@ -201,7 +193,7 @@ public final class TestDefaultProjectScheduler {
          * Set input data
          */
         objectUnderTest
-                .setDirectory(DIR);
+                .setDirectory(Helper.DIR);
         objectUnderTest.setNow(projectInfo.getNow());
 
         /**
@@ -212,7 +204,7 @@ public final class TestDefaultProjectScheduler {
         /**
          * Delete project, bookings and deadline files
          */
-        cleanupTargetDirectory();
+        this.helper.cleanupTargetDirectory();
 
         /**
          * Run the method under test
@@ -310,12 +302,6 @@ public final class TestDefaultProjectScheduler {
         Assert.assertEquals(((Task) expectedTask).getName(), task.getName());
     }
 
-    private void cleanupTargetDirectory() {
-        new File(DIR + "/pccBookings.tji.tjp").delete();
-        new File(DIR + "/pccDeadlines.csv").delete();
-        new File(DIR + "/pccProject.tjp").delete();
-    }
-
     @Test
     /**
      * evernote:///view/3784753/s35/d7d20fd2-70de-41fd-8ed3-5e08500c0cea/d7d20fd2-70de-41fd-8ed3-5e08500c0cea/
@@ -349,10 +335,10 @@ public final class TestDefaultProjectScheduler {
                 getGoogleTasksDefect201109_1();
 
         final List<SchedulingObject> pccTasks =
-                importTasks(googleTasks, injector);
+                this.helper.importTasks(googleTasks, injector);
 
         final List<Booking> bookings =
-                calculatePlan(injector, persistence, pccTasks);
+                this.helper.calculatePlan(injector, persistence, pccTasks);
 
         Assert.assertNotNull(bookings);
         Assert.assertEquals(4, bookings.size());
@@ -429,14 +415,14 @@ public final class TestDefaultProjectScheduler {
                 getGoogleTasksDefect201109_2();
 
         final List<SchedulingObject> pccTasks =
-                importTasks(googleTasks, injector);
+                this.helper.importTasks(googleTasks, injector);
 
         final Task ball = getTaskByName(pccTasks, B_BALL);
-        
+
         Assert.assertEquals(0, ball.getChildren().size());
 
         final List<Booking> bookings =
-                calculatePlan(injector, persistence, pccTasks);
+                this.helper.calculatePlan(injector, persistence, pccTasks);
 
         Assert.assertNotNull(bookings);
         Assert.assertEquals(2, bookings.size());
@@ -510,82 +496,6 @@ public final class TestDefaultProjectScheduler {
 
     }
 
-    private List<Booking> calculatePlan(final Injector aInjector,
-            final Persistence aPersistence,
-            final List<SchedulingObject> aPccTasks) {
-        final ProjectScheduler objectUnderTest =
-                aInjector.getInstance(ProjectScheduler.class);
-
-        assertNotNull(objectUnderTest);
-
-        final ProjectExportInfo projectInfo =
-                getProjectInfo(aPersistence, aPccTasks, objectUnderTest);
-
-        objectUnderTest.setInjector(aInjector);
-        objectUnderTest.setTaskJugglerPath(TJ3_PATH);
-        objectUnderTest.setTransientMode(true);
-        objectUnderTest
-                .setDirectory(DIR);
-        objectUnderTest.setNow(projectInfo.getNow());
-
-        /**
-         * Delete project, bookings and deadline files
-         */
-        cleanupTargetDirectory();
-
-        try {
-            objectUnderTest.run();
-        } catch (final PccException exception) {
-            LOGGER.error("", exception);
-            fail(exception.getMessage());
-        }
-
-        final List<Booking> bookings = objectUnderTest.getBookings();
-
-        return bookings;
-    }
-
-    private ProjectExportInfo getProjectInfo(final Persistence aPersistence,
-            final List<SchedulingObject> aPccTasks,
-            final ProjectScheduler aObjectUnderTest) {
-        final ProjectExportInfo projectInfo = aObjectUnderTest
-                .getProjectExportInfo();
-
-        assertNotNull(projectInfo);
-
-        aPersistence.createSuperUser();
-        final UserData user = aPersistence.getUser(Persistence.SUPER_USER_NAME,
-                Persistence.SUPER_USER_PASSWORD);
-
-        assertNotNull(user);
-
-        final List<Resource> resources = getResources(aPersistence);
-
-        projectInfo.setSchedulingObjectsToExport(aPccTasks);
-        projectInfo.setResourcesToExport(resources);
-        projectInfo.setCopyright("DP");
-        projectInfo.setCurrency("EUR");
-        projectInfo.setNow(RubyDateTimeUtils.getDate(2011, Calendar.SEPTEMBER,
-                4, 17,
-                37));
-        projectInfo.setProjectName("Sample project");
-        projectInfo.setSchedulingHorizonMonths(1);
-        projectInfo.setUserData(user);
-        return projectInfo;
-    }
-
-    private List<Resource> getResources(final Persistence aPersistence) {
-        final List<Resource> resources = new LinkedList<Resource>();
-
-        final Long id =
-                aPersistence.createHumanResource("DP", "Dmitri", "Anatl'evich",
-                        "Pisarenko", 8.0);
-        final Resource worker = aPersistence.getResource(id);
-        worker.setDailyLimitInHours(8);
-        resources.add(worker);
-        return resources;
-    }
-
     private List<com.google.api.services.tasks.v1.model.Task>
             getGoogleTasksDefect201109_1() {
         // Prepare test data (START)
@@ -641,34 +551,4 @@ public final class TestDefaultProjectScheduler {
         return googleTasks;
     }
 
-    private
-            List<SchedulingObject>
-            importTasks(
-                    final List<com.google.api.services.tasks.v1.model.Task> aGoogleTasks,
-                    final Injector aInjector) {
-        final GoogleCalendarTasks2PccImporter2Factory factory =
-                aInjector
-                        .getInstance(GoogleCalendarTasks2PccImporter2Factory.class);
-        final GoogleCalendarTasks2PccImporter2 objectUnderTest =
-                factory.create();
-        objectUnderTest.setInjector(aInjector);
-
-        final UserData user = new MockObjectFactory().createUserData();
-
-        // Prepare test data (END)
-        objectUnderTest.setGoogleTasks(aGoogleTasks);
-        objectUnderTest.setInjector(aInjector);
-        objectUnderTest.setUser(user);
-        try {
-            objectUnderTest.run();
-        } catch (final PccException exception) {
-            LOGGER.error("", exception);
-            Assert.fail(exception.getMessage());
-        }
-
-        final List<SchedulingObject> createdPccTasks =
-                objectUnderTest.getCreatedPccTasks();
-
-        return createdPccTasks;
-    }
 }
