@@ -19,6 +19,7 @@ import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImpo
 import at.silverstrike.pcc.api.gtask2pcctaskconverter.GoogleTask2PccTaskConverterFactory;
 import at.silverstrike.pcc.api.gtasknoteparser.GoogleTaskNotesParserFactory;
 import at.silverstrike.pcc.api.gtaskrelevance.IsGoogleTaskRelevantCalculatorFactory;
+import at.silverstrike.pcc.api.gtaskrelevance2.RelevantTaskSetCalculatorFactory;
 import at.silverstrike.pcc.api.gtasktitleparser.GoogleTaskTitleParserFactory;
 import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.api.projectscheduler.ProjectScheduler;
@@ -31,6 +32,7 @@ import at.silverstrike.pcc.impl.gcaltasks2pccimporter.DefaultGoogleCalendarTasks
 import at.silverstrike.pcc.impl.gtask2pcctaskconverter.DefaultGoogleTask2PccTaskConverterFactory;
 import at.silverstrike.pcc.impl.gtasknoteparser.DefaultGoogleTaskNotesParserFactory;
 import at.silverstrike.pcc.impl.gtaskrelevance.DefaultIsGoogleTaskRelevantCalculatorFactory;
+import at.silverstrike.pcc.impl.gtaskrelevance2.DefaultRelevantTaskSetCalculatorFactory;
 import at.silverstrike.pcc.impl.gtasktitleparser.DefaultGoogleTaskTitleParserFactory;
 import at.silverstrike.pcc.impl.projectscheduler.DefaultProjectSchedulerFactory;
 import at.silverstrike.pcc.impl.tj3bookingsparser.DefaultBookingsFile2BookingsFactory;
@@ -73,6 +75,8 @@ public final class MockInjectorModuleDefect201109_1 extends AbstractModule {
                 new DefaultGoogleTask2PccTaskConverterFactory());
         bind(GoogleTaskTitleParserFactory.class).toInstance(
                 new DefaultGoogleTaskTitleParserFactory());
+        bind(RelevantTaskSetCalculatorFactory.class).toInstance(
+                new DefaultRelevantTaskSetCalculatorFactory());
     }
 
 }
