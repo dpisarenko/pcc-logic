@@ -43,8 +43,10 @@ class DefaultGoogleTasksExporter implements GoogleTasksExporter {
     private static final String PARENT = "${parent}";
     private static final String TITLE = "${title}";
     private static final String ID = "${id}";
-    private static final String LINE_TEMPLATE = "${id};${title};${parent};${notes};${completed};${position}${lineSeparator}";
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+    private static final String LINE_TEMPLATE =
+            "${id};${title};${parent};${notes};${completed};${position}${lineSeparator}";
+    private static final String LINE_SEPARATOR = System
+            .getProperty("line.separator");
     private String clientSecret;
     private String clientId;
     private String consumerKey;
@@ -55,6 +57,10 @@ class DefaultGoogleTasksExporter implements GoogleTasksExporter {
 
     @Override
     public void run() throws PccException {
+        if (!allDataSpecified()) {
+            LOGGER.error("Some of the data, required for accessing Google Tasks are not specified.");
+            return;
+        }
 
         final HttpTransport httpTransport = new NetHttpTransport();
         final JacksonFactory jsonFactory = new JacksonFactory();
@@ -92,8 +98,10 @@ class DefaultGoogleTasksExporter implements GoogleTasksExporter {
             for (final com.google.api.services.tasks.v1.model.Task curTask : tasks.items) {
 
                 final String[] replacementList =
-                        new String[] { curTask.id, curTask.title, curTask.parent,
-                                curTask.notes, curTask.completed, curTask.position,
+                        new String[] { curTask.id, curTask.title,
+                                curTask.parent,
+                                curTask.notes, curTask.completed,
+                                curTask.position,
                                 LINE_SEPARATOR };
 
                 fileContents.append(StringUtils.replaceEach(LINE_TEMPLATE,
@@ -105,6 +113,13 @@ class DefaultGoogleTasksExporter implements GoogleTasksExporter {
         } catch (final IOException exception) {
             LOGGER.error("", exception);
         }
+    }
+
+    private boolean allDataSpecified() {
+        return (!StringUtils.isBlank(this.clientId))
+                && (!StringUtils.isBlank(this.clientSecret))
+                && (!StringUtils.isBlank(this.consumerKey))
+                && (!StringUtils.isBlank(this.refreshToken));
     }
 
     public void setClientSecret(final String aClientSecret) {
