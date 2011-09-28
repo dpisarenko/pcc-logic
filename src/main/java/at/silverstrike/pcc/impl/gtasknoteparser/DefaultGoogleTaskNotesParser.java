@@ -31,7 +31,8 @@ class DefaultGoogleTaskNotesParser implements GoogleTaskNotesParser {
     private static final String HASHTAG = "#";
     private String notes;
     private boolean effortSpecified;
-    private Pattern effortPattern;
+    private Pattern effortPatternHours;
+    private Pattern effortPatternMinutes;
     private double effortInHours;
 
     private boolean predecessorsSpecified;
@@ -41,9 +42,9 @@ class DefaultGoogleTaskNotesParser implements GoogleTaskNotesParser {
         // This means N.YYh
         // I. e. max effort is 9.99 hours.
         // The fractional part is optional.
-        final String effortRegex = ".*(\\d(\\.\\d{0,2}?)?)h.*";
+        effortPatternHours = Pattern.compile(".*(\\d*(\\.\\d{0,2}?)?)h.*");
 
-        effortPattern = Pattern.compile(effortRegex);
+        effortPatternMinutes = Pattern.compile("[^\\d]*(\\d+)m.*");
     }
 
     @Override
@@ -97,12 +98,21 @@ class DefaultGoogleTaskNotesParser implements GoogleTaskNotesParser {
     }
 
     private void parseEffort() {
-        final Matcher matcher = this.effortPattern.matcher(this.notes.trim());
-        this.effortSpecified = matcher.matches();
+        final Matcher matcherHours =
+                this.effortPatternHours.matcher(this.notes.trim());
+        final Matcher matcherMinutes =
+                this.effortPatternMinutes.matcher(this.notes.trim());
 
-        if (this.effortSpecified) {
-            final String effortAsString = matcher.group(1);
+        if (matcherHours.matches()) {
+            final String effortAsString = matcherHours.group(1);
             this.effortInHours = Double.parseDouble(effortAsString);
+            this.effortSpecified = true;
+        } else if (matcherMinutes.matches()) {
+            final String effortAsString = matcherMinutes.group(1);
+            this.effortInHours = Double.parseDouble(effortAsString) / 60.;
+            this.effortSpecified = true;
+        } else {
+            this.effortSpecified = false;
         }
     }
 
