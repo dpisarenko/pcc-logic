@@ -182,4 +182,26 @@ public final class TestDefaultIsGoogleTaskRelevantCalculator {
         }
         return actualRelevance;
     }
+    
+    @Test 
+    public void testOnBlankCompletedField()
+    {
+        final IsGoogleTaskRelevantCalculator objectUnderTest =
+            getObjectUnderTest();
+
+        final com.google.api.services.tasks.v1.model.Task task = new Task();
+
+        task.set("title", "Поработать по концепции");
+        task.set("completed", "");
+        task.set("id", "MDA4MjIwMTU4MjI3NTg0MzUxMTM6MDo0OTIxNjE2NzE");
+        task.set("kind", null);
+        task.set("notes", "1h");
+        task.set("parent", "MDA4MjIwMTU4MjI3NTg0MzUxMTM6MDoxNjk");
+        task.set("position", "00000000000003145727");
+        task.set("status", null);
+        task.set("updated", null);
+        
+        Assert.assertFalse(getActualRelevance(objectUnderTest, task));
+        
+    }
 }
