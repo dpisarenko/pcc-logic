@@ -33,8 +33,8 @@ import at.silverstrike.pcc.api.gtask2pcctaskconverter.GoogleTask2PccTaskConverte
 import at.silverstrike.pcc.api.gtask2pcctaskconverter.GoogleTask2PccTaskConverterFactory;
 import at.silverstrike.pcc.api.gtasknoteparser.GoogleTaskNotesParser;
 import at.silverstrike.pcc.api.gtasknoteparser.GoogleTaskNotesParserFactory;
-import at.silverstrike.pcc.api.gtaskrelevance.IsGoogleTaskRelevantCalculator;
-import at.silverstrike.pcc.api.gtaskrelevance.IsGoogleTaskRelevantCalculatorFactory;
+import at.silverstrike.pcc.api.gtaskrelevance2.RelevantTaskSetCalculator;
+import at.silverstrike.pcc.api.gtaskrelevance2.RelevantTaskSetCalculatorFactory;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.UserData;
 import at.silverstrike.pcc.api.persistence.Persistence;
@@ -53,8 +53,10 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
     private Injector injector;
     private UserData user;
 
-    public void setGoogleTasks(
-            final List<com.google.api.services.tasks.v1.model.Task> aGoogleTasks) {
+    public
+            void
+            setGoogleTasks(
+                    final List<com.google.api.services.tasks.v1.model.Task> aGoogleTasks) {
         this.googleTasks = aGoogleTasks;
     }
 
@@ -175,7 +177,8 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
 
         for (final String curGoogleTaskId : aRelevantTasksByIds.keySet()) {
             try {
-                final RelevantTaskInformation tuple = new RelevantTaskInformation();
+                final RelevantTaskInformation tuple =
+                        new RelevantTaskInformation();
 
                 final com.google.api.services.tasks.v1.model.Task curGoogleTask =
                         aRelevantTasksByIds.get(curGoogleTaskId);
@@ -245,7 +248,6 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
                         aPccTasksByGoogleIds.get(parentId);
 
                 parentPccTask.getChildren().add(childPccTask);
-                
                 childPccTask.setParent(parentPccTask);
             }
         }
@@ -286,33 +288,54 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
     private
             void
             getRelevantGoogleTasks(
-                    final Map<String, com.google.api.services.tasks.v1.model.Task> relevantTasksByIds) {
-        final IsGoogleTaskRelevantCalculatorFactory factory =
+                    final Map<String, com.google.api.services.tasks.v1.model.Task> aRelevantTasksByIds) {
+        final RelevantTaskSetCalculatorFactory factory =
                 this.injector
-                        .getInstance(IsGoogleTaskRelevantCalculatorFactory.class);
-        final IsGoogleTaskRelevantCalculator relevanceCalculator =
-                factory.create();
+                        .getInstance(RelevantTaskSetCalculatorFactory.class);
+        final RelevantTaskSetCalculator calculator = factory.create();
 
-        relevanceCalculator.setInjector(this.injector);
+        calculator.setInjector(this.injector);
+        calculator.setGoogleTasks(this.googleTasks);
+        try {
+            calculator.run();
+            final List<com.google.api.services.tasks.v1.model.Task> relevantTasks =
+                    calculator.getRelevantTasks();
 
-        for (final com.google.api.services.tasks.v1.model.Task curTask : this.googleTasks) {
-            LOGGER.debug(
-                    "Task list: title='{}', completed='{}', id='{}', kind='{}', notes='{}', parent='{}', position='{}', status='{}', updated='{}'",
-                    new Object[] { curTask.title, curTask.completed,
-                            curTask.id, curTask.kind, curTask.notes,
-                            curTask.parent, curTask.position, curTask.status,
-                            curTask.updated });
-
-            try {
-                relevanceCalculator.setGoogleTask(curTask);
-                relevanceCalculator.run();
-                if (relevanceCalculator.isRelevant()) {
-                    relevantTasksByIds.put(curTask.id, curTask);
-                }
-            } catch (final PccException exception) {
-                LOGGER.error("", exception);
+            for (final com.google.api.services.tasks.v1.model.Task curTask : relevantTasks) {
+                aRelevantTasksByIds.put(curTask.id, curTask);
             }
+
+        } catch (final PccException exception) {
+            LOGGER.error("", exception);
         }
+
+        // final IsGoogleTaskRelevantCalculatorFactory factory =
+        // this.injector
+        // .getInstance(IsGoogleTaskRelevantCalculatorFactory.class);
+        // final IsGoogleTaskRelevantCalculator relevanceCalculator =
+        // factory.create();
+        //
+        // relevanceCalculator.setInjector(this.injector);
+        //
+        // for (final com.google.api.services.tasks.v1.model.Task curTask :
+        // this.googleTasks) {
+        // LOGGER.debug(
+        // "Task list: title='{}', completed='{}', id='{}', kind='{}', notes='{}', parent='{}', position='{}', status='{}', updated='{}'",
+        // new Object[] { curTask.title, curTask.completed,
+        // curTask.id, curTask.kind, curTask.notes,
+        // curTask.parent, curTask.position, curTask.status,
+        // curTask.updated });
+        //
+        // try {
+        // relevanceCalculator.setGoogleTask(curTask);
+        // relevanceCalculator.run();
+        // if (relevanceCalculator.isRelevant()) {
+        // relevantTasksByIds.put(curTask.id, curTask);
+        // }
+        // } catch (final PccException exception) {
+        // LOGGER.error("", exception);
+        // }
+        // }
     }
 
     public void setUser(final UserData aUser) {

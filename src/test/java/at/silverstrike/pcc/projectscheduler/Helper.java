@@ -274,7 +274,7 @@ class Helper {
             final File aFile) {
         List<String> lines = null;
         try {
-            lines = FileUtils.readLines(aFile);
+            lines = FileUtils.readLines(aFile, "UTF-8");
         } catch (final IOException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
