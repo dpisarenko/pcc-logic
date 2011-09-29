@@ -58,7 +58,7 @@ public final class TestBookingsParser {
             final BookingsParser parser = new BookingsParser(tokenStream);
 
             parser.bookingsFile();
-
+            checkParsingErrors(parser);
             bookingsFile = parser.getBookingsFile();
         } catch (final Exception exception) {
             LOGGER.error("", exception);
@@ -121,7 +121,7 @@ public final class TestBookingsParser {
             final BookingsParser parser = new BookingsParser(tokenStream);
 
             parser.bookingsFile();
-
+            checkParsingErrors(parser);
             bookingsFile = parser.getBookingsFile();
         } catch (final Exception exception) {
             LOGGER.error("", exception);
@@ -154,7 +154,7 @@ public final class TestBookingsParser {
             final BookingsParser parser = new BookingsParser(tokenStream);
 
             parser.bookingsFile();
-
+            checkParsingErrors(parser);
             bookingsFile = parser.getBookingsFile();
         } catch (final Exception exception) {
             LOGGER.error("", exception);
@@ -182,4 +182,30 @@ public final class TestBookingsParser {
 
     }
 
+    @Test
+    public void testParsingError20110930() {
+        InputStream inputStream = null;
+        try {
+            inputStream =
+                    FileUtils.openInputStream(new File(DIR
+                            + "testParsingError20110930"));
+            final BookingsLexer lexer =
+                    new BookingsLexer(new ANTLRInputStream(inputStream));
+            final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            final BookingsParser parser = new BookingsParser(tokenStream);
+
+            parser.bookingsFile();
+            checkParsingErrors(parser);
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+    }
+
+    private void checkParsingErrors(final BookingsParser parser) {
+        Assert.assertEquals("Parsing error(s) occured", 0,
+                parser.getNumberOfSyntaxErrors());
+    }
 }

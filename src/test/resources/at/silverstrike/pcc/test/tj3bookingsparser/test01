@@ -1,4 +1,7 @@
 project prj "Sample project" "1.0" 2010-10-25-00:00-+0200 - 2010-11-24-09:00-+0100 {
+	timezone "UTC"
+	scenario plan "Plan" {
+    }
 }
 
 projectids prj
@@ -14,8 +17,8 @@ task T2010 "Some interesting task" {
 
 supplement task T2010 {
   booking R1210 2010-10-25-09:00-+0200 + 2.75h { overtime 2 }
-  complete 0.0
   priority 200
+  projectid prj
 }
 
 supplement resource R1210 {

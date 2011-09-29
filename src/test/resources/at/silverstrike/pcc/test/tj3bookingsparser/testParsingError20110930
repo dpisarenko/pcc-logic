@@ -1,0 +1,167 @@
+project prj "pcc" "1.0" 2011-09-30-01:00-+0000 - 2011-10-30-11:00-+0000 {
+  timezone "UTC"
+  scenario plan "Plan" {
+  }
+}
+
+projectids prj
+
+resource R1 "R"
+
+task T7 "Срочное" {
+  task T21 "Поработать по концепции" {
+    start 2011-09-30-14:30-+0000
+    end 2011-10-03-14:30-+0000
+    scheduling asap
+    scheduled
+  }
+}
+task T9 "STAR-TA" {
+  task T14 "22_31_36" {
+    task T4 "010" {
+      start 2011-09-30-09:00-+0000
+      end 2011-09-30-09:30-+0000
+      scheduling asap
+      scheduled
+    }
+    task T6 "013" {
+      start 2011-09-30-10:00-+0000
+      end 2011-09-30-10:30-+0000
+      scheduling asap
+      scheduled
+    }
+    task T11 "012" {
+      start 2011-09-30-09:30-+0000
+      end 2011-09-30-10:00-+0000
+      scheduling asap
+      scheduled
+    }
+    task T12 "014" {
+      start 2011-09-30-10:30-+0000
+      end 2011-09-30-11:00-+0000
+      scheduling asap
+      scheduled
+    }
+    task T15 "011" {
+      start 2011-09-30-14:00-+0000
+      end 2011-09-30-14:30-+0000
+      scheduling asap
+      scheduled
+    }
+  }
+}
+task T23 "ЦУП" {
+  task T10 "Теория" {
+    task T17 "Добавить в концепцию: Сайт ..." {
+      start 2011-09-30-11:00-+0000
+      end 2011-09-30-12:00-+0000
+      scheduling asap
+      scheduled
+    }
+    task T18 "Добавить в концепцию: Диста..." {
+      start 2011-10-03-14:30-+0000
+      end 2011-10-03-15:30-+0000
+      scheduling asap
+      scheduled
+    }
+  }
+}
+task T20 "Елена Прекрасная" {
+  task T13 "Купить конфеты" {
+    start 2011-09-30-13:00-+0000
+    end 2011-09-30-14:00-+0000
+    scheduling asap
+    scheduled
+  }
+  task T24 "Отправить конфеты по почте" {
+    start 2011-10-03-15:30-+0000
+    end 2011-10-03-16:30-+0000
+    scheduling asap
+    scheduled
+  }
+}
+supplement task T7 {
+  priority 0
+  projectid prj
+}
+supplement task T7.T21 {
+  booking R1 2011-09-30-14:30-+0000 + 3.5h,
+          2011-10-03-09:00-+0000 + 3.0h,
+          2011-10-03-13:00-+0000 + 1.5h { overtime 2 }
+  priority 981
+  projectid prj
+}
+supplement task T9 {
+  priority 0
+  projectid prj
+}
+supplement task T9.T14 {
+  priority 0
+  projectid prj
+}
+supplement task T9.T14.T4 {
+  booking R1 2011-09-30-09:00-+0000 + 0.5h { overtime 2 }
+  priority 1000
+  projectid prj
+}
+supplement task T9.T14.T6 {
+  booking R1 2011-09-30-10:00-+0000 + 0.5h { overtime 2 }
+  priority 998
+  projectid prj
+}
+supplement task T9.T14.T11 {
+  booking R1 2011-09-30-09:30-+0000 + 0.5h { overtime 2 }
+  priority 999
+  projectid prj
+}
+supplement task T9.T14.T12 {
+  booking R1 2011-09-30-10:30-+0000 + 0.5h { overtime 2 }
+  priority 997
+  projectid prj
+}
+supplement task T9.T14.T15 {
+  booking R1 2011-09-30-14:00-+0000 + 0.5h { overtime 2 }
+  priority 986
+  projectid prj
+}
+supplement task T23 {
+  priority 0
+  projectid prj
+}
+supplement task T23.T10 {
+  priority 0
+  projectid prj
+}
+supplement task T23.T10.T17 {
+  booking R1 2011-09-30-11:00-+0000 + 1.0h { overtime 2 }
+  priority 988
+  projectid prj
+}
+supplement task T23.T10.T18 {
+  booking R1 2011-10-03-14:30-+0000 + 1.0h { overtime 2 }
+  priority 978
+  projectid prj
+}
+supplement task T20 {
+  priority 0
+  projectid prj
+}
+supplement task T20.T13 {
+  booking R1 2011-09-30-13:00-+0000 + 1.0h { overtime 2 }
+  priority 987
+  projectid prj
+}
+supplement task T20.T24 {
+  booking R1 2011-10-03-15:30-+0000 + 1.0h { overtime 2 }
+  priority 977
+  projectid prj
+}
+supplement resource R1 {
+  workinghours sun off
+               workinghours mon 9:00 - 12:00, 13:00 - 18:00
+               workinghours tue 9:00 - 12:00, 13:00 - 18:00
+               workinghours wed 9:00 - 12:00, 13:00 - 18:00
+               workinghours thu 9:00 - 12:00, 13:00 - 18:00
+               workinghours fri 9:00 - 12:00, 13:00 - 18:00
+               workinghours sat off
+}
