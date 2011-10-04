@@ -1599,4 +1599,11 @@ public final class DefaultPersistence implements Persistence {
         return bookings;
     }
 
+    @Override
+    public Event createTransientEvent(final long aId) {
+        final DefaultEvent event = new DefaultEvent();
+        event.setId(aId);
+        return event;
+    }
+
 }

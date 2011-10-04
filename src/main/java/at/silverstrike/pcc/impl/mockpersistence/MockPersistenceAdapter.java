@@ -264,4 +264,10 @@ public abstract class MockPersistenceAdapter implements Persistence {
         return null;
     }
 
+    @Override
+    public Event createTransientEvent(final long aId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

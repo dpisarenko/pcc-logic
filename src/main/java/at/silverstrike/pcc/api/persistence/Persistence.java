@@ -189,4 +189,7 @@ public interface Persistence extends ModuleWithInjectableDependencies {
             updateBookingsTransientMode(final List<BookingTuple> aBookingTuples,
                     final UserData aUserData,
                     final List<SchedulingObject> aSchedulingObjectsToExport);
+
+    Event createTransientEvent(final long aId);
+    
 }
