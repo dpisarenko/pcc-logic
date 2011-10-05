@@ -16,6 +16,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,7 @@ public class TestDefect201110051 {
     private Helper helper = new Helper();
 
     @Test
+    @Ignore
     public void testDefect201110051() {
         /**
          * Create persistence
