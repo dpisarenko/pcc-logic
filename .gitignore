@@ -1,1 +1,3 @@
 target/derby.log
+/target
+/derby.log
