@@ -34,10 +34,10 @@ import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.ResourceAllocation;
 import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
 
-class Helper {
+final class Helper {
     public static final int ONE_MONTH = 1;
     public static final String EURO = "EUR";
-    
+
     private static final Logger LOGGER =
             LoggerFactory.getLogger(Helper.class);
 
@@ -191,12 +191,23 @@ class Helper {
 
     public List<SchedulingObject> getTestOnEvents() {
         final List<SchedulingObject> processes =
-            new LinkedList<SchedulingObject>();
+                new LinkedList<SchedulingObject>();
 
         processes.add(MOCK_OBJECT_FACTORY.createControlProcess(null));
         processes.add(MOCK_OBJECT_FACTORY.createEvent());
-        
+
         return processes;
+    }
+
+    public Date getDateDefect201109301() {
+        final GregorianCalendar calendar =
+                new GregorianCalendar(2011, Calendar.OCTOBER, 5, 22, 02);
+        final Date now = calendar.getTime();
+        return now;
+    }
+
+    public List<SchedulingObject> getDefect201109301Processes() {
+        return getTestRun03Processes();
     }
 
 }
