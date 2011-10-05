@@ -1,0 +1,178 @@
+project prj "pcc-logic" "1.0" 2011-10-05-04:00-+0000 - 2011-11-04-14:00-+0000 {
+  timezone "UTC"
+  scenario plan "Plan" {
+    active yes
+  }
+}
+
+projectids prj
+
+resource R74 "R"
+
+task T19 "STAR-TA" {
+  task T5 "STAR3 GUI OTS" {
+    task T18 "STAR3 GUI OTS: Execute GUI ..." {
+      start 2011-10-05-12:00-+0000
+      end 2011-10-05-14:00-+0000
+      scheduling asap
+      scheduled
+    }
+    task T23 "STAR3 GUI OTS: Make XP run ..." {
+      start 2011-10-10-13:00-+0000
+      end 2011-10-10-15:00-+0000
+      scheduling asap
+      scheduled
+    }
+  }
+}
+task T6 "Новый основной заказчик" {
+  task T10 "Отправить CV Thomas Unzeitig" {
+    start 2011-10-05-10:00-+0000
+    end 2011-10-05-12:00-+0000
+    scheduling asap
+    scheduled
+  }
+}
+task T13 "ЦУП" {
+  task T20 "Теория" {
+    task T9 "Добавить в концепцию: Диста..." {
+      start 2011-10-05-09:00-+0000
+      end 2011-10-05-10:00-+0000
+      scheduling asap
+      scheduled
+    }
+    task T22 "Добавить в концепцию: Сайт ..." {
+      start 2011-10-07-12:00-+0000
+      end 2011-10-07-13:00-+0000
+      scheduling asap
+      scheduled
+    }
+  }
+}
+task T17 "Срочное" {
+  task T15 "Занести в концепцию: нахожд..." {
+    start 2011-10-05-14:00-+0000
+    end 2011-10-05-15:00-+0000
+    scheduling asap
+    scheduled
+  }
+  task T16 "Сформулировать суть моего п..." {
+    start 2011-10-05-15:00-+0000
+    end 2011-10-06-10:00-+0000
+    scheduling asap
+    scheduled
+  }
+  task T21 "Отчет ВАС-у по ПФУ - план б..." {
+    start 2011-10-06-10:00-+0000
+    end 2011-10-07-12:00-+0000
+    scheduling asap
+    scheduled
+  }
+  task T26 "Поработать по концепции" {
+    start 2011-10-07-13:00-+0000
+    end 2011-10-10-13:00-+0000
+    scheduling asap
+    scheduled
+  }
+}
+task E1 "ALTRUIX: 2. Abstimmungs-Mee..." {
+  start 2011-10-06-03:00-+0000
+  end 2011-10-06-05:00-+0000
+  scheduling alap
+  scheduled
+}
+task E2 "CEE Panel" {
+  start 2011-10-05-05:00-+0000
+  end 2011-10-05-06:00-+0000
+  scheduling alap
+  scheduled
+}
+supplement task T19 {
+  priority 0
+  projectid prj
+}
+supplement task T19.T5 {
+  priority 0
+  projectid prj
+}
+supplement task T19.T5.T18 {
+  booking R74 2011-10-05-12:00-+0000 + 2.0h { overtime 2 }
+  priority 987
+  projectid prj
+}
+supplement task T19.T5.T23 {
+  booking R74 2011-10-10-13:00-+0000 + 2.0h { overtime 2 }
+  priority 975
+  projectid prj
+}
+supplement task T6 {
+  priority 0
+  projectid prj
+}
+supplement task T6.T10 {
+  booking R74 2011-10-05-10:00-+0000 + 2.0h { overtime 2 }
+  priority 988
+  projectid prj
+}
+supplement task T13 {
+  priority 0
+  projectid prj
+}
+supplement task T13.T20 {
+  priority 0
+  projectid prj
+}
+supplement task T13.T20.T9 {
+  booking R74 2011-10-05-09:00-+0000 + 1.0h { overtime 2 }
+  priority 989
+  projectid prj
+}
+supplement task T13.T20.T22 {
+  booking R74 2011-10-07-12:00-+0000 + 1.0h { overtime 2 }
+  priority 979
+  projectid prj
+}
+supplement task T17 {
+  priority 0
+  projectid prj
+}
+supplement task T17.T15 {
+  booking R74 2011-10-05-14:00-+0000 + 1.0h { overtime 2 }
+  priority 986
+  projectid prj
+}
+supplement task T17.T16 {
+  booking R74 2011-10-05-15:00-+0000 + 2.0h,
+          2011-10-06-09:00-+0000 + 1.0h { overtime 2 }
+  priority 982
+  projectid prj
+}
+supplement task T17.T21 {
+  booking R74 2011-10-06-10:00-+0000 + 7.0h,
+          2011-10-07-09:00-+0000 + 3.0h { overtime 2 }
+  priority 981
+  projectid prj
+}
+supplement task T17.T26 {
+  booking R74 2011-10-07-13:00-+0000 + 4.0h,
+          2011-10-10-09:00-+0000 + 4.0h { overtime 2 }
+  priority 977
+  projectid prj
+}
+supplement task E1 {
+  priority 500
+  projectid prj
+}
+supplement task E2 {
+  priority 500
+  projectid prj
+}
+supplement resource R74 {
+  workinghours sun off
+               workinghours mon 9:00 - 17:00
+               workinghours tue 9:00 - 17:00
+               workinghours wed 9:00 - 17:00
+               workinghours thu 9:00 - 17:00
+               workinghours fri 9:00 - 17:00
+               workinghours sat off
+}

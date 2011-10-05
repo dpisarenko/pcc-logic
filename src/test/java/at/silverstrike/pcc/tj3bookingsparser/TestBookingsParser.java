@@ -204,6 +204,29 @@ public final class TestBookingsParser {
         }
     }
 
+    @Test
+    public void testAlapParsingError20111005() {
+        InputStream inputStream = null;
+        try {
+            inputStream =
+                    FileUtils.openInputStream(new File(DIR
+                            + "testAlapParsingError20111005"));
+            final BookingsLexer lexer =
+                    new BookingsLexer(new ANTLRInputStream(inputStream));
+            final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            final BookingsParser parser = new BookingsParser(tokenStream);
+
+            parser.bookingsFile();
+            checkParsingErrors(parser);
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+    }
+
+    
     private void checkParsingErrors(final BookingsParser parser) {
         Assert.assertEquals("Parsing error(s) occured", 0,
                 parser.getNumberOfSyntaxErrors());

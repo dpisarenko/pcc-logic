@@ -86,7 +86,7 @@ task
 	(task)* 
 	(Start DateTimeWithTimeZone
 	End DateTimeWithTimeZone
-	Scheduling Asap
+	Scheduling SchedulingType
 	Scheduled)*
 	CloseParen
 	;
@@ -247,9 +247,10 @@ Scheduling
 	'scheduling'
 	;
 	
-Asap
-	:
-	'asap'
+	
+SchedulingType
+	: 'asap'
+	| 'alap'
 	;
 
 Scheduled
