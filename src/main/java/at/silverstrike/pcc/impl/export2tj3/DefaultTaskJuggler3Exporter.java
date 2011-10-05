@@ -414,20 +414,28 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     }
 
     private String getEventText(final Event aSchedulingObject) {
-        final String[] searchList =
-                new String[] { "${soId}", "${eventName}", "${startDateTime}",
-                        "${endDateTime}" };
-        final String[] replacementList =
-                new String[] {
-                        formatLong(aSchedulingObject.getId()).toString(),
-                        shortenName(aSchedulingObject.getName()).toString(),
-                        formatDate(aSchedulingObject.getStartDateTime())
-                                .toString(),
-                        formatDate(aSchedulingObject.getEndDateTime())
-                                .toString() };
+        final Date startTime = aSchedulingObject.getStartDateTime();
+        final Date endTime = aSchedulingObject.getEndDateTime();
 
-        return StringUtils.replaceEach(this.eventTemplate, searchList,
-                replacementList);
+        if ((startTime != null) && (endTime != null)) {
+            final String[] searchList =
+                    new String[] { "${soId}", "${eventName}",
+                            "${startDateTime}",
+                            "${endDateTime}" };
+            final String[] replacementList =
+                    new String[] {
+                            formatLong(aSchedulingObject.getId()).toString(),
+                            shortenName(aSchedulingObject.getName()).toString(),
+                            formatDate(startTime)
+                                    .toString(),
+                            formatDate(endTime)
+                                    .toString() };
+
+            return StringUtils.replaceEach(this.eventTemplate, searchList,
+                    replacementList);
+        } else {
+            return "";
+        }
     }
 
     private String getTaskText(final SchedulingObject aSchedulingObject,
