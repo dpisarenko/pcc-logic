@@ -117,7 +117,7 @@ public final class DefaultPersistence implements Persistence {
      * @see at.silverstrike.pcc.api.persistence.Persistence#closeSession()
      */
     @Override
-    public final void closeSession() {
+    public void closeSession() {
         if (sessionFactory == null) {
             return;
         }
@@ -133,12 +133,12 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final Booking createBooking() {
+    public Booking createBooking() {
         return new DefaultBooking();
     }
 
     @Override
-    public final Long createHumanResource(final String aAbbreviation,
+    public Long createHumanResource(final String aAbbreviation,
             final String aFirstName, final String aMiddleName,
             final String aSurname, final double aDailyMaxWorkTimeInHours) {
         final Transaction tx = session.beginTransaction();
@@ -171,7 +171,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final Task createSubTask(final String aProcessName,
+    public Task createSubTask(final String aProcessName,
             final Long aParentProcessId,
             final UserData aUser) {
         final Transaction tx = session.beginTransaction();
@@ -220,7 +220,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final Long createTask(final String aProcessName) {
+    public Long createTask(final String aProcessName) {
         final Transaction tx = session.beginTransaction();
 
         final DefaultSchedulingObject task = new DefaultTask();
@@ -238,7 +238,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final void generateDailyPlans(final Date aNow) {
+    public void generateDailyPlans(final Date aNow) {
         final Transaction tx = session.beginTransaction();
 
         try {
@@ -274,7 +274,7 @@ public final class DefaultPersistence implements Persistence {
 
     @SuppressWarnings({ "rawtypes" })
     @Override
-    public final List<SchedulingObject> getAllNotDeletedTasks(
+    public List<SchedulingObject> getAllNotDeletedTasks(
             final UserData aUser) {
         final List<SchedulingObject> returnValue =
                 new LinkedList<SchedulingObject>();
@@ -336,7 +336,7 @@ public final class DefaultPersistence implements Persistence {
 
     @SuppressWarnings({ "rawtypes" })
     @Override
-    public final List<SchedulingObject>
+    public List<SchedulingObject>
             getChildTasks(final SchedulingObject aParent) {
         final List<SchedulingObject> returnValue =
                 new LinkedList<SchedulingObject>();
@@ -381,7 +381,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final List<SchedulingObject> getChildTasks(final Long aProcessId) {
+    public List<SchedulingObject> getChildTasks(final Long aProcessId) {
         final Transaction tx = session.beginTransaction();
         try {
             SchedulingObject process = null;
@@ -403,7 +403,7 @@ public final class DefaultPersistence implements Persistence {
 
     @SuppressWarnings("unchecked")
     @Override
-    public final DailyPlan getDailyPlan(final Date aNewDate,
+    public DailyPlan getDailyPlan(final Date aNewDate,
             final String aResource) {
         DailyPlan returnValue = null;
 
@@ -471,7 +471,7 @@ public final class DefaultPersistence implements Persistence {
 
     @SuppressWarnings("unchecked")
     @Override
-    public final List<SchedulingObject> getSubProcessesWithChildren(
+    public List<SchedulingObject> getSubProcessesWithChildren(
             final Long aProcessId, final UserData aUser) {
         List<SchedulingObject> processes = null;
 
@@ -510,7 +510,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final Task getTask(final Object aProcessid) {
+    public Task getTask(final Object aProcessid) {
         if (aProcessid == null) {
             return null;
         } else {
@@ -521,7 +521,7 @@ public final class DefaultPersistence implements Persistence {
 
     @SuppressWarnings("unchecked")
     @Override
-    public final List<Task> getUncompletedTasksWithEstimatedEndTime() {
+    public List<Task> getUncompletedTasksWithEstimatedEndTime() {
         List<Task> processes = new LinkedList<Task>();
 
         try {
@@ -541,7 +541,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final void
+    public void
             handoffProcess(final Long aProcessId, final Long aWorkerId) {
         if (aProcessId == null) {
             LOGGER.error("processId is null");
@@ -595,7 +595,7 @@ public final class DefaultPersistence implements Persistence {
      * @see at.silverstrike.pcc.api.persistence.Persistence#openSession()
      */
     @Override
-    public final void openSession(final String aHost, final String aUser,
+    public void openSession(final String aHost, final String aUser,
             final String aPassword, final String aDatabase) {
         LOGGER.debug(ErrorCodes.M_001_OPEN_SESSION);
         try {
@@ -631,7 +631,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final void updateBookings(final List<BookingTuple> aBookingTuples,
+    public void updateBookings(final List<BookingTuple> aBookingTuples,
             final UserData aUserData) {
         final Transaction tx = session.beginTransaction();
         try {
@@ -669,7 +669,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final void updateTask(final Task aProcess) {
+    public void updateTask(final Task aProcess) {
         final Transaction tx = session.beginTransaction();
 
         try {
@@ -682,7 +682,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final void updateTaskEndTimes(
+    public void updateTaskEndTimes(
             final List<ProcessEndTimeTuple> aEndTimeTuples) {
         LOGGER.debug("updateTaskEndTimes, 1");
 
@@ -944,7 +944,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final void clearDatabase() {
+    public void clearDatabase() {
         final Transaction tx = session.beginTransaction();
         try {
             final String[] entitiesToDelete =
@@ -987,7 +987,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final Resource getResource(final Long aResourceId) {
+    public Resource getResource(final Long aResourceId) {
         if (aResourceId == null) {
             return null;
         } else {
@@ -998,7 +998,7 @@ public final class DefaultPersistence implements Persistence {
 
     @SuppressWarnings("unchecked")
     @Override
-    public final UserData getUserData() {
+    public UserData getUserData() {
         final UserData userData = new DefaultUserData();
 
         final Query bookingsQuery = session.createQuery("from DefaultBooking");
@@ -1035,7 +1035,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final Event createSubEvent(final String aEventName,
+    public Event createSubEvent(final String aEventName,
             final Long aParentProcessId, final UserData aUser) {
         final Transaction tx = session.beginTransaction();
         Event returnValue = null;
@@ -1078,11 +1078,11 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final boolean deleteEvent(final Event aEvent) {
+    public boolean deleteEvent(final Event aEvent) {
         return deleteSchedulingObject(aEvent);
     }
 
-    public final Integer getNextSchedulingObjectPriority(
+    public Integer getNextSchedulingObjectPriority(
             final SchedulingObject aParent) {
         Integer maxPriority = MAX_PRIORITY;
         try {
@@ -1120,7 +1120,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final Worker getCurrentWorker(final UserData aUser) {
+    public Worker getCurrentWorker(final UserData aUser) {
         final String resourceName = aUser.getResourceName();
         final String hql =
                 "from DefaultWorker where abbreviation = '${resource}'".
@@ -1156,7 +1156,7 @@ public final class DefaultPersistence implements Persistence {
     }
 
     @Override
-    public final boolean hasChildren(final SchedulingObject aObject) {
+    public boolean hasChildren(final SchedulingObject aObject) {
         Long numberOfChildren = 0L;
         try {
             final String hql;
@@ -1177,7 +1177,7 @@ public final class DefaultPersistence implements Persistence {
 
     @SuppressWarnings("unchecked")
     @Override
-    public final List<SchedulingObject> getTopLevelTasks(final UserData aUser) {
+    public List<SchedulingObject> getTopLevelTasks(final UserData aUser) {
         @SuppressWarnings("rawtypes")
         List result = null;
         final Transaction tx = session.beginTransaction();
