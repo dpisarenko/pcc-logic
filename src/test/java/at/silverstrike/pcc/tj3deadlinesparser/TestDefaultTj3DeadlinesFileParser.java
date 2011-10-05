@@ -48,6 +48,9 @@ public class TestDefaultTj3DeadlinesFileParser {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
         }
+        
+        Assert.assertNotNull(parser.getProcessEndTimes());
+        Assert.assertEquals(1, parser.getProcessEndTimes().size());
     }
 
     private Tj3DeadlinesFileParser getParser() {
@@ -69,7 +72,6 @@ public class TestDefaultTj3DeadlinesFileParser {
 
         assertNotNull(parser);
 
-        parser.setInjector(injector);
         return parser;
     }
 }

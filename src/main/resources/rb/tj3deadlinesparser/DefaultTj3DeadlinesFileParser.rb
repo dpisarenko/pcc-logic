@@ -66,7 +66,7 @@ class DefaultTj3DeadlinesFileParser
 	
 					logger.debug("datetime: #{row[2]}")
 					
-					if row[0].strip.start_with?("""T")
+					if row[0].strip.start_with?("\"T")
 						tuple = DefaultProcessEndTimeTuple.new(row[0], DateTime.parse(row[2]))
 						@processEndTimes.add(tuple)
 					end
