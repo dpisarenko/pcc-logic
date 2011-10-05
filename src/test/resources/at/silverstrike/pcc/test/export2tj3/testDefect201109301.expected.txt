@@ -6,7 +6,7 @@
 # Copyright 2010, 2011 Dmitri Anatol'evich Pisarenko
 # All rights reserved
 
-project "pcc-logic" 2011-10-05-22:00 +1m 
+project "MyProject" 2011-10-05-22:00 +1m 
 {
   timeformat "%d.%m.%Y %H:%M"
 
