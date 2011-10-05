@@ -16,7 +16,6 @@ import static junit.framework.Assert.fail;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Injector;
@@ -29,10 +28,6 @@ public final class TestDefaultTj3DeadlinesFileParserFactory {
     private static final Logger LOGGER =
             LoggerFactory
                     .getLogger(TestDefaultTj3DeadlinesFileParserFactory.class);
-
-    @Before
-    public void setupLogger() {
-    }
 
     @Test
     public void testCreate01() {
