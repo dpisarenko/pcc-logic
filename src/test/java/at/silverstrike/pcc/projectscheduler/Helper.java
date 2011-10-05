@@ -229,6 +229,7 @@ final class Helper {
         objectUnderTest
                 .setDirectory(DIR);
         objectUnderTest.setNow(aNow);
+        objectUnderTest.getProjectExportInfo().setNow(aNow);
 
         /**
          * Delete project, bookings and deadline files
