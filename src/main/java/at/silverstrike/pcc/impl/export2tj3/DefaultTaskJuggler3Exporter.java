@@ -59,7 +59,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     private static final String DAILY_LIMIT_IN_HOURS = "${dailyLimitInHours}";
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(
-            "yyyy-MM-dd-hh:mm");
+            "yyyy-MM-dd-HH:mm");
 
     private static final String EFFORT = "${effort}";
 
