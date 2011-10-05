@@ -34,6 +34,7 @@ import at.silverstrike.pcc.api.export2tj3.NoProcessesException;
 import at.silverstrike.pcc.api.export2tj3.NoProjectExportInfoException;
 import at.silverstrike.pcc.api.export2tj3.NoResourcesException;
 import at.silverstrike.pcc.api.export2tj3.TaskJuggler3Exporter;
+import at.silverstrike.pcc.api.model.Event;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.DailyLimitResourceAllocation;
@@ -126,6 +127,9 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
     private static final Double TIMING_RESOLUTION_IN_HOURS = 0.16667;
 
+    private static final String EXPORT2TJ3_TEMPLATE_EVENT = TEMPLATE_DIRECTORY
+            + "export2tj3.template.event";
+
     private String effortTemplate;
     private EmbeddedFileReader embeddedFileReader;
     private Persistence persistence;
@@ -136,6 +140,8 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
     private String taskTemplate;
     private ProjectExportInfo projectExportInfo;
     private boolean transientMode;
+
+    private String eventTemplate;
 
     public DefaultTaskJuggler3Exporter() {
     }
@@ -205,6 +211,10 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
             embeddedFileReader.setFilename(EXPORT2TJ3_TEMPLATE_START);
             embeddedFileReader.run();
             startDateTimeTemplate = embeddedFileReader.getFileContents();
+
+            embeddedFileReader.setFilename(EXPORT2TJ3_TEMPLATE_EVENT);
+            embeddedFileReader.run();
+            eventTemplate = embeddedFileReader.getFileContents();
 
             for (final SchedulingObject process : processes) {
                 builder.append(getTaskInformation(process, null));
@@ -390,13 +400,43 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         }
     }
 
-    private String getTaskInformation(final SchedulingObject aProcess,
+    private String getTaskInformation(final SchedulingObject aSchedulingObject,
+            final SchedulingObject aParent) {
+
+        if (aSchedulingObject instanceof Task) {
+            return getTaskText(aSchedulingObject, aParent);
+        } else if (aSchedulingObject instanceof Event) {
+            return getEventText((Event) aSchedulingObject);
+        } else {
+            return "";
+        }
+
+    }
+
+    private String getEventText(final Event aSchedulingObject) {
+        final String[] searchList =
+                new String[] { "${soId}", "${eventName}", "${startDateTime}",
+                        "${endDateTime}" };
+        final String[] replacementList =
+                new String[] {
+                        formatLong(aSchedulingObject.getId()).toString(),
+                        shortenName(aSchedulingObject.getName()).toString(),
+                        formatDate(aSchedulingObject.getStartDateTime())
+                                .toString(),
+                        formatDate(aSchedulingObject.getEndDateTime())
+                                .toString() };
+
+        return StringUtils.replaceEach(this.eventTemplate, searchList,
+                replacementList);
+    }
+
+    private String getTaskText(final SchedulingObject aSchedulingObject,
             final SchedulingObject aParent) {
         final StringBuilder stringBuilder = new StringBuilder();
         final List<SchedulingObject> childProcesses =
-                getChildProcesses(aProcess);
+                getChildProcesses(aSchedulingObject);
 
-        if ((((Task) aProcess).getAverageCaseEffort() == 0.)
+        if ((((Task) aSchedulingObject).getAverageCaseEffort() == 0.)
                 && (childProcesses.size() < 1)) {
             return "";
         }
@@ -404,26 +444,31 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         if (childProcesses != null) {
             for (final SchedulingObject childProcess : childProcesses) {
                 stringBuilder
-                        .append(getTaskInformation(childProcess, aProcess));
+                        .append(getTaskInformation(childProcess,
+                                aSchedulingObject));
             }
         }
 
         final String childProcessDefinitions = stringBuilder.toString();
 
         final Integer boxedPriority =
-                getBoxedPriority(aProcess, childProcesses);
+                getBoxedPriority(aSchedulingObject, childProcesses);
         final int priority = getPriority(boxedPriority);
 
         final String taskDefinition =
                 taskTemplate
-                        .replace(ID, formatLong(aProcess.getId()))
-                        .replace(NAME, shortenName(((Task) aProcess).getName()))
+                        .replace(ID, formatLong(aSchedulingObject.getId()))
+                        .replace(
+                                NAME,
+                                shortenName(((Task) aSchedulingObject)
+                                        .getName()))
                         .replace(START_DATE_TIME,
                                 getStartDateTime((Task) aParent))
                         .replace(PRIORITY, formatInt(priority))
                         .replace(RESOURCE_ALLOCATIONS,
-                                getEffortAllocations((Task) aProcess))
-                        .replace(EFFORT_INFO, getEffortInfo((Task) aProcess))
+                                getEffortAllocations((Task) aSchedulingObject))
+                        .replace(EFFORT_INFO,
+                                getEffortInfo((Task) aSchedulingObject))
                         .replace(CHILD_TASKS, childProcessDefinitions);
 
         return taskDefinition;

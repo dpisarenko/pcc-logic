@@ -35,6 +35,9 @@ import at.silverstrike.pcc.api.model.ResourceAllocation;
 import at.silverstrike.pcc.impl.mockpersistence.MockObjectFactory;
 
 class Helper {
+    public static final int ONE_MONTH = 1;
+    public static final String EURO = "EUR";
+    
     private static final Logger LOGGER =
             LoggerFactory.getLogger(Helper.class);
 
@@ -183,6 +186,16 @@ class Helper {
 
         processes.add(task);
 
+        return processes;
+    }
+
+    public List<SchedulingObject> getTestOnEvents() {
+        final List<SchedulingObject> processes =
+            new LinkedList<SchedulingObject>();
+
+        processes.add(MOCK_OBJECT_FACTORY.createControlProcess(null));
+        processes.add(MOCK_OBJECT_FACTORY.createEvent());
+        
         return processes;
     }
 

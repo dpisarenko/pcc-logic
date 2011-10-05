@@ -1,0 +1,7 @@
+
+task E${soId} "${eventName}"
+{
+	start ${startDateTime}
+	end ${endDateTime}
+	scheduled
+}

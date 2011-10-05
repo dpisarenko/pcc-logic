@@ -23,7 +23,6 @@ import junit.framework.Assert;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.junit.Before;
 import org.junit.Test;
 
 import ru.altruix.commons.api.di.InjectorFactory;
@@ -45,7 +44,7 @@ import at.silverstrike.pcc.impl.testutils.LineReader;
 import at.silverstrike.pcc.impl.testutils.MockInjectorFactory;
 
 public final class TestDefaultTaskJuggler3Exporter {
-    private static final String EURO = "EUR";
+    
     private static final File ACTUAL_RESULTS_FILE = new File(
             "src/test/resources/at/silverstrike/pcc/test/export2tj3/"
                     + "testRun03.actual.txt");
@@ -53,14 +52,10 @@ public final class TestDefaultTaskJuggler3Exporter {
             "src/test/resources/at/silverstrike/pcc/test/export2tj3/"
                     + "testRun03.expected.txt");
 
-    private static final int ONE_MONTH = 1;
+    
     private final Helper helper = new Helper();
     private static final Logger LOGGER = LoggerFactory
             .getLogger(TestDefaultTaskJuggler3Exporter.class);
-
-    @Before
-    public void setupLogger() {
-    }
 
     @Test
     public void testRun01() {
@@ -92,11 +87,11 @@ public final class TestDefaultTaskJuggler3Exporter {
         projectExportInfo.setSchedulingObjectsToExport(this.helper
                 .getTestRun01Processes());
         projectExportInfo.setCopyright("Dmitri Pisarenko");
-        projectExportInfo.setCurrency(EURO);
+        projectExportInfo.setCurrency(Helper.EURO);
         projectExportInfo.setNow(helper.getDate18October2010());
         projectExportInfo.setProjectName("MyProject");
         projectExportInfo.setResourcesToExport(null);
-        projectExportInfo.setSchedulingHorizonMonths(ONE_MONTH);
+        projectExportInfo.setSchedulingHorizonMonths(Helper.ONE_MONTH);
 
         /**
          * Run the method under test
@@ -137,12 +132,12 @@ public final class TestDefaultTaskJuggler3Exporter {
 
         projectExportInfo.setSchedulingObjectsToExport(null);
         projectExportInfo.setCopyright("Dmitri Pisarenko");
-        projectExportInfo.setCurrency(EURO);
+        projectExportInfo.setCurrency(Helper.EURO);
         projectExportInfo.setNow(helper.getDate18October2010());
         projectExportInfo.setProjectName("MyProject");
         projectExportInfo.setResourcesToExport(this.helper
                 .getTestRun01Resources());
-        projectExportInfo.setSchedulingHorizonMonths(ONE_MONTH);
+        projectExportInfo.setSchedulingHorizonMonths(Helper.ONE_MONTH);
 
         /**
          * Run the method under test
@@ -189,12 +184,12 @@ public final class TestDefaultTaskJuggler3Exporter {
         projectExportInfo.setSchedulingObjectsToExport(this.helper
                 .getTestRun03Processes());
         projectExportInfo.setCopyright("Dmitri Pisarenko");
-        projectExportInfo.setCurrency(EURO);
+        projectExportInfo.setCurrency(Helper.EURO);
         projectExportInfo.setNow(helper.getDate18October2010());
         projectExportInfo.setProjectName("MyProject");
         projectExportInfo.setResourcesToExport(this.helper
                 .getTestRun03Resources());
-        projectExportInfo.setSchedulingHorizonMonths(ONE_MONTH);
+        projectExportInfo.setSchedulingHorizonMonths(Helper.ONE_MONTH);
 
         /**
          * Run the method under test
@@ -258,12 +253,12 @@ public final class TestDefaultTaskJuggler3Exporter {
         projectExportInfo.setSchedulingObjectsToExport(this.helper
                 .getTestDefect59Processes());
         projectExportInfo.setCopyright("Dmitri Pisarenko");
-        projectExportInfo.setCurrency(EURO);
+        projectExportInfo.setCurrency(Helper.EURO);
         projectExportInfo.setNow(helper.getDate18October2010());
         projectExportInfo.setProjectName("MyProject");
         projectExportInfo.setResourcesToExport(this.helper
                 .getTestRun03Resources());
-        projectExportInfo.setSchedulingHorizonMonths(ONE_MONTH);
+        projectExportInfo.setSchedulingHorizonMonths(Helper.ONE_MONTH);
 
         /**
          * Run the method under test
@@ -346,11 +341,11 @@ public final class TestDefaultTaskJuggler3Exporter {
         projectExportInfo.setSchedulingObjectsToExport(readData
                 .getSchedulingData());
         projectExportInfo.setCopyright("Dmitri Pisarenko");
-        projectExportInfo.setCurrency(EURO);
+        projectExportInfo.setCurrency(Helper.EURO);
         projectExportInfo.setNow(helper.getDate18October2010());
         projectExportInfo.setProjectName("MyProject");
         projectExportInfo.setResourcesToExport(resourceList);
-        projectExportInfo.setSchedulingHorizonMonths(ONE_MONTH);
+        projectExportInfo.setSchedulingHorizonMonths(Helper.ONE_MONTH);
 
         /**
          * Run the method under test
@@ -407,12 +402,12 @@ public final class TestDefaultTaskJuggler3Exporter {
         projectExportInfo.setSchedulingObjectsToExport(this.helper
                 .getTestValidateInputsProcesses());
         projectExportInfo.setCopyright("Dmitri Pisarenko");
-        projectExportInfo.setCurrency(EURO);
+        projectExportInfo.setCurrency(Helper.EURO);
         projectExportInfo.setNow(helper.getDate18October2010());
         projectExportInfo.setProjectName("MyProject");
         projectExportInfo.setResourcesToExport(this.helper
                 .getTestValidateInputsResources());
-        projectExportInfo.setSchedulingHorizonMonths(ONE_MONTH);
+        projectExportInfo.setSchedulingHorizonMonths(Helper.ONE_MONTH);
 
         /**
          * Run the method under test

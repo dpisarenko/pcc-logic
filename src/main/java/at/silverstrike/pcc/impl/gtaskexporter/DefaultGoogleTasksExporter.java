@@ -98,10 +98,14 @@ class DefaultGoogleTasksExporter implements GoogleTasksExporter {
             for (final com.google.api.services.tasks.v1.model.Task curTask : tasks.items) {
 
                 final String[] replacementList =
-                        new String[] { curTask.id, curTask.title,
-                                curTask.parent,
-                                curTask.notes, curTask.completed,
-                                curTask.position,
+                        new String[] {
+                                StringUtils.defaultString(curTask.id, ""),
+                                StringUtils.defaultString(curTask.title, ""),
+                                StringUtils.defaultString(curTask.parent, ""),
+                                StringUtils.defaultString(curTask.notes, ""),
+                                StringUtils
+                                        .defaultString(curTask.completed, ""),
+                                StringUtils.defaultString(curTask.position, ""),
                                 LINE_SEPARATOR };
 
                 fileContents.append(StringUtils.replaceEach(LINE_TEMPLATE,

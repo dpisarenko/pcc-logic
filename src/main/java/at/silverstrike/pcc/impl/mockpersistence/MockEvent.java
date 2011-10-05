@@ -18,7 +18,7 @@ import at.silverstrike.pcc.api.model.UserData;
 
 /**
  * @author DP118M
- *
+ * 
  */
 class MockEvent extends MockSchedulingObject implements Event {
     private String place;
@@ -27,28 +27,33 @@ class MockEvent extends MockSchedulingObject implements Event {
     private UserData user;
 
     public UserData getUserData() {
-            return user;
+        return user;
     }
 
     public void setUserData(final UserData aUser) {
-            this.user = aUser;
+        this.user = aUser;
     }
-    
+
     public String getPlace() {
         return place;
     }
+
     public void setPlace(final String aPlace) {
         this.place = aPlace;
     }
+
     public Date getStartDateTime() {
         return startDateTime;
     }
+
     public void setStartDateTime(final Date aStartDateTime) {
         this.startDateTime = aStartDateTime;
     }
+
     public Date getEndDateTime() {
         return endDateTime;
     }
+
     public void setEndDateTime(final Date aEndDateTime) {
         this.endDateTime = aEndDateTime;
     }
