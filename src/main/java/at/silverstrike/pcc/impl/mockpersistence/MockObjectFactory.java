@@ -27,11 +27,11 @@ import at.silverstrike.pcc.api.persistence.Persistence;
 
 public final class MockObjectFactory {
 
-    public final UserData createUserData() {
+    public UserData createUserData() {
         return new MockUserData();
     }
 
-    public final Task createControlProcess(final Long aId) {
+    public Task createControlProcess(final Long aId) {
         final MockControlProcess mockControlProcess = new MockControlProcess();
 
         mockControlProcess.setId(aId);
@@ -39,52 +39,52 @@ public final class MockObjectFactory {
         return mockControlProcess;
     }
 
-    public final Task createControlProcess() {
+    public Task createControlProcess() {
         return new MockControlProcess();
     }
 
-    public final Booking createBooking() {
+    public Booking createBooking() {
         return new MockBooking();
     }
 
-    public final DailyLimitResourceAllocation
+    public DailyLimitResourceAllocation
             createDailyLimitResourceAllocation() {
         return new MockDailyLimitResourceAllocation();
     }
 
-    public final DailyPlan createDailyPlan() {
+    public DailyPlan createDailyPlan() {
         return new MockDailyPlan();
     }
 
-    public final DailySchedule createDailySchedule() {
+    public DailySchedule createDailySchedule() {
         return new MockDailySchedule();
     }
 
-    public final DailyToDoList createDailyToDoList() {
+    public DailyToDoList createDailyToDoList() {
         return new MockDailyToDoList();
     }
 
-    public final Resource createResource() {
+    public Resource createResource() {
         return new MockResource();
     }
 
-    public final ResourceAllocation createResourceAllocation() {
+    public ResourceAllocation createResourceAllocation() {
         return new MockResourceAllocation();
     }
 
-    public final Worker createWorker() {
+    public Worker createWorker() {
         return new MockWorker();
     }
 
-    public final Milestone createMilestone() {
+    public Milestone createMilestone() {
         return new MockMilestone();
     }
 
-    public final Event createEvent() {
+    public Event createEvent() {
         return new MockEvent();
     }
 
-    public final Task createTask() {
+    public Task createTask() {
         return new MockControlProcess();
     }
 
