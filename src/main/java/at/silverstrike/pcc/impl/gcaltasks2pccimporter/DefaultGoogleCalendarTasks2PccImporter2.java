@@ -11,7 +11,6 @@
 
 package at.silverstrike.pcc.impl.gcaltasks2pccimporter;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -33,6 +32,8 @@ import at.silverstrike.pcc.api.gtask2pcctaskconverter.GoogleTask2PccTaskConverte
 import at.silverstrike.pcc.api.gtask2pcctaskconverter.GoogleTask2PccTaskConverterFactory;
 import at.silverstrike.pcc.api.gtasknoteparser.GoogleTaskNotesParser;
 import at.silverstrike.pcc.api.gtasknoteparser.GoogleTaskNotesParserFactory;
+import at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalculator;
+import at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalculatorFactory;
 import at.silverstrike.pcc.api.gtaskrelevance2.RelevantTaskSetCalculator;
 import at.silverstrike.pcc.api.gtaskrelevance2.RelevantTaskSetCalculatorFactory;
 import at.silverstrike.pcc.api.model.SchedulingObject;
@@ -109,56 +110,29 @@ class DefaultGoogleCalendarTasks2PccImporter2 implements
             setPriorities(
                     final Map<String, Task> aRelevantTasksByIds,
                     final Map<String, at.silverstrike.pcc.api.model.Task> aPccTasksByGoogleIds) {
-        final List<PriorityTuple> priorityTuples =
-                new LinkedList<PriorityTuple>();
 
-        // Create tuples
-        for (final String curGoogleTaskId : aRelevantTasksByIds.keySet()) {
-            final com.google.api.services.tasks.v1.model.Task curGoogleTask =
-                    aRelevantTasksByIds.get(curGoogleTaskId);
+        final GoogleTasksPriorityCalculatorFactory factory =
+                this.injector
+                        .getInstance(GoogleTasksPriorityCalculatorFactory.class);
+        final GoogleTasksPriorityCalculator calculator = factory.create();
 
-            final PriorityTuple tuple = new PriorityTuple();
-
-            tuple.setGoogleTaskId(curGoogleTaskId);
-            if (curGoogleTask.position != null) {
-                tuple.setPosition(Long.parseLong(curGoogleTask.position));
-            } else {
-                tuple.setPosition(0L);
-            }
-
-            final String parentTaskId = curGoogleTask.parent;
-
-            if (!StringUtils.isBlank(parentTaskId)) {
-                final com.google.api.services.tasks.v1.model.Task parentTask =
-                        aRelevantTasksByIds.get(parentTaskId);
-
-                if (parentTask != null) {
-                    tuple.setParentPosition(Long.parseLong(parentTask.position));
-                } else {
-                    tuple.setParentPosition(0L);
-                }
-            } else {
-                tuple.setParentPosition(0L);
-            }
-            priorityTuples.add(tuple);
+        calculator.setTasks(aRelevantTasksByIds);
+        try {
+            calculator.run();
+        } catch (final PccException exception) {
+            LOGGER.error("", exception);
         }
 
-        // Sort them by MAX(position, parentPosition) in descending order
-        Collections.sort(priorityTuples);
+        final Map<String, Integer> prioritiesByTaskIds =
+                calculator.getPrioritiesByTaskIds();
 
-        // Assign Taskjuggler-friendly priorities
-        int curPriority = 1000;
-
-        for (final PriorityTuple curPriorityTuple : priorityTuples) {
-            curPriorityTuple.setPriority(curPriority--);
-        }
-
-        // Save priorities in PCC tasks
-        for (final PriorityTuple curPriorityTuple : priorityTuples) {
+        for (final String curTaskId : prioritiesByTaskIds.keySet()) {
             final at.silverstrike.pcc.api.model.Task pccTask =
                     aPccTasksByGoogleIds
-                            .get(curPriorityTuple.getGoogleTaskId());
-            pccTask.setPriority(curPriorityTuple.getPriority());
+                            .get(curTaskId);
+
+            pccTask.setPriority(prioritiesByTaskIds.get(curTaskId));
+
         }
     }
 
