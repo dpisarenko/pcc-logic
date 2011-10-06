@@ -3,7 +3,6 @@ task E${soId} "${eventName}"
 {
 	start ${startDateTime}
 	end ${endDateTime}
-	priority 1000
 	${resourceAllocations}
 	scheduled
 }

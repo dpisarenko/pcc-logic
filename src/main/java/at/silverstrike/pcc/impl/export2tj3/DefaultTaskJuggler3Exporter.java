@@ -218,17 +218,14 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
             embeddedFileReader.run();
             eventTemplate = embeddedFileReader.getFileContents();
 
-            Task anyTask = null;
-            for (int i = 0; (i < processes.size()) && (anyTask == null); i++) {
+            this.eventResourceAllocation = "";
+            for (int i = 0; (i < processes.size())
+                    && StringUtils.isBlank(this.eventResourceAllocation
+                            .toString()); i++) {
                 if (processes.get(i) instanceof Task) {
-                    anyTask = (Task) processes.get(i);
+                    this.eventResourceAllocation =
+                            this.getEffortAllocationsNoLimits((Task) processes.get(i));
                 }
-            }
-
-            if (anyTask != null) {
-                this.eventResourceAllocation =
-                        this.getEffortAllocations(anyTask);
-
             }
 
             for (final SchedulingObject process : processes) {
@@ -386,6 +383,26 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         return stringBuilder.toString();
     }
 
+    private CharSequence getEffortAllocationsNoLimits(final Task aProcess) {
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        if ((aProcess != null) && (aProcess.getResourceAllocations() != null)) {
+            for (final ResourceAllocation resourceAllocation : aProcess
+                    .getResourceAllocations()) {
+                final String resourceAllocationInfo;
+
+                resourceAllocationInfo =
+                        resourceAllocationNoLimitsTemplate.replace(
+                                RESOURCE,
+                                getResourceIdentifier(resourceAllocation
+                                        .getResource()));
+                stringBuilder.append(resourceAllocationInfo);
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
     private CharSequence getEffortInfo(final Task aProcess) {
         final Double bestCaseEffort = aProcess.getBestCaseEffort();
         final Double worstCaseEffort = aProcess.getWorstCaseEffort();
@@ -432,7 +449,6 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         final Date startTime = aSchedulingObject.getStartDateTime();
         final Date endTime = aSchedulingObject.getEndDateTime();
 
-        eventResourceAllocation = "";
         if ((startTime != null) && (endTime != null)) {
             final String[] searchList =
                     new String[] { "${soId}", "${eventName}",
