@@ -13,11 +13,15 @@ package at.silverstrike.pcc.projectscheduler;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +41,7 @@ import co.altruix.pcc.api.calendarevent2pcceventconverter.CalendarEventEntry2Pcc
 import co.altruix.pcc.api.calendarevent2pcceventconverter.CalendarEventEntry2PccEventConverterFactory;
 
 import com.google.api.services.tasks.v1.model.Task;
+import com.google.gdata.data.DateTime;
 import com.google.gdata.data.calendar.CalendarEventEntry;
 import com.google.inject.Injector;
 
@@ -50,6 +55,7 @@ public class TestDefect201110051 {
     private Helper helper = new Helper();
 
     @Test
+    @Ignore
     public void testDefect201110051() {
         /**
          * Create persistence
@@ -92,8 +98,51 @@ public class TestDefect201110051 {
                 this.helper.calculatePlan(injector, persistence,
                         schedulingObjects, RubyDateTimeUtils.getDate(2011,
                                 Calendar.OCTOBER, 5, 22, 46));
-
+        
         Assert.assertNotNull(bookings);
+        
+        final Map<String, Booking> bookingsByTaskNames =
+                getBookingsByTaskNames(bookings);
+                
+        final Booking scheduledTask1 = bookingsByTaskNames.get("ScheduledTask1");
+        
+        Assert.assertNotNull(scheduledTask1);
+        
+        final Date taskStart = scheduledTask1.getStartDateTime();
+        final Date taskEnd = scheduledTask1.getEndDateTime();
+        
+        Assert.assertNotNull(taskStart);
+        Assert.assertNotNull(taskEnd);
+        
+        final Date event1Start = new Date(DateTime.parseDateTime("2011-10-07T14:10:00.000+02:00").getValue());
+        final Date event1End = new Date(DateTime.parseDateTime("2011-10-07T14:55:00.000+02:00").getValue());
+        
+        final Date event2Start = new Date(DateTime.parseDateTime("2011-10-07T12:05:00.000+02:00").getValue());
+        final Date event2End = new Date(DateTime.parseDateTime("2011-10-07T12:50:00.000+02:00").getValue());
+
+        /**
+         * Check that times of task and event1 do not overlap
+         */
+        Assert.assertTrue(taskStart.before(event1Start) && taskEnd.before(event1Start));
+        
+        /**
+         * Check that times of task and event2 do not overlap
+         */
+        
+        Assert.assertTrue(taskEnd.before(event2Start) || taskStart.after(event2End));
+        
+        
+    }
+
+    private Map<String, Booking> getBookingsByTaskNames(
+            final List<Booking> bookings) {
+        final Map<String, Booking> bookingsByTaskNames =
+                new HashMap<String, Booking>();
+        for (final Booking curBooking : bookings) {
+            bookingsByTaskNames.put(curBooking.getProcess().getName(),
+                    curBooking);
+        }
+        return bookingsByTaskNames;
     }
 
     private List<SchedulingObject> importEvents(final Injector aInjector) {
