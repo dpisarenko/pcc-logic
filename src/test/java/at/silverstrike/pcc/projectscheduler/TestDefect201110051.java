@@ -55,7 +55,6 @@ public class TestDefect201110051 {
     private Helper helper = new Helper();
 
     @Test
-    @Ignore
     public void testDefect201110051() {
         /**
          * Create persistence
@@ -99,20 +98,6 @@ public class TestDefect201110051 {
                         schedulingObjects, RubyDateTimeUtils.getDate(2011,
                                 Calendar.OCTOBER, 5, 22, 46));
         
-        Assert.assertNotNull(bookings);
-        
-        final Map<String, Booking> bookingsByTaskNames =
-                getBookingsByTaskNames(bookings);
-                
-        final Booking scheduledTask1 = bookingsByTaskNames.get("ScheduledTask1");
-        
-        Assert.assertNotNull(scheduledTask1);
-        
-        final Date taskStart = scheduledTask1.getStartDateTime();
-        final Date taskEnd = scheduledTask1.getEndDateTime();
-        
-        Assert.assertNotNull(taskStart);
-        Assert.assertNotNull(taskEnd);
         
         final Date event1Start = new Date(DateTime.parseDateTime("2011-10-07T14:10:00.000+02:00").getValue());
         final Date event1End = new Date(DateTime.parseDateTime("2011-10-07T14:55:00.000+02:00").getValue());
@@ -120,18 +105,37 @@ public class TestDefect201110051 {
         final Date event2Start = new Date(DateTime.parseDateTime("2011-10-07T12:05:00.000+02:00").getValue());
         final Date event2End = new Date(DateTime.parseDateTime("2011-10-07T12:50:00.000+02:00").getValue());
 
-        /**
-         * Check that times of task and event1 do not overlap
-         */
-        Assert.assertTrue(taskStart.before(event1Start) && taskEnd.before(event1Start));
         
-        /**
-         * Check that times of task and event2 do not overlap
-         */
+        Assert.assertNotNull(bookings);
         
-        Assert.assertTrue(taskEnd.before(event2Start) || taskStart.after(event2End));
+        final Map<String, Booking> bookingsByTaskNames =
+                getBookingsByTaskNames(bookings);
+                
+        final List<Booking> scheduledTaskBookings = new LinkedList<Booking>();
+        
+        for (final Booking curBooking : bookings) {
+            if ("ScheduledTask1".equals(curBooking.getProcess().getName()))
+            {
+                scheduledTaskBookings.add(curBooking);
+            }
+        }
+
+        Assert.assertTrue(scheduledTaskBookings.size() > 0);
+
         
         
+        for (final Booking curBooking : scheduledTaskBookings)
+        {
+            final Date taskStart = curBooking.getStartDateTime();
+            final Date taskEnd = curBooking.getEndDateTime();
+
+            Assert.assertNotNull(taskStart);
+            Assert.assertNotNull(taskEnd);
+
+            Assert.assertTrue(taskEnd.before(event1Start) || taskStart.after(event1End));
+            Assert.assertTrue(taskEnd.before(event2Start) || taskStart.after(event2End));
+            
+        }        
     }
 
     private Map<String, Booking> getBookingsByTaskNames(
