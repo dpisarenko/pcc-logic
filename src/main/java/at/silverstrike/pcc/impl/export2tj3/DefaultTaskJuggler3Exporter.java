@@ -223,8 +223,14 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                     && StringUtils.isBlank(this.eventResourceAllocation
                             .toString()); i++) {
                 if (processes.get(i) instanceof Task) {
-                    this.eventResourceAllocation =
-                            this.getEffortAllocationsNoLimits((Task) processes.get(i));
+
+                    this.eventResourceAllocation = 
+                            resourceAllocationNoLimitsTemplate.replace(
+                                    RESOURCE,
+                                    Long.toString(this.projectExportInfo
+                                            .getResourcesToExport().get(0)
+                                            .getId()));
+
                 }
             }
 
@@ -376,26 +382,6 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                                     getResourceIdentifier(resourceAllocation
                                             .getResource()));
                 }
-                stringBuilder.append(resourceAllocationInfo);
-            }
-        }
-
-        return stringBuilder.toString();
-    }
-
-    private CharSequence getEffortAllocationsNoLimits(final Task aProcess) {
-        final StringBuilder stringBuilder = new StringBuilder();
-
-        if ((aProcess != null) && (aProcess.getResourceAllocations() != null)) {
-            for (final ResourceAllocation resourceAllocation : aProcess
-                    .getResourceAllocations()) {
-                final String resourceAllocationInfo;
-
-                resourceAllocationInfo =
-                        resourceAllocationNoLimitsTemplate.replace(
-                                RESOURCE,
-                                getResourceIdentifier(resourceAllocation
-                                        .getResource()));
                 stringBuilder.append(resourceAllocationInfo);
             }
         }
