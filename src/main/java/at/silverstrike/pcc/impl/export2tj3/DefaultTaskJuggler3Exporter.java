@@ -143,6 +143,8 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
 
     private String eventTemplate;
 
+    private CharSequence eventResourceAllocation;
+
     public DefaultTaskJuggler3Exporter() {
     }
 
@@ -215,6 +217,19 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
             embeddedFileReader.setFilename(EXPORT2TJ3_TEMPLATE_EVENT);
             embeddedFileReader.run();
             eventTemplate = embeddedFileReader.getFileContents();
+
+            Task anyTask = null;
+            for (int i = 0; (i < processes.size()) && (anyTask == null); i++) {
+                if (processes.get(i) instanceof Task) {
+                    anyTask = (Task) processes.get(i);
+                }
+            }
+
+            if (anyTask != null) {
+                this.eventResourceAllocation =
+                        this.getEffortAllocations(anyTask);
+
+            }
 
             for (final SchedulingObject process : processes) {
                 builder.append(getTaskInformation(process, null));
@@ -417,11 +432,13 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         final Date startTime = aSchedulingObject.getStartDateTime();
         final Date endTime = aSchedulingObject.getEndDateTime();
 
+        eventResourceAllocation = "";
         if ((startTime != null) && (endTime != null)) {
             final String[] searchList =
                     new String[] { "${soId}", "${eventName}",
                             "${startDateTime}",
-                            "${endDateTime}" };
+                            "${endDateTime}",
+                            "${resourceAllocations}" };
             final String[] replacementList =
                     new String[] {
                             formatLong(aSchedulingObject.getId()).toString(),
@@ -429,7 +446,8 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                             formatDate(startTime)
                                     .toString(),
                             formatDate(endTime)
-                                    .toString() };
+                                    .toString(),
+                                    eventResourceAllocation.toString() };
 
             return StringUtils.replaceEach(this.eventTemplate, searchList,
                     replacementList);
