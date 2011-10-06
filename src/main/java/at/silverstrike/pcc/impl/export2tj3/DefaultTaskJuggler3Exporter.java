@@ -227,7 +227,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                     this.eventResourceAllocation = 
                             resourceAllocationNoLimitsTemplate.replace(
                                     RESOURCE,
-                                    Long.toString(this.projectExportInfo
+                                    "R" + Long.toString(this.projectExportInfo
                                             .getResourcesToExport().get(0)
                                             .getId()));
 
