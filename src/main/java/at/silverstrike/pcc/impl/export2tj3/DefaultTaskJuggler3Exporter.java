@@ -448,8 +448,8 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                             "${effort}" };
             final long effortInMinutes =
                     (long) Math.ceil((double) (endTime.getTime() - startTime
-                            .getTime()) / MILLISECONDS_IN_SECOND
-                            * SECONDS_IN_MINUTE);
+                            .getTime()) / (MILLISECONDS_IN_SECOND
+                            * SECONDS_IN_MINUTE));
             final String[] replacementList =
                     new String[] {
                             formatLong(aSchedulingObject.getId()).toString(),

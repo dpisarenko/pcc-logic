@@ -44,7 +44,13 @@ bookingsFile
   resourceDeclaration
   task+
   (
-  	suppTask=supplementTask { this.bookingsFile.addSupplementStatement( $suppTask.suppStmt ); }
+  	suppTask=supplementTask 
+  	{
+  		if ($suppTask.suppStmt.getTaskId().startsWith("T"))
+  		{
+  		  this.bookingsFile.addSupplementStatement( $suppTask.suppStmt );
+  		} 
+  	}
   )*
   supplementResource*
   EOF
@@ -90,8 +96,6 @@ task
 	Scheduled)*
 	CloseParen
 	;
-
-/* (Complete FloatingPointNumber)* */
 
 supplementTask returns [DefaultSupplementStatement suppStmt]
 	:

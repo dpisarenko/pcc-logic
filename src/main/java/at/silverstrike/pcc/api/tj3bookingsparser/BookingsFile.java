@@ -15,8 +15,8 @@ import java.util.List;
 
 /**
  * @author Dmitri Pisarenko
- *
+ * 
  */
 public interface BookingsFile {
-	List<SupplementStatement> getSupplementStatements();
+    List<SupplementStatement> getSupplementStatements();
 }

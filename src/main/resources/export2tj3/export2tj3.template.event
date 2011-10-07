@@ -4,6 +4,5 @@ task E${soId} "${eventName}"
 	start ${startDateTime}
 	priority 1000
 	${resourceAllocations}
-	scheduled
 	effort ${effort}min
 }

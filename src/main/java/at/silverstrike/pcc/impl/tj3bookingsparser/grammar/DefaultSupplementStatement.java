@@ -22,26 +22,26 @@ import at.silverstrike.pcc.api.tj3bookingsparser.SupplementStatement;
  * 
  */
 class DefaultSupplementStatement implements SupplementStatement {
-	private String taskId;
-	private List<BookingStatement> bookingStatements;
+    private String taskId;
+    private List<BookingStatement> bookingStatements;
 
-	public DefaultSupplementStatement() {
-		this.bookingStatements = new LinkedList<BookingStatement>();
-	}
+    public DefaultSupplementStatement() {
+        this.bookingStatements = new LinkedList<BookingStatement>();
+    }
 
-	void setTaskId(final String aTaskId) {
-		this.taskId = aTaskId;
-	}
+    void setTaskId(final String aTaskId) {
+        this.taskId = aTaskId;
+    }
 
-	void addBookingStatement(final BookingStatement aBookingStatement) {
-		this.bookingStatements.add(aBookingStatement);
-	}
+    void addBookingStatement(final BookingStatement aBookingStatement) {
+        this.bookingStatements.add(aBookingStatement);
+    }
 
-	public String getTaskId() {
-		return taskId;
-	}
+    public String getTaskId() {
+        return taskId;
+    }
 
-	public List<BookingStatement> getBookingStatements() {
-		return bookingStatements;
-	}
+    public List<BookingStatement> getBookingStatements() {
+        return bookingStatements;
+    }
 }

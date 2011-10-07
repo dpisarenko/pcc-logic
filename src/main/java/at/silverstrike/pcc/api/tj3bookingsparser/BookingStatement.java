@@ -15,13 +15,13 @@ import java.util.List;
 
 /**
  * @author Dmitri Pisarenko
- *
+ * 
  */
 public interface BookingStatement {
 
-	String getResource();
+    String getResource();
 
-	String getScenario();
+    String getScenario();
 
-	List<IndBooking> getIndBookings();
+    List<IndBooking> getIndBookings();
 }
