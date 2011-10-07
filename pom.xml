@@ -4,7 +4,7 @@
 
 	<groupId>co.altruix</groupId>
 	<artifactId>pcc-logic</artifactId>
-	<version>1.12</version>
+	<version>1.13</version>
 	<packaging>jar</packaging>
 
 	<name>pcc-logic</name>
