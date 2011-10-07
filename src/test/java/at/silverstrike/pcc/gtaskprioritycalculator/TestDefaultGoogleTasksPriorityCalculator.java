@@ -107,8 +107,9 @@ public final class TestDefaultGoogleTasksPriorityCalculator {
             final Map<String, Integer> prioritiesByTaskIds =
                     objectUnderTest.getPrioritiesByTaskIds();
 
-            Assert.assertEquals(new Integer(999), prioritiesByTaskIds.get(ID_1));
-            Assert.assertEquals(new Integer(1000),
+            Assert.assertEquals(new Integer(HIGHEST_PRIORITY - PRIORITY_STEP),
+                    prioritiesByTaskIds.get(ID_1));
+            Assert.assertEquals(new Integer(HIGHEST_PRIORITY),
                     prioritiesByTaskIds.get(ID_2));
         } catch (final PccException exception) {
             LOGGER.error("", exception);
