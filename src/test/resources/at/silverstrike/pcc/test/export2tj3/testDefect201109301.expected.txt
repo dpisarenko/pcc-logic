@@ -17,7 +17,7 @@ project "MyProject" 2011-10-05-22:00 +1m
 
   currency "EUR"
 
-  timingresolution 10 min
+  timingresolution 5 min
   
   scenario plan "Plan" {
   }
