@@ -17,8 +17,10 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import jruby.joda.time.Interval;
 import junit.framework.Assert;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,42 +96,49 @@ public class TestDefect201110051 {
                 this.helper.calculatePlan(injector, persistence,
                         schedulingObjects, RubyDateTimeUtils.getDate(2011,
                                 Calendar.OCTOBER, 5, 22, 46));
-        
-        
-        final Date event1Start = new Date(DateTime.parseDateTime("2011-10-07T14:10:00.000+02:00").getValue());
-        final Date event1End = new Date(DateTime.parseDateTime("2011-10-07T14:55:00.000+02:00").getValue());
-        
-        final Date event2Start = new Date(DateTime.parseDateTime("2011-10-07T12:05:00.000+02:00").getValue());
-        final Date event2End = new Date(DateTime.parseDateTime("2011-10-07T12:50:00.000+02:00").getValue());
 
-        
+        final Interval event1Interval = new Interval(DateTime
+                .parseDateTime("2011-10-07T14:10:00.000+02:00")
+                .getValue(), DateTime
+                .parseDateTime("2011-10-07T14:55:00.000+02:00")
+                .getValue());
+
+        final Interval event2Interval = new Interval(DateTime.parseDateTime(
+                "2011-10-07T12:05:00.000+02:00")
+                .getValue(), DateTime.parseDateTime(
+                "2011-10-07T12:50:00.000+02:00")
+                .getValue());
+
         Assert.assertNotNull(bookings);
-                        
+
         final List<Booking> scheduledTaskBookings = new LinkedList<Booking>();
-        
+
         for (final Booking curBooking : bookings) {
-            if ("ScheduledTask1".equals(curBooking.getProcess().getName()))
-            {
+            if ("ScheduledTask1".equals(curBooking.getProcess().getName())) {
                 scheduledTaskBookings.add(curBooking);
             }
         }
 
         Assert.assertTrue(scheduledTaskBookings.size() > 0);
 
-        
-        
-        for (final Booking curBooking : scheduledTaskBookings)
-        {
-            final Date taskStart = curBooking.getStartDateTime();
-            final Date taskEnd = curBooking.getEndDateTime();
+        for (final Booking curBooking : scheduledTaskBookings) {
+            final Date taskStart =
+                    DateUtils.addSeconds(curBooking.getStartDateTime(), 1);
+            final Date taskEnd =
+                    DateUtils.addSeconds(curBooking.getEndDateTime(), -1);
 
             Assert.assertNotNull(taskStart);
             Assert.assertNotNull(taskEnd);
 
-            Assert.assertTrue(taskEnd.before(event1Start) || taskStart.after(event1End));
-            Assert.assertTrue(taskEnd.before(event2Start) || taskStart.after(event2End));
+            final Interval taskInterval = new Interval(taskStart.getTime(), taskEnd.getTime());
+
+            Assert.assertFalse(taskInterval.overlaps(event1Interval));
+            Assert.assertFalse(event1Interval.overlaps(taskInterval));
             
-        }        
+            Assert.assertFalse(taskInterval.overlaps(event2Interval));
+            Assert.assertFalse(event2Interval.overlaps(taskInterval));
+        }
+
     }
 
     private List<SchedulingObject> importEvents(final Injector aInjector) {

@@ -317,12 +317,26 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         }
     }
 
+    private Date roundDate(final Date aDate) {
+        return DateUtils.round(aDate, Calendar.HOUR_OF_DAY);
+    }
+
     /**
      * Formats a Date instance to format YYYY-MM-DD, e. g. 2010-04-28 for
      * 28.04.2010.
      */
     private CharSequence formatDate(final Date aDate) {
-        return DATE_FORMAT.format(DateUtils.round(aDate, Calendar.HOUR_OF_DAY));
+        // final long minutes = DateUtils.getFragmentInMinutes(aDate,
+        // Calendar.MINUTE);
+        // Date roundedDate = null;
+        // // if (minutes < 5)
+        // // {
+        // // roundedDate = DateUtils.addMinutes(aDate, amount)
+        // // }
+
+        // return DATE_FORMAT.format(DateUtils.round(aDate,
+        // Calendar.HOUR_OF_DAY));
+        return DATE_FORMAT.format(aDate);
     }
 
     private String formatDouble(final double aNumber) {
@@ -573,8 +587,10 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                                 this.projectExportInfo.getCopyright())
                         .replace(PLACEHOLDER_CURRENCY,
                                 this.projectExportInfo.getCurrency())
-                        .replace(PLACEHOLDER_NOW,
-                                formatDate(this.projectExportInfo.getNow()))
+                        .replace(
+                                PLACEHOLDER_NOW,
+                                formatDate(roundDate(this.projectExportInfo
+                                        .getNow())))
                         .replace(
                                 PLACEHOLDER_SCHEDULING_HORIZON_MONTHS,
                                 formatInt(this.projectExportInfo
