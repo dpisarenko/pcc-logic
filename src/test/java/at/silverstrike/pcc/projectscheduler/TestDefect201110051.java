@@ -14,14 +14,11 @@ package at.silverstrike.pcc.projectscheduler;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -107,10 +104,7 @@ public class TestDefect201110051 {
 
         
         Assert.assertNotNull(bookings);
-        
-        final Map<String, Booking> bookingsByTaskNames =
-                getBookingsByTaskNames(bookings);
-                
+                        
         final List<Booking> scheduledTaskBookings = new LinkedList<Booking>();
         
         for (final Booking curBooking : bookings) {
@@ -136,17 +130,6 @@ public class TestDefect201110051 {
             Assert.assertTrue(taskEnd.before(event2Start) || taskStart.after(event2End));
             
         }        
-    }
-
-    private Map<String, Booking> getBookingsByTaskNames(
-            final List<Booking> bookings) {
-        final Map<String, Booking> bookingsByTaskNames =
-                new HashMap<String, Booking>();
-        for (final Booking curBooking : bookings) {
-            bookingsByTaskNames.put(curBooking.getProcess().getName(),
-                    curBooking);
-        }
-        return bookingsByTaskNames;
     }
 
     private List<SchedulingObject> importEvents(final Injector aInjector) {

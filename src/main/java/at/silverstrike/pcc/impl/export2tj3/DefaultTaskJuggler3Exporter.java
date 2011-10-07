@@ -50,6 +50,10 @@ import com.google.inject.Injector;
  * 
  */
 class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
+    private static final long SECONDS_IN_MINUTE = 60L;
+
+    private static final long MILLISECONDS_IN_SECOND = 1000L;
+
     private static final String RESOURCE_ID = "${resourceId}";
 
     private static final String ABBREVIATION = "${abbreviation}";
@@ -224,7 +228,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                             .toString()); i++) {
                 if (processes.get(i) instanceof Task) {
 
-                    this.eventResourceAllocation = 
+                    this.eventResourceAllocation =
                             resourceAllocationNoLimitsTemplate.replace(
                                     RESOURCE,
                                     "R" + Long.toString(this.projectExportInfo
@@ -440,7 +444,12 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                     new String[] { "${soId}", "${eventName}",
                             "${startDateTime}",
                             "${endDateTime}",
-                            "${resourceAllocations}" };
+                            "${resourceAllocations}",
+                            "${effort}" };
+            final long effortInMinutes =
+                    (long) Math.ceil((double) (endTime.getTime() - startTime
+                            .getTime()) / MILLISECONDS_IN_SECOND
+                            * SECONDS_IN_MINUTE);
             final String[] replacementList =
                     new String[] {
                             formatLong(aSchedulingObject.getId()).toString(),
@@ -449,7 +458,8 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
                                     .toString(),
                             formatDate(endTime)
                                     .toString(),
-                                    eventResourceAllocation.toString() };
+                                    eventResourceAllocation.toString(),
+                            Long.toString(effortInMinutes) };
 
             return StringUtils.replaceEach(this.eventTemplate, searchList,
                     replacementList);
