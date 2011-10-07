@@ -63,19 +63,22 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
         t1.set(GoogleTaskFields.ID, "1");
         t1.set(GoogleTaskFields.TITLE, "T1: Task 1");
         t1.set(GoogleTaskFields.NOTES, "1h");
+        t1.set(GoogleTaskFields.POSITION, "1");
 
         // Task T2, depends on T1
         final Task t2 = new Task();
         t2.set(GoogleTaskFields.ID, "2");
         t2.set(GoogleTaskFields.TITLE, "T2: Task 2");
         t2.set(GoogleTaskFields.NOTES, "1h Depends on T1");
-
+        t2.set(GoogleTaskFields.POSITION, "2");
+        
         // Task T3, depends on T1 and T2
         final Task t3 = new Task();
         t3.set(GoogleTaskFields.ID, "3");
         t3.set(GoogleTaskFields.TITLE, "T3: Task 3");
         t3.set(GoogleTaskFields.NOTES, "1h Depends on T1, T2");
-
+        t3.set(GoogleTaskFields.POSITION, "3");
+        
         googleTasks.add(t1);
         googleTasks.add(t2);
         googleTasks.add(t3);
@@ -92,19 +95,22 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
         final Task t1 = new Task();
         t1.set(GoogleTaskFields.ID, "1");
         t1.set(GoogleTaskFields.TITLE, "T1: Task 1");
-
+        t1.set(GoogleTaskFields.POSITION, "1");
+        
         // Task T2, depends on T1
         final Task t2 = new Task();
         t2.set(GoogleTaskFields.ID, "2");
         t2.set(GoogleTaskFields.TITLE, "T2: Task 2");
         t2.set("notes", "#T1");
-
+        t2.set(GoogleTaskFields.POSITION, "2");
+        
         // Task T3, depends on T1 and T2
         final Task t3 = new Task();
         t3.set(GoogleTaskFields.ID, "3");
         t3.set(GoogleTaskFields.TITLE, "T3: Task 3");
         t3.set("notes", "#T1 #T2");
-
+        t3.set(GoogleTaskFields.POSITION, "3");
+        
         googleTasks.add(t1);
         googleTasks.add(t2);
         googleTasks.add(t3);
