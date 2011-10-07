@@ -11,6 +11,9 @@
 
 package at.silverstrike.pcc.gcaltasks2pccimporter;
 
+import static at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalculator.HIGHEST_PRIORITY;
+import static at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalculator.PRIORITY_STEP;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +34,8 @@ import com.google.inject.Injector;
 
 import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2;
 import at.silverstrike.pcc.api.gcaltasks2pccimporter.GoogleCalendarTasks2PccImporter2Factory;
+import at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalculator;
+import at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalculatorFactory;
 import at.silverstrike.pcc.api.gtasks.GoogleTaskFields;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.UserData;
@@ -204,14 +209,14 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
         final Injector injector = injectorFactory.createInjector();
         return injector;
     }
-    
+
     /**
      * Test case for defect - 201109/1, priorities are not set
-     * evernote:///view/3784753/s35/d7d20fd2-70de-41fd-8ed3-5e08500c0cea/d7d20fd2-70de-41fd-8ed3-5e08500c0cea/
+     * evernote:///view/3784753/s35/d7d20fd2-70de-41fd-
+     * 8ed3-5e08500c0cea/d7d20fd2-70de-41fd-8ed3-5e08500c0cea/
      */
     @Test
-    public void testDefect201109_1()
-    {
+    public void testDefect201109_1() {
         // Prepare test data (START)
         final List<Task> googleTasks = new LinkedList<Task>();
 
@@ -258,40 +263,50 @@ public final class TestDefaultGoogleCalendarTasks2PccImporter2 {
         googleTasks.add(doll);
 
         final List<SchedulingObject> pccTasks = importTasks(googleTasks);
-        
-        final Map<String, at.silverstrike.pcc.api.model.Task> pccTasksByLabels =
-            getPccTasksByLabels(pccTasks);
 
-        final at.silverstrike.pcc.api.model.Task pccTaskBall = pccTasksByLabels.get("B");
-        final at.silverstrike.pcc.api.model.Task pccTaskSmallBall = pccTasksByLabels.get("SB");
-        final at.silverstrike.pcc.api.model.Task pccTaskBigBall = pccTasksByLabels.get("BB");
-        final at.silverstrike.pcc.api.model.Task pccTaskTrain = pccTasksByLabels.get("T");
-        final at.silverstrike.pcc.api.model.Task pccTaskDoll = pccTasksByLabels.get("D");
-        
+        final Map<String, at.silverstrike.pcc.api.model.Task> pccTasksByLabels =
+                getPccTasksByLabels(pccTasks);
+
+        final at.silverstrike.pcc.api.model.Task pccTaskBall =
+                pccTasksByLabels.get("B");
+        final at.silverstrike.pcc.api.model.Task pccTaskSmallBall =
+                pccTasksByLabels.get("SB");
+        final at.silverstrike.pcc.api.model.Task pccTaskBigBall =
+                pccTasksByLabels.get("BB");
+        final at.silverstrike.pcc.api.model.Task pccTaskTrain =
+                pccTasksByLabels.get("T");
+        final at.silverstrike.pcc.api.model.Task pccTaskDoll =
+                pccTasksByLabels.get("D");
+
         Assert.assertNotNull(pccTaskBall);
         Assert.assertNotNull(pccTaskSmallBall);
         Assert.assertNotNull(pccTaskBigBall);
         Assert.assertNotNull(pccTaskTrain);
         Assert.assertNotNull(pccTaskDoll);
-        
+
         LOGGER.debug("pccTaskBall: {}", pccTaskBall.getPriority());
         LOGGER.debug("pccTaskSmallBall: {}", pccTaskSmallBall.getPriority());
         LOGGER.debug("pccTaskBigBall: {}", pccTaskBigBall.getPriority());
         LOGGER.debug("pccTaskTrain: {}", pccTaskTrain.getPriority());
         LOGGER.debug("pccTaskDoll: {}", pccTaskDoll.getPriority());
-        
-        Assert.assertEquals(1000, (int)pccTaskBall.getPriority());
-        Assert.assertEquals(999, (int)pccTaskSmallBall.getPriority());
-        Assert.assertEquals(998, (int)pccTaskBigBall.getPriority());
-        Assert.assertEquals(997, (int)pccTaskTrain.getPriority());
-        Assert.assertEquals(996, (int)pccTaskDoll.getPriority());
-        
-        
+
+        Assert.assertEquals(HIGHEST_PRIORITY, (int) pccTaskBall.getPriority());
+        Assert.assertEquals(HIGHEST_PRIORITY - PRIORITY_STEP,
+                (int) pccTaskSmallBall.getPriority());
+        Assert.assertEquals(HIGHEST_PRIORITY - PRIORITY_STEP * 2,
+                (int) pccTaskBigBall.getPriority());
+        Assert.assertEquals(HIGHEST_PRIORITY - PRIORITY_STEP * 3,
+                (int) pccTaskTrain.getPriority());
+        Assert.assertEquals(HIGHEST_PRIORITY - PRIORITY_STEP * 4,
+                (int) pccTaskDoll.getPriority());
+
         Assert.assertNotNull(pccTaskSmallBall.getParent());
         Assert.assertNotNull(pccTaskBigBall.getParent());
-        
-        Assert.assertEquals(pccTaskBall.getId(), pccTaskSmallBall.getParent().getId());
-        Assert.assertEquals(pccTaskBall.getId(), pccTaskBigBall.getParent().getId());
+
+        Assert.assertEquals(pccTaskBall.getId(), pccTaskSmallBall.getParent()
+                .getId());
+        Assert.assertEquals(pccTaskBall.getId(), pccTaskBigBall.getParent()
+                .getId());
     }
 
     private List<SchedulingObject> importTasks(final List<Task> aGoogleTasks) {
