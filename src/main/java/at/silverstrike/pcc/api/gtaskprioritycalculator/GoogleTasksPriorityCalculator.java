@@ -20,6 +20,9 @@ import ru.altruix.commons.api.conventions.SingleActivityModule;
  * 
  */
 public interface GoogleTasksPriorityCalculator extends SingleActivityModule {
+            public static final int HIGHEST_PRIORITY = 800;
+            public static final int PRIORITY_STEP = 10;
+
             void
             setTasks(
                     final Map<String, com.google.api.services.tasks.v1.model.Task> aTasksByTaskIds);

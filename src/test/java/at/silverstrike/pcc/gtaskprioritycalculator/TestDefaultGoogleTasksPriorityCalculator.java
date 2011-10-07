@@ -11,6 +11,9 @@
 
 package at.silverstrike.pcc.gtaskprioritycalculator;
 
+import static at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalculator.HIGHEST_PRIORITY;
+import static at.silverstrike.pcc.api.gtaskprioritycalculator.GoogleTasksPriorityCalculator.PRIORITY_STEP;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,13 +69,16 @@ public final class TestDefaultGoogleTasksPriorityCalculator {
             final Map<String, Integer> prioritiesByTaskIds =
                     objectUnderTest.getPrioritiesByTaskIds();
 
-            Assert.assertEquals(new Integer(1000), prioritiesByTaskIds.get(ID_1));
-            Assert.assertEquals(new Integer(999), prioritiesByTaskIds.get(ID_2));
+            Assert.assertEquals(new Integer(HIGHEST_PRIORITY),
+                    prioritiesByTaskIds.get(ID_1));
+            Assert.assertEquals(new Integer(HIGHEST_PRIORITY - PRIORITY_STEP),
+                    prioritiesByTaskIds.get(ID_2));
         } catch (final PccException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
         }
     }
+
     @Test
     public void testTwoTasksReverse() {
         final GoogleTasksPriorityCalculatorFactory factory =
@@ -86,7 +92,6 @@ public final class TestDefaultGoogleTasksPriorityCalculator {
         task1.set("title", "Project 1");
         task1.set("id", ID_1);
         task1.set("position", "00000000001610612735");
-        
 
         final com.google.api.services.tasks.v1.model.Task task2 = new Task();
         task2.set("title", "Project 2");
@@ -103,7 +108,8 @@ public final class TestDefaultGoogleTasksPriorityCalculator {
                     objectUnderTest.getPrioritiesByTaskIds();
 
             Assert.assertEquals(new Integer(999), prioritiesByTaskIds.get(ID_1));
-            Assert.assertEquals(new Integer(1000), prioritiesByTaskIds.get(ID_2));
+            Assert.assertEquals(new Integer(1000),
+                    prioritiesByTaskIds.get(ID_2));
         } catch (final PccException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
