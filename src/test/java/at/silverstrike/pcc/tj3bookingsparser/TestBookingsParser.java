@@ -16,6 +16,7 @@ import static junit.framework.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.LinkedList;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -226,7 +227,42 @@ public final class TestBookingsParser {
         }
     }
 
-    
+    @Test
+    public void testDefect201110112() {
+        InputStream inputStream = null;
+        BookingsFile bookingsFile = null;
+        try {
+            inputStream =
+                    FileUtils.openInputStream(new File(DIR
+                            + "testDefect_201110112.tji.tjp"));
+            final BookingsLexer lexer =
+                    new BookingsLexer(new ANTLRInputStream(inputStream));
+            final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            final BookingsParser parser = new BookingsParser(tokenStream);
+
+            parser.bookingsFile();
+            checkParsingErrors(parser);
+            bookingsFile = parser.getBookingsFile();
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+
+        Assert.assertNotNull(bookingsFile);
+        
+        final List<String> taskNames = new LinkedList<String>();
+        
+        for (final SupplementStatement curSuppStmt : bookingsFile.getSupplementStatements())
+        {
+            taskNames.add(curSuppStmt.getTaskId());
+        }
+        
+
+        Assert.assertEquals(4, taskNames.size());
+    }
+
     private void checkParsingErrors(final BookingsParser parser) {
         Assert.assertEquals("Parsing error(s) occured", 0,
                 parser.getNumberOfSyntaxErrors());
