@@ -1593,6 +1593,8 @@ public final class DefaultPersistence implements Persistence {
 
                 bookings.add(booking);
             }
+        } catch (final ClassCastException exception) {
+            throw exception;
         } catch (final Exception exception) {
             LOGGER.error("", exception);
         }

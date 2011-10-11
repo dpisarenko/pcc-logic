@@ -242,6 +242,10 @@ final class Helper {
             LOGGER.error("", exception);
             fail(exception.getMessage());
         }
+        catch (final ClassCastException exception)
+        {
+            throw exception;
+        }
 
         final List<Booking> bookings = objectUnderTest.getBookings();
 

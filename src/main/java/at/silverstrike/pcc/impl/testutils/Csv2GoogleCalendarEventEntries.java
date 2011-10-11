@@ -57,6 +57,9 @@ public final class Csv2GoogleCalendarEventEntries {
 
             event.setTitle(new PlainTextConstruct(fields[1]));
             final When when = new When();
+            
+            LOGGER.debug("startTime: {}", fields[2]);
+            
             when.setStartTime(DateTime.parseDateTime(fields[2]));
             when.setEndTime(DateTime.parseDateTime(fields[3]));
             event.getTimes().add(when);
