@@ -1581,17 +1581,22 @@ public final class DefaultPersistence implements Persistence {
 
                 LOGGER.debug("booking ID: {}", tuple.getBooking().getId());
 
-                final Task process =
-                        (Task) tasksByIds.get(tuple.getProcessId());
-                final Resource resource =
-                        (Resource) session.load(DefaultResource.class,
-                                tuple.getResourceId());
+                final SchedulingObject schedulingObject =
+                        tasksByIds.get(tuple.getProcessId());
 
-                booking.setProcess(process);
-                booking.setResource(resource);
-                booking.setUserData(aUserData);
+                if (schedulingObject instanceof Task) {
+                    final Task process =
+                            (Task) schedulingObject;
+                    final Resource resource =
+                            (Resource) session.load(DefaultResource.class,
+                                    tuple.getResourceId());
 
-                bookings.add(booking);
+                    booking.setProcess(process);
+                    booking.setResource(resource);
+                    booking.setUserData(aUserData);
+
+                    bookings.add(booking);
+                }
             }
         } catch (final ClassCastException exception) {
             throw exception;
