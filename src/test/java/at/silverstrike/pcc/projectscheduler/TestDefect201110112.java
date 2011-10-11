@@ -13,30 +13,32 @@ package at.silverstrike.pcc.projectscheduler;
 
 import java.util.Calendar;
 import java.util.Date;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
 
+import junit.framework.Assert;
+
+import org.junit.Test;
+
+import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.impl.jruby.RubyDateTimeUtils;
 
 /**
  * @author DP118M
  * 
  */
-public class TestDefect201110111 extends SchedulingDefectTestCase {
-    static final Logger LOGGER =
-            LoggerFactory.getLogger(TestDefect201110111.class);
-
+public class TestDefect201110112 extends SchedulingDefectTestCase {
     @Test
-    public void testDefect201110111() {
-
+    public void testDefect201110112() {
         final Date now = RubyDateTimeUtils.getDate(2011,
                 Calendar.OCTOBER, 5, 22, 46);
 
-        calculatePlan(
-                        "defect201110111/diagnostic_gtasks-2011-10-11___11-38-36-285.csv",
-                        "defect201110111/diagnostic_gevents-2011-10-11___11-38-36-285.csv",
+        final List<Booking> bookings =
+                calculatePlan(
+                        "defect201110112/diagnostic_gtasks-2011-10-11___14-07-47-712.csv",
+                        "defect201110112/diagnostic_gevents-2011-10-11___14-07-47-712.csv",
                         now);
+        
+        Assert.assertTrue(bookings.size() > 0);
     }
 
 }
