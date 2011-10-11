@@ -18,6 +18,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +42,7 @@ import com.google.inject.Injector;
  * @author DP118M
  *
  */
+@Ignore
 class SchedulingDefectTestCase {
     private static final Logger LOGGER =
         LoggerFactory.getLogger(SchedulingDefectTestCase.class);
