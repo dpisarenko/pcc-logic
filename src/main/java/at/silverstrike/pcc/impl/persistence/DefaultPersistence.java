@@ -1571,8 +1571,10 @@ public final class DefaultPersistence implements Persistence {
         final Map<Long, SchedulingObject> tasksByIds =
                 new HashMap<Long, SchedulingObject>();
 
-        for (final SchedulingObject aTask : aSchedulingObjectsToExport) {
-            tasksByIds.put(aTask.getId(), aTask);
+        for (final SchedulingObject aSchedulingObject : aSchedulingObjectsToExport) {
+            if (aSchedulingObject instanceof Task) {
+                tasksByIds.put(aSchedulingObject.getId(), aSchedulingObject);
+            }
         }
 
         try {

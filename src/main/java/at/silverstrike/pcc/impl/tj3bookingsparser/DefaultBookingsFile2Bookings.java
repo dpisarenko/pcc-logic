@@ -36,7 +36,8 @@ class DefaultBookingsFile2Bookings implements BookingsFile2Bookings {
     private List<BookingTuple> tuples;
     private BookingsFile bookingsFile = null;
     private Persistence persistence = null;
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultBookingsFile2Bookings.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(DefaultBookingsFile2Bookings.class);
 
     @Override
     public List<BookingTuple> getTuples() {
@@ -49,34 +50,46 @@ class DefaultBookingsFile2Bookings implements BookingsFile2Bookings {
 
         for (final SupplementStatement suppStmt : this.bookingsFile
                 .getSupplementStatements()) {
-            final long taskId =
-                    taskOrResourceIdStringToLong(suppStmt.getTaskId());
+            final String schedulingObjectId = suppStmt.getTaskId();
 
-            for (final BookingStatement bookingStmt : suppStmt
-                    .getBookingStatements()) {
-                final long resourceId =
-                        taskOrResourceIdStringToLong(bookingStmt.getResource());
+            if (isTask(schedulingObjectId)) {
+                final long taskId =
+                        taskOrResourceIdStringToLong(schedulingObjectId);
 
-                for (final IndBooking indBooking : bookingStmt.getIndBookings()) {
-                    final Booking booking = this.persistence.createBooking();
+                for (final BookingStatement bookingStmt : suppStmt
+                        .getBookingStatements()) {
+                    final long resourceId =
+                            taskOrResourceIdStringToLong(bookingStmt
+                                    .getResource());
 
-                    final Date startTime =
-                            parseDateTime(indBooking.getStartTime());
+                    for (final IndBooking indBooking : bookingStmt
+                            .getIndBookings()) {
+                        final Booking booking =
+                                this.persistence.createBooking();
 
-                    booking.setStartDateTime(startTime);
-                    booking.setDuration(parseDuration(indBooking.getDuration()));
+                        final Date startTime =
+                                parseDateTime(indBooking.getStartTime());
 
-                    final BookingTuple tuple = new DefaultBookingTuple();
+                        booking.setStartDateTime(startTime);
+                        booking.setDuration(parseDuration(indBooking
+                                .getDuration()));
 
-                    tuple.setProcessId(taskId);
-                    tuple.setResourceId(resourceId);
-                    tuple.setBooking(booking);
+                        final BookingTuple tuple = new DefaultBookingTuple();
 
-                    this.tuples.add(tuple);
+                        tuple.setProcessId(taskId);
+                        tuple.setResourceId(resourceId);
+                        tuple.setBooking(booking);
+
+                        this.tuples.add(tuple);
+                    }
                 }
             }
         }
         LOGGER.debug("tuples: {}", this.tuples.size());
+    }
+
+    private boolean isTask(final String schedulingObjectId) {
+        return schedulingObjectId.startsWith("T");
     }
 
     private double parseDuration(final String aDuration) {
@@ -102,8 +115,9 @@ class DefaultBookingsFile2Bookings implements BookingsFile2Bookings {
     }
 
     private long taskOrResourceIdStringToLong(final String aIdAsString) {
-        LOGGER.debug("taskOrResourceIdStringToLong, aIdAsString: {}", aIdAsString);
-        
+        LOGGER.debug("taskOrResourceIdStringToLong, aIdAsString: {}",
+                aIdAsString);
+
         final String[] ids = aIdAsString.split("\\.");
         final String taskId = ids[ids.length - 1];
         return Long.parseLong(taskId.substring(1));
