@@ -99,9 +99,7 @@ public final class DefaultPersistence implements Persistence {
             "from " + "DefaultTask where ((state = "
                     + STATE_SCHEDULED + ") or (state = " + STATE_BEING_ATTAINED
                     + ")) or "
-                    + "((averageEstimatedEndDateTime is not null) or "
-                    + "(bestEstimatedEndDateTime is not null) or "
-                    + "(worstEstimatedEndDateTime is not null))";
+                    + "(estimatedCompletionDateTime is not null))";
 
     private static final Logger LOGGER = LoggerFactory
             .getLogger(DefaultPersistence.class);
