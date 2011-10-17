@@ -232,11 +232,7 @@ public final class TestDefaultProjectScheduler {
                 RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 11, 30);
 
         Assert.assertEquals(date201010251130,
-                process.getBestEstimatedEndDateTime());
-        Assert.assertEquals(date201010251130,
-                process.getAverageEstimatedEndDateTime());
-        Assert.assertEquals(date201010251130,
-                process.getWorstEstimatedEndDateTime());
+                process.getEstimatedCompletionDateTime());
 
         /**
          * Verify that daily plan exists
