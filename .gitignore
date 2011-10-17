@@ -2,3 +2,4 @@ target/derby.log
 /target
 /derby.log
 src/test/resources/at/silverstrike/pcc/test/xmlserialization/testSerializationDeserialization.xml
+src/test/resources/at/silverstrike/pcc/test/export2tj3/testRun03.actual.txt
