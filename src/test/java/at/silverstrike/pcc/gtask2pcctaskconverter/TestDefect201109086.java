@@ -61,8 +61,7 @@ public class TestDefect201109086 {
         final at.silverstrike.pcc.api.model.Task pccTask =
                 objectUnderTest.getPccTask();
 
-        Assert.assertEquals(0.25, pccTask.getBestCaseEffort());
-        Assert.assertEquals(0.25, pccTask.getWorstCaseEffort());
+        Assert.assertEquals(0.25, pccTask.getEffort());
     }
 
     @Test
@@ -88,8 +87,7 @@ public class TestDefect201109086 {
         final at.silverstrike.pcc.api.model.Task pccTask =
                 objectUnderTest.getPccTask();
 
-        Assert.assertEquals(0.5, pccTask.getBestCaseEffort());
-        Assert.assertEquals(0.5, pccTask.getWorstCaseEffort());
+        Assert.assertEquals(0.5, pccTask.getEffort());
     }
 
     @Test
@@ -115,8 +113,7 @@ public class TestDefect201109086 {
         final at.silverstrike.pcc.api.model.Task pccTask =
                 objectUnderTest.getPccTask();
 
-        Assert.assertEquals(0.75, pccTask.getBestCaseEffort());
-        Assert.assertEquals(0.75, pccTask.getWorstCaseEffort());
+        Assert.assertEquals(0.75, pccTask.getEffort());
     }
 
     
