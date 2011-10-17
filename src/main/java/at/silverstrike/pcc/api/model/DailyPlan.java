@@ -28,10 +28,6 @@ public interface DailyPlan extends UniquelyIdentifiableObject {
 
     Date getDate();
 
-    void setToDoList(final DailyToDoList aToDoList);
-
-    DailyToDoList getToDoList();
-
     void setSchedule(final DailySchedule aSchedule);
 
     DailySchedule getSchedule();

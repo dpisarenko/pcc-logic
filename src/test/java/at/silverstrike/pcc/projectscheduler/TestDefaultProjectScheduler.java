@@ -281,21 +281,6 @@ public final class TestDefaultProjectScheduler {
         Assert.assertEquals(date201010250900, booking.getStartDateTime());
 
         Assert.assertEquals(date201010251130, booking.getEndDateTime());
-
-        final DailyToDoList toDoList = dailyPlan.getToDoList();
-
-        Assert.assertNotNull(toDoList);
-
-        final List<Task> tasks = toDoList.getTasksToCompleteToday();
-
-        Assert.assertNotNull(tasks);
-
-        Assert.assertEquals(1, tasks.size());
-
-        final Task task = tasks.get(0);
-
-        Assert.assertEquals(expectedTask.getId(), task.getId());
-        Assert.assertEquals(((Task) expectedTask).getName(), task.getName());
     }
 
     @Test
