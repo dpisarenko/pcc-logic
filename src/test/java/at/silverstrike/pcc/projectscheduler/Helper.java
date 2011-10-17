@@ -66,8 +66,7 @@ final class Helper {
 
         task.setName("Some interesting task");
         task.setPriority(200);
-        task.setBestCaseEffort(2.5);
-        task.setWorstCaseEffort(2.5);
+        task.setEffort(2.5);
 
         final ResourceAllocation resourceAllocation =
                 mockObjectFactory.createResourceAllocation();
@@ -119,8 +118,7 @@ final class Helper {
         final Task task = aPersistence.getTask(id);
 
         task.setPriority(200);
-        task.setBestCaseEffort(2.5);
-        task.setWorstCaseEffort(2.5);
+        task.setEffort(2.5);
 
         final Resource resource = getWorkerDP(aPersistence);
 
