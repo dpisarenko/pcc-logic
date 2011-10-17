@@ -482,9 +482,14 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         final List<SchedulingObject> childProcesses =
                 getChildProcesses(aSchedulingObject);
 
-        if ((((Task) aSchedulingObject).getEffort() == 0.)
-                && (childProcesses.size() < 1)) {
-            return "";
+        if (aSchedulingObject instanceof Task)
+        {
+            final Task task = (Task)aSchedulingObject;
+            
+            if (((task.getEffort() == null) || (task.getEffort() == 0.)) && (childProcesses.size() < 1))
+            {
+                return "";
+            }
         }
 
         if (childProcesses != null) {
