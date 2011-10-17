@@ -407,18 +407,12 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         return stringBuilder.toString();
     }
 
-    private CharSequence getEffortInfo(final Task aProcess) {
-        final Double bestCaseEffort = aProcess.getBestCaseEffort();
-        final Double worstCaseEffort = aProcess.getWorstCaseEffort();
+    private CharSequence getEffortInfo(final Task aTask) {
+        final Double effort = aTask.getEffort();
 
-        if ((bestCaseEffort != null) && (worstCaseEffort != null)) {
+        if (effort != null) {
             return effortTemplate.replace(EFFORT,
-                    formatDouble(aProcess.getAverageCaseEffort()));
-        } else if ((bestCaseEffort != null) && (worstCaseEffort == null)) {
-            return effortTemplate.replace(EFFORT, formatDouble(bestCaseEffort));
-        } else if ((bestCaseEffort == null) && (worstCaseEffort != null)) {
-            return effortTemplate
-                    .replace(EFFORT, formatDouble(worstCaseEffort));
+                    formatDouble(effort));
         } else {
             return "";
         }
@@ -488,7 +482,7 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
         final List<SchedulingObject> childProcesses =
                 getChildProcesses(aSchedulingObject);
 
-        if ((((Task) aSchedulingObject).getAverageCaseEffort() == 0.)
+        if ((((Task) aSchedulingObject).getEffort() == 0.)
                 && (childProcesses.size() < 1)) {
             return "";
         }
@@ -605,16 +599,16 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
             throw new NoProjectExportInfoException();
         }
 
-        final List<SchedulingObject> processes =
+        final List<SchedulingObject> schedulingObjects =
                 this.projectExportInfo.getSchedulingObjectsToExport();
         final List<Resource> resources =
                 this.projectExportInfo.getResourcesToExport();
 
-        if (processes == null) {
+        if (schedulingObjects == null) {
             throw new NoProcessesException();
         }
 
-        if (processes.size() < 1) {
+        if (schedulingObjects.size() < 1) {
             throw new NoProcessesException();
         }
 
@@ -626,16 +620,14 @@ class DefaultTaskJuggler3Exporter implements TaskJuggler3Exporter {
             throw new NoResourcesException();
         }
 
-        for (final SchedulingObject proc : processes) {
+        for (final SchedulingObject proc : schedulingObjects) {
             if (proc instanceof Task) {
                 final Task task = (Task) proc;
 
                 LOGGER.debug("task: " + task.getName());
 
                 if (task.getChildren() == null) {
-                    checkTimingResolution(task, task.getBestCaseEffort());
-                    checkTimingResolution(task, task.getAverageCaseEffort());
-                    checkTimingResolution(task, task.getWorstCaseEffort());
+                    checkTimingResolution(task, task.getEffort());
                 }
             }
         }
