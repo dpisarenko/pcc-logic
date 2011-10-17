@@ -37,30 +37,6 @@ public final class TestDefaultPersistence {
                     .getLogger(TestDefaultPersistence.class);
 
     @Test
-    public final void test01() {
-        final Persistence persistence = new DefaultPersistence();
-
-        try {
-            persistence.openSession(Persistence.HOST_LOCAL, null, null,
-                    Persistence.DB_DEV);
-            persistence.clearDatabase();
-        } catch (final RuntimeException exception) {
-            Assert.fail(exception.getMessage());
-        } catch (final Exception exception) {
-            Assert.fail(exception.getMessage());
-        }
-
-        try {
-            persistence.getDailyPlan(new Date(), "DP");
-        } catch (final RuntimeException exception) {
-            Assert.fail(exception.getMessage());
-        } catch (final Exception exception) {
-            Assert.fail(exception.getMessage());
-        }
-
-    }
-
-    @Test
     public final void testDefect57() {
         // Get object under test (persistence)
         final Persistence persistence = new DefaultPersistence();
