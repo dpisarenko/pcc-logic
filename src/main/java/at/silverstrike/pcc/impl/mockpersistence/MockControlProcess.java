@@ -22,14 +22,12 @@ import at.silverstrike.pcc.api.model.ResourceAllocation;
 import at.silverstrike.pcc.api.model.UserData;
 
 class MockControlProcess extends MockSchedulingObject implements Task {
+    private Double effort;
+    private Date dueDateTime;
+    private Date estimatedCompletionDateTime;
 
-    private Double bestCaseEffort;
-    private Double worstCaseEffort;
     private List<ResourceAllocation> resourceAllocations =
             new LinkedList<ResourceAllocation>();
-    private Date averageEstimatedEndDateTime;
-    private Date bestEstimatedEndDateTime;
-    private Date worstEstimatedEndDateTime;
     private SchedulingObjectValidationError validationError;
     private UserData user;
     private List<SchedulingObject> children;
@@ -46,38 +44,6 @@ class MockControlProcess extends MockSchedulingObject implements Task {
         this.user = aUser;
     }
 
-    public Double getBestCaseEffort() {
-        return this.bestCaseEffort;
-    }
-
-    public void setBestCaseEffort(final Double aEffortInHours) {
-        this.bestCaseEffort = aEffortInHours;
-    }
-
-    @Override
-    public double getAverageCaseEffort() {
-        if ((this.bestCaseEffort != null) && (this.worstCaseEffort == null)) {
-            return this.bestCaseEffort;
-        } else if ((this.bestCaseEffort == null)
-                && (this.worstCaseEffort != null)) {
-            return this.worstCaseEffort;
-        } else if ((this.bestCaseEffort == null)
-                && (this.worstCaseEffort == null)) {
-            return 0.;
-        } else {
-            return (this.bestCaseEffort + this.worstCaseEffort) / 2;
-        }
-    }
-
-    public Double getWorstCaseEffort() {
-        return this.worstCaseEffort;
-    }
-
-    public void setWorstCaseEffort(final Double aEffortInHours) {
-        this.worstCaseEffort = aEffortInHours;
-
-    }
-
     public void setResourceAllocations(
             final List<ResourceAllocation> aResourceAllocations) {
         this.resourceAllocations = aResourceAllocations;
@@ -85,30 +51,6 @@ class MockControlProcess extends MockSchedulingObject implements Task {
 
     public List<ResourceAllocation> getResourceAllocations() {
         return this.resourceAllocations;
-    }
-
-    public Date getAverageEstimatedEndDateTime() {
-        return this.averageEstimatedEndDateTime;
-    }
-
-    public void setAverageEstimatedEndDateTime(final Date aDate) {
-        this.averageEstimatedEndDateTime = aDate;
-    }
-
-    public Date getBestEstimatedEndDateTime() {
-        return this.bestEstimatedEndDateTime;
-    }
-
-    public void setBestEstimatedEndDateTime(final Date aDate) {
-        this.bestEstimatedEndDateTime = aDate;
-    }
-
-    public Date getWorstEstimatedEndDateTime() {
-        return this.worstEstimatedEndDateTime;
-    }
-
-    public void setWorstEstimatedEndDateTime(final Date aDate) {
-        this.worstEstimatedEndDateTime = aDate;
     }
 
     public SchedulingObjectValidationError getValidationError() {
@@ -126,6 +68,30 @@ class MockControlProcess extends MockSchedulingObject implements Task {
 
     public void setChildren(final List<SchedulingObject> aChildren) {
         this.children = aChildren;
+    }
+
+    public Double getEffort() {
+        return effort;
+    }
+
+    public void setEffort(Double effort) {
+        this.effort = effort;
+    }
+
+    public Date getDueDateTime() {
+        return dueDateTime;
+    }
+
+    public void setDueDateTime(Date dueDateTime) {
+        this.dueDateTime = dueDateTime;
+    }
+
+    public Date getEstimatedCompletionDateTime() {
+        return estimatedCompletionDateTime;
+    }
+
+    public void setEstimatedCompletionDateTime(Date estimatedCompletionDateTime) {
+        this.estimatedCompletionDateTime = estimatedCompletionDateTime;
     }
 
 }
