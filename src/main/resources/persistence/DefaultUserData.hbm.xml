@@ -38,10 +38,6 @@
 			<key column="USER_DATA_ID" />
 			<one-to-many class="at.silverstrike.pcc.impl.persistence.DefaultSchedulingObject" />
 		</bag>
-		<bag name="dailyPlans" lazy="false">
-			<key column="USER_DATA_ID" />
-			<one-to-many class="at.silverstrike.pcc.impl.persistence.DefaultDailyPlan" />
-		</bag>
 		<bag name="bookings" lazy="false">
 			<key column="USER_DATA_ID" />
 			<one-to-many class="at.silverstrike.pcc.impl.persistence.DefaultBooking" />
