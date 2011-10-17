@@ -16,9 +16,6 @@ import at.silverstrike.pcc.api.model.Event;
 import at.silverstrike.pcc.api.model.Milestone;
 import at.silverstrike.pcc.api.model.Task;
 import at.silverstrike.pcc.api.model.DailyLimitResourceAllocation;
-import at.silverstrike.pcc.api.model.DailyPlan;
-import at.silverstrike.pcc.api.model.DailySchedule;
-import at.silverstrike.pcc.api.model.DailyToDoList;
 import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.ResourceAllocation;
 import at.silverstrike.pcc.api.model.UserData;
@@ -50,18 +47,6 @@ public final class MockObjectFactory {
     public DailyLimitResourceAllocation
             createDailyLimitResourceAllocation() {
         return new MockDailyLimitResourceAllocation();
-    }
-
-    public DailyPlan createDailyPlan() {
-        return new MockDailyPlan();
-    }
-
-    public DailySchedule createDailySchedule() {
-        return new MockDailySchedule();
-    }
-
-    public DailyToDoList createDailyToDoList() {
-        return new MockDailyToDoList();
     }
 
     public Resource createResource() {
