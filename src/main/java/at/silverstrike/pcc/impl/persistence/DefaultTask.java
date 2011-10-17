@@ -25,48 +25,16 @@ import at.silverstrike.pcc.api.model.ResourceAllocation;
  */
 class DefaultTask extends DefaultSchedulingObject implements
         Task {
-    private Double bestCaseEffort;
-    private Double worstCaseEffort;
+    private Double effort;
+    private Date dueDateTime;
+    private Date estimatedCompletionDateTime;
+    
     private List<ResourceAllocation> resourceAllocations;
-    private Date averageEstimatedEndDateTime;
-    private Date bestEstimatedEndDateTime;
-    private Date worstEstimatedEndDateTime;
     private List<SchedulingObject> children;
 
     public DefaultTask() {
         super();
         this.children = new LinkedList<SchedulingObject>();
-    }
-
-    public Double getBestCaseEffort() {
-        return bestCaseEffort;
-    }
-
-    public void setBestCaseEffort(final Double aBestCaseEffort) {
-        this.bestCaseEffort = aBestCaseEffort;
-    }
-
-    public Double getWorstCaseEffort() {
-        return worstCaseEffort;
-    }
-
-    public void setWorstCaseEffort(final Double aWorstCaseEffort) {
-        this.worstCaseEffort = aWorstCaseEffort;
-    }
-
-    @Override
-    public double getAverageCaseEffort() {
-        if ((this.bestCaseEffort != null) && (this.worstCaseEffort == null)) {
-            return this.bestCaseEffort;
-        } else if ((this.bestCaseEffort == null)
-                && (this.worstCaseEffort != null)) {
-            return this.worstCaseEffort;
-        } else if ((this.bestCaseEffort == null)
-                && (this.worstCaseEffort == null)) {
-            return 0.;
-        } else {
-            return (this.bestCaseEffort + this.worstCaseEffort) / 2;
-        }
     }
 
     public List<ResourceAllocation> getResourceAllocations() {
@@ -83,38 +51,35 @@ class DefaultTask extends DefaultSchedulingObject implements
         return this.getName();
     }
 
-    public Date getAverageEstimatedEndDateTime() {
-        return averageEstimatedEndDateTime;
-    }
-
-    public void setAverageEstimatedEndDateTime(
-            final Date aAverageEstimatedEndDateTime) {
-        this.averageEstimatedEndDateTime = aAverageEstimatedEndDateTime;
-    }
-
-    public Date getBestEstimatedEndDateTime() {
-        return bestEstimatedEndDateTime;
-    }
-
-    public void
-            setBestEstimatedEndDateTime(final Date aBestEstimatedEndDateTime) {
-        this.bestEstimatedEndDateTime = aBestEstimatedEndDateTime;
-    }
-
-    public Date getWorstEstimatedEndDateTime() {
-        return worstEstimatedEndDateTime;
-    }
-
-    public void setWorstEstimatedEndDateTime(
-            final Date aWorstEstimatedEndDateTime) {
-        this.worstEstimatedEndDateTime = aWorstEstimatedEndDateTime;
-    }
-
     public List<SchedulingObject> getChildren() {
         return children;
     }
 
     public void setChildren(final List<SchedulingObject> aChildren) {
         this.children = aChildren;
+    }
+
+    public Double getEffort() {
+        return effort;
+    }
+
+    public void setEffort(Double effort) {
+        this.effort = effort;
+    }
+
+    public Date getDueDateTime() {
+        return dueDateTime;
+    }
+
+    public void setDueDateTime(Date dueDateTime) {
+        this.dueDateTime = dueDateTime;
+    }
+
+    public Date getEstimatedCompletionDateTime() {
+        return estimatedCompletionDateTime;
+    }
+
+    public void setEstimatedCompletionDateTime(Date estimatedCompletionDateTime) {
+        this.estimatedCompletionDateTime = estimatedCompletionDateTime;
     }
 }
