@@ -16,62 +16,30 @@ import java.util.List;
 
 public interface Task extends SchedulingObject {
     /**
-     * Get effort estimate in hours (best case).
+     * Effort estimate property
      */
-    Double getBestCaseEffort();
-
+    Double getEffort();
+    void setEffort(final Double aEffortInHours);
+    
     /**
-     * Set effort estimate in hours (best case).
+     * "Due to" date/time (deadline) property
      */
-    void setBestCaseEffort(final Double aEffortInHours);
-
+    Date getDueDateTime();
+    void setDueDateTime(final Date aDueDateTime);
+    
     /**
-     * Get effort estimate in hours (average case).
+     * Estimated completion date/time
      */
-    double getAverageCaseEffort();
-
-    /**
-     * Get effort estimate in hours (worst case).
-     */
-    Double getWorstCaseEffort();
-
-    /**
-     * Set effort estimate in hours (worst case).
-     */
-    void setWorstCaseEffort(final Double aEffortInHours);
-
+    Date getEstimatedCompletionDateTime();
+    void setEstimatedCompletionDateTime(final Date aEstimatedCompletionDate);
+    
     void setResourceAllocations(final List<ResourceAllocation> aResourceAllocations);
 
     List<ResourceAllocation> getResourceAllocations();
 
     /**
-     * Get estimated end time (completion date) of the task for the average case
-     * scenario (based on average effort estimates of this and other tasks).
+     * Child tasks
      */
-    Date getAverageEstimatedEndDateTime();
-
-    void setAverageEstimatedEndDateTime(final Date aDate);
-
-    /**
-     * This method is not implemented now (prototype 1).
-     */
-    Date getBestEstimatedEndDateTime();
-
-    /**
-     * This method is not implemented now (prototype 1).
-     */
-    void setBestEstimatedEndDateTime(final Date aDate);
-
-    /**
-     * This method is not implemented now (prototype 1).
-     */
-    Date getWorstEstimatedEndDateTime();
-
-    /**
-     * This method is not implemented now (prototype 1).
-     */
-    void setWorstEstimatedEndDateTime(final Date aDate);
-    
     void setChildren(final List<SchedulingObject> aChildren);
     List<SchedulingObject> getChildren();
 }
