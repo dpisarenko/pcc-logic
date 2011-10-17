@@ -15,13 +15,11 @@ import java.util.List;
 
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.SchedulingObject;
-import at.silverstrike.pcc.api.model.DailyPlan;
 import at.silverstrike.pcc.api.model.UserData;
 
 class MockUserData implements UserData {
     private String identifier;
     private List<SchedulingObject> processes;
-    private List<DailyPlan> dailyPlans;
     private List<Booking> bookings;
     private String googleUsername;
     private String googlePassword;
@@ -43,14 +41,6 @@ class MockUserData implements UserData {
 
     public void setSchedulingData(final List<SchedulingObject> aProcesses) {
         this.processes = aProcesses;
-    }
-
-    public List<DailyPlan> getDailyPlans() {
-        return dailyPlans;
-    }
-
-    public void setDailyPlans(final List<DailyPlan> aDailyPlans) {
-        this.dailyPlans = aDailyPlans;
     }
 
     public List<Booking> getBookings() {
