@@ -30,7 +30,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ru.altruix.commons.api.conventions.TestConventions;
 import ru.altruix.commons.api.di.InjectorFactory;
 import ru.altruix.commons.api.di.PccException;
 
@@ -38,9 +37,6 @@ import at.silverstrike.pcc.api.gtasks.GoogleTaskFields;
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
-import at.silverstrike.pcc.api.model.DailyPlan;
-import at.silverstrike.pcc.api.model.DailySchedule;
-import at.silverstrike.pcc.api.model.DailyToDoList;
 import at.silverstrike.pcc.api.model.UserData;
 import at.silverstrike.pcc.api.persistence.Persistence;
 import at.silverstrike.pcc.api.projectscheduler.ProjectExportInfo;
@@ -242,45 +238,6 @@ public final class TestDefaultProjectScheduler {
 
         Assert.assertNotNull(resource);
         Assert.assertFalse(StringUtils.isEmpty(resource));
-
-        final Date date201010250000 =
-                RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 0, 0);
-
-        final DailyPlan dailyPlan =
-                persistence.getDailyPlan(date201010250000, resource);
-
-        Assert.assertNotNull(dailyPlan);
-
-        final DailySchedule schedule = dailyPlan.getSchedule();
-
-        Assert.assertNotNull(schedule);
-
-        final List<Booking> bookings = schedule.getBookings();
-
-        Assert.assertNotNull(bookings);
-        Assert.assertEquals(1, bookings.size());
-
-        final Booking booking = bookings.get(0);
-
-        Assert.assertEquals(2.5, booking.getDuration(), TestConventions.DELTA);
-        Assert.assertNotNull(booking.getProcess());
-        Assert.assertNotNull(booking.getResource());
-        Assert.assertNotNull(booking.getUserData());
-
-        final SchedulingObject expectedTask =
-                projectInfo.getSchedulingObjectsToExport().get(0);
-
-        Assert.assertEquals(((Task) expectedTask).getName(), booking
-                .getProcess().getName());
-        Assert.assertEquals(projectInfo.getResourcesToExport().get(0)
-                .getAbbreviation(), booking.getResource().getAbbreviation());
-
-        final Date date201010250900 =
-                RubyDateTimeUtils.getDate(2010, Calendar.OCTOBER, 25, 9, 0);
-
-        Assert.assertEquals(date201010250900, booking.getStartDateTime());
-
-        Assert.assertEquals(date201010251130, booking.getEndDateTime());
     }
 
     @Test
