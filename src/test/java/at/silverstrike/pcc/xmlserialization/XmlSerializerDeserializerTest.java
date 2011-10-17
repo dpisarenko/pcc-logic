@@ -28,9 +28,6 @@ import ru.altruix.commons.api.di.PccException;
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
-import at.silverstrike.pcc.api.model.DailyPlan;
-import at.silverstrike.pcc.api.model.DailySchedule;
-import at.silverstrike.pcc.api.model.DailyToDoList;
 import at.silverstrike.pcc.api.model.ProcessState;
 import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.ResourceAllocation;
@@ -113,23 +110,11 @@ public class XmlSerializerDeserializerTest extends TestCase {
         process1.setEstimatedCompletionDateTime(new Date());
         writtenData.setSchedulingData(new ArrayList<SchedulingObject>());
         writtenData.getSchedulingData().add(process1);
-        final DailyPlan dailyPlan1 = objectFactory.createDailyPlan();
-        dailyPlan1.setDate(new Date());
-        dailyPlan1.setResource(objectFactory.createResource());
-        final DailySchedule dailySchedule = objectFactory.createDailySchedule();
-        dailySchedule.setBookings(new ArrayList<Booking>());
         final Booking booking = objectFactory.createBooking();
         booking.setDuration(3.4);
         booking.setProcess(objectFactory.createControlProcess());
         booking.setResource(objectFactory.createResource());
         booking.setStartDateTime(new Date());
-        dailySchedule.getBookings().add(booking);
-        dailyPlan1.setSchedule(dailySchedule);
-        final DailyToDoList dailyToDoList = objectFactory.createDailyToDoList();
-        dailyToDoList.setTasksToCompleteToday(new ArrayList<Task>());
-        dailyPlan1.setToDoList(dailyToDoList);
-        writtenData.setDailyPlans(new ArrayList<DailyPlan>());
-        writtenData.getDailyPlans().add(dailyPlan1);
         writtenData.setIdentifier("1st user data identifier");
         writtenData.setBookings(new ArrayList<Booking>());
         final Booking booking1 = objectFactory.createBooking();
@@ -216,59 +201,9 @@ public class XmlSerializerDeserializerTest extends TestCase {
                 testBooking(written, read);
             }
         }
-
-        // test daily plans
-        final int writtenDataDailyPlansSize =
-                writtenData.getDailyPlans().size();
-        final int readDataDailyPlansSize = readData.getDailyPlans().size();
-        Assert.assertEquals(writtenDataDailyPlansSize, readDataDailyPlansSize);
-        if (writtenDataDailyPlansSize == readDataDailyPlansSize) {
-            for (int i = 0; i < writtenDataDailyPlansSize; i++) {
-                final DailyPlan written = writtenData.getDailyPlans().get(i);
-                final DailyPlan read = readData.getDailyPlans().get(i);
-                testDailyPlan(written, read);
-            }
-        }
     }
 
-    private void testDailyPlan(final DailyPlan aWritten,
-            final DailyPlan aRead) {
-        if (aWritten.getDate() != null) {
-            Assert.assertEquals(aWritten.getDate(), aRead.getDate());
-        }
-        if (aWritten.getId() != null) {
-            Assert.assertEquals(aWritten.getId(), aRead.getId());
-        }
-        if (aWritten.getResource() != null) {
-            testResource(aWritten.getResource(), aRead.getResource());
-        }
-        if (aWritten.getSchedule() != null) {
-            testSchedule(aWritten.getSchedule(), aRead.getSchedule());
-        }
-        if (aWritten.getToDoList() != null) {
-            testDailyToDoList(aWritten.getToDoList(), aRead.getToDoList());
-        }
-    }
 
-    private void testDailyToDoList(final DailyToDoList aWritten,
-            final DailyToDoList aRead) {
-        if (aWritten.getId() != null) {
-            Assert.assertEquals(aWritten.getId(), aRead.getId());
-        }
-        if (aWritten.getTasksToCompleteToday() != null) {
-            final int writtenProcesses =
-                    aWritten.getTasksToCompleteToday().size();
-            final int readProcesses = aRead.getTasksToCompleteToday().size();
-            Assert.assertEquals(writtenProcesses, readProcesses);
-            if (writtenProcesses == readProcesses) {
-                for (int i = 0; i < writtenProcesses; i++) {
-                    testProcess(aWritten.getTasksToCompleteToday().get(i),
-                            aRead
-                                    .getTasksToCompleteToday().get(i));
-                }
-            }
-        }
-    }
 
     private void testResource(final Resource aWritten,
             final Resource aRead) {
@@ -283,23 +218,6 @@ public class XmlSerializerDeserializerTest extends TestCase {
         }
     }
 
-    private void testSchedule(final DailySchedule aWritten,
-            final DailySchedule aRead) {
-        if (aWritten.getId() != null) {
-            Assert.assertEquals(aWritten.getId(), aRead.getId());
-        }
-        if (aWritten.getBookings() != null) {
-            final int writtenBooking = aWritten.getBookings().size();
-            final int readBooking = aRead.getBookings().size();
-            Assert.assertEquals(writtenBooking, readBooking);
-            if (writtenBooking == readBooking) {
-                for (int i = 0; i < writtenBooking; i++) {
-                    testBooking(aWritten.getBookings().get(i), aRead
-                            .getBookings().get(i));
-                }
-            }
-        }
-    }
 
     private void testBooking(final Booking aWritten, final Booking aRead) {
         if (aWritten.getDuration() != 0) {
