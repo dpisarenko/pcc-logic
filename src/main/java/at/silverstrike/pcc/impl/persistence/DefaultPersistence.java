@@ -703,16 +703,12 @@ public final class DefaultPersistence implements Persistence {
                     { "DefaultDailyLimitResourceAllocation",
                             "DefaultResourceAllocation",
                             "DefaultBooking",
-                            "DefaultDailyPlan",
-                            "DefaultDailySchedule",
                             "DefaultResource",
 
                             "DefaultEvent",
                             "DefaultMilestone",
 
                             "DefaultWorker",
-                            "TBL_DAILY_TO_DO_LIST_TASKSTOCOMPLETETODAY",
-                            "DefaultDailyToDoList",
 
                             "DefaultTask",
                             "DefaultSchedulingObject",
