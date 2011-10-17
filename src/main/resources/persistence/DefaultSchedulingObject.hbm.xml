@@ -46,11 +46,10 @@
 		<joined-subclass name="at.silverstrike.pcc.impl.persistence.DefaultTask"
 			table="TBL_TASK" lazy="false">
 			<key column="TASK_ID" />
-			<property name="bestCaseEffort" />
-			<property name="worstCaseEffort" />
-			<property name="averageEstimatedEndDateTime" />
-			<property name="bestEstimatedEndDateTime" />
-			<property name="worstEstimatedEndDateTime" />
+			<property name="effort" />
+			<property name="dueDateTime" />
+			<property name="estimatedCompletionDateTime" />
+			
 			<bag name="resourceAllocations" lazy="false">
 				<key column="TASK_ID" />
 				<one-to-many
