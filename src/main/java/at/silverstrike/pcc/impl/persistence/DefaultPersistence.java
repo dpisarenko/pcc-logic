@@ -702,9 +702,7 @@ public final class DefaultPersistence implements Persistence {
                 LOGGER.debug("process ID: {}, process: {}",
                         tuple.getProcessId(), process);
 
-                process.setAverageEstimatedEndDateTime(tuple.getEndDateTime());
-                process.setBestEstimatedEndDateTime(tuple.getEndDateTime());
-                process.setWorstEstimatedEndDateTime(tuple.getEndDateTime());
+                process.setEstimatedCompletionDateTime(tuple.getEndDateTime());
 
                 session.update(process);
             }
@@ -909,7 +907,7 @@ public final class DefaultPersistence implements Persistence {
                                 + "(resource = :resource)");
 
                 final Date day =
-                        setTimeTo00(curProcess.getAverageEstimatedEndDateTime());
+                        setTimeTo00(curProcess.getEstimatedCompletionDateTime());
                 final Resource resource = allocation.getResource();
 
                 dailyPlanQuery.setParameter("day", day);
