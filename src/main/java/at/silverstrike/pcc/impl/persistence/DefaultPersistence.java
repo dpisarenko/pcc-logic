@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.hibernate.Query;
@@ -40,9 +39,6 @@ import at.silverstrike.pcc.api.model.InvitationRequest;
 import at.silverstrike.pcc.api.model.InvitationRequestStatus;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
-import at.silverstrike.pcc.api.model.DailyPlan;
-import at.silverstrike.pcc.api.model.DailySchedule;
-import at.silverstrike.pcc.api.model.DailyToDoList;
 import at.silverstrike.pcc.api.model.ProcessState;
 import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.ResourceAllocation;
@@ -62,12 +58,7 @@ public final class DefaultPersistence implements Persistence {
     private static final double DAILY_LIMIT_IN_HOURS = 8.;
     private static final int MAX_PRIORITY = 500;
     private static final int PRIORITY_INCREASE_STEP = 10;
-    private static final int LAST_HOUR = 23;
-    private static final int LAST_MINUTE = 59;
-    private static final int LAST_SECOND = 59;
-    private static final int LAST_MILLISECOND = 999;
     public static final String DB_NAME = "pcc";
-    private static final int DAYS_TO_PLAN_AHEAD = 7;
     // jdbc:derby://localhost:1527/pcc;create=true
 
     private static final String JDBC_CONN_STRING_EXISTING_DB_TEMPLATE =
@@ -249,19 +240,6 @@ public final class DefaultPersistence implements Persistence {
                     .executeUpdate();
             session.createQuery("delete from DefaultDailyPlan").executeUpdate();
 
-            final Date lastPlannedDay =
-                    DateUtils.addDays(aNow, DAYS_TO_PLAN_AHEAD);
-
-            createDailyPlans(session, aNow);
-
-            printDailyPlans(ErrorCodes.M_007_DAILY_PLAN_LIST1);
-
-            // Create daily to-do lists
-            updateDailyToDoLists(session, aNow, lastPlannedDay);
-
-            // Create daily schedules
-            updateDailySchedules(session, aNow, lastPlannedDay);
-
             tx.commit();
         } catch (final Exception exception) {
             LOGGER.error(ErrorCodes.M_010_GENERATE_DAILY_PLANS, exception);
@@ -397,62 +375,6 @@ public final class DefaultPersistence implements Persistence {
             tx.rollback();
             return new LinkedList<SchedulingObject>();
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public DailyPlan getDailyPlan(final Date aNewDate,
-            final String aResource) {
-        DailyPlan returnValue = null;
-
-        try {
-            printDailyPlans(ErrorCodes.M_008_DAILY_PLAN_LIST2);
-
-            final Query query =
-                    session.createQuery("from DefaultDailyPlan p where "
-                            + "(p.date = :day) and "
-                            + "(p.resource.abbreviation = :resource)");
-
-            query.setParameter("day", setTimeTo00(aNewDate));
-            query.setParameter("resource", aResource);
-
-            final List<DailyPlan> plans = (List<DailyPlan>) query.list();
-
-            if (plans.size() > 0) {
-                returnValue = plans.get(0);
-            }
-        } catch (final Exception exception) {
-            LOGGER.error(ErrorCodes.M_009_GET_DAILY_PLAN, exception);
-            throw new RuntimeException(exception);
-        }
-        return returnValue;
-    }
-
-    @SuppressWarnings("unchecked")
-    private void printDailyPlans(final String aText) {
-        LOGGER.debug("{}: Daily plans (start)", aText);
-        LOGGER.debug("session: {}", session);
-
-        final Query debugQuery = session.createQuery("from DefaultDailyPlan");
-
-        final List<DailyPlan> plans2 = (List<DailyPlan>) debugQuery.list();
-
-        for (final DailyPlan plan : plans2) {
-
-            LOGGER.debug(
-                    "Daily plan, date: {}, resource: {}, tasks: {}",
-                    new Object[] { plan.getDate(),
-                            plan.getResource().getAbbreviation(),
-                            plan.getToDoList().getTasksToCompleteToday().size() });
-
-            if ((plan.getSchedule() != null)
-                    && (plan.getSchedule().getBookings() != null)) {
-                LOGGER.debug("Schedule items: {}", plan.getSchedule()
-                        .getBookings().size());
-            }
-        }
-
-        LOGGER.debug("{}: Daily plans (end)", aText);
     }
 
     /**
@@ -712,32 +634,6 @@ public final class DefaultPersistence implements Persistence {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private void createDailyPlans(final Session aSession, final Date aNow) {
-        final List<Resource> resources =
-                (List<Resource>) aSession.createQuery("from DefaultResource")
-                        .list();
-
-        for (int i = 0; i < DAYS_TO_PLAN_AHEAD; i++) {
-            final Date currentDay = DateUtils.addDays(aNow, i);
-
-            for (final Resource resource : resources) {
-                final DailySchedule schedule = new DefaultDailySchedule();
-                final DailyToDoList toDoList = new DefaultDailyToDoList();
-                final DailyPlan plan = new DefaultDailyPlan();
-
-                plan.setResource(resource);
-                plan.setDate(setTimeTo00(currentDay));
-                plan.setSchedule(schedule);
-                plan.setToDoList(toDoList);
-
-                aSession.save(schedule);
-                aSession.save(toDoList);
-                aSession.save(plan);
-            }
-        }
-    }
-
     private void tryToCreateDb(final Throwable aException, final String aHost,
             final String aDatabase) {
         LOGGER.error("tryToCreateDb, 1, ", aException);
@@ -802,143 +698,6 @@ public final class DefaultPersistence implements Persistence {
         return cnf;
     }
 
-    @SuppressWarnings("unchecked")
-    private void updateDailySchedules(final Session aSession, final Date aNow,
-            final Date aLastPlannedDay) {
-        final Date startDateTime = setTimeTo00(aNow);
-        final Date endDateTime = setTimeTo2359(aLastPlannedDay);
-
-        final Query bookingsQuery =
-                aSession.createQuery("from DefaultBooking "
-                        + "where (startDateTime >= :minDate) and "
-                        + "(startDateTime <= :maxDate)");
-        bookingsQuery.setParameter("minDate", startDateTime);
-        bookingsQuery.setParameter("maxDate", endDateTime);
-
-        final List<Booking> bookings = bookingsQuery.list();
-
-        LOGGER.debug("updateDailySchedules: bookings.size(): {}",
-                bookings.size());
-
-        for (final Booking curBooking : bookings) {
-            final Query dailyPlanQuery =
-                    aSession.createQuery("from DefaultDailyPlan "
-                            + "where (date = :day) and "
-                            + "(resource = :resource)");
-
-            final Date day = setTimeTo00(curBooking.getStartDateTime());
-            final Resource resource = curBooking.getResource();
-
-            dailyPlanQuery.setParameter("day", day);
-            dailyPlanQuery.setParameter("resource", resource);
-
-            final List<DailyPlan> foundDailyPlans =
-                    (List<DailyPlan>) dailyPlanQuery.list();
-
-            if (!foundDailyPlans.isEmpty()) {
-                final DailyPlan dailyPlan = (DailyPlan) foundDailyPlans.get(0);
-
-                List<Booking> dailyPlanBookings =
-                        dailyPlan.getSchedule().getBookings();
-
-                if (dailyPlanBookings == null) {
-                    dailyPlanBookings = new LinkedList<Booking>();
-                    dailyPlan.getSchedule().setBookings(dailyPlanBookings);
-                }
-
-                dailyPlanBookings.add(curBooking);
-
-                aSession.update(dailyPlan);
-                aSession.update(dailyPlan.getSchedule());
-            } else {
-                LOGGER.error(
-                        ErrorCodes.M_005_DAILY_PLAN_NOT_FOUND_SCHEDULE
-                                + ": Daily plan for resource '{}' and date '{}' not found.",
-                        new Object[] { resource.getAbbreviation(), day });
-            }
-        }
-    }
-
-    private Date setTimeTo2359(final Date aLastPlannedDay) {
-        Date endDateTime = DateUtils.setHours(aLastPlannedDay, LAST_HOUR);
-        endDateTime = DateUtils.setMinutes(endDateTime, LAST_MINUTE);
-        endDateTime = DateUtils.setSeconds(endDateTime, LAST_SECOND);
-        endDateTime = DateUtils.setMilliseconds(endDateTime, LAST_MILLISECOND);
-        return endDateTime;
-    }
-
-    private Date setTimeTo00(final Date aNow) {
-        Date startDateTime = DateUtils.setHours(aNow, 0);
-        startDateTime = DateUtils.setMinutes(startDateTime, 0);
-        startDateTime = DateUtils.setSeconds(startDateTime, 0);
-        startDateTime = DateUtils.setMilliseconds(startDateTime, 0);
-        return startDateTime;
-    }
-
-    @SuppressWarnings("unchecked")
-    private void updateDailyToDoLists(final Session aSession, final Date aNow,
-            final Date aLastPlannedDay) {
-        final Query query =
-                aSession.createQuery("from DefaultTask " + "where "
-                        + "(averageEstimatedEndDateTime >= :minDate)"
-                        + " and (averageEstimatedEndDateTime <= :maxDate)");
-
-        final Date minDate = setTimeTo00(aNow);
-        final Date maxDate = setTimeTo2359(aLastPlannedDay);
-
-        query.setParameter("minDate", minDate);
-        query.setParameter("maxDate", maxDate);
-
-        final List<Task> processes =
-                (List<Task>) query.list();
-
-        LOGGER.debug("updateDailyToDoLists, minDate: {}, maxDate: {}",
-                new Object[] { minDate, maxDate });
-        LOGGER.debug("updateDailyToDoLists, processes: {}", processes.size());
-
-        for (final Task curProcess : processes) {
-            for (final ResourceAllocation allocation : curProcess
-                    .getResourceAllocations()) {
-                final Query dailyPlanQuery =
-                        aSession.createQuery("from DefaultDailyPlan "
-                                + "where (date = :day) and "
-                                + "(resource = :resource)");
-
-                final Date day =
-                        setTimeTo00(curProcess.getEstimatedCompletionDateTime());
-                final Resource resource = allocation.getResource();
-
-                dailyPlanQuery.setParameter("day", day);
-                dailyPlanQuery.setParameter("resource", resource);
-
-                LOGGER.debug(
-                        "updateDailyToDoLists, process: {}, day: {}, resource: {}",
-                        new Object[] { curProcess, day, resource });
-
-                final List<DailyPlan> foundDailyPlans =
-                        (List<DailyPlan>) dailyPlanQuery.list();
-
-                if (!foundDailyPlans.isEmpty()) {
-                    final DailyPlan dailyPlan =
-                            (DailyPlan) foundDailyPlans.get(0);
-
-                    dailyPlan.getToDoList().getTasksToCompleteToday()
-                            .add(curProcess);
-
-                    LOGGER.debug("Updating daily plan: {}", dailyPlan);
-                    aSession.update(dailyPlan);
-                    LOGGER.debug("Updating daily plan: {} completed", dailyPlan);
-
-                } else {
-                    LOGGER.error(
-                            ErrorCodes.M_006_DAILY_PLAN_NOT_FOUND_TO_DO
-                                    + ": Daily plan for resource {} and day {} not found.",
-                            new Object[] { resource.getAbbreviation(), day });
-                }
-            }
-        }
-    }
-
     @Override
     public void clearDatabase() {
         final Transaction tx = session.beginTransaction();
@@ -999,11 +758,7 @@ public final class DefaultPersistence implements Persistence {
 
         final Query bookingsQuery = session.createQuery("from DefaultBooking");
         final List<Booking> bookings = bookingsQuery.list();
-
-        final Query dailyPlanQuery =
-                session.createQuery("from DefaultDailyPlan");
-        final List<DailyPlan> dailyPlans = dailyPlanQuery.list();
-
+        
         final List<SchedulingObject> schedulingObjects =
                 new LinkedList<SchedulingObject>();
 
@@ -1023,7 +778,6 @@ public final class DefaultPersistence implements Persistence {
         schedulingObjects.addAll(milestones);
 
         userData.setBookings(bookings);
-        userData.setDailyPlans(dailyPlans);
         userData.setIdentifier("dp");
         userData.setSchedulingData(schedulingObjects);
 
@@ -1288,7 +1042,6 @@ public final class DefaultPersistence implements Persistence {
         final DefaultUserData userData = new DefaultUserData();
 
         userData.setBookings(new LinkedList<Booking>());
-        userData.setDailyPlans(new LinkedList<DailyPlan>());
         userData.setIdentifier("");
         userData.setPassword(aPassword);
         userData.setSchedulingData(new LinkedList<SchedulingObject>());
@@ -1315,7 +1068,6 @@ public final class DefaultPersistence implements Persistence {
             final DefaultUserData userData = new DefaultUserData();
 
             userData.setBookings(new LinkedList<Booking>());
-            userData.setDailyPlans(new LinkedList<DailyPlan>());
             userData.setIdentifier("");
             userData.setPassword(Persistence.SUPER_USER_PASSWORD);
             userData.setSchedulingData(new LinkedList<SchedulingObject>());

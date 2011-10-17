@@ -22,7 +22,6 @@ import at.silverstrike.pcc.api.model.Event;
 import at.silverstrike.pcc.api.model.InvitationRequest;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
-import at.silverstrike.pcc.api.model.DailyPlan;
 import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.UserData;
 import at.silverstrike.pcc.api.model.Worker;
@@ -94,13 +93,6 @@ public interface Persistence extends ModuleWithInjectableDependencies {
      * Used only in tests
      */
     List<Task> getUncompletedTasksWithEstimatedEndTime();
-
-    /**
-     * Returns daily plan for specified resource on specified day.
-     * 
-     * Used only in tests
-     */
-    DailyPlan getDailyPlan(final Date aNewDate, final String aResource);
 
     /**
      * Returns a list of processes, which

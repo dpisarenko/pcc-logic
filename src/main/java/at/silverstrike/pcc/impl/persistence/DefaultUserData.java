@@ -17,13 +17,11 @@ import org.apache.commons.lang.StringUtils;
 
 import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.SchedulingObject;
-import at.silverstrike.pcc.api.model.DailyPlan;
 import at.silverstrike.pcc.api.model.UserData;
 
 class DefaultUserData implements UserData {
     private String identifier;
     private List<SchedulingObject> schedulingObjects;
-    private List<DailyPlan> dailyPlans;
     private List<Booking> bookings;
     private String username;
     private String password;
@@ -49,14 +47,6 @@ class DefaultUserData implements UserData {
 
     public void setSchedulingData(final List<SchedulingObject> aProcesses) {
         this.schedulingObjects = aProcesses;
-    }
-
-    public List<DailyPlan> getDailyPlans() {
-        return dailyPlans;
-    }
-
-    public void setDailyPlans(final List<DailyPlan> aDailyPlans) {
-        this.dailyPlans = aDailyPlans;
     }
 
     public List<Booking> getBookings() {

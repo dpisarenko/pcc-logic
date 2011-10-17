@@ -23,10 +23,6 @@ public interface UserData extends UniquelyIdentifiableObject {
 
     List<SchedulingObject> getSchedulingData();
 
-    void setDailyPlans(List<DailyPlan> aDailyPlans);
-
-    List<DailyPlan> getDailyPlans();
-
     void setBookings(List<Booking> aBookings);
 
     List<Booking> getBookings();
