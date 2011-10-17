@@ -69,28 +69,25 @@ public class XmlSerializerDeserializerTest extends TestCase {
         // schedules.
         final Task process1 = objectFactory.createControlProcess();
         process1.setName("process1");
-        process1.setAverageEstimatedEndDateTime(new Date());
-        process1.setBestCaseEffort(1.1);
-        process1.setBestEstimatedEndDateTime(new Date());
+        process1.setEstimatedCompletionDateTime(new Date());
+        process1.setEffort(1.1);
+        
         final Task parent = objectFactory.createControlProcess();
-        parent.setAverageEstimatedEndDateTime(new Date());
-        parent.setBestCaseEffort(3.3);
-        parent.setBestEstimatedEndDateTime(new Date());
+        parent.setEstimatedCompletionDateTime(new Date());
+        parent.setEffort(3.3);
         parent.setName("parent");
         parent.setParent(objectFactory.createControlProcess());
         parent.setPredecessors(new HashSet<SchedulingObject>());
         parent.setPriority(1);
         parent.setResourceAllocations(new ArrayList<ResourceAllocation>());
         parent.setState(ProcessState.ATTAINED);
-        parent.setWorstCaseEffort(6.7);
-        parent.setWorstEstimatedEndDateTime(new Date());
+        parent.setEffort(6.7);
         process1.setParent(parent);
         final Set<SchedulingObject> predecessors =
                 new HashSet<SchedulingObject>();
         final Task firstPredecessors = objectFactory.createControlProcess();
-        firstPredecessors.setAverageEstimatedEndDateTime(new Date());
-        firstPredecessors.setBestCaseEffort(2.2);
-        firstPredecessors.setBestEstimatedEndDateTime(new Date());
+        firstPredecessors.setEstimatedCompletionDateTime(new Date());
+        firstPredecessors.setEffort(2.2);
         firstPredecessors.setName("firstPredecessors");
         firstPredecessors.setParent(objectFactory.createControlProcess());
         firstPredecessors.setPriority(1);
@@ -105,15 +102,15 @@ public class XmlSerializerDeserializerTest extends TestCase {
         resourceAllocations.add(resourceAllocation);
         firstPredecessors.setResourceAllocations(resourceAllocations);
         firstPredecessors.setState(ProcessState.REPORTED);
-        firstPredecessors.setWorstCaseEffort(5.5);
-        firstPredecessors.setWorstEstimatedEndDateTime(new Date());
+        firstPredecessors.setEffort(5.5);
+        firstPredecessors.setEstimatedCompletionDateTime(new Date());
         predecessors.add(firstPredecessors);
         process1.setPredecessors(predecessors);
         process1.setPriority(5);
         process1.setResourceAllocations(new ArrayList<ResourceAllocation>());
         process1.setState(ProcessState.ATTAINED);
-        process1.setWorstCaseEffort(7.7);
-        process1.setWorstEstimatedEndDateTime(new Date());
+        process1.setEffort(7.7);
+        process1.setEstimatedCompletionDateTime(new Date());
         writtenData.setSchedulingData(new ArrayList<SchedulingObject>());
         writtenData.getSchedulingData().add(process1);
         final DailyPlan dailyPlan1 = objectFactory.createDailyPlan();
@@ -331,17 +328,10 @@ public class XmlSerializerDeserializerTest extends TestCase {
         if (aWritten.getName() != null) {
             Assert.assertEquals(aWritten.getName(), aRead.getName());
         }
-        if (aWritten.getAverageEstimatedEndDateTime() != null) {
-            Assert.assertEquals(aWritten.getAverageEstimatedEndDateTime(),
-                    aRead.getAverageEstimatedEndDateTime());
-        }
-        if (aWritten.getBestCaseEffort() != null) {
-            Assert.assertEquals(aWritten.getBestCaseEffort(),
-                    aRead.getBestCaseEffort());
-        }
-        if (aWritten.getBestEstimatedEndDateTime() != null) {
-            Assert.assertEquals(aWritten.getBestEstimatedEndDateTime(),
-                    aRead.getBestEstimatedEndDateTime());
+        if (aWritten.getEstimatedCompletionDateTime() != null)
+        {
+            Assert.assertEquals(aWritten.getEstimatedCompletionDateTime(),
+                    aRead.getEstimatedCompletionDateTime());
         }
         if (aWritten.getId() != null) {
             Assert.assertEquals(aWritten.getId(), aRead.getId());
@@ -383,13 +373,13 @@ public class XmlSerializerDeserializerTest extends TestCase {
         if (aWritten.getState() != null) {
             Assert.assertEquals(aWritten.getState(), aRead.getState());
         }
-        if (aWritten.getWorstCaseEffort() != null) {
-            Assert.assertEquals(aWritten.getWorstCaseEffort(),
-                    aRead.getWorstCaseEffort());
+        if (aWritten.getEffort() != null) {
+            Assert.assertEquals(aWritten.getEffort(),
+                    aRead.getEffort());
         }
-        if (aWritten.getWorstEstimatedEndDateTime() != null) {
-            Assert.assertEquals(aWritten.getWorstEstimatedEndDateTime(),
-                    aRead.getWorstEstimatedEndDateTime());
+        if (aWritten.getEstimatedCompletionDateTime() != null) {
+            Assert.assertEquals(aWritten.getEstimatedCompletionDateTime(),
+                    aRead.getEstimatedCompletionDateTime());
         }
     }
 

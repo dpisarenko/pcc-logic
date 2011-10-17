@@ -57,8 +57,7 @@ class DefaultIncorrectSchedulingObjectsMarker implements
 
                 final boolean hasChildren = persistence.hasChildren(curTask);
 
-                if ((!hasChildren) && ((curTask.getBestCaseEffort() == null)
-                        || (curTask.getWorstCaseEffort() == null))) {
+                if ((!hasChildren) && (curTask.getEffort() == null)) {
                     errorsFound = true;
                     errorFound = true;
                     curTask.setValidationError(SchedulingObjectValidationError.EFFORT_NOT_SPECIFIED);
