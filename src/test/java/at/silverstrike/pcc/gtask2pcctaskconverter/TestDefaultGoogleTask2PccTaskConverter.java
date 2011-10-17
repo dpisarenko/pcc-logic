@@ -61,8 +61,8 @@ public final class TestDefaultGoogleTask2PccTaskConverter {
         final at.silverstrike.pcc.api.model.Task pccTask =
                 objectUnderTest.getPccTask();
 
-        Assert.assertEquals(1.0, pccTask.getBestCaseEffort());
-        Assert.assertEquals(1.0, pccTask.getWorstCaseEffort());
+        Assert.assertEquals(1.0, pccTask.getEffort());
+        Assert.assertEquals(1.0, pccTask.getEffort());
 
         /**
          * Run the second time, with null notes
@@ -85,8 +85,7 @@ public final class TestDefaultGoogleTask2PccTaskConverter {
         /**
          * Make sure that the second time the effort is equal to null.
          */
-        Assert.assertNull(pccTask2.getBestCaseEffort());
-        Assert.assertNull(pccTask2.getWorstCaseEffort());
+        Assert.assertNull(pccTask2.getEffort());
     }
 
     @Test
@@ -203,8 +202,7 @@ public final class TestDefaultGoogleTask2PccTaskConverter {
         final at.silverstrike.pcc.api.model.Task pccTask =
                 objectUnderTest.getPccTask();
 
-        Assert.assertEquals(12.0, pccTask.getBestCaseEffort());
-        Assert.assertEquals(12.0, pccTask.getWorstCaseEffort());
+        Assert.assertEquals(12.0, pccTask.getEffort());
     }
 
 }

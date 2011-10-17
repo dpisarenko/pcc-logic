@@ -116,8 +116,7 @@ final class Helper {
 
         task.setName("Some interesting task");
         task.setPriority(200);
-        task.setBestCaseEffort(2.5);
-        task.setWorstCaseEffort(2.5);
+        task.setEffort(2.5);
 
         final ResourceAllocation resourceAllocation =
                 MOCK_OBJECT_FACTORY.createResourceAllocation();
@@ -144,8 +143,7 @@ final class Helper {
         Assert.assertNull(task.getName());
         Assert.assertNull(task.getId());
         Assert.assertNull(task.getPriority());
-        Assert.assertNull(task.getBestCaseEffort());
-        Assert.assertNull(task.getWorstCaseEffort());
+        Assert.assertNull(task.getEffort());
 
         final ResourceAllocation resourceAllocation =
                 MOCK_OBJECT_FACTORY.createResourceAllocation();
@@ -181,8 +179,7 @@ final class Helper {
         Assert.assertNull(task.getName());
         Assert.assertNull(task.getId());
         Assert.assertNull(task.getPriority());
-        Assert.assertNull(task.getBestCaseEffort());
-        Assert.assertNull(task.getWorstCaseEffort());
+        Assert.assertNull(task.getEffort());
 
         processes.add(task);
 
