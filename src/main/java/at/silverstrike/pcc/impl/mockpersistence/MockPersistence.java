@@ -21,7 +21,6 @@ import at.silverstrike.pcc.api.model.Booking;
 import at.silverstrike.pcc.api.model.Event;
 import at.silverstrike.pcc.api.model.SchedulingObject;
 import at.silverstrike.pcc.api.model.Task;
-import at.silverstrike.pcc.api.model.DailyPlan;
 import at.silverstrike.pcc.api.model.Resource;
 import at.silverstrike.pcc.api.model.UserData;
 import at.silverstrike.pcc.api.persistence.Persistence;
@@ -70,11 +69,6 @@ class MockPersistence extends MockPersistenceAdapter implements Persistence {
 
     @Override
     public List<SchedulingObject> getChildTasks(final Long aProcessId) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public DailyPlan getDailyPlan(final Date aNewDate, final String aResource) {
         throw new NotImplementedException();
     }
 
