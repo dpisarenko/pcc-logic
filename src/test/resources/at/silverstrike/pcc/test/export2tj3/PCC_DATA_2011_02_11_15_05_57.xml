@@ -33,6 +33,5 @@
       </resourceAllocations>
     </at.silverstrike.pcc.impl.persistence.DefaultTask>
   </schedulingObjects>
-  <dailyPlans/>
   <bookings/>
 </at.silverstrike.pcc.impl.persistence.DefaultUserData>
