@@ -5,8 +5,7 @@
       <id>1</id>
       <name>task 2</name>
       <state>REPORTED</state>
-      <bestCaseEffort>0.016666666666666666</bestCaseEffort>
-      <worstCaseEffort>0.016666666666666666</worstCaseEffort>
+      <effort>0.016666666666666666</effort>
       <priority>1000</priority>
       <resourceAllocations class="org.hibernate.collection.PersistentBag">
         <initialized>true</initialized>
