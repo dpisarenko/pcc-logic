@@ -259,11 +259,10 @@ public final class TestDefaultPersistence {
         final Task task =
                 persistence.createTaskStub();
 
-        task.setBestCaseEffort(null);
-        task.setWorstCaseEffort(null);
+        task.setEffort(null);
 
         try {
-            task.getAverageCaseEffort();
+            task.getEffort();
         } catch (final NullPointerException exception) {
             LOGGER.error("", exception);
             Assert.fail(exception.getMessage());
