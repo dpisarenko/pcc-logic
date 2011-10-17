@@ -13,7 +13,6 @@ package at.silverstrike.pcc.persistence;
 
 import static junit.framework.Assert.assertEquals;
 
-import java.util.Date;
 import java.util.List;
 
 import junit.framework.Assert;
