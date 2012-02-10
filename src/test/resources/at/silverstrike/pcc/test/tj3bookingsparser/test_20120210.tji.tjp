@@ -1,0 +1,32 @@
+project prj "Sample project" "1.0" 2012-04-01-09:00-+0000 - 2012-05-01-19:00-+0000 {
+  timingresolution 5min
+  timezone "UTC"
+  scenario plan "Plan" {
+    active yes
+  }
+}
+
+projectids prj
+
+resource R1210 "DP"
+
+task T2010 "Some interesting task" {
+  start 2012-04-02-09:00-+0000
+  end 2012-04-02-11:30-+0000
+  scheduling asap
+  scheduled
+}
+supplement task T2010 {
+  booking R1210 2012-04-02-09:00-+0000 + 2.5h { overtime 2 }
+  priority 200
+  projectid prj
+}
+supplement resource R1210 {
+  workinghours sun off
+               workinghours mon 9:00 - 17:00
+               workinghours tue 9:00 - 17:00
+               workinghours wed 9:00 - 17:00
+               workinghours thu 9:00 - 17:00
+               workinghours fri 9:00 - 17:00
+               workinghours sat off
+}

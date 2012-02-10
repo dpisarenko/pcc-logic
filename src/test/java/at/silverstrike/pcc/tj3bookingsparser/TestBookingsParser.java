@@ -263,6 +263,42 @@ public final class TestBookingsParser {
         Assert.assertEquals(4, taskNames.size());
     }
 
+    @Test
+    public void testFile20120210() {
+        InputStream inputStream = null;
+        BookingsFile bookingsFile = null;
+        try {
+            inputStream =
+                    FileUtils.openInputStream(new File(DIR
+                            + "test_20120210.tji.tjp"));
+            final BookingsLexer lexer =
+                    new BookingsLexer(new ANTLRInputStream(inputStream));
+            final CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+            final BookingsParser parser = new BookingsParser(tokenStream);
+
+            parser.bookingsFile();
+            checkParsingErrors(parser);
+            bookingsFile = parser.getBookingsFile();
+        } catch (final Exception exception) {
+            LOGGER.error("", exception);
+            Assert.fail(exception.getMessage());
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+
+        Assert.assertNotNull(bookingsFile);
+        
+        final List<String> taskNames = new LinkedList<String>();
+        
+        for (final SupplementStatement curSuppStmt : bookingsFile.getSupplementStatements())
+        {
+            taskNames.add(curSuppStmt.getTaskId());
+        }
+        
+        Assert.assertEquals(1, taskNames.size());
+    }
+
+    
     private void checkParsingErrors(final BookingsParser parser) {
         Assert.assertEquals("Parsing error(s) occured", 0,
                 parser.getNumberOfSyntaxErrors());
