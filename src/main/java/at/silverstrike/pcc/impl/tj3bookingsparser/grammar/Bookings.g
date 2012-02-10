@@ -58,7 +58,7 @@ bookingsFile
 
 header
 	:
-	Project Prj String String DateTimeWithTimeZone Hyphen DateTimeWithTimeZone OpenParen TimeZone* String 
+	Project Prj String String DateTimeWithTimeZone Hyphen DateTimeWithTimeZone OpenParen TimingResolution* TimingResolutionValue* TimeZone* String* 
 	ScenarioPart1 OpenParen ScenarioPart2* CloseParen 
 	CloseParen
 	;
@@ -76,6 +76,11 @@ ScenarioPart2
 TimeZone
 	:
 	'timezone'
+	;
+
+TimingResolution
+	:
+	'timingresolution'
 	;
 
 projectIds:
@@ -308,8 +313,14 @@ IntegerNumber
   : D+
   ;
 
+TimingResolutionValue
+  :
+  IntegerNumber A*
+  ;
+
 Identifier
   : (D|A|P)+;
+
 
 String
   :  '"' ~'"'* '"'
