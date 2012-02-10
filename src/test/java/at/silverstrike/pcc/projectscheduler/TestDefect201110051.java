@@ -20,6 +20,7 @@ import jruby.joda.time.Interval;
 import junit.framework.Assert;
 
 import org.apache.commons.lang.time.DateUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,7 @@ public class TestDefect201110051 extends SchedulingDefectTestCase {
             LoggerFactory.getLogger(TestDefect201110051.class);
 
     @Test
+    @Ignore
     public void testDefect201110051() {
 
         final Date now = RubyDateTimeUtils.getDate(2011,
